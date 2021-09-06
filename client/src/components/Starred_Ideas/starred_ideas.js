@@ -4,7 +4,7 @@ const Starred_ideas = () => {
   return (
     <div className="container">
       <div className="row ">
-        <div className="col-6">
+        <div className="offset-3 col-6">
           <FeedTile />
         </div>
       </div>
