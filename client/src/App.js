@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar/navbar";
 import Footer from "./components/Footer/footer";
 import FeedPage from "./components/Feed_Page/feedpage";
 import Notification from "./components/Notification/notification";
+import Starred_ideas from "./components/Starred_Ideas/starred_ideas";
 function App() {
   return (
     <div className="App">
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" exact component={Home} />
           <Route path="/feed" exact component={FeedPage} />
           <Route path="/notifications" exact component={Notification} />
+          <Route path="/starred" exact component={Starred_ideas} />
         </Switch>
         <Footer />
       </BrowserRouter>
