@@ -3,7 +3,10 @@
     color: black;
     border-width: 2px;
     border-color: black;
-    box-shadow: 0 4px 8px 0 rgb(255, 255, 255), 0 1px 20px 0 rgb(255, 255, 255);}
+    }
+    .readmore:hover{
+        box-shadow: 0 4px 8px 0 rgb(255, 255, 255), 0 1px 20px 0 rgb(255, 255, 255);
+    }
 
 .tile{
     border-radius: 50px;
