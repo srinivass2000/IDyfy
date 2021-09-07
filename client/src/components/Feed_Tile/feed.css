@@ -11,7 +11,7 @@
     background-image: linear-gradient(to bottom, hsla(0, 0%, 100%, 0.219) , #00255C ,hsla(0, 0%, 100%, 0.13));
 	-webkit-backdrop-filter: blur(10px);
 	backdrop-filter: blur(10px);
-    box-shadow: 0 0 20px #ccc;
+    box-shadow: 2px 2px 20px #ccc;
     border-width: 6px;
     border-color: #999DB4;
 }
