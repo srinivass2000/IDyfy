@@ -13,18 +13,18 @@ import {Link} from "react-router-dom";
 const Navbar = () => {
   return (
     <div>
-      <div className="flex content-center" style=
+      <div className="flex content-center mb-5" style=
       {{ backgroundColor : "#B287FF"}}>
         <div className="ml-5"><img src={Idyfy_logo} alt="IDYFY LOGO"/></div>
         <div className="flex-auto pt-4 ml-3"><img src={Idyfy_name} alt="IDYFY NAME"/></div>
         <div className="relative pt-4"> 
           <input type="text" className="h-14 w-96 pr-8 pl-5 rounded-xl z-0 focus:shadow focus:outline-none border" placeholder="Search for Ideas..."/>
-          <div className="absolute top-4 right-3 pt-6"> <img src={search} alt="Search"/> </div>
+          <div className="absolute top-4 right-3 pt-4"> <img src={search} alt="Search"/> </div>
         </div>
         <div className="flex-auto flex flex-col">
-          <Link to="/">
+          <Link to="/feed">
           <div className="flex justify-center pt-4"><img src={home} alt="home"/></div>
-          <div className="pt-2"><h6>Home</h6></div>
+          <div><h6>Home</h6></div>
           </Link>
         </div>
         <div className="flex-auto flex flex-col">
@@ -45,7 +45,7 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="flex-auto flex flex-col">
-        <Link to="/notifiction">
+        <Link to="/notification">
           <div className="flex justify-center pt-4"><img src={notifications} alt="Notifications"/></div>
           <div><h6>Notifications</h6></div>
           </Link>

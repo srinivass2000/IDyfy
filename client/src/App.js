@@ -15,7 +15,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/feed" exact component={FeedPage} />
-          <Route path="/notifications" exact component={Notification} />
+          <Route path="/notification" exact component={Notification} />
           <Route path="/starred" exact component={Starred_ideas} />
         </Switch>
         <Footer />
