@@ -7,7 +7,10 @@ import {Link} from 'react-router-dom'
 
 let footerStyle = {
       background : "#3C0168",
-      color : "white"
+      color : "white",
+      position: "fixed",
+      bottom : 0 ,
+      width : "100%"
   }
 
 let spanStyle = {
