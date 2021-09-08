@@ -14,29 +14,29 @@ const Navbar = () => {
   return (
     <div>
       <div
-        className="flex content-center"
+        className="flex content-center mb-5"
         style={{ backgroundColor: "#B287FF" }}
       >
         <div className="ml-5">
           <img src={Idyfy_logo} alt="IDYFY LOGO" />
         </div>
-        <div className="flex-auto pt-4 ml-3">
+        <div className="pt-4 ml-3">
           <img src={Idyfy_name} alt="IDYFY NAME" />
         </div>
-        <div className="relative pt-4">
+        <div className="relative pt-3">
           <input
             type="text"
-            className="h-14 w-96 pr-8 pl-5 rounded-xl z-0 focus:shadow focus:outline-none border"
+            className="ml-3 h-12 w-96 pr-8 pl-5 mr-2 rounded-xl z-0 focus:shadow focus:outline-none border"
             placeholder="Search for Ideas..."
           />
-          <div className="absolute top-4 right-3 pt-4">
+          <div className="absolute top-2 right-6 pt-4">
             {" "}
             <img src={search} alt="Search" />{" "}
           </div>
         </div>
         <div className="flex-auto flex flex-col">
           <Link to="/feed">
-            <div className="flex justify-center pt-4">
+            <div className="flex justify-center pt-3">
               <img src={home} alt="home" />
             </div>
             <div>
@@ -45,7 +45,7 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="flex-auto flex flex-col">
-          <div className="flex justify-center pt-4">
+          <div className="flex justify-center pt-3">
             <img src={new_idea} alt="New Idea" />
           </div>
           <div>
@@ -54,7 +54,7 @@ const Navbar = () => {
         </div>
         <div className="flex-auto flex flex-col">
           <Link to="/myideas">
-            <div className="flex justify-center pt-4">
+            <div className="flex justify-center pt-3">
               <img src={my_idea} alt="My Ideas" />
             </div>
             <div>
@@ -65,7 +65,7 @@ const Navbar = () => {
 
         <div className="flex-auto flex flex-col">
           <Link to="/starred">
-            <div className="flex justify-center pt-4">
+            <div className="flex justify-center pt-3">
               <img src={starred} alt="Starred Ideas" />
             </div>
             <div>
@@ -75,7 +75,7 @@ const Navbar = () => {
         </div>
         <div className="flex-auto flex flex-col">
           <Link to="/notification">
-            <div className="flex justify-center pt-4">
+            <div className="flex justify-center pt-3">
               <img src={notifications} alt="Notifications" />
             </div>
             <div>
@@ -85,11 +85,8 @@ const Navbar = () => {
         </div>
         <div className="flex-auto flex flex-col">
           <Link to="/profile">
-            <div className="flex justify-center pt-3 ">
+            <div className="flex justify-center pt-3">
               <img src={profile} alt="My Profile" />
-            </div>
-            <div>
-              <h6>My Profile</h6>
             </div>
           </Link>
         </div>

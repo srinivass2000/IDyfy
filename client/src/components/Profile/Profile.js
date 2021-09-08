@@ -4,8 +4,8 @@ import profile from "../../assets/svg/Dummy_Profile2.svg";
 
 const Profile = () => {
   return (
-    <div className="profilebanner ">
-      <div className="container shadow-lg p-3  rounded color ">
+    <div className="profilebanner">
+      <div className="container shadow-lg p-3 rounded color ">
         <div className="row pb-2  border-bottom">
           <div className=" col-2">
             <div className="flex justify-center">10</div>
