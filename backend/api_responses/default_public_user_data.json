@@ -1,0 +1,27 @@
+
+{
+    "type":"Public_user_data",
+    "data_rep":{
+        "username":"default",
+        "email":"default",
+        "password":"default",
+        "first_name":"default",
+        "last_name":"default",
+        "profile_img/NFT":"default",
+        "followers":{
+            "count":"",
+            "follower_dict":{}
+        },
+        "following":{
+            "count":"",
+            "follower_dict":{}
+        },     
+
+        "reputation":"default",
+        "feed":["default"],
+        "notification":["default"],
+        "contributed_ideas":["default"],
+        "stared_ideas":["default"]
+    }
+
+}
