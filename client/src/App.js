@@ -7,6 +7,7 @@ import Footer from "./components/Footer/footer";
 import FeedPage from "./components/Feed_Page/feedpage";
 import Notification from "./components/Notification/notification";
 import Starred_ideas from "./components/Starred_Ideas/starred_ideas";
+import Profile from "./components/Profile/Profile";
 function App() {
   return (
     <div className="App">
@@ -17,8 +18,9 @@ function App() {
           <Route path="/feed" exact component={FeedPage} />
           <Route path="/notification" exact component={Notification} />
           <Route path="/starred" exact component={Starred_ideas} />
+          <Route path="/profile" exact component={Profile} />
         </Switch>
-        <Footer />
+        {/* <Footer /> */}
       </BrowserRouter>
     </div>
   );
