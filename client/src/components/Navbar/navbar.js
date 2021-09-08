@@ -13,8 +13,8 @@ import {Link} from "react-router-dom";
 const Navbar = () => {
   return (
     <div>
-      <div className="flex content-center mb-5" style=
-      {{ backgroundColor : "#B287FF"}}>
+      <div className="flex content-center mb-5" 
+      style={{ backgroundColor : "#B287FF"}}>
         <div className="ml-5"><img src={Idyfy_logo} alt="IDYFY LOGO"/></div>
         <div className="flex-auto pt-4 ml-3"><img src={Idyfy_name} alt="IDYFY NAME"/></div>
         <div className="relative pt-4"> 

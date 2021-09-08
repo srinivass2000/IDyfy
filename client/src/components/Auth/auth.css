@@ -2,7 +2,18 @@
     background-color: #840FCC;
     color: #FFFF;
 }
-
+.button2{
+    background-color: #ffffff;
+    color: #000000;
+}
+.button:hover{
+    background-color: #000153;
+    color: #ffffff;
+}
+.button2:hover{
+    background-color: #000000;
+    color: #ffffff
+}
 .left{
     background-color: #E0CEFF;
 }
@@ -11,4 +22,13 @@
 }
 .heighty{
     margin: auto;
+}
+.welcome{
+    color: #B287FF;
+}
+.create_text{
+    color: #C7A8FF;
+}
+.form_box{
+    background-color: #E5D7FF;
 }
