@@ -11,9 +11,9 @@
 		"like_status":false,
 		"comments":{
 			"count":"",
-			"comment_list":[{},{}],
+			"comment_list":[{},{}]
 		},
 		"star_count":"",
-		"main_url":"",
+		"main_url":""
 	}
 }
