@@ -1,0 +1,43 @@
+.profilebanner{
+    color: blanchedalmond;
+    background-image: url("../../assets/images/banner.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    position: absolute;
+    top: 80px;
+    width: 100%;
+    height: 60px;
+    
+    border-bottom: solid 340px transparent;
+    border-top: solid 230px transparent;
+
+}
+
+.color{
+    background-color: #D6BEFF;
+    color: black;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: large;
+    font-weight: bold;
+}
+
+.profileimage{
+    position: absolute;
+    height: 300px;
+    top: -150px;
+    filter: drop-shadow(15px 1px 4px #00255C);
+}
+.name{
+    font-size: xx-large;
+}
+.address{
+    font-size: x-large;
+}
+.post{
+    font-size: x-large;
+}
+.university{
+    font-size:x-large;
+}
