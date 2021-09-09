@@ -1,21 +1,36 @@
-import express from "express";
-import cors from "cors";
-import passport from "passport";
-import passportLocal from "passport-local";
-passportLocal.Strategy;
-import cookieParser from "cookie-parser";
-import bcrypt from "bcryptjs";
-import expressSession from "express-session";
-
+const express = require("express");
 const app = express();
-app.use(
-  expressSession({ secret: "idyfy", resave: true, saveUninitialized: true })
-);
+const dotenv = require("dotenv");
+const connectDB = require("./config/db");
+const errorHandler = require("./middleware/error");
 
-app.use(cookieParser("idyfy"));
+dotenv.config();
 
-app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+connectDB();
+
+app.use(express.json());
+
+app.get("/", (req, res, next) => {
+  res.send("Api's are running absolutely fine!🔥");
+});
+
+
+
+//Routes section
+
+app.use("/api/auth", require("./routes/auth"));
+
+
+
+// Error Handler Middleware
+app.use(errorHandler);
+
 
 const port = process.env.PORT || 5000;
 
-app.listen(port, () => {console.log(`Server running on port ${port} 🔥`)});
+const server = app.listen(port, () => {console.log(`Server running on port ${port} 🔥`)});
+
+process.on("unhandledRejection", (err, promise) => {
+  console.log(`Logged Error: ${err.message}`);
+  server.close(() => process.exit(1));
+});
