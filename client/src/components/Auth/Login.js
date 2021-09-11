@@ -37,7 +37,7 @@ const Login = () => {
       width: "50%",
       transform: "translate(-50%, -50%)",
       padding: "0px",
-      overflow : "hidden",
+      overflow : "hidden"
     },
   };
   const [modalIsOpen, setIsOpen] = React.useState(false);

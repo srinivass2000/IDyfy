@@ -1,0 +1,9 @@
+.links:hover{
+    text-decoration: none;    
+    color: white;
+    filter: grayscale(100);
+}
+.links{
+    color: #2E008E;
+    font-weight:500;
+}

@@ -4,11 +4,11 @@ import Login from "../Auth/Login";
 
 const Home = () => {
   return (
-    <div className="row ">
-      <div className="col-6 mt-10">
+    <div className="row m-auto mt-5">
+      <div className="offset-4 col-2">
         <SignUp />
       </div>
-      <div className="col-6 mt-10">
+      <div className="col-2">
         <Login />
       </div>
     </div>

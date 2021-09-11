@@ -8,6 +8,7 @@ import new_idea from "../../assets/icons/new_idea.svg";
 import starred from "../../assets/icons/starred.svg";
 import notifications from "../../assets/icons/notifications.svg";
 import profile from "../../assets/images/dummy_profile.png";
+import "../Navbar/navbar.css";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
@@ -35,9 +36,9 @@ const Navbar = () => {
           </div>
         </div>
         <div className="flex-auto flex flex-col">
-          <Link to="/feed">
+          <Link className="links home" to="/feed">
             <div className="flex justify-center pt-3">
-              <img src={home} alt="home" />
+              <img className="icon" src={home} alt="home" />
             </div>
             <div>
               <h6>Home</h6>
@@ -53,7 +54,7 @@ const Navbar = () => {
           </div>
         </div>
         <div className="flex-auto flex flex-col">
-          <Link to="/myideas">
+          <Link className="links" to="/myideas">
             <div className="flex justify-center pt-3">
               <img src={my_idea} alt="My Ideas" />
             </div>
@@ -64,7 +65,7 @@ const Navbar = () => {
         </div>
 
         <div className="flex-auto flex flex-col">
-          <Link to="/starred">
+          <Link className="links" to="/starred">
             <div className="flex justify-center pt-3">
               <img src={starred} alt="Starred Ideas" />
             </div>
@@ -74,9 +75,9 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="flex-auto flex flex-col">
-          <Link to="/notification">
+          <Link className="links" to="/notification">
             <div className="flex justify-center pt-3">
-              <img src={notifications} alt="Notifications" />
+              <i className="image-hover"><img src={notifications} alt="Notifications" /></i>
             </div>
             <div>
               <h6>Notifications</h6>
@@ -84,7 +85,7 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="flex-auto flex flex-col">
-          <Link to="/profile">
+          <Link className="links" to="/profile">
             <div className="flex justify-center pt-3">
               <img src={profile} alt="My Profile" />
             </div>
