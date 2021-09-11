@@ -25,10 +25,20 @@
 }
 .welcome{
     color: #B287FF;
+    font-size:large;
+    
 }
 .create_text{
     color: #C7A8FF;
+    font-size: small;
 }
 .form_box{
     background-color: #E5D7FF;
+}
+.forgot{
+    font-size: smaller;
+    color: #b8b6b6;
+}
+.stones{
+    transform: scaleX(-1);
 }
