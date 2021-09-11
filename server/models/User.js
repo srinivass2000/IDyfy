@@ -8,13 +8,13 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please provide username"],
   },
-  fullname:{
+  fullname: {
     type: String,
-    required: [true, "Please provide fullname"]
+    required: [true, "Please provide fullname"],
   },
   email: {
     type: String,
-    required: [true, "Please provide email address"],
+    required: [true, "Please provide valid email address"],
     unique: true,
     match: [
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -29,6 +29,9 @@ const UserSchema = new mongoose.Schema({
   },
   resetPasswordToken: String,
   resetPasswordExpire: Date,
+  emailVerified: Boolean,
+  emailVerificationToken: String,
+  emailVerificationTokenExpiry: Date,
 });
 
 UserSchema.pre("save", async function (next) {
@@ -64,6 +67,21 @@ UserSchema.methods.getResetPasswordToken = function () {
   this.resetPasswordExpire = Date.now() + 10 * (60 * 1000); // Ten Minutes
 
   return resetToken;
+};
+
+UserSchema.methods.getemailVerificationToken = function () {
+  const VerificationToken = crypto.randomBytes(20).toString("hex");
+
+  // Hash token (private key) and save to database
+  this.emailVerificationToken = crypto
+    .createHash("sha256")
+    .update(VerificationToken)
+    .digest("hex");
+
+  // Set token expire date
+  this.emailVerificationTokenExpiry = Date.now() + 10 * (60 * 1000); // Ten Minutes
+
+  return VerificationToken;
 };
 
 const User = mongoose.model("User", UserSchema);
