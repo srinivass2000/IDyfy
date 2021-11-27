@@ -17,6 +17,10 @@ const IdeaSchema = new mongoose.Schema({
         type: Date,
         default: Date.now(),
     },
+    latest_version: {
+        type: Number,
+        default: 0,
+    }
 });
 
 const Idea = mongoose.model("Idea", IdeaSchema);

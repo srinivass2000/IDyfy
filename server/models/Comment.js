@@ -2,19 +2,19 @@ const mongoose = require("mongoose");
 
 const CommentSchema = new mongoose.Schema({
     user_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        type: String,
+        required: true
     },
     idea_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Idea",
+        type: String,
+        required: true
     },
     content: {
         type: String,
+        required: true
     },
     feature_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Feature",
+        type: String,
     },
 });
 

@@ -7,19 +7,20 @@ const FeatureSchema = new mongoose.Schema({
         required: [true, "Please provide Title"],
     },
     user_id: {
-        type: mongoose.Schema.ObjectId,
-        ref: "User",
+        type: String,
+        required: true
     },
     idea_id: {
-        type: mongoose.Schema.ObjectId,
-        ref: "Idea",
+        type: String,
+        required: true
     },
     parent_id: {
-        type: mongoose.Schema.ObjectId,
-        ref: "Feature",
+        type: String,
+        required: true
     },
     content: {
         type: String,
+        required: true
     },
     content_hash: {
         type: String,
@@ -27,8 +28,14 @@ const FeatureSchema = new mongoose.Schema({
     updated_content: {
         type: Boolean,
     },
-    version_start: Number,
-    version_end: Number,
+    version_start: {
+        type: Number,
+        default: 0,
+    },
+    version_end: {
+        type: Number,
+        default: 0,
+    },
 });
 
 
