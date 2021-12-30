@@ -1,7 +1,7 @@
 const Idea = require("../../models/Idea");
 const ErrorResponse = require("../../utils/errorResponse");
 
-exports.create_idea = async(req, res, next) => {
+exports.create_idea = async (req, res, next) => {
     try {
         const {
             title,
@@ -28,4 +28,6 @@ exports.create_idea = async(req, res, next) => {
         // next(err)
         return next(new ErrorResponse(err.message, 500));
     }
+
+
 };

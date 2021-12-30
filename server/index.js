@@ -24,6 +24,8 @@ app.use("/api/feature", require("./routes/feature_routes"));
 
 
 
+app.use("/api/faker", require("./routes/fake_routes"));
+
 // Error Handler Middleware
 app.use(errorHandler);
 
