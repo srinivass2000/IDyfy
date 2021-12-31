@@ -15,6 +15,7 @@ const CommentSchema = new mongoose.Schema({
     },
     feature_id: {
         type: String,
+        default: null
     },
 });
 

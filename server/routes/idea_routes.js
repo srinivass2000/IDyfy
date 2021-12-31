@@ -1,5 +1,8 @@
 const express = require("express");
 const router = express.Router();
+const {
+    protect
+} = require("../middleware/auth");
 
 const {
     create_idea
@@ -18,10 +21,10 @@ const {
 } = require('../controllers/home/user_ideas');
 
 
-router.route("/create-idea").post(create_idea);
+router.route("/create-idea").post(protect, create_idea);
 router.route("/get-idea").get(get_idea);
 router.route("/get-ideas").get(get_ideas);
-router.route("/get-contributed-ideas").get(get_contributed_ideas);
+router.route("/get-contributed-ideas").get(protect, get_contributed_ideas);
 
 
 

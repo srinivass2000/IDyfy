@@ -1,5 +1,6 @@
 const Idea = require("../../models/Idea");
 const ErrorResponse = require("../../utils/errorResponse");
+const Comment = require("../../models/Comment");
 
 exports.get_idea = async (req, res, next) => {
     try {
@@ -9,9 +10,15 @@ exports.get_idea = async (req, res, next) => {
 
         //comments
 
+        const comment = await Comment.find({
+            idea_id: idea_id,
+            feature_id: null
+        })
+
         res.status(200).json({
             success: true,
             idea: ideaId,
+            comments: comment
         });
 
 

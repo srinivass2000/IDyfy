@@ -21,6 +21,7 @@ app.get("/", (req, res, next) => {
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/idea", require("./routes/idea_routes"));
 app.use("/api/feature", require("./routes/feature_routes"));
+app.use("/api/comment", require("./routes/comment_routes"));
 
 
 

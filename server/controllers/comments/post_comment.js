@@ -1,24 +1,26 @@
 const Idea = require("../../models/Idea");
+const Comment = require("../../models/Comment");
 const ErrorResponse = require("../../utils/errorResponse");
 
-exports.create_idea = async (req, res, next) => {
+exports.post_comment = async (req, res, next) => {
     try {
         const {
-            title,
-            description,
-            tags
+            idea_id,
+            feature_id,
+            content
         } = req.body;
+
         console.log(req.user._id)
         try {
-            const idea = await Idea.create({
-                title,
-                description,
-                tags,
-                contributors: [req.user._id],
+            const comment = await Comment.create({
+                user_id: req.user._id,
+                idea_id,
+                content,
+                feature_id
             });
             res.status(200).json({
                 success: true,
-                idea
+                comment
             });
         } catch (err) {
             console.log(err);
@@ -30,6 +32,4 @@ exports.create_idea = async (req, res, next) => {
         // next(err)
         return next(new ErrorResponse(err.message, 500));
     }
-
-
 };

@@ -2,12 +2,11 @@ const Feature = require("../../models/Feature");
 const ErrorResponse = require("../../utils/errorResponse");
 const crypto = require('crypto')
 
-exports.update_feature = async(req, res, next) => {
+exports.update_feature = async (req, res, next) => {
     try {
         const {
             id,
             title,
-            user_id,
             idea_id,
             parent_id,
             content,
@@ -33,7 +32,7 @@ exports.update_feature = async(req, res, next) => {
             _id: id
         }, {
             title: title,
-            user_id: user_id,
+            user_id: req.user._id,
             idea_id: idea_id,
             parent_id: parent_id,
             content: content,

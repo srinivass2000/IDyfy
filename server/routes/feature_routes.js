@@ -2,6 +2,10 @@ const express = require("express");
 const router = express.Router();
 
 const {
+    protect
+} = require("../middleware/auth");
+
+const {
     create_feature
 } = require('../controllers/feature/create_feature');
 
@@ -14,8 +18,8 @@ const {
 } = require('../controllers/feature/version_end');
 
 
-router.route("/create-feature").post(create_feature);
-router.route("/update-feature").post(update_feature);
-router.route("/version-end").post(version_end);
+router.route("/create-feature").post(protect, create_feature);
+router.route("/update-feature").post(protect, update_feature);
+router.route("/version-end").post(protect, version_end);
 
 module.exports = router;

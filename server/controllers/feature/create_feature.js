@@ -1,11 +1,10 @@
 const Feature = require("../../models/Feature");
 const ErrorResponse = require("../../utils/errorResponse");
 
-exports.create_feature = async(req, res, next) => {
+exports.create_feature = async (req, res, next) => {
     try {
         const {
             title,
-            user_id,
             idea_id,
             parent_id,
             content,
@@ -15,7 +14,7 @@ exports.create_feature = async(req, res, next) => {
 
         const feature = await Feature.create({
             title,
-            user_id,
+            user_id: req.user._id,
             idea_id,
             parent_id,
             content,
