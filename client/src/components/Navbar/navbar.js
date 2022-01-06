@@ -77,7 +77,9 @@ const Navbar = () => {
         <div className="flex-auto flex flex-col">
           <Link className="links" to="/notification">
             <div className="flex justify-center pt-3">
-              <i className="image-hover"><img src={notifications} alt="Notifications" /></i>
+              <i className="image-hover">
+                <img src={notifications} alt="Notifications" />
+              </i>
             </div>
             <div>
               <h6>Notifications</h6>
@@ -85,11 +87,17 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="flex-auto flex flex-col">
-          <Link className="links" to="/profile">
-            <div className="flex justify-center pt-3">
-              <img src={profile} alt="My Profile" />
+          <div className="flex justify-center pt-3">
+            <div className="dropdown">
+              <Link to="/profile">
+                <img
+                  className="icon dropdown-toggle"
+                  src={profile}
+                  alt="My Profile"
+                />
+              </Link>
             </div>
-          </Link>
+          </div>
         </div>
       </div>
     </div>

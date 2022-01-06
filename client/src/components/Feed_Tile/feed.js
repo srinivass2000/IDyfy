@@ -8,7 +8,7 @@ import Like from "../../assets/icon/heart.svg";
 import "../Feed_Tile/feed.css";
 const FeedTile = () => {
   return (
-    <div className="text-white p-4 tile">
+    <div className="text-white p-4 mb-12 tile">
       <div className="row">
         <div className="offset-1 mt-5 col-8">
           <div className="row">Title : Ideas of Ideas</div>

@@ -4,7 +4,10 @@ import profile from "../../assets/svg/Dummy_Profile2.svg";
 
 const Profile = () => {
   return (
-    <div className="profilebanner flex justify-center">
+    <div
+      className="profilebanner flex justify-center mt-3"
+      style={{ zoom: "80%" }}
+    >
       <div className="row container">
         <div className="offset-1 col-10 shadow-lg p-3 rounded color ">
           <div className="row pb-2  border-bottom">

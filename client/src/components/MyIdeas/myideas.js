@@ -1,7 +1,7 @@
 import React from "react";
 import FeedTile from "../Feed_Tile/feed";
 
-const FeedPage = () => {
+const MyIdeas = () => {
   return (
     <div className="container">
       <div className="row my-3">
@@ -16,7 +16,7 @@ const FeedPage = () => {
             className="btn-sm mb-1"
             style={{ "background-color": "#840FCC", color: "white" }}
           >
-            MY FEED
+            MY IDEAS
           </button>
         </div>
         <div className="col-5">
@@ -31,7 +31,6 @@ const FeedPage = () => {
       <div className="row ">
         <div className="offset-3 col-6">
           <FeedTile />
-
           <FeedTile />
           <FeedTile />
         </div>
@@ -40,4 +39,4 @@ const FeedPage = () => {
   );
 };
 
-export default FeedPage;
+export default MyIdeas;
