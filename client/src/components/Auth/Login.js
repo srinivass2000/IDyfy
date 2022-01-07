@@ -37,7 +37,7 @@ const Login = () => {
       width: "50%",
       transform: "translate(-50%, -50%)",
       padding: "0px",
-      overflow : "hidden"
+      overflow: "hidden",
     },
   };
   const [modalIsOpen, setIsOpen] = React.useState(false);
@@ -77,31 +77,49 @@ const Login = () => {
                 </h1>
               </div>
               <div className="flex justify-center">
-                <h5 className="create_text mt-2">Welcome Back! Please log in to your account</h5>
+                <h5 className="create_text mt-2">
+                  Welcome Back! Please log in to your account
+                </h5>
               </div>
               <div className="flex justify-center mt-4 mx-3">
-                <input type="text" className="form-control form_box" placeholder="Email Address"/>
+                <input
+                  type="text"
+                  className="form-control form_box"
+                  placeholder="Email Address"
+                />
               </div>
               <div className="flex justify-center mt-3 mx-3">
-                <input type="password" className="form-control form_box" placeholder="Password"/>
+                <input
+                  type="password"
+                  className="form-control form_box"
+                  placeholder="Password"
+                />
               </div>
               <div className="row container mb-3 mt-3">
                 <div class="col-5 ml-3 mt-2 mb-3 custom-control custom-checkbox">
-                    <input type="checkbox" className="custom-control-input" id="rememberme"/>
-                    <label className="custom-control-label text-white" for="rememberme">Remember Me</label>
+                  <input
+                    type="checkbox"
+                    className="custom-control-input"
+                    id="rememberme"
+                  />
+                  <label
+                    className="custom-control-label text-white"
+                    for="rememberme"
+                  >
+                    Remember Me
+                  </label>
                 </div>
                 <div className="col-6 ml-2 mt-2">
-                    <button className="forgot">
-                        forgot password?
-                    </button>
+                  <button className="forgot">forgot password?</button>
                 </div>
               </div>
               <div className="flex justify-center">
-                <button className="mr-2 h-10 mb-10 btn button">
-                  Log In
-                </button>
-                <button className="ml-2 h-10 w-30 mb-40 btn button2">
-                  Sign Up
+                <button className="mr-2 h-10 mb-10 btn button">Log In</button>
+                <button
+                  className="ml-2 h-10 w-30 mb-40 btn button2"
+                  onClick={closeModal}
+                >
+                  Cancel
                 </button>
               </div>
             </div>

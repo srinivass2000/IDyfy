@@ -4,13 +4,12 @@ import Idyfy_name from "../../assets/svg/Idyfy_name.svg";
 import search from "../../assets/icons/search.svg";
 import home from "../../assets/icons/home.svg";
 import my_idea from "../../assets/icons/my_idea.svg";
-import new_idea from "../../assets/icons/new_idea.svg";
 import starred from "../../assets/icons/starred.svg";
 import notifications from "../../assets/icons/notifications.svg";
 import profile from "../../assets/images/dummy_profile.png";
 import "../Navbar/navbar.css";
 import { Link } from "react-router-dom";
-
+import New_idea from "../NewIdeas/newideas";
 const Navbar = () => {
   return (
     <div>
@@ -45,14 +44,18 @@ const Navbar = () => {
             </div>
           </Link>
         </div>
-        <div className="flex-auto flex flex-col">
-          <div className="flex justify-center pt-3">
-            <img src={new_idea} alt="New Idea" />
-          </div>
-          <div>
-            <h6>New Idea</h6>
-          </div>
-        </div>
+        <New_idea />
+        {/* <div className="flex-auto flex flex-col">
+          <a className="links home" to="/feed">
+            <div className="flex justify-center pt-3">
+              <img className="icon" src={home} alt="home" />
+            </div>
+            <div>
+              <h6>Home</h6>
+            </div>
+          </a>
+        </div> */}
+        {/*  */}
         <div className="flex-auto flex flex-col">
           <Link className="links" to="/myideas">
             <div className="flex justify-center pt-3">
