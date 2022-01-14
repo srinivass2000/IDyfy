@@ -1,6 +1,10 @@
-const Feature = require("../../models/Feature");
+// const Feature = require("../../models/Feature");
 const ErrorResponse = require("../../utils/errorResponse");
 const crypto = require('crypto')
+const mongoose = require("mongoose");
+const {
+    FeatureSchema
+} = require("../../models/Feature");
 
 exports.update_feature = async (req, res, next) => {
     try {
@@ -15,6 +19,10 @@ exports.update_feature = async (req, res, next) => {
 
         var updated_content, content_hash;
 
+        var Feature = mongoose.model(`features_${idea_id}`, FeatureSchema);
+
+        console.log(Feature);
+
         const initial = await Feature.findById(id);
 
         hashed_content = crypto.createHash("sha256").update(content).digest("hex");
@@ -27,6 +35,7 @@ exports.update_feature = async (req, res, next) => {
             content_hash = hashed_content;
             console.log("here");
         }
+
 
         const response = await Feature.findOneAndUpdate({
             _id: id
