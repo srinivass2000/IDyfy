@@ -4,6 +4,7 @@ import "../Auth/auth.css";
 import Idyfy_logo from "../../assets/svg/Idyfy_logo.svg";
 import Stones from "../../assets/svg/stones1.svg";
 import Idyfy_name from "../../assets/svg/Idyfy_name_Signup.svg";
+import { isMobile } from "react-device-detect";
 
 const Login = () => {
   const initialState = {
@@ -28,18 +29,37 @@ const Login = () => {
     setFormData({ ...formdata, [e.target.name]: e.target.value });
   };
   //   let subtitle;
-  const customStyles = {
-    content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      width: "50%",
-      transform: "translate(-50%, -50%)",
-      padding: "0px",
-      overflow: "hidden",
-    },
-  };
+  let customStyles;
+  if (isMobile) {
+    console.log("small");
+
+    customStyles = {
+      content: {
+        top: "50%",
+        left: "50%",
+        right: "auto",
+        bottom: "auto",
+        width: "90%",
+        transform: "translate(-50%, -50%)",
+        padding: "0px",
+        overflow: "hidden",
+      },
+    };
+  } else {
+    console.log("big");
+    customStyles = {
+      content: {
+        top: "50%",
+        left: "50%",
+        right: "auto",
+        bottom: "auto",
+        width: "50%",
+        transform: "translate(-50%, -50%)",
+        padding: "0px",
+        overflow: "hidden",
+      },
+    };
+  }
   const [modalIsOpen, setIsOpen] = React.useState(false);
   function openModal() {
     setIsOpen(true);
@@ -67,17 +87,17 @@ const Login = () => {
       >
         <div className="relative m-auto container">
           <div className="row">
-            <div className="col-6 right">
+            <div className="col-lg-6 col-12 right">
               <div className="flex justify-center mt-10">
                 <img src={Idyfy_name} alt="IDYFY " />
               </div>
               <div className="flex justify-center">
-                <h1 className="welcome mt-2">
+                <h1 className="welcome mt-2 text-center">
                   Welcome to your professional community
                 </h1>
               </div>
-              <div className="flex justify-center">
-                <h5 className="create_text mt-2">
+              <div className="flex justify-center ">
+                <h5 className="create_text mt-2 text-center">
                   Welcome Back! Please log in to your account
                 </h5>
               </div>
@@ -95,21 +115,21 @@ const Login = () => {
                   placeholder="Password"
                 />
               </div>
-              <div className="row container mb-3 mt-3">
-                <div class="col-5 ml-3 mt-2 mb-3 custom-control custom-checkbox">
+              <div className="row container mb-3 mt-3 mx-3">
+                <div class=" col-7 mt-2 mb-3 custom-control custom-checkbox">
                   <input
                     type="checkbox"
                     className="custom-control-input"
                     id="rememberme"
                   />
                   <label
-                    className="custom-control-label text-white"
+                    className="ml-2 custom-control-label text-white"
                     for="rememberme"
                   >
                     Remember Me
                   </label>
                 </div>
-                <div className="col-6 ml-2 mt-2">
+                <div className="col-4  mt-2">
                   <button className="forgot">forgot password?</button>
                 </div>
               </div>
@@ -123,8 +143,15 @@ const Login = () => {
                 </button>
               </div>
             </div>
-            <div className="col-6 left flex justify-center">
-              <img src={Idyfy_logo} alt="IDYFY " />
+            <div className="col-6 left d-none d-lg-block">
+              <center>
+                <img
+                  className="mt-20"
+                  src={Idyfy_logo}
+                  alt="IDYFY "
+                  style={{ height: "250px" }}
+                />
+              </center>
             </div>
           </div>
           <div className="row absolute bottom-0 left-0 right-0">

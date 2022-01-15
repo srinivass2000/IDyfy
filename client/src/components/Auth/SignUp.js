@@ -4,6 +4,7 @@ import "../Auth/auth.css";
 import Idyfy_logo from "../../assets/svg/Idyfy_logo.svg";
 import Stones from "../../assets/svg/stones1.svg";
 import Idyfy_name from "../../assets/svg/Idyfy_name_Signup.svg";
+import { isMobile } from "react-device-detect";
 
 const SignUp = () => {
   const initialState = {
@@ -28,18 +29,37 @@ const SignUp = () => {
     setFormData({ ...formdata, [e.target.name]: e.target.value });
   };
   //   let subtitle;
-  const customStyles = {
-    content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      width: "50%",
-      transform: "translate(-50%, -50%)",
-      padding: "0px",
-      overflow: "hidden",
-    },
-  };
+  let customStyles;
+  if (isMobile) {
+    console.log("small");
+
+    customStyles = {
+      content: {
+        top: "50%",
+        left: "50%",
+        right: "auto",
+        bottom: "auto",
+        width: "90%",
+        transform: "translate(-50%, -50%)",
+        padding: "0px",
+        overflow: "hidden",
+      },
+    };
+  } else {
+    console.log("big");
+    customStyles = {
+      content: {
+        top: "50%",
+        left: "50%",
+        right: "auto",
+        bottom: "auto",
+        width: "50%",
+        transform: "translate(-50%, -50%)",
+        padding: "0px",
+        overflow: "hidden",
+      },
+    };
+  }
   const [modalIsOpen, setIsOpen] = React.useState(false);
   function openModal() {
     setIsOpen(true);
@@ -67,15 +87,22 @@ const SignUp = () => {
       >
         <div className="relative m-auto container">
           <div className="row">
-            <div className="col-6 left flex justify-center">
-              <img src={Idyfy_logo} alt="IDYFY " />
+            <div className="col-6 left  d-none d-lg-block">
+              <center>
+                <img
+                  className="mt-20"
+                  src={Idyfy_logo}
+                  alt="IDYFY "
+                  style={{ height: "250px" }}
+                />
+              </center>
             </div>
-            <div className="col-6 right">
+            <div className="col-lg-6 col-12 right">
               <div className="flex justify-center mt-10">
                 <img src={Idyfy_name} alt="IDYFY " />
               </div>
               <div className="flex justify-center">
-                <h1 className="welcome mt-2">
+                <h1 className="welcome mt-2 text-center">
                   Welcome to your professional community
                 </h1>
               </div>
@@ -117,7 +144,7 @@ const SignUp = () => {
                   id="rememberme"
                 />
                 <label
-                  className="custom-control-label text-white"
+                  className="ml-2 custom-control-label text-white"
                   for="rememberme"
                 >
                   Remember Me

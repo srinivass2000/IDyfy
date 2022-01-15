@@ -6,7 +6,7 @@ import Stones from "../../assets/svg/stones1.svg";
 import Idyfy_name from "../../assets/svg/Idyfy_name_Signup.svg";
 import new_idea from "../../assets/icons/new_idea.svg";
 import "./newideas.css";
-
+import { isMobile } from "react-device-detect";
 const New_idea = () => {
   const initialState = {
     username: "",
@@ -30,18 +30,38 @@ const New_idea = () => {
     setFormData({ ...formdata, [e.target.name]: e.target.value });
   };
   //   let subtitle;
-  const customStyles = {
-    content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      width: "50%",
-      transform: "translate(-50%, -50%)",
-      padding: "0px",
-      overflow: "hidden",
-    },
-  };
+  let customStyles;
+  if (isMobile) {
+    console.log("small");
+
+    customStyles = {
+      content: {
+        top: "50%",
+        left: "50%",
+        right: "auto",
+        bottom: "auto",
+        width: "90%",
+        transform: "translate(-50%, -50%)",
+        padding: "0px",
+        overflow: "hidden",
+      },
+    };
+  } else {
+    console.log("big");
+    customStyles = {
+      content: {
+        top: "50%",
+        left: "50%",
+        right: "auto",
+        bottom: "auto",
+        width: "50%",
+        transform: "translate(-50%, -50%)",
+        padding: "0px",
+        overflow: "hidden",
+      },
+    };
+  }
+
   const [modalIsOpen, setIsOpen] = React.useState(false);
   function openModal() {
     setIsOpen(true);
@@ -114,8 +134,7 @@ const New_idea = () => {
                   className="custom-control-label text-white"
                   for="rememberme"
                 >
-                  I agree to the terms and conditions{" "}
-                  <a className="link">T&C</a>
+                  I agree to the <a className="link">T&C</a>
                 </label>
               </div>
               <div className="flex justify-center">
