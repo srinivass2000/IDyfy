@@ -1,5 +1,9 @@
-const Feature = require("../../models/Feature");
+// const Feature = require("../../models/Feature");
 const ErrorResponse = require("../../utils/errorResponse");
+const mongoose = require("mongoose");
+const {
+    FeatureSchema
+} = require("../../models/Feature");
 
 exports.create_feature = async (req, res, next) => {
     try {
@@ -11,6 +15,10 @@ exports.create_feature = async (req, res, next) => {
             version_start
         } =
         req.body;
+
+        var Feature = mongoose.model(`features_${idea_id}`, FeatureSchema);
+
+        console.log(Feature);
 
         const feature = await Feature.create({
             title,

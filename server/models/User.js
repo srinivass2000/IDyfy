@@ -27,17 +27,20 @@ const UserSchema = new mongoose.Schema({
         minlength: 6,
         select: false,
     },
+    starred_idea: Array,
+    pulled_ideas: Number,
     resetPasswordToken: String,
     resetPasswordExpire: Date,
     emailVerified: Boolean,
     emailVerificationToken: String,
     emailVerificationTokenExpiry: Date,
     ideas_contributed: Array,
+    ideas_details: Array,
     engagement_score: Number,
     profile_pic: String,
 });
 
-UserSchema.pre("save", async function(next) {
+UserSchema.pre("save", async function (next) {
     if (!this.isModified("password")) {
         next();
     }
@@ -47,17 +50,19 @@ UserSchema.pre("save", async function(next) {
     next();
 });
 
-UserSchema.methods.matchPassword = async function(password) {
+UserSchema.methods.matchPassword = async function (password) {
     return await bcrypt.compare(password, this.password);
 };
 
-UserSchema.methods.getSignedJwtToken = function() {
-    return jwt.sign({ id: this._id }, process.env.JWT_SECRET_KEY, {
+UserSchema.methods.getSignedJwtToken = function () {
+    return jwt.sign({
+        id: this._id
+    }, process.env.JWT_SECRET_KEY, {
         expiresIn: process.env.JWT_EXPIRE,
     });
 };
 
-UserSchema.methods.getResetPasswordToken = function() {
+UserSchema.methods.getResetPasswordToken = function () {
     const resetToken = crypto.randomBytes(20).toString("hex");
 
     // Hash token (private key) and save to database
@@ -72,7 +77,7 @@ UserSchema.methods.getResetPasswordToken = function() {
     return resetToken;
 };
 
-UserSchema.methods.getemailVerificationToken = function() {
+UserSchema.methods.getemailVerificationToken = function () {
     const VerificationToken = crypto.randomBytes(20).toString("hex");
 
     // Hash token (private key) and save to database

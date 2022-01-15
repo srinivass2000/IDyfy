@@ -39,10 +39,7 @@ const FeatureSchema = new mongoose.Schema({
 });
 
 
-FeatureSchema.pre("save", async function(next) {
-    // if (!this.isModified("content")) {
-    //     next();
-    // }
+FeatureSchema.pre("save", async function (next) {
     hashed_content = crypto.createHash("sha256").update(this.content).digest("hex");
     console.log(hashed_content)
     if (hashed_content === this.content_hash) {
@@ -56,27 +53,9 @@ FeatureSchema.pre("save", async function(next) {
     }
 });
 
-
-// FeatureSchema.pre("updateOne", async function(next) {
-//     if (!this.isModified("content")) {
-//         console.log("not modified")
-//         next();
-//     }
-//     const data = this.getUpdate()
-//     console.log(data);
-//     hashed_content = crypto.createHash("sha256");
-//     console.log(hashed_content)
-//     if (hashed_content === this.content_hash) {
-//         this.updated_content = 0;
-//         next();
-//     } else {
-//         this.updated_content = 1;
-//         this.content_hash = hashed_content;
-//         console.log("here");
-//         next();
-//     }
-// });
-
 const Feature = mongoose.model("Feature", FeatureSchema);
 
-module.exports = Feature;
+module.exports = {
+    Feature,
+    FeatureSchema
+};
