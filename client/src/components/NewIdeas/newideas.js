@@ -57,9 +57,9 @@ const New_idea = () => {
 
   return (
     <div>
-      <div className="flex-auto flex flex-col ml-8 mr-8">
+      <div className="flex-auto flex flex-col ml-3 mr-3">
         <a className="links home" onClick={openModal}>
-          <div className="flex justify-center pt-3">
+          <div className="flex justify-center pt-2">
             <img src={new_idea} alt="New Idea" />
           </div>
           <div>

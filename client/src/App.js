@@ -13,27 +13,27 @@ import { isMobile } from "react-device-detect";
 function App() {
   return (
     <div className="App">
-      {isMobile ? (
+      {/* {isMobile ? (
         <>
           <h3 className="mt-20 bg-red-200 p-10">
             🙏🏼🙏🏼 This content is unavailable on mobile 🙏🏼🙏🏼
           </h3>
           <h4 className="mt-20 bg-green-200 p-10">😀 😃 Coming Soon 😀 😃</h4>
         </>
-      ) : (
-        <BrowserRouter>
-          <Navbar />
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/feed" exact component={FeedPage} />
-            <Route path="/notification" exact component={Notification} />
-            <Route path="/starred" exact component={Starred_ideas} />
-            <Route path="/profile" exact component={Profile} />
-            <Route path="/myideas" exact component={MyIdeas} />
-          </Switch>
-          {/* <Footer /> */}
-        </BrowserRouter>
-      )}
+      ) : ( */}
+      <BrowserRouter>
+        <Navbar />
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/feed" exact component={FeedPage} />
+          <Route path="/notification" exact component={Notification} />
+          <Route path="/starred" exact component={Starred_ideas} />
+          <Route path="/profile" exact component={Profile} />
+          <Route path="/myideas" exact component={MyIdeas} />
+        </Switch>
+        {/* <Footer /> */}
+      </BrowserRouter>
+      {/* )} */}
     </div>
   );
 }

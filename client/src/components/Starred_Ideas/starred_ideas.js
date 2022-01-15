@@ -4,13 +4,13 @@ const Starred_ideas = () => {
   return (
     <div className="container">
       <div className="row my-3">
-        <div className="col-5">
+        <div className="col-lg-5 col-3">
           <hr
             className="mt-2"
             style={{ width: "100%", height: "2px", color: "white" }}
           />
         </div>
-        <div className="col-2">
+        <div className="col-lg-2 col-6">
           <button
             className="btn-sm mb-1"
             style={{ "background-color": "#840FCC", color: "white" }}
@@ -18,7 +18,7 @@ const Starred_ideas = () => {
             STARRED IDEAS
           </button>
         </div>
-        <div className="col-5">
+        <div className="col-lg-5 col-3">
           <hr
             className="mt-2"
             style={{ width: "100%", height: "2px", color: "white" }}
@@ -28,7 +28,7 @@ const Starred_ideas = () => {
 
       {/* map */}
       <div className="row ">
-        <div className="offset-3 col-6">
+        <div className="offset-md-1 col-md-10 offset-lg-3 col-lg-6 col-12">
           <FeedTile />
           <FeedTile />
           <FeedTile />
