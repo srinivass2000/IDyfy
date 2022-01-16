@@ -8,21 +8,20 @@ import { isMobile } from "react-device-detect";
 
 const Login = () => {
   const initialState = {
-    username: "",
     email: "",
     password: "",
-    confirmpassword: "",
+    remember: "off",
   };
   const [formdata, setFormData] = useState(initialState);
-  const handleSubmit = async (e, id) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    //api put
     try {
-      //   await axios.put(`http://localhost:5000/helpereditorder/${id}`, formdata);
+      //   await await axios.post("http://localhost:5000/login`, formdata);
     } catch (e) {
       console.log(e);
     }
     closeModal();
+    console.log(formdata);
     setFormData(initialState);
   };
   const handleChange = (e) => {
@@ -31,8 +30,6 @@ const Login = () => {
   //   let subtitle;
   let customStyles;
   if (isMobile) {
-    console.log("small");
-
     customStyles = {
       content: {
         top: "50%",
@@ -46,7 +43,6 @@ const Login = () => {
       },
     };
   } else {
-    console.log("big");
     customStyles = {
       content: {
         top: "50%",
@@ -87,7 +83,7 @@ const Login = () => {
       >
         <div className="relative m-auto container">
           <div className="row">
-            <div className="col-lg-6 col-12 right">
+            <form onSubmit={handleSubmit} className="col-lg-6 col-12 right">
               <div className="flex justify-center mt-10">
                 <img src={Idyfy_name} alt="IDYFY " />
               </div>
@@ -104,6 +100,8 @@ const Login = () => {
               <div className="flex justify-center mt-4 mx-3">
                 <input
                   type="text"
+                  name="email"
+                  onChange={handleChange}
                   className="form-control form_box"
                   placeholder="Email Address"
                 />
@@ -111,6 +109,8 @@ const Login = () => {
               <div className="flex justify-center mt-3 mx-3">
                 <input
                   type="password"
+                  name="password"
+                  onChange={handleChange}
                   className="form-control form_box"
                   placeholder="Password"
                 />
@@ -121,6 +121,8 @@ const Login = () => {
                     type="checkbox"
                     className="custom-control-input"
                     id="rememberme"
+                    name="remember"
+                    onChange={handleChange}
                   />
                   <label
                     className="ml-2 custom-control-label text-white"
@@ -142,7 +144,7 @@ const Login = () => {
                   Cancel
                 </button>
               </div>
-            </div>
+            </form>
             <div className="col-6 left d-none d-lg-block">
               <center>
                 <img

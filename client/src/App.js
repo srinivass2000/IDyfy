@@ -32,11 +32,8 @@ function App() {
           <Route path="/starred" exact component={Starred_ideas} />
           <Route path="/profile" exact component={Profile} />
           <Route path="/myideas" exact component={MyIdeas} />
-<<<<<<< HEAD
           <Route path="/" component={Error} />
-=======
           <Route path="/idea" exact component={Idea} />
->>>>>>> c3770280f99473762163e986edce9ba6ff653de2
         </Switch>
         {/* <Footer /> */}
       </BrowserRouter>
