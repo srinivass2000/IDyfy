@@ -13,7 +13,7 @@ const Notification = () => {
         <div className="col-lg-2 col-4">
           <button
             className="btn-sm mb-1"
-            style={{ "background-color": "#840FCC", color: "white" }}
+            style={{ backgroundColor: "#840FCC", color: "white" }}
           >
             NOTIFICATIONS
           </button>

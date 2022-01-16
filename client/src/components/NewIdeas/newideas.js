@@ -3,7 +3,6 @@ import Modal from "react-modal";
 import "../Auth/auth.css";
 import Idyfy_logo from "../../assets/svg/Idyfy_logo.svg";
 import Stones from "../../assets/svg/stones1.svg";
-import Idyfy_name from "../../assets/svg/Idyfy_name_Signup.svg";
 import new_idea from "../../assets/icons/new_idea.svg";
 import "./newideas.css";
 import { isMobile } from "react-device-detect";
@@ -32,8 +31,6 @@ const New_idea = () => {
   //   let subtitle;
   let customStyles;
   if (isMobile) {
-    console.log("small");
-
     customStyles = {
       content: {
         top: "50%",
@@ -47,7 +44,6 @@ const New_idea = () => {
       },
     };
   } else {
-    console.log("big");
     customStyles = {
       content: {
         top: "50%",
@@ -73,19 +69,19 @@ const New_idea = () => {
   function closeModal() {
     setIsOpen(false);
   }
-  //modal end
+  //modal ends
 
   return (
     <div>
       <div className="flex-auto flex flex-col ml-3 mr-3">
-        <a className="links home" onClick={openModal}>
+        <div className="links home" onClick={openModal}>
           <div className="flex justify-center pt-2">
             <img src={new_idea} alt="New Idea" />
           </div>
           <div>
             <h6>New Ideas</h6>
           </div>
-        </a>
+        </div>
       </div>
 
       <Modal
@@ -94,6 +90,7 @@ const New_idea = () => {
         onRequestClose={closeModal}
         style={customStyles}
         contentLabel="Example Modal"
+        ariaHideApp={false}
       >
         <div className="relative m-auto container blue">
           <div className="row">
@@ -124,7 +121,7 @@ const New_idea = () => {
                 ></textarea>
               </div>
 
-              <div class="ml-3 mt-2 mb-3 custom-control custom-checkbox">
+              <div className="ml-3 mt-2 mb-3 custom-control custom-checkbox">
                 <input
                   type="checkbox"
                   className="custom-control-input"
@@ -132,9 +129,12 @@ const New_idea = () => {
                 />
                 <label
                   className="custom-control-label text-white"
-                  for="rememberme"
+                  htmlFor="rememberme"
                 >
-                  I agree to the <a className="link">T&C</a>
+                  I agree to the{" "}
+                  <a href="/" className="link">
+                    T&C
+                  </a>
                 </label>
               </div>
               <div className="flex justify-center">

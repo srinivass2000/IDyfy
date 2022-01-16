@@ -5,7 +5,7 @@ import Idyfy_logo from "../../assets/svg/Idyfy_logo.svg";
 import Stones from "../../assets/svg/stones1.svg";
 import Idyfy_name from "../../assets/svg/Idyfy_name_Signup.svg";
 import { isMobile } from "react-device-detect";
-import axios from "axios";
+// import axios from "axios";
 const SignUp = () => {
   const initialState = {
     name: "",
@@ -82,6 +82,7 @@ const SignUp = () => {
         onRequestClose={closeModal}
         style={customStyles}
         contentLabel="Example Modal"
+        ariaHideApp={false}
       >
         <div className="relative m-auto container">
           <div className="row">
@@ -143,7 +144,7 @@ const SignUp = () => {
                   onChange={handleChange}
                 />
               </div>
-              <div class="ml-3 mt-2 mb-3 custom-control custom-checkbox">
+              <div className="ml-3 mt-2 mb-3 custom-control custom-checkbox">
                 <input
                   type="checkbox"
                   className="custom-control-input"
@@ -153,7 +154,7 @@ const SignUp = () => {
                 />
                 <label
                   className="ml-2 custom-control-label text-white"
-                  for="rememberme"
+                  htmlFor="rememberme"
                 >
                   Remember Me
                 </label>
