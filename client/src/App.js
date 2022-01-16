@@ -10,6 +10,7 @@ import Starred_ideas from "./components/Starred_Ideas/starred_ideas";
 import Profile from "./components/Profile/Profile";
 import MyIdeas from "./components/MyIdeas/myideas";
 import { isMobile } from "react-device-detect";
+import Error from "./components/error/error";
 function App() {
   return (
     <div className="App">
@@ -30,6 +31,7 @@ function App() {
           <Route path="/starred" exact component={Starred_ideas} />
           <Route path="/profile" exact component={Profile} />
           <Route path="/myideas" exact component={MyIdeas} />
+          <Route path="/" component={Error} />
         </Switch>
         {/* <Footer /> */}
       </BrowserRouter>

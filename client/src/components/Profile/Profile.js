@@ -49,6 +49,24 @@ const Profile = () => {
           </div>{" "}
         </div>{" "}
       </div>{" "}
+      <div className="container ">
+        <div className="row mt-4">
+          <div className="fs-3 offset-lg-1 col-lg-2 offset-1 col-5 blue border-radius rounded">
+            <em>Contributed Ideas</em>
+          </div>
+        </div>
+        <div className="row ">
+          <div className="idea offset-lg-1 col-lg-2 offset-2 col-8 mr-28 text-white mt-10">
+            <p className="text-left p-2">#Machine learnig</p>
+            <p className="text-left p-1">IDEA TITLE</p>
+            <p className="text-left p-1">
+              Desc: fewref jej iegwerj ijui weiug ehg wehgij ijew irui erh iu
+              eie riof eiuf ehf iouw erhu.....
+            </p>
+          </div>
+        </div>
+        <div className="row mt-4"></div>
+      </div>
     </div>
   );
 };
