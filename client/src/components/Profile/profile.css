@@ -14,7 +14,15 @@
     border-top: solid 230px transparent;
 
 }
-
+.idea{
+    background-image: url("../../assets/svg/ideas.svg");
+    /* background-position: center; */
+    /* background-repeat:repeat; */
+    /* background-size:300px 200px; */
+    height: 200px;
+    bottom: 0;
+    /* width:200px */    
+}
 
 .color{
     background-color: #D6BEFF;
