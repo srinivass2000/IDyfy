@@ -33,15 +33,9 @@ function App() {
           <Route path="/starred" exact component={Starred_ideas} />
           <Route path="/profile" exact component={Profile} />
           <Route path="/myideas" exact component={MyIdeas} />
-<<<<<<< HEAD
-          <Route path="/" component={Error} />
-=======
-          <Route path="/idea" exact component={Idea} />
-<<<<<<< HEAD
+          <Route path="/idea" exact component={Idea}/>
           <Route path="/feature" exact component={Feature} />
-=======
->>>>>>> c3770280f99473762163e986edce9ba6ff653de2
->>>>>>> ac5108fddc4c58ca0b8831faa9223ae9b5751c62
+          <Route path="/" component={Error} />  
         </Switch>
         {/* <Footer /> */}
       </BrowserRouter>
