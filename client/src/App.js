@@ -10,6 +10,8 @@ import Profile from "./components/Profile/Profile";
 import MyIdeas from "./components/MyIdeas/myideas";
 import Idea from "./components/Idea/idea";
 import Feature from "./components/feature/feature";
+import Graph from "./components/graph/graph";
+
 // import { isMobile } from "react-device-detect";
 import Error from "./components/error/error";
 function App() {
@@ -34,6 +36,7 @@ function App() {
           <Route path="/myideas" exact component={MyIdeas} />
           <Route path="/idea" exact component={Idea}/>
           <Route path="/feature" exact component={Feature} />
+          <Route path="/graph" exact component={Graph} />
           <Route path="/" component={Error} />  
         </Switch>
         {/* <Footer /> */}
