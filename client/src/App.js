@@ -12,7 +12,7 @@ import Idea from "./components/Idea/idea";
 import Feature from "./components/feature/feature";
 // import { isMobile } from "react-device-detect";
 import Error from "./components/error/error";
-
+import VerifyEmail from "./components/verifyemail/verify";
 function App() {
   return (
     <div className="App">
@@ -34,9 +34,11 @@ function App() {
           <Route path="/starred" exact component={Starred_ideas} />
           <Route path="/profile" exact component={Profile} />
           <Route path="/myideas" exact component={MyIdeas} />
-          <Route path="/idea" exact component={Idea}/>
+          <Route path="/idea" exact component={Idea} />
           <Route path="/feature" exact component={Feature} />
-          <Route path="/" component={Error} />  
+          <Route path="/email/verify/:id" exact component={VerifyEmail} />
+
+          <Route path="/" component={Error} />
         </Switch>
         {/* <Footer /> */}
       </BrowserRouter>

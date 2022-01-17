@@ -16,7 +16,7 @@ exports.login = async (req, res, next) => {
     const user = await User.findOne({ email }).select("+password");
 
     if (!user) {
-      return next(new ErrorResponse("Invalid credentials", 401));
+      return next(new ErrorResponse("No user exists with this email", 403));
     }
 
     // Check that password match
@@ -38,14 +38,13 @@ exports.login = async (req, res, next) => {
 
 // Register user
 exports.register = async (req, res, next) => {
-  const { fullname, username, email, password } = req.body;
+  const { name, email, password } = req.body;
   let user = await User.findOne({ email });
 
   if (!user) {
     try {
       user = await User.create({
-        username,
-        fullname,
+        name,
         email,
         password,
         emailVerified: false,
