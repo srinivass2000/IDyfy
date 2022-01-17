@@ -14,30 +14,34 @@ import Graph from "./components/graph/graph";
 
 // import { isMobile } from "react-device-detect";
 import Error from "./components/error/error";
+import VerifyEmail from "./components/verifyemail/verify";
+import Protectedroute from "./components/protectedroutes";
 function App() {
   return (
     <div className="App">
+      {" "}
       {/* {isMobile ? (
-        <>
-          <h3 className="mt-20 bg-red-200 p-10">
-            🙏🏼🙏🏼 This content is unavailable on mobile 🙏🏼🙏🏼
-          </h3>
-          <h4 className="mt-20 bg-green-200 p-10">😀 😃 Coming Soon 😀 😃</h4>
-        </>
-      ) : ( */}
+                        <>
+                          <h3 className="mt-20 bg-red-200 p-10">
+                            🙏🏼🙏🏼 This content is unavailable on mobile 🙏🏼🙏🏼
+                          </h3>
+                          <h4 className="mt-20 bg-green-200 p-10">😀 😃 Coming Soon 😀 😃</h4>
+                        </>
+                      ) : ( */}{" "}
       <BrowserRouter>
         <Navbar />
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/feed" exact component={FeedPage} />
-          <Route path="/notification" exact component={Notification} />
-          <Route path="/starred" exact component={Starred_ideas} />
-          <Route path="/profile" exact component={Profile} />
-          <Route path="/myideas" exact component={MyIdeas} />
-          <Route path="/idea" exact component={Idea}/>
-          <Route path="/feature" exact component={Feature} />
-          <Route path="/graph" exact component={Graph} />
-          <Route path="/" component={Error} />  
+          <Protectedroute path="/feed" exact component={FeedPage} />
+          <Protectedroute path="/notification" exact component={Notification} />
+          <Protectedroute path="/starred" exact component={Starred_ideas} />
+          <Protectedroute path="/profile" exact component={Profile} />
+          <Protectedroute path="/myideas" exact component={MyIdeas} />
+          <Protectedroute path="/idea" exact component={Idea} />
+          <Protectedroute path="/feature" exact component={Feature} />
+          <Protectedroute path="/graph" exact component={Graph} />
+          <Route path="/email/verify/:id" exact component={VerifyEmail} />
+          <Route path="/" component={Error} />
         </Switch>
         {/* <Footer /> */}
       </BrowserRouter>
