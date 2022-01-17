@@ -34,13 +34,13 @@ const Profile = () => {
             </div>{" "}
           </div>{" "}
           <div className="row mt-10 flex justify-center">
-            <div className="name"> Thats What She Said </div>{" "}
-            <div className="address"> There she lives </div>{" "}
-            <div className="post"> Thats her job </div>{" "}
-            <div className="university"> -Thats her university </div>{" "}
+            <div className="name" style={{fontSize:"x-large"}}> Thats What She Said </div>{" "}
+            <div className="address" style={{fontSize:"x-large"}}> There she lives </div>{" "}
+            <div className="post" style={{fontSize:"x-large"}}> Thats her job </div>{" "}
+            <div className="university" style={{fontSize:"x-large"}}> -Thats her university </div>{" "}
           </div>{" "}
           <div className="row  flex justify-center">
-            <span className="name mt-10"> About Me </span>{" "}
+            <span className="name mt-10" style={{fontSize:"x-large"}}> About Me </span>{" "}
             <div className="about">
               I need an easy friend I do, with an ear to lend I do think you fit
               this shoe I do, but you have a clue I 'll take advantage while You
