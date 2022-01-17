@@ -57,6 +57,4 @@ exports.create_idea = async (req, res, next) => {
         // next(err)
         return next(new ErrorResponse(err.message, 500));
     }
-
-
 };
