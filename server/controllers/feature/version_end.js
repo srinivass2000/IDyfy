@@ -1,5 +1,6 @@
 const Feature = require("../../models/Feature");
 const Idea = require("../../models/Idea");
+const User = require("../../models/User");
 const ErrorResponse = require("../../utils/errorResponse");
 
 exports.version_end = async(req, res, next) => {
@@ -8,9 +9,21 @@ exports.version_end = async(req, res, next) => {
             idea_id,
         } = req.body;
 
+        // const {
+        //     user_id,
+        // } = req.body;
+
         const idea = await Idea.findOne({
             _id: idea_id
         });
+
+        const user = await User.findOne({
+            _id: user_id
+        });
+
+        // const idea = await user.idea_detials.findOne({
+        //     _id: idea_id
+        // });
 
         const response = await Idea.findOneAndUpdate({
             _id: idea_id
@@ -18,10 +31,19 @@ exports.version_end = async(req, res, next) => {
             latest_version: ++idea.latest_version,
         });
 
-        const final = await Idea.findOne({
+        // const response = await User.idea_detials.findOneAndUpdate({
+        //     _id: idea_id
+        // }, {
+        //     latest_version: ++User.idea_detials.latest_version,
+        // });
+
+        const final = await user.idea_details.findOne({
             _id: idea_id
         });
 
+        // const final = await user.idea_detials.findOne({
+        //     _id: idea_id
+        // }); 
 
         console.log(req.user)
         var features_affected;

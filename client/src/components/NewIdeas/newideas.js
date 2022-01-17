@@ -4,7 +4,6 @@ import "../Auth/auth.css";
 import Idyfy_logo from "../../assets/svg/Idyfy_logo.svg";
 import Stones from "../../assets/svg/stones1.svg";
 import new_idea from "../../assets/icons/new_idea.svg";
-import "./newideas.css";
 import { isMobile } from "react-device-detect";
 const New_idea = () => {
   const initialState = {
@@ -92,7 +91,7 @@ const New_idea = () => {
         contentLabel="Example Modal"
         ariaHideApp={false}
       >
-        <div className="relative m-auto container blue">
+        <div className="relative m-auto container" style={{backgroundColor: "#b6aaf3"}}>
           <div className="row">
             <img
               src={Idyfy_logo}

@@ -135,7 +135,7 @@ const Idea = () => {
             <button
               className="btn pl-3 pr-3 mb-3 mt-3"
               style={{
-                "": "#F62F08",
+                backgroundColor: "#F62F08",
                 color: "white",
                 fontSize: "1.7rem",
                 borderRadius: "1.2rem",

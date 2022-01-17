@@ -34,9 +34,9 @@ function App() {
           <Route path="/starred" exact component={Starred_ideas} />
           <Route path="/profile" exact component={Profile} />
           <Route path="/myideas" exact component={MyIdeas} />
-          <Route path="/idea" exact component={Idea} />
+          <Route path="/idea" exact component={Idea}/>
           <Route path="/feature" exact component={Feature} />
-          <Route path="/" component={Error} />
+          <Route path="/" component={Error} />  
         </Switch>
         {/* <Footer /> */}
       </BrowserRouter>
