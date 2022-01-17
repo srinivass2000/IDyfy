@@ -3,7 +3,6 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./App.css";
 import Home from "./components/Home/home";
 import Navbar from "./components/Navbar/navbar";
-import Footer from "./components/Footer/footer";
 import FeedPage from "./components/Feed_Page/feedpage";
 import Notification from "./components/Notification/notification";
 import Starred_ideas from "./components/Starred_Ideas/starred_ideas";
@@ -11,7 +10,7 @@ import Profile from "./components/Profile/Profile";
 import MyIdeas from "./components/MyIdeas/myideas";
 import Idea from "./components/Idea/idea";
 import Feature from "./components/feature/feature";
-import { isMobile } from "react-device-detect";
+// import { isMobile } from "react-device-detect";
 import Error from "./components/error/error";
 
 function App() {

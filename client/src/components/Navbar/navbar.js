@@ -9,7 +9,7 @@ import notifications from "../../assets/icons/notifications.svg";
 import profile from "../../assets/images/dummy_profile.png";
 import "../Navbar/navbar.css";
 import { Link } from "react-router-dom";
-import New_idea from "../NewIdeas/newideas";
+import Newidea from "../NewIdeas/newideas";
 // const Navbar = () => {
 //   return (
 //     <div>
@@ -92,15 +92,15 @@ const Navbar = () => {
   return (
     <div>
       <nav
-        class="navbar navbar-expand-lg "
+        className="navbar navbar-expand-lg "
         style={{ backgroundColor: "#B287FF" }}
       >
-        <div class="container-fluid">
-          <Link class="navbar-brand mr-20" href="/feed">
+        <div className="container-fluid">
+          <Link className="navbar-brand mr-20" to="/feed">
             <img src={Idyfy_logo} alt="IDYFY LOGO" style={{ height: "70px" }} />
           </Link>
           <button
-            class="navbar-toggler"
+            className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent"
@@ -119,9 +119,9 @@ const Navbar = () => {
               />
             </span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <li className="nav-item">
                 <Link className="links home" to="/feed">
                   <div className="flex justify-center pt-2 pr-4 pl-4">
                     <img className="icon" src={home} alt="home" />
@@ -131,10 +131,10 @@ const Navbar = () => {
                   </div>
                 </Link>
               </li>
-              <li class="nav-item">
-                <New_idea />
+              <li className="nav-item">
+                <Newidea />
               </li>
-              <li class="nav-item">
+              <li className="nav-item">
                 <Link className="links" to="/myideas">
                   <div className="flex justify-center  pt-2 pr-6 pl-6">
                     <img src={my_idea} alt="My Ideas" />
@@ -144,7 +144,7 @@ const Navbar = () => {
                   </div>
                 </Link>
               </li>
-              <li class="nav-item">
+              <li className="nav-item">
                 <Link className="links" to="/starred">
                   <div className="flex justify-center  pt-2 pr-10 pl-10">
                     <img src={starred} alt="Starred Ideas" />
@@ -154,7 +154,7 @@ const Navbar = () => {
                   </div>
                 </Link>
               </li>
-              <li class="nav-item">
+              <li className="nav-item">
                 <Link className="links" to="/notification">
                   <div className="flex justify-center pt-2 pr-10 pl-10">
                     <i className="image-hover">
@@ -167,7 +167,7 @@ const Navbar = () => {
                 </Link>
               </li>
             </ul>
-            <form class="d-flex justify-center">
+            <form className="d-flex justify-center">
               <input
                 type="text"
                 className="h-10 mr-2 p-1 rounded-xl z-0 focus:shadow focus:outline-none border"

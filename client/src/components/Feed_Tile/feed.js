@@ -1,5 +1,4 @@
 import React from "react";
-import FeedIcon from "../../assets/svg/feedicon.svg";
 import Star from "../../assets/icon/star.svg";
 import Chat from "../../assets/icon/chat.svg";
 import Share from "../../assets/icon/share.svg";
@@ -59,10 +58,10 @@ const FeedTile = () => {
                 stroke="url(#paint1_linear_840_2198)"
               />
             </g>
-            <text x="50" y="40" fill="black" font-weight="bold" font-size="40">
+            <text x="50" y="40" fill="black" fontWeight="bold" fontSize="40">
               5
             </text>
-            <text x="22" y="60" fill="black" font-weight="bold">
+            <text x="22" y="60" fill="black" fontWeight="bold">
               Contributers
             </text>
             <defs>
@@ -73,9 +72,9 @@ const FeedTile = () => {
                 width="126.667"
                 height="126"
                 filterUnits="userSpaceOnUse"
-                color-interpolation-filters="sRGB"
+                colorInterpolationFilters="sRGB"
               >
-                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feFlood floodOpacity="0" result="BackgroundImageFix" />
                 <feGaussianBlur in="BackgroundImage" stdDeviation="10" />
                 <feComposite
                   in2="SourceAlpha"
@@ -114,8 +113,8 @@ const FeedTile = () => {
                 y2="15.0078"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stop-color="#E43A19" />
-                <stop offset="1" stop-color="white" stop-opacity="0.25" />
+                <stop stopColor="#E43A19" />
+                <stop offset="1" stopColor="white" stopOpacity="0.25" />
               </linearGradient>
               <linearGradient
                 id="paint1_linear_840_2198"
@@ -125,8 +124,8 @@ const FeedTile = () => {
                 y2="16.1988"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stop-color="white" stop-opacity="0.25" />
-                <stop offset="1" stop-color="white" stop-opacity="0.05" />
+                <stop stopColor="white" stopOpacity="0.25" />
+                <stop offset="1" stopColor="white" stopOpacity="0.05" />
               </linearGradient>
             </defs>
           </svg>
