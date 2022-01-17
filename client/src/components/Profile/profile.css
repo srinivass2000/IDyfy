@@ -6,13 +6,22 @@
     background-size: cover;
 
     position: absolute;
-    top: 80px;
+    top: 90px;
     width: 100%;
     height: 60px;
     
     border-bottom: solid 340px transparent;
     border-top: solid 230px transparent;
 
+}
+.idea{
+    background-image: url("../../assets/svg/ideas.svg");
+    /* background-position: center; */
+    /* background-repeat:repeat; */
+    /* background-size:300px 200px; */
+    height: 200px;
+    bottom: 0;
+    /* width:200px */    
 }
 
 .color{
@@ -22,22 +31,12 @@
     font-size: large;
     font-weight: bold;
 }
-
+.box{
+    margin-top: 140px;
+}
 .profileimage{
     position: absolute;
     height: 300px;
     top: -150px;
     filter: drop-shadow(15px 1px 4px #00255C);
-}
-.name{
-    font-size: xx-large;
-}
-.address{
-    font-size: x-large;
-}
-.post{
-    font-size: x-large;
-}
-.university{
-    font-size:x-large;
 }

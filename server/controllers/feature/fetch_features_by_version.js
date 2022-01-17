@@ -7,17 +7,26 @@ const {
 } = require("../../models/Feature");
 
 
-exports.fetch_features = async (req, res, next) => {
+exports.fetch_features_version_wise = async (req, res, next) => {
 
     try {
-        const idea_id = req.query.id;
+        const {
+            idea_id,
+            version_start,
+            version_end
+        } = req.body;
 
         var Feature = mongoose.model(`features_${idea_id}`, FeatureSchema);
 
         console.log(Feature);
 
-        var results = await Feature.find({}).sort({
-            version_end: 'desc'
+        var results = await Feature.find({
+            version_start: {
+                $lt: version_start
+            },
+            version_end: {
+                $gte: version_end
+            },
         });
 
         res.status(200).json({

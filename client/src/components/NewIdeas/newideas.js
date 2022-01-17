@@ -3,10 +3,8 @@ import Modal from "react-modal";
 import "../Auth/auth.css";
 import Idyfy_logo from "../../assets/svg/Idyfy_logo.svg";
 import Stones from "../../assets/svg/stones1.svg";
-import Idyfy_name from "../../assets/svg/Idyfy_name_Signup.svg";
 import new_idea from "../../assets/icons/new_idea.svg";
-import "./newideas.css";
-
+import { isMobile } from "react-device-detect";
 const New_idea = () => {
   const initialState = {
     username: "",
@@ -30,18 +28,35 @@ const New_idea = () => {
     setFormData({ ...formdata, [e.target.name]: e.target.value });
   };
   //   let subtitle;
-  const customStyles = {
-    content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      width: "50%",
-      transform: "translate(-50%, -50%)",
-      padding: "0px",
-      overflow: "hidden",
-    },
-  };
+  let customStyles;
+  if (isMobile) {
+    customStyles = {
+      content: {
+        top: "50%",
+        left: "50%",
+        right: "auto",
+        bottom: "auto",
+        width: "90%",
+        transform: "translate(-50%, -50%)",
+        padding: "0px",
+        overflow: "hidden",
+      },
+    };
+  } else {
+    customStyles = {
+      content: {
+        top: "50%",
+        left: "50%",
+        right: "auto",
+        bottom: "auto",
+        width: "50%",
+        transform: "translate(-50%, -50%)",
+        padding: "0px",
+        overflow: "hidden",
+      },
+    };
+  }
+
   const [modalIsOpen, setIsOpen] = React.useState(false);
   function openModal() {
     setIsOpen(true);
@@ -53,19 +68,19 @@ const New_idea = () => {
   function closeModal() {
     setIsOpen(false);
   }
-  //modal end
+  //modal ends
 
   return (
     <div>
-      <div className="flex-auto flex flex-col ml-8 mr-8">
-        <a className="links home" onClick={openModal}>
-          <div className="flex justify-center pt-3">
+      <div className="flex-auto flex flex-col ml-3 mr-3">
+        <div className="links home" onClick={openModal}>
+          <div className="flex justify-center pt-2">
             <img src={new_idea} alt="New Idea" />
           </div>
           <div>
             <h6>New Ideas</h6>
           </div>
-        </a>
+        </div>
       </div>
 
       <Modal
@@ -74,8 +89,9 @@ const New_idea = () => {
         onRequestClose={closeModal}
         style={customStyles}
         contentLabel="Example Modal"
+        ariaHideApp={false}
       >
-        <div className="relative m-auto container blue">
+        <div className="relative m-auto container" style={{backgroundColor: "#b6aaf3"}}>
           <div className="row">
             <img
               src={Idyfy_logo}
@@ -104,7 +120,7 @@ const New_idea = () => {
                 ></textarea>
               </div>
 
-              <div class="ml-3 mt-2 mb-3 custom-control custom-checkbox">
+              <div className="ml-3 mt-2 mb-3 custom-control custom-checkbox">
                 <input
                   type="checkbox"
                   className="custom-control-input"
@@ -112,10 +128,12 @@ const New_idea = () => {
                 />
                 <label
                   className="custom-control-label text-white"
-                  for="rememberme"
+                  htmlFor="rememberme"
                 >
-                  I agree to the terms and conditions{" "}
-                  <a className="link">T&C</a>
+                  I agree to the{" "}
+                  <a href="/" className="link">
+                    T&C
+                  </a>
                 </label>
               </div>
               <div className="flex justify-center">
