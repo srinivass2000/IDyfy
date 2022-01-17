@@ -10,7 +10,7 @@ const Feature=() => {
             <div className="container">
                 <div className="row">
                     <div className="offset-md-4 col-md-4">
-                        <button className="btn pl-3 pr-3 mb-3 mt-3" style={{ "background-color": "#840FCC", color: "white" }}>
+                        <button className="btn pl-3 pr-3 mb-3 mt-3" style={{ backgroundColor: "#840FCC", color: "white" }}>
                             Lorem Lipsum
                         </button>
                     </div>
@@ -58,7 +58,7 @@ const Feature=() => {
             </div>
             <Footer/>
         </div>
-    );
+  );
 };
 
 export default Feature;

@@ -13,7 +13,7 @@ const Starred_ideas = () => {
         <div className="col-lg-2 col-6">
           <button
             className="btn-sm mb-1"
-            style={{ "background-color": "#840FCC", color: "white" }}
+            style={{ backgroundColor: "#840FCC", color: "white" }}
           >
             STARRED IDEAS
           </button>

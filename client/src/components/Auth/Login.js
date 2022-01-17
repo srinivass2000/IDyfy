@@ -5,24 +5,24 @@ import Idyfy_logo from "../../assets/svg/Idyfy_logo.svg";
 import Stones from "../../assets/svg/stones1.svg";
 import Idyfy_name from "../../assets/svg/Idyfy_name_Signup.svg";
 import { isMobile } from "react-device-detect";
+// import axios from "axios";
 
 const Login = () => {
   const initialState = {
-    username: "",
     email: "",
     password: "",
-    confirmpassword: "",
+    remember: "off",
   };
   const [formdata, setFormData] = useState(initialState);
-  const handleSubmit = async (e, id) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    //api put
     try {
-      //   await axios.put(`http://localhost:5000/helpereditorder/${id}`, formdata);
+      //   await await axios.post("http://localhost:5000/login`, formdata);
     } catch (e) {
       console.log(e);
     }
     closeModal();
+    console.log(formdata);
     setFormData(initialState);
   };
   const handleChange = (e) => {
@@ -31,8 +31,6 @@ const Login = () => {
   //   let subtitle;
   let customStyles;
   if (isMobile) {
-    console.log("small");
-
     customStyles = {
       content: {
         top: "50%",
@@ -46,7 +44,6 @@ const Login = () => {
       },
     };
   } else {
-    console.log("big");
     customStyles = {
       content: {
         top: "50%",
@@ -84,10 +81,11 @@ const Login = () => {
         onRequestClose={closeModal}
         style={customStyles}
         contentLabel="Example Modal"
+        ariaHideApp={false}
       >
         <div className="relative m-auto container">
           <div className="row">
-            <div className="col-lg-6 col-12 right">
+            <form onSubmit={handleSubmit} className="col-lg-6 col-12 right">
               <div className="flex justify-center mt-10">
                 <img src={Idyfy_name} alt="IDYFY " />
               </div>
@@ -104,6 +102,8 @@ const Login = () => {
               <div className="flex justify-center mt-4 mx-3">
                 <input
                   type="text"
+                  name="email"
+                  onChange={handleChange}
                   className="form-control form_box"
                   placeholder="Email Address"
                 />
@@ -111,20 +111,24 @@ const Login = () => {
               <div className="flex justify-center mt-3 mx-3">
                 <input
                   type="password"
+                  name="password"
+                  onChange={handleChange}
                   className="form-control form_box"
                   placeholder="Password"
                 />
               </div>
               <div className="row container mb-3 mt-3 mx-3">
-                <div class=" col-7 mt-2 mb-3 custom-control custom-checkbox">
+                <div className=" col-7 mt-2 mb-3 custom-control custom-checkbox">
                   <input
                     type="checkbox"
                     className="custom-control-input"
                     id="rememberme"
+                    name="remember"
+                    onChange={handleChange}
                   />
                   <label
                     className="ml-2 custom-control-label text-white"
-                    for="rememberme"
+                    htmlFor="rememberme"
                   >
                     Remember Me
                   </label>
@@ -142,7 +146,7 @@ const Login = () => {
                   Cancel
                 </button>
               </div>
-            </div>
+            </form>
             <div className="col-6 left d-none d-lg-block">
               <center>
                 <img

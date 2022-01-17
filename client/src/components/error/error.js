@@ -1,8 +1,6 @@
 import React from "react";
 import error from "../../assets/svg/404.svg";
-import Idyfy_logo from "../../assets/svg/Idyfy_logo.svg";
 import Stones from "../../assets/svg/stones1.svg";
-import Idyfy_name from "../../assets/svg/Idyfy_name_Signup.svg";
 
 import "../Feed_Tile/feed.css";
 import { Link } from "react-router-dom";
@@ -27,7 +25,7 @@ const Error = () => {
         </div>
         <div className="row ">
           <div className="text-white offset-lg-4 col-lg-4 offset-1 col-10  flex justify-center">
-            <p style={{ "font-size": "40px" }}>404</p>
+            <p style={{ fontSize: "40px" }}>404</p>
           </div>
         </div>
         <p className="text-white">
