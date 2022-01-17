@@ -15,13 +15,13 @@ const signup = (name, email, confirmpassword, remember, password) => {
       (res) => {
         // console.log(res);
         alert("verification mail sent");
-        console.log("Verification Email sent");
+        // console.log("Verification Email sent");
       },
       (err) => {
         console.log(err.response.status);
         console.log(err.response.data);
         if (err.response.status === 401) {
-          alert("User already exists");
+          alert("User already exists try to login");
         }
       }
     );
@@ -42,7 +42,7 @@ const login = (email, remember, password) => {
         if (res.status === 202) {
           localStorage.setItem("UserToken", res.data.token);
           alert("succcessfully logged in");
-        } else if (res.status == 200) {
+        } else if (res.status === 200) {
           alert("Email verification mail sent");
         }
         return res;
@@ -52,16 +52,26 @@ const login = (email, remember, password) => {
         console.log(err.response.data);
         if (err.response.status === 403) {
           alert("No user exists with this email");
-        } else if (err.response.status == 401) {
+        } else if (err.response.status === 401) {
           alert("invalid Credentials");
         }
       }
     );
 };
 
+const logout = () => {
+  localStorage.removeItem("UserToken");
+};
+
+const getUser = () => {
+  return localStorage.getItem("UserToken");
+};
+
 const AuthService = {
   signup,
   login,
+  logout,
+  getUser,
 };
 
 export default AuthService;
