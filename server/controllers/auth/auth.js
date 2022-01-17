@@ -55,8 +55,7 @@ exports.register = async (req, res, next) => {
       next(err);
     }
   } else {
-    // return next(new ErrorResponse("User already Exists!", 401));
-    res.status(401).json({ success: false, data: "User already Exists!" });
+    return next(new ErrorResponse("User already Exists!", 401));
   }
 };
 
