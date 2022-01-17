@@ -18,17 +18,17 @@ const Feature=() => {
                 <div className="row">
                     <div className="offset-md-4 col-md-4 flex justify-center">
                         <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item " style={{color:"white"}}><a href="#">feature-1</a></li>
-                                <li class="breadcrumb-item" style={{color:"white"}}><a href="#">feature-12</a></li>
-                                <li class="breadcrumb-item active "style={{color:"white"}} aria-current="page">feature-123</li>
+                            <ol className="breadcrumb">
+                                <li className="breadcrumb-item " style={{color:"white"}}><a href="/">feature-1</a></li>
+                                <li className="breadcrumb-item" style={{color:"white"}}><a href="/">feature-12</a></li>
+                                <li className="breadcrumb-item active "style={{color:"white"}} aria-current="page">feature-123</li>
                             </ol>
                         </nav>
                     </div>
                 </div>
                 <div className="row">
                     <div className="col-md-2"> 
-                        <button className="btn-sm pl-3 pr-3 mb-3 mt-3" style={{ "background-color": "#840FCC", color: "white" }}>
+                        <button className="btn-sm pl-3 pr-3 mb-3 mt-3" style={{ backgroundColor: "#840FCC", color: "white" }}>
                             Description : 
                         </button>
                     </div>
