@@ -5,7 +5,8 @@ import Idyfy_logo from "../../assets/svg/Idyfy_logo.svg";
 import Stones from "../../assets/svg/stones1.svg";
 import Idyfy_name from "../../assets/svg/Idyfy_name_Signup.svg";
 import { isMobile } from "react-device-detect";
-// import axios from "axios";
+import AuthService from "../../services/authservices";
+import { useHistory } from "react-router-dom";
 
 const Login = () => {
   const initialState = {
@@ -13,16 +14,25 @@ const Login = () => {
     password: "",
     remember: "off",
   };
+  const history = useHistory();
   const [formdata, setFormData] = useState(initialState);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      //   await await axios.post("http://localhost:5000/login`, formdata);
+      await AuthService.login(
+        formdata.email,
+        formdata.remember,
+        formdata.password
+      ).then((res) => {
+        if (res.status === 202) {
+          history.push("/feed");
+        }
+      });
     } catch (e) {
       console.log(e);
     }
     closeModal();
-    console.log(formdata);
+    // console.log(formdata);
     setFormData(initialState);
   };
   const handleChange = (e) => {
