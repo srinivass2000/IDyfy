@@ -4,7 +4,6 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const UserSchema = new mongoose.Schema({
-<<<<<<< HEAD
   name: {
     type: String,
     required: [true, "Please provide fullname"],
@@ -35,45 +34,6 @@ const UserSchema = new mongoose.Schema({
   ideas_details: Array,
   engagement_score: Number,
   profile_pic: String,
-=======
-    username: {
-        type: String,
-        required: [true, "Please provide username"],
-    },
-    fullname: {
-        type: String,
-        required: [true, "Please provide fullname"],
-    },
-    email: {
-        type: String,
-        required: [true, "Please provide valid email address"],
-        unique: true,
-        match: [
-            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-            "Please provide a valid email",
-        ],
-    },
-    password: {
-        type: String,
-        required: [true, "Please add a password"],
-        minlength: 6,
-        select: false,
-    },
-    starred_idea: Array,
-    pulled_ideas: Number,
-    resetPasswordToken: String,
-    resetPasswordExpire: Date,
-    emailVerified: Boolean,
-    emailVerificationToken: String,
-    emailVerificationTokenExpiry: Date,
-    ideas_contributed: Array,
-    ideas_details: [{
-        'idea_id': String,
-        'latest_version': Number
-    }],
-    engagement_score: Number,
-    profile_pic: String,
->>>>>>> 404a93ddd198f7f9f0e0f596ce546e6c058d3da2
 });
 
 UserSchema.pre("save", async function (next) {
