@@ -11,10 +11,6 @@ exports.version_end = async (req, res, next) => {
       _id: idea_id,
     });
 
-    const user = await User.findOne({
-      _id: user_id,
-    });
-
     const response = await Idea.findOneAndUpdate(
       {
         _id: idea_id,
@@ -24,12 +20,6 @@ exports.version_end = async (req, res, next) => {
       }
     );
 
-    // const response = await User.idea_detials.findOneAndUpdate({
-    //     _id: idea_id
-    // }, {
-    //     latest_version: ++User.idea_detials.latest_version,
-    // });
-
     const final = await user.idea_details.findOne({
       _id: idea_id,
     });
@@ -38,7 +28,6 @@ exports.version_end = async (req, res, next) => {
     //     _id: idea_id
     // });
 
-    console.log(req.user);
     var features_affected;
     try {
       features_affected = await Feature.updateMany(
