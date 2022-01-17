@@ -6,7 +6,6 @@ import Stones from "../../assets/svg/stones1.svg";
 import Idyfy_name from "../../assets/svg/Idyfy_name_Signup.svg";
 import { isMobile } from "react-device-detect";
 import AuthService from "../../services/authservices";
-import axios from "axios";
 
 const SignUp = () => {
   const initialState = {
@@ -27,10 +26,7 @@ const SignUp = () => {
         formdata.confirmpassword,
         formdata.remember,
         formdata.password
-      ).then((res) => {
-        closeModal();
-        alert("Verification Email sent");
-      });
+      );
     } catch (e) {
       console.log(e);
     }

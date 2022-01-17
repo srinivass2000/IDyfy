@@ -13,6 +13,7 @@ import Feature from "./components/feature/feature";
 // import { isMobile } from "react-device-detect";
 import Error from "./components/error/error";
 import VerifyEmail from "./components/verifyemail/verify";
+import Protectedroute from "./components/protectedroutes";
 function App() {
   return (
     <div className="App">
@@ -28,13 +29,13 @@ function App() {
         <Navbar />
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/feed" exact component={FeedPage} />
-          <Route path="/notification" exact component={Notification} />
-          <Route path="/starred" exact component={Starred_ideas} />
-          <Route path="/profile" exact component={Profile} />
-          <Route path="/myideas" exact component={MyIdeas} />
-          <Route path="/idea" exact component={Idea} />
-          <Route path="/feature" exact component={Feature} />
+          <Protectedroute path="/feed" exact component={FeedPage} />
+          <Protectedroute path="/notification" exact component={Notification} />
+          <Protectedroute path="/starred" exact component={Starred_ideas} />
+          <Protectedroute path="/profile" exact component={Profile} />
+          <Protectedroute path="/myideas" exact component={MyIdeas} />
+          <Protectedroute path="/idea" exact component={Idea} />
+          <Protectedroute path="/feature" exact component={Feature} />
           <Route path="/email/verify/:id" exact component={VerifyEmail} />
 
           <Route path="/" component={Error} />
