@@ -23,7 +23,8 @@ exports.create_idea = async (req, res, next) => {
     const { title, description, tags } = req.body;
     console.log(req.user._id);
     const a = req.user._id;
-    const ideas_details = { [a]: 0 };
+    var ideas_details = {};
+    ideas_details[a] = 0;
     try {
       const idea = await Idea.create({
         title,

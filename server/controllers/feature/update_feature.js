@@ -56,6 +56,7 @@ exports.update_feature = async (req, res, next) => {
           version_start: version_start,
           content_hash: content_hash,
           updated_content,
+          available: true,
         }
       );
 
@@ -74,6 +75,7 @@ exports.update_feature = async (req, res, next) => {
         version_start: version_start,
         content_hash: content_hash,
         updated_content,
+        available: true,
       });
 
       var prev_feature = await Feature.findOneAndUpdate(
@@ -84,6 +86,7 @@ exports.update_feature = async (req, res, next) => {
           version_end: version_start,
           updated_version: version_start,
           updated_feature: response._id,
+          available: undefined,
         }
       );
       prev_feature = await Feature.findById(id);

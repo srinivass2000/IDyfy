@@ -1,7 +1,9 @@
-const Feature = require("../../models/Feature");
+// const Feature = require("../../models/Feature");
 const Idea = require("../../models/Idea");
 const User = require("../../models/User");
 const ErrorResponse = require("../../utils/errorResponse");
+const mongoose = require("mongoose");
+const { FeatureSchema } = require("../../models/Feature");
 
 exports.version_end = async (req, res, next) => {
   try {
@@ -11,34 +13,52 @@ exports.version_end = async (req, res, next) => {
       _id: idea_id,
     });
 
-    const response = await Idea.findOneAndUpdate(
-      {
-        _id: idea_id,
-      },
-      {
-        latest_version: ++idea.latest_version,
-      }
-    );
+    var user_id = req.user._id;
 
-    const final = await user.idea_details.findOne({
-      _id: idea_id,
-    });
+    var latest_version = parseInt(idea.ideas_details[user_id]);
+    // var latest_version = 30;
 
-    // const final = await user.idea_detials.findOne({
-    //     _id: idea_id
-    // });
+    console.log(latest_version);
+
+    var Feature = mongoose.model(`features_${idea_id}`, FeatureSchema);
+
+    console.log(Feature);
 
     var features_affected;
     try {
       features_affected = await Feature.updateMany(
         {
-          idea_id: idea_id,
-          version_end: 0,
+          $and: [
+            {
+              updated_version: { $exists: false },
+              deleted_version: { $exists: false },
+              version_end: latest_version,
+              available: true,
+            },
+          ],
         },
         {
-          version_end: final.latest_version,
+          version_end: ++latest_version,
+          available: true,
         }
       );
+
+      // console.log("here");
+      var ideas_details = {};
+      ideas_details = idea.ideas_details;
+      ideas_details[user_id] = latest_version;
+
+      console.log(ideas_details);
+
+      const response = await Idea.findOneAndUpdate(
+        {
+          _id: idea_id,
+        },
+        {
+          ideas_details,
+        }
+      );
+
       console.log(features_affected);
     } catch (error) {
       console.log(error);
@@ -46,13 +66,11 @@ exports.version_end = async (req, res, next) => {
     }
 
     const features = await Feature.find({
-      idea_id: final._id,
-      version_end: final.latest_version,
+      version_end: latest_version,
     });
 
     res.status(200).json({
       success: true,
-      idea: final,
       features,
       features_affected: features_affected.modifiedCount,
     });

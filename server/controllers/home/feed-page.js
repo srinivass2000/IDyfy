@@ -8,7 +8,11 @@ exports.get_ideas = async (req, res, next) => {
     skip = parseInt(skip);
     // console.log(skip);
     const PAGE_SIZE = 10;
-    const result = await Idea.find({}).skip(skip).limit(PAGE_SIZE);
+
+    const result = await Idea.find({})
+      .sort({ createdAt: 1 })
+      .skip(skip)
+      .limit(PAGE_SIZE);
 
     res.status(200).json({
       success: true,

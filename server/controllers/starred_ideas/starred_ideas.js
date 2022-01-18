@@ -1,13 +1,14 @@
 const Idea = require("../../models/Idea");
 const ErrorResponse = require("../../utils/errorResponse");
-const { protect } = require("../../middleware/auth");
 
-exports.get_contributed_ideas = async (req, res, next) => {
+exports.get_starred_ideas = async (req, res, next) => {
   try {
     console.log(req.user._id);
+    var id = req.user._id;
+    id = id.toString();
     const result = await Idea.find({
-      contributors: {
-        $in: [req.user._id],
+      starred_by: {
+        $in: [id],
       },
     });
     res.status(200).json({

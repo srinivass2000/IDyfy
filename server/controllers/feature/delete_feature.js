@@ -36,6 +36,7 @@ exports.delete_feature = async (req, res, next) => {
         {
           deleted_version: idea.ideas_details[req.user._id] + 1,
           version_end: idea.ideas_details[req.user._id] + 1,
+          available: undefined,
         }
       );
 
