@@ -30,7 +30,6 @@ const FeatureSchema = new mongoose.Schema({
   },
   version_start: {
     type: Number,
-    default: 0,
   },
   version_end: {
     type: Number,
@@ -44,6 +43,9 @@ const FeatureSchema = new mongoose.Schema({
   },
   deleted_version: {
     type: Number,
+  },
+  available: {
+    type: Boolean,
   },
 });
 
