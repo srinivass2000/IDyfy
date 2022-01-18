@@ -31,7 +31,6 @@ const UserSchema = new mongoose.Schema({
   emailVerificationToken: String,
   emailVerificationTokenExpiry: Date,
   ideas_contributed: Array,
-  ideas_details: Array,
   engagement_score: Number,
   profile_pic: String,
 });

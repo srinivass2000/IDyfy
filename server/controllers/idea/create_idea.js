@@ -1,11 +1,7 @@
 const Idea = require("../../models/Idea");
 const ErrorResponse = require("../../utils/errorResponse");
-const {
-    FeatureSchema
-} = require("../../models/Feature");
+const { FeatureSchema } = require("../../models/Feature");
 const mongoose = require("mongoose");
-
-
 
 // function createModelForName(name) {
 //     console.log(name);
@@ -23,38 +19,38 @@ const mongoose = require("mongoose");
 // }
 
 exports.create_idea = async (req, res, next) => {
+  try {
+    const { title, description, tags } = req.body;
+    console.log(req.user._id);
+    const a = req.user._id;
+    const ideas_details = { [a]: 0 };
     try {
-        const {
-            title,
-            description,
-            tags
-        } = req.body;
-        console.log(req.user._id)
-        try {
-            const idea = await Idea.create({
-                title,
-                description,
-                tags,
-                contributors: [req.user._id],
-            });
+      const idea = await Idea.create({
+        title,
+        description,
+        tags,
+        contributors: [req.user._id],
+        ideas_details,
+      });
 
-            // var table_name = createModelForName(`features_${idea._id}`);
+      // var table_name = createModelForName(`features_${idea._id}`);
 
-            // console.log(table_name)
+      // console.log(table_name)
 
+      console.log(idea.ideas_details[a]);
 
-            res.status(200).json({
-                success: true,
-                idea
-            });
-        } catch (err) {
-            console.log(err);
-            // next(err)
-            return next(new ErrorResponse("Oops Something went wrong!", 500));
-        }
+      res.status(200).json({
+        success: true,
+        idea,
+      });
     } catch (err) {
-        console.log(err);
-        // next(err)
-        return next(new ErrorResponse(err.message, 500));
+      console.log(err);
+      // next(err)
+      return next(new ErrorResponse("Oops Something went wrong!", 500));
     }
+  } catch (err) {
+    console.log(err);
+    // next(err)
+    return next(new ErrorResponse(err.message, 500));
+  }
 };

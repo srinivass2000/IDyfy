@@ -3,6 +3,7 @@ const ErrorResponse = require("../../utils/errorResponse");
 const crypto = require("crypto");
 const mongoose = require("mongoose");
 const { FeatureSchema } = require("../../models/Feature");
+const Idea = require("../../models/Idea");
 
 exports.update_feature = async (req, res, next) => {
   try {
@@ -15,6 +16,10 @@ exports.update_feature = async (req, res, next) => {
     var Feature = mongoose.model(`features_${idea_id}`, FeatureSchema);
 
     console.log(Feature);
+
+    const idea = await Idea.findById(idea_id);
+
+    console.log(idea);
 
     const initial = await Feature.findById(id);
 
@@ -29,11 +34,35 @@ exports.update_feature = async (req, res, next) => {
       console.log("here");
     }
 
-    const response = await Feature.findOneAndUpdate(
-      {
-        _id: id,
-      },
-      {
+    a = req.user._id;
+    console.log(a);
+    console.log(initial.version_start);
+    console.log(idea.ideas_details[a] + 1);
+
+    if (initial.version_start === idea.ideas_details[req.user._id] + 1) {
+      const response = await Feature.findOneAndUpdate(
+        {
+          _id: id,
+        },
+        {
+          title: title,
+          user_id: req.user._id,
+          idea_id: idea_id,
+          parent_id: parent_id,
+          content: content,
+          version_start: version_start,
+          content_hash: content_hash,
+          updated_content,
+        }
+      );
+
+      const feature = await Feature.findById(id);
+      res.status(200).json({
+        success: true,
+        feature: feature,
+      });
+    } else {
+      const response = await Feature.create({
         title: title,
         user_id: req.user._id,
         idea_id: idea_id,
@@ -42,14 +71,25 @@ exports.update_feature = async (req, res, next) => {
         version_start: version_start,
         content_hash: content_hash,
         updated_content,
-      }
-    );
+      });
 
-    const feature = await Feature.findById(id);
-    res.status(200).json({
-      success: true,
-      feature: feature,
-    });
+      var prev_feature = await Feature.findOneAndUpdate(
+        {
+          _id: id,
+        },
+        {
+          version_end: version_start,
+          updated_version: version_start,
+          updated_feature: response._id,
+        }
+      );
+      prev_feature = await Feature.findById(id);
+      res.status(200).json({
+        success: true,
+        new_feature: response,
+        prev_feature: prev_feature,
+      });
+    }
   } catch (err) {
     console.log(err);
     return next(new ErrorResponse("Oops Something went wrong!", 500));

@@ -36,10 +36,13 @@ const FeatureSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  isupdated: {
+  updated_version: {
     type: Number,
   },
-  isdeleted: {
+  updated_feature: {
+    type: String,
+  },
+  deleted_version: {
     type: Number,
   },
 });
