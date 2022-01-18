@@ -22,6 +22,7 @@ app.use("/api/auth", require("./routes/auth"));
 app.use("/api/idea", require("./routes/idea_routes"));
 app.use("/api/feature", require("./routes/feature_routes"));
 app.use("/api/comment", require("./routes/comment_routes"));
+app.use("/api/profile", require("./routes/profile_routes"));
 
 app.use("/api/faker", require("./routes/fake_routes"));
 
