@@ -19,19 +19,23 @@ const SignUp = () => {
   const [formdata, setFormData] = useState(initialState);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      await AuthService.signup(
-        formdata.name,
-        formdata.email,
-        formdata.confirmpassword,
-        formdata.remember,
-        formdata.password
-      );
-    } catch (e) {
-      console.log(e);
+    if (formdata.password === formdata.confirmpassword) {
+      try {
+        await AuthService.signup(
+          formdata.name,
+          formdata.email,
+          formdata.confirmpassword,
+          formdata.remember,
+          formdata.password
+        );
+      } catch (e) {
+        console.log(e);
+      }
+      // console.log(formdata);
+    } else {
+      alert("password and confirm password doesnt match");
     }
     closeModal();
-    // console.log(formdata);
     setFormData(initialState);
   };
   const handleChange = (e) => {

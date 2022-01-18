@@ -16,6 +16,7 @@ import Graph from "./components/graph/graph";
 import Error from "./components/error/error";
 import VerifyEmail from "./components/verifyemail/verify";
 import Protectedroute from "./components/protectedroutes";
+import ResetPassword from "./components/verifyemail/resetpassword";
 function App() {
   return (
     <div className="App">
@@ -41,6 +42,7 @@ function App() {
           <Protectedroute path="/feature" exact component={Feature} />
           <Protectedroute path="/graph" exact component={Graph} />
           <Route path="/email/verify/:id" exact component={VerifyEmail} />
+          <Route path="/passwordreset/:id" exact component={ResetPassword} />
           <Route path="/" component={Error} />
         </Switch>
         {/* <Footer /> */}

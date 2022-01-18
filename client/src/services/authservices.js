@@ -67,11 +67,32 @@ const getUser = () => {
   return localStorage.getItem("UserToken");
 };
 
+const forgotpswd = (email) => {
+  return axios
+    .post(API_URL + "/forgotpassword", {
+      email,
+    })
+    .then(
+      (res) => {
+        // console.log(res);
+        alert("Email sent to reset password");
+      },
+      (err) => {
+        // console.log(err.response);
+        if (err.response.status === 404) {
+          alert("This email is not registered");
+        } else if (err.response.status === 500) {
+          alert("Could not send email pls try later");
+        }
+      }
+    );
+};
 const AuthService = {
   signup,
   login,
   logout,
   getUser,
+  forgotpswd,
 };
 
 export default AuthService;
