@@ -9,7 +9,7 @@ exports.update_feature = async (req, res, next) => {
   try {
     const { id, title, idea_id, parent_id, content, version_start } = req.body;
 
-    var user_id = req.user._id;
+    // var user_id = req.user._id;
 
     var updated_content, content_hash;
 
@@ -39,7 +39,10 @@ exports.update_feature = async (req, res, next) => {
     console.log(initial.version_start);
     console.log(idea.ideas_details[a] + 1);
 
-    if (initial.version_start === idea.ideas_details[req.user._id] + 1) {
+    if (
+      initial.version_start === idea.ideas_details[req.user._id] + 1 ||
+      initial.version_end === 0
+    ) {
       const response = await Feature.findOneAndUpdate(
         {
           _id: id,
