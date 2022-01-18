@@ -6,6 +6,7 @@ import Stones from "../../assets/svg/stones1.svg";
 import Idyfy_name from "../../assets/svg/Idyfy_name_Signup.svg";
 import { isMobile } from "react-device-detect";
 import AuthService from "../../services/authservices";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
   const initialState = {
@@ -16,6 +17,8 @@ const SignUp = () => {
     remember: "off",
   };
   // /minlength: 6 for password
+  const notify1 = () =>
+    toast.error("Password and confirm password doesnt match!");
   const [formdata, setFormData] = useState(initialState);
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,7 +36,8 @@ const SignUp = () => {
       }
       // console.log(formdata);
     } else {
-      alert("password and confirm password doesnt match");
+      // alert("password and confirm password doesnt match");
+      notify1();
     }
     closeModal();
     setFormData(initialState);

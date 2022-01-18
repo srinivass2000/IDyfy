@@ -1,6 +1,8 @@
 import { React, useState } from "react";
 import axios from "axios";
 import { useParams, useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
+
 const ResetPassword = () => {
   const { id } = useParams();
   const history = useHistory();
@@ -9,6 +11,11 @@ const ResetPassword = () => {
     confirmpassword: "",
   };
   const [pswd, setPwsd] = useState(initialState);
+  const notify1 = () => toast.success("Successfully reseted password !");
+  const notify2 = () => toast.error("Invalid token !");
+  const notify3 = () =>
+    toast.error("Password and Confirm Password doesnt match !");
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log(id, pswd.password);
@@ -22,16 +29,19 @@ const ResetPassword = () => {
             // console.log(res.data.token);
             localStorage.setItem("UserToken", res.data.token);
             history.replace("/feed");
-            alert("successfully reseted password");
+            // alert("successfully reseted password");
+            notify1();
           },
           (err) => {
             console.log(err);
             history.push("/");
-            alert("Invalid token");
+            // alert("Invalid token");
+            notify2();
           }
         );
     } else {
-      alert("Password and Confirm Password doesnt match");
+      // alert("Password and Confirm Password doesnt match");
+      notify3();
     }
   };
   const handleChange = (e) => {

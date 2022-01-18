@@ -136,7 +136,7 @@ const Login = () => {
                 />
               </div>
               <div className="row container mb-3 mt-3 ">
-                <div className=" col-6 mt-2 mb-3 custom-control custom-checkbox">
+                <div className=" col-lg-6 col-12 mt-2 mb-3 custom-control custom-checkbox flex justify-center">
                   <input
                     type="checkbox"
                     className="custom-control-input"
@@ -151,7 +151,7 @@ const Login = () => {
                     Remember Me
                   </label>
                 </div>
-                <div className="col-6  mt-2">
+                <div className="col-lg-6 col-12 mt-2 flex justify-center">
                   <a
                     onClick={forgotpassword}
                     className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-2 border border-blue-500 hover:border-transparent rounded forgot"

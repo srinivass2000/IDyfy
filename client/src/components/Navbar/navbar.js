@@ -12,6 +12,8 @@ import { Link, useLocation } from "react-router-dom";
 import Newidea from "../NewIdeas/newideas";
 import AuthService from "../../services/authservices";
 import { useHistory } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Navbar = () => {
   const [user, setUser] = useState("");
   const location = useLocation();
@@ -25,6 +27,7 @@ const Navbar = () => {
   }, [location]);
   return (
     <div>
+      <ToastContainer theme="dark" />
       <nav
         className="navbar navbar-expand-lg "
         style={{ backgroundColor: "#B287FF" }}
@@ -125,18 +128,23 @@ const Navbar = () => {
               <button onClick={logout}>logout</button>
             </div>
           ) : (
-            <>
-              <form className="d-flex justify-center">
-                <input
-                  type="text"
-                  className="h-10 mr-2 p-1 rounded-xl z-0 focus:shadow focus:outline-none border"
-                  placeholder="Search for Ideas..."
-                />
-                <button className="pt-1">
-                  <img src={search} alt="Search" style={{ height: "20px" }} />
-                </button>
-              </form>
-            </>
+            <div className=" d-flex justify-content-end">
+              <div
+                className="collapse navbar-collapse"
+                id="navbarSupportedContent"
+              >
+                <form>
+                  <input
+                    type="text"
+                    className="h-10 mr-2 p-1 rounded-xl z-0 focus:shadow focus:outline-none border"
+                    placeholder="Search for Ideas..."
+                  />
+                  <button className="pt-1">
+                    <img src={search} alt="Search" style={{ height: "20px" }} />
+                  </button>
+                </form>
+              </div>
+            </div>
           )}
         </div>
       </nav>
