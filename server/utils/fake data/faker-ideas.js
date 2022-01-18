@@ -15,10 +15,15 @@ exports.fake_idea = async (req, res, next) => {
         liked_users.push(faker.name.firstName());
       }
 
-      var contributors = [];
-      for (var i = 0; i < 3; i++) {
-        contributors.push(faker.name.firstName());
-      }
+      var contributors = [
+        "61cd6d1f8fca5f2c130865a7",
+        "61e55c97e4f68488d6b5e189",
+      ];
+      // for (var i = 0; i < 3; i++) {
+      //   contributors.push(faker.name.firstName());
+      // }
+
+      var starred_by = ["61cd6d1f8fca5f2c130865a7", "61e55c97e4f68488d6b5e189"];
 
       var tags = [];
       for (var j = 0; j < 5; j++) {
@@ -31,6 +36,7 @@ exports.fake_idea = async (req, res, next) => {
         tags: tags,
         liked_users: liked_users,
         contributors: contributors,
+        starred_by,
         latest_version: faker.random.number(),
         date: faker.date.past(),
       });

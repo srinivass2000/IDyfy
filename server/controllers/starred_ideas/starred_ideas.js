@@ -1,17 +1,16 @@
 const Idea = require("../../models/Idea");
 const ErrorResponse = require("../../utils/errorResponse");
 
-exports.get_ideas = async (req, res, next) => {
+exports.get_starred_ideas = async (req, res, next) => {
   try {
-    var { skip } = req.body;
-    skip = parseInt(skip);
-    // console.log(skip);
-    const PAGE_SIZE = 10;
-    const result = await Idea.find({})
-      .sort({ createdAt: 1 })
-      .skip(skip)
-      .limit(PAGE_SIZE);
-
+    console.log(req.user._id);
+    var id = req.user._id;
+    id = id.toString();
+    const result = await Idea.find({
+      starred_by: {
+        $in: [id],
+      },
+    });
     res.status(200).json({
       success: true,
       ideas: result,

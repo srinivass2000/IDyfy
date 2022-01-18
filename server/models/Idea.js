@@ -1,24 +1,28 @@
 const crypto = require("crypto");
 const mongoose = require("mongoose");
 
-const IdeaSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
+const IdeaSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+    },
+    liked_users: Array,
+    contributors: Array,
+    shares: Array,
+    tags: Array,
+    date: {
+      type: Date,
+      default: Date.now(),
+    },
+    starred_by: Array,
+    ideas_details: Object,
   },
-  description: {
-    type: String,
-  },
-  liked_users: Array,
-  contributors: Array,
-  shares: Array,
-  tags: Array,
-  date: {
-    type: Date,
-    default: Date.now(),
-  },
-  ideas_details: Object,
-});
+  { timestamps: true }
+);
 
 const Idea = mongoose.model("Idea", IdeaSchema);
 

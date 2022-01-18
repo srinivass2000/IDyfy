@@ -1,53 +1,56 @@
 const crypto = require("crypto");
 const mongoose = require("mongoose");
 
-const FeatureSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: [true, "Please provide Title"],
+const FeatureSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: [true, "Please provide Title"],
+    },
+    user_id: {
+      type: String,
+      required: true,
+    },
+    idea_id: {
+      type: String,
+      required: true,
+    },
+    parent_id: {
+      type: String,
+      required: true,
+    },
+    content: {
+      type: String,
+      required: true,
+    },
+    content_hash: {
+      type: String,
+    },
+    updated_content: {
+      type: Boolean,
+    },
+    version_start: {
+      type: Number,
+    },
+    version_end: {
+      type: Number,
+      default: 0,
+    },
+    updated_version: {
+      type: Number,
+    },
+    updated_feature: {
+      type: String,
+    },
+    deleted_version: {
+      type: Number,
+    },
+    available: {
+      type: Boolean,
+    },
   },
-  user_id: {
-    type: String,
-    required: true,
-  },
-  idea_id: {
-    type: String,
-    required: true,
-  },
-  parent_id: {
-    type: String,
-    required: true,
-  },
-  content: {
-    type: String,
-    required: true,
-  },
-  content_hash: {
-    type: String,
-  },
-  updated_content: {
-    type: Boolean,
-  },
-  version_start: {
-    type: Number,
-  },
-  version_end: {
-    type: Number,
-    default: 0,
-  },
-  updated_version: {
-    type: Number,
-  },
-  updated_feature: {
-    type: String,
-  },
-  deleted_version: {
-    type: Number,
-  },
-  available: {
-    type: Boolean,
-  },
-});
+  { timestamps: true }
+);
 
 FeatureSchema.pre("save", async function (next) {
   hashed_content = crypto
