@@ -38,6 +38,7 @@
 .forgot{
     font-size: smaller;
     color: #b8b6b6;
+    cursor: pointer; 
 }
 .stones{
     transform: scaleX(-1);

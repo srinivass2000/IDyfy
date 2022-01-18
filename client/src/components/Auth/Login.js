@@ -35,6 +35,14 @@ const Login = () => {
     // console.log(formdata);
     setFormData(initialState);
   };
+  const forgotpassword = async (e) => {
+    e.preventDefault();
+    try {
+      await AuthService.forgotpswd(formdata.email);
+    } catch (e) {
+      console.log(e);
+    }
+  };
   const handleChange = (e) => {
     setFormData({ ...formdata, [e.target.name]: e.target.value });
   };
@@ -127,8 +135,8 @@ const Login = () => {
                   placeholder="Password"
                 />
               </div>
-              <div className="row container mb-3 mt-3 mx-3">
-                <div className=" col-7 mt-2 mb-3 custom-control custom-checkbox">
+              <div className="row container mb-3 mt-3 ">
+                <div className=" col-6 mt-2 mb-3 custom-control custom-checkbox">
                   <input
                     type="checkbox"
                     className="custom-control-input"
@@ -143,12 +151,19 @@ const Login = () => {
                     Remember Me
                   </label>
                 </div>
-                <div className="col-4  mt-2">
-                  <button className="forgot">forgot password?</button>
+                <div className="col-6  mt-2">
+                  <a
+                    onClick={forgotpassword}
+                    className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-2 border border-blue-500 hover:border-transparent rounded forgot"
+                  >
+                    forgot password?
+                  </a>
                 </div>
               </div>
               <div className="flex justify-center">
-                <button className="mr-2 h-10 mb-10 btn button">Log In</button>
+                <button type="submit" className="mr-2 h-10 mb-10 btn button">
+                  Log In
+                </button>
                 <button
                   className="ml-2 h-10 w-30 mb-40 btn button2"
                   onClick={closeModal}
