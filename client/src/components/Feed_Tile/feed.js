@@ -3,15 +3,23 @@ import Star from "../../assets/icon/star.svg";
 import Chat from "../../assets/icon/chat.svg";
 import Share from "../../assets/icon/share.svg";
 import Like from "../../assets/icon/heart.svg";
-
+import { Link } from "react-router-dom";
 import "../Feed_Tile/feed.css";
-const FeedTile = () => {
+const FeedTile = (props) => {
+  const url = "/idea/";
   return (
     <div className="text-white p-4 mb-12 tile">
       <div className="row">
         <div className="offset-lg-1 mt-4 col-lg-8 col-8">
-          <div className="row">Title : Ideas of Ideas</div>
-          <div className="row">Field : ML and Web</div>
+          <div className="flex align-left ">Title : {props.details.title}</div>
+          <div className="flex align-left ">
+            Field:
+            {props.details.tags.map((tag, index) => (
+              <p key={index} className="d-inline px-2">
+                {tag}
+              </p>
+            ))}
+          </div>
         </div>
         <div className="col-4 d-block d-sm-none mt-3">
           <em
@@ -19,8 +27,8 @@ const FeedTile = () => {
               font: "30px Arial, sans-serif",
             }}
           >
-            5
-          </em>{" "}
+            {props.details.contributors.length}
+          </em>
           Contributors
         </div>
         <div className="col-3 mt-3 d-none d-sm-block">
@@ -59,7 +67,7 @@ const FeedTile = () => {
               />
             </g>
             <text x="50" y="40" fill="black" fontWeight="bold" fontSize="40">
-              5
+              {props.details.contributors.length}
             </text>
             <text x="22" y="60" fill="black" fontWeight="bold">
               Contributers
@@ -133,19 +141,19 @@ const FeedTile = () => {
       </div>
       <div className="row mt-3">
         <h2>Description</h2>
-        <p className="mt-1">
-          Our platform will bring like minded people to work for a common goal
-          without much friction and make the whole brainstorming part of the
-          ideation phase effortless.
-        </p>
+        <p className="mt-1">{props.details.description}</p>
       </div>
-      <button className="my-3 readmore rounded-pill px-2">Read more</button>
+      <Link to={url + props.details._id}>
+        <button className="my-3 readmore rounded-pill px-2">Read more</button>
+      </Link>
       <hr className="hr mt-1" />
       <div className="row mt-3">
         <div className="col-lg-1  col-1">
           <img src={Like} alt="feed icon" className="absolute mt-1 " />
         </div>
-        <div className="text-start col-lg-1 col-1 ">3</div>
+        <div className="text-start col-lg-1 col-1 ">
+          {props.details.liked_users.length}
+        </div>
 
         <div className="offset-lg-1 col-lg-1 d offset-1 col-1">
           <img
@@ -164,7 +172,9 @@ const FeedTile = () => {
             width="30px"
           />
         </div>
-        <div className="text-start col-lg-1 col-1">3</div>
+        <div className="text-start col-lg-1 col-1">
+          {props.details.starred_by.length}
+        </div>
         <div className="offset-lg-3 col-lg-1 offset-3 col-1">
           <img src={Share} alt="feed icon" className="absolute mt-1" />
         </div>

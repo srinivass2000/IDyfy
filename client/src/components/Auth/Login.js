@@ -152,12 +152,12 @@ const Login = () => {
                   </label>
                 </div>
                 <div className="col-lg-6 col-12 mt-2 flex justify-center">
-                  <a
+                  <p
                     onClick={forgotpassword}
                     className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-2 border border-blue-500 hover:border-transparent rounded forgot"
                   >
                     forgot password?
-                  </a>
+                  </p>
                 </div>
               </div>
               <div className="flex justify-center">
