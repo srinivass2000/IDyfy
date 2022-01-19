@@ -6,9 +6,11 @@ exports.get_profile = async (req, res, next) => {
   try {
     console.log(req.user._id);
     const user = req.user;
+    var id = req.user._id;
+    id = id.toString();
     const result = await Idea.find({
       contributors: {
-        $in: [req.user._id],
+        $in: id,
       },
     });
     res.status(200).json({
