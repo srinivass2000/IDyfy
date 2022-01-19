@@ -18,6 +18,7 @@ import Error from "./components/error/error";
 import VerifyEmail from "./components/verifyemail/verify";
 import Protectedroute from "./components/protectedroutes";
 import ResetPassword from "./components/verifyemail/resetpassword";
+import CreateIdea from "./components/NewIdeas/createIdea";
 function App() {
   return (
     <div className="App">
@@ -39,7 +40,8 @@ function App() {
           <Protectedroute path="/starred" exact component={Starred_ideas} />
           <Protectedroute path="/profile" exact component={Profile} />
           <Protectedroute path="/myideas" exact component={MyIdeas} />
-          <Protectedroute path="/idea/:id" exact component={Idea} />
+          <Protectedroute path="/createIdea" exact component={CreateIdea} />
+          <Protectedroute path="/idea" exact component={Idea} />
           <Protectedroute path="/feature" exact component={Feature} />
           <Protectedroute path="/graphtest" exact component={GraphTest} />
           <Protectedroute path="/graph" exact component={Graph} />

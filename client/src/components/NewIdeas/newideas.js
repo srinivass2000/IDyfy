@@ -1,32 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Modal from "react-modal";
 import "../Auth/auth.css";
 import Idyfy_logo from "../../assets/svg/Idyfy_logo.svg";
 import Stones from "../../assets/svg/stones1.svg";
 import new_idea from "../../assets/icons/new_idea.svg";
 import { isMobile } from "react-device-detect";
+import "../NewIdeas/newidea.css";
+import InputTag from "./tags";
+
 const New_idea = () => {
   const initialState = {
-    username: "",
-    email: "",
-    password: "",
-    confirmpassword: "",
+    title: "",
+    description: "",
   };
+
+  //const [tags, setTags] = useState(['tags','input'])
   const [formdata, setFormData] = useState(initialState);
-  const handleSubmit = async (e, id) => {
+
+  const handleSubmit = (e) => {
     e.preventDefault();
     //api put
     try {
-      //   await axios.put(`http://localhost:5000/helpereditorder/${id}`, formdata);
+      console.log(formdata);
+      //console.log(tags);
     } catch (e) {
       console.log(e);
     }
-    closeModal();
+    //closeModal();
     setFormData(initialState);
   };
+  
+  const close = ()=>{
+    closeModal();
+    setFormData(initialState);
+  }
+
   const handleChange = (e) => {
     setFormData({ ...formdata, [e.target.name]: e.target.value });
   };
+  
   //   let subtitle;
   let customStyles;
   if (isMobile) {
@@ -70,6 +82,8 @@ const New_idea = () => {
   }
   //modal ends
 
+  
+
   return (
     <div>
       <div className="flex-auto flex flex-col ml-3 mr-3">
@@ -96,9 +110,10 @@ const New_idea = () => {
             <img
               src={Idyfy_logo}
               style={{ height: "150px" }}
-              alt="IDYFY "
+              alt="IDYFY"
               className="mt-2"
             />
+            <form>
             <div>
               <div className="flex justify-center">
                 <h1 className="mt-2 ">Create a new Idea !!</h1>
@@ -106,8 +121,11 @@ const New_idea = () => {
               <div className="flex justify-center mt-3 mx-3">
                 <input
                   type="text"
+                  name="title"
+                  onChange={handleChange}
                   className="form-control form_box"
                   placeholder="Title"
+                  required
                 />
               </div>
               <div className="flex justify-center mt-3 mx-3">
@@ -115,20 +133,26 @@ const New_idea = () => {
                   rows="5"
                   cols="60"
                   name="description"
+                  onChange={handleChange}
                   className="form-control form_box"
-                  placeholder="Abstract"
+                  placeholder="Description"
+                  required
                 ></textarea>
               </div>
-
+              
+              <div className="flex justify-center mt-3 mx-3">
+                <InputTag />
+              </div>
+              
               <div className="ml-3 mt-2 mb-3 custom-control custom-checkbox">
                 <input
                   type="checkbox"
                   className="custom-control-input"
-                  id="rememberme"
+                  id="tandc"
                 />
                 <label
                   className="custom-control-label text-white"
-                  htmlFor="rememberme"
+                  htmlFor="tandc"
                 >
                   I agree to the{" "}
                   <a href="/" className="link">
@@ -137,15 +161,16 @@ const New_idea = () => {
                 </label>
               </div>
               <div className="flex justify-center">
-                <button className="mr-2 h-10 mb-10 btn button">Create</button>
+                <p className="mr-2 h-10 mb-10 btn button" onClick={handleSubmit}>Create</p>
                 <button
                   className="ml-2 h-10 w-30 mb-40 btn button2"
-                  onClick={closeModal}
+                  onClick={close}
                 >
                   Cancel
                 </button>
               </div>
             </div>
+            </form>
           </div>
           <div className="row absolute bottom-0 left-0 right-0">
             <img src={Stones} alt="Stone Art" />
