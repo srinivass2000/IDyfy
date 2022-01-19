@@ -22,7 +22,8 @@ exports.create_idea = async (req, res, next) => {
   try {
     const { title, description, tags } = req.body;
     console.log(req.user._id);
-    const a = req.user._id;
+    var a = req.user._id;
+    a = a.toString();
     var ideas_details = {};
     ideas_details[a] = 0;
     try {
@@ -30,7 +31,7 @@ exports.create_idea = async (req, res, next) => {
         title,
         description,
         tags,
-        contributors: [req.user._id],
+        contributors: [a],
         ideas_details,
       });
 
