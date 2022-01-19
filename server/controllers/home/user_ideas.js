@@ -9,7 +9,7 @@ exports.get_contributed_ideas = async (req, res, next) => {
     id = id.toString();
     const result = await Idea.find({
       contributors: {
-        $in: id,
+        $in: [id],
       },
     });
     res.status(200).json({
