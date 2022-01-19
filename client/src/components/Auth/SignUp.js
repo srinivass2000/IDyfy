@@ -31,6 +31,8 @@ const SignUp = () => {
           formdata.remember,
           formdata.password
         );
+        closeModal();
+        setFormData(initialState);
       } catch (e) {
         console.log(e);
       }
@@ -39,8 +41,6 @@ const SignUp = () => {
       // alert("password and confirm password doesnt match");
       notify1();
     }
-    closeModal();
-    setFormData(initialState);
   };
   const handleChange = (e) => {
     setFormData({ ...formdata, [e.target.name]: e.target.value });
@@ -84,6 +84,7 @@ const SignUp = () => {
   //   }
   function closeModal() {
     setIsOpen(false);
+    setFormData(initialState);
   }
   //modal end
 

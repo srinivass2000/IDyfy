@@ -26,14 +26,14 @@ const Login = () => {
       ).then((res) => {
         if (res.status === 202) {
           history.push("/feed");
+          closeModal();
+          setFormData(initialState);
         }
       });
     } catch (e) {
       console.log(e);
     }
-    closeModal();
     // console.log(formdata);
-    setFormData(initialState);
   };
   const forgotpassword = async (e) => {
     e.preventDefault();
@@ -85,6 +85,7 @@ const Login = () => {
   //   }
   function closeModal() {
     setIsOpen(false);
+    setFormData(initialState);
   }
   //modal end
 

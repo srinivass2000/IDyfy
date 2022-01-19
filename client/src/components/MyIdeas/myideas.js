@@ -1,7 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import FeedTile from "../Feed_Tile/feed";
+import { useState } from "react";
+import axios from "axios";
+import authHeader from "../../services/auth-header";
 
 const MyIdeas = () => {
+  const [ideas, setIdeas] = useState();
+  const getideas = async () => {
+    try {
+      // console.log(skip);
+      await axios
+        .get("http://localhost:5000/api/idea/get-contributed-ideas", {
+          headers: authHeader(),
+        })
+        .then(
+          (res) => {
+            setIdeas(res.data.ideas);
+            console.log(res);
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  useEffect(() => {
+    getideas();
+  }, []);
   return (
     <div className="container">
       <div className="row my-3">
@@ -28,13 +55,23 @@ const MyIdeas = () => {
       </div>
 
       {/* map */}
-      <div className="row ">
-        <div className="offset-md-1 col-md-10 offset-lg-3 col-lg-6 col-12">
-          <FeedTile />
-          <FeedTile />
-          <FeedTile />
-        </div>
-      </div>
+      {ideas ? (
+        ideas.map((idea, index) => (
+          <div key={index} className="row ">
+            <div className="offset-md-1 col-md-10 offset-lg-3 col-lg-6 col-12 text-white">
+              <FeedTile details={idea} />
+            </div>
+          </div>
+        ))
+      ) : (
+        <>
+          <div class="mt-10 d-flex justify-content-center">
+            <div class="spinner-border text-light" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };

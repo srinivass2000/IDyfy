@@ -141,7 +141,12 @@ const FeedTile = (props) => {
       </div>
       <div className="row mt-3">
         <h2>Description</h2>
-        <p className="mt-1">{props.details.description}</p>
+        <p className="mt-1">
+          {props.details.description.length > 200 &&
+            props.details.description.substring(200, 0) + " . . . ."}
+          {props.details.description.length <= 200 &&
+            props.details.description.substring(200, 0)}
+        </p>
       </div>
       <Link to={url + props.details._id}>
         <button className="my-3 readmore rounded-pill px-2">Read more</button>
