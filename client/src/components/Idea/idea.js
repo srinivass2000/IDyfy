@@ -3,6 +3,8 @@ import back from "../../assets/svg/backidea.svg";
 import contri from "../../assets/svg/contributor_icon.svg";
 import Like from "../../assets/icon/heart.svg";
 import Chat from "../../assets/icon/chat.svg";
+import InputTag from "../NewIdeas/tags";
+
 
 const Idea = () => {
   return (
@@ -145,6 +147,9 @@ const Idea = () => {
               View Graph
             </button>
           </div>
+        </div>
+        <div>
+          <InputTag/>
         </div>
       </div>
     </div>

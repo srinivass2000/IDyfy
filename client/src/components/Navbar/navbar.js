@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Idyfy_logo from "../../assets/svg/nav.svg";
+import new_idea from "../../assets/icons/new_idea.svg";
 import search from "../../assets/icons/search.svg";
 import home from "../../assets/icons/home.svg";
 import list from "../../assets/icon/list.png";
@@ -9,7 +10,6 @@ import notifications from "../../assets/icons/notifications.svg";
 import profile from "../../assets/images/dummy_profile.png";
 import "../Navbar/navbar.css";
 import { Link, useLocation } from "react-router-dom";
-import Newidea from "../NewIdeas/newideas";
 import AuthService from "../../services/authservices";
 import { useHistory } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -73,7 +73,14 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Newidea />
+                  <Link className="links" to="/createIdea">
+                    <div className="flex justify-center  pt-2 pr-6 pl-6 mr-3 ml-3">
+                      <img src={new_idea} alt="Create Idea" />
+                    </div>
+                    <div>
+                      <h6>Create Idea</h6>
+                    </div>
+                  </Link>
                 </li>
                 <li className="nav-item">
                   <Link className="links" to="/myideas">
