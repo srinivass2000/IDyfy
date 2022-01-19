@@ -71,7 +71,13 @@ const FeedPage = () => {
           </div>
         ))
       ) : (
-        <></>
+        <>
+          <div class="mt-10 d-flex justify-content-center">
+            <div class="spinner-border text-light" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        </>
       )}
       <div>
         <button onClick={skipinc}>load more</button>

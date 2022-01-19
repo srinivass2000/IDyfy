@@ -8,7 +8,9 @@
     font-weight:500;
 }
 
-
+.hoveritem:hover{
+    background-color: #B287FF;
+}
 
 
 

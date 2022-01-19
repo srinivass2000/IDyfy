@@ -14,13 +14,19 @@ import AuthService from "../../services/authservices";
 import { useHistory } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 const Navbar = () => {
+  const url = "/search/";
   const [user, setUser] = useState("");
+  const [searchdata, setSearchdata] = useState({ search: "" });
   const location = useLocation();
   const history = useHistory();
   const logout = () => {
     AuthService.logout();
     history.push("/");
+  };
+  const handleChange = (e) => {
+    setSearchdata({ ...searchdata, [e.target.name]: e.target.value });
   };
   useEffect(() => {
     setUser(AuthService.getUser);
@@ -110,22 +116,74 @@ const Navbar = () => {
               </ul>
               <form className="d-flex justify-center">
                 <input
-                  type="text"
+                  type="search"
                   className="h-10 mr-2 p-1 rounded-xl z-0 focus:shadow focus:outline-none border"
-                  placeholder="Search for Ideas..."
+                  placeholder="Search Ideas or People...."
+                  name="search"
+                  onChange={handleChange}
                 />
-                <button className="pt-1">
+                <Link to={url + searchdata.search} className="pt-2">
                   <img src={search} alt="Search" style={{ height: "20px" }} />
-                </button>
+                </Link>
               </form>
-              <Link to="/profile" className="mt-2 d-flex justify-center">
+              {/* small screen */}
+              <Link
+                to="/profile"
+                className="mt-2 d-flex justify-center d-lg-none"
+              >
                 <img
                   className="ml-3 mt-1 icon dropdown-toggle"
                   src={profile}
                   alt="My Profile"
                 />
               </Link>
-              <button onClick={logout}>logout</button>
+              {/* large */}
+              <div className="dropstart  d-flex justify-center d-none d-lg-block">
+                <p
+                  class="mr-5"
+                  type="button"
+                  id="dropdownMenuButton1"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <img
+                    className="ml-3 mt-1 icon dropdown-toggle"
+                    src={profile}
+                    alt="My Profile"
+                  />
+                </p>
+
+                <ul
+                  class="dropdown-menu "
+                  aria-labelledby="dropdownMenuButton1"
+                  style={{
+                    backgroundColor: "#0a0135",
+                    border: "5px solid #840FCC",
+                  }}
+                >
+                  <li className="p-1">
+                    <Link
+                      class="dropdown-item text-center text-white hoveritem"
+                      to="/profile"
+                    >
+                      Profile
+                    </Link>
+                  </li>
+                  <li className="flex justify-center p-1">
+                    <button
+                      onClick={logout}
+                      className="flex justify-center text-white"
+                      style={{ backgroundColor: "red" }}
+                    >
+                      logout
+                    </button>
+                  </li>
+                </ul>
+              </div>
+              {/* small */}
+              <button onClick={logout} className="d-lg-none mt-2">
+                logout
+              </button>
             </div>
           ) : (
             <div className=" d-flex justify-content-end">
@@ -135,13 +193,18 @@ const Navbar = () => {
               >
                 <form>
                   <input
-                    type="text"
+                    type="search"
                     className="h-10 mr-2 p-1 rounded-xl z-0 focus:shadow focus:outline-none border"
-                    placeholder="Search for Ideas..."
+                    placeholder="Search Ideas or People..."
+                    name="search"
+                    onChange={handleChange}
                   />
-                  <button className="pt-1">
+                  <Link
+                    to={url + searchdata.search}
+                    className="pt-2 inline-block"
+                  >
                     <img src={search} alt="Search" style={{ height: "20px" }} />
-                  </button>
+                  </Link>
                 </form>
               </div>
             </div>

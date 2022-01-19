@@ -10,6 +10,7 @@ import Profile from "./components/Profile/Profile";
 import MyIdeas from "./components/MyIdeas/myideas";
 import Idea from "./components/Idea/idea";
 import Feature from "./components/feature/feature";
+import GraphTest from "./components/graph/test_graph";
 import Graph from "./components/graph/graph";
 
 // import { isMobile } from "react-device-detect";
@@ -40,6 +41,7 @@ function App() {
           <Protectedroute path="/myideas" exact component={MyIdeas} />
           <Protectedroute path="/idea/:id" exact component={Idea} />
           <Protectedroute path="/feature" exact component={Feature} />
+          <Protectedroute path="/graphtest" exact component={GraphTest} />
           <Protectedroute path="/graph" exact component={Graph} />
           <Route path="/email/verify/:id" exact component={VerifyEmail} />
           <Route path="/passwordreset/:id" exact component={ResetPassword} />

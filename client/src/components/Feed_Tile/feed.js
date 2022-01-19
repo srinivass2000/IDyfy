@@ -9,11 +9,21 @@ const FeedTile = (props) => {
   const url = "/idea/";
   return (
     <div className="text-white p-4 mb-12 tile">
-      <div className="row">
+      <div className="row overflow-x-hidden">
         <div className="offset-lg-1 mt-4 col-lg-8 col-8">
-          <div className="flex align-left ">Title : {props.details.title}</div>
+          <div
+            className="flex justify-center fs-1 mb-3"
+            style={{ fontFamily: "Pelo" }}
+          >
+            {" "}
+            {props.details.title}
+          </div>
           <div className="flex align-left ">
-            Field:
+            <span
+              style={{ textDecoration: "underline", fontFamily: "cursive" }}
+            >
+              Field:
+            </span>
             {props.details.tags.map((tag, index) => (
               <p key={index} className="d-inline px-2">
                 {tag}
@@ -140,7 +150,9 @@ const FeedTile = (props) => {
         </div>
       </div>
       <div className="row mt-3">
-        <h2>Description</h2>
+        <h2 style={{ textDecoration: "underline", fontFamily: "cursive" }}>
+          Description
+        </h2>
         <p className="mt-1">
           {props.details.description.length > 200 &&
             props.details.description.substring(200, 0) + " . . . ."}
