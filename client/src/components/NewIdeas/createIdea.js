@@ -4,6 +4,7 @@ import Idyfy_logo from "../../assets/svg/Idyfy_logo.svg";
 import "../Auth/auth.css";
 import Footer from "../Footer/footer";
 import InputTag from "./tags";
+import Tags from "./tagsfunc";
 import axios from "axios";
 import authHeader from "../../services/auth-header";
 
@@ -80,6 +81,14 @@ const CreateIdea = ()=>{
                     
                     <div className="flex justify-start mt-3 mx-3">
                         <InputTag/>
+                    </div>
+
+                    <div className="flex justify-start mt-3 mx-3">
+                        <h1>functional tags below </h1>
+                    </div>
+
+                    <div className="flex justify-start mt-3 mx-3">
+                        <Tags/>
                     </div>
 
                     <div className="ml-3 mt-2 mb-3 custom-control custom-checkbox">
