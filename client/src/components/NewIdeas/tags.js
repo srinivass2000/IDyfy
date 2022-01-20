@@ -41,8 +41,8 @@ class InputTag extends React.Component {
                 <button type="button" onClick={() => { this.removeTag(i); }}>+</button>
               </li>
             ))}
-            {console.log(tags)}
-            <li className="input-tag__tags__input"><input required placeholder="Add Tags" type="text" onKeyDown={this.inputKeyDown} ref={c => { this.tagInput = c; }} /></li>
+            
+            <li className="input-tag__tags__input"><input placeholder="Add Tags" type="text" onKeyDown={this.inputKeyDown} ref={c => { this.tagInput = c; }} /></li>
           </ul>
         </div>
       );
