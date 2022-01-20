@@ -4,7 +4,7 @@ const Comment = require("../../models/Comment");
 
 exports.get_idea = async (req, res, next) => {
   try {
-    const id = req.params.id;
+    const id = req.query.id;
 
     console.log(id);
 
