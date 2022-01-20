@@ -28,9 +28,9 @@ const VerifyEmail = () => {
 
   return (
     <div className="container">
-      <div class="mt-10 d-flex justify-content-center">
-        <div class="spinner-border text-light" role="status">
-          <span class="visually-hidden">Loading...</span>
+      <div className="mt-10 d-flex justify-content-center">
+        <div className="spinner-border text-light" role="status">
+          <span className="visually-hidden">Loading...</span>
         </div>
       </div>
     </div>

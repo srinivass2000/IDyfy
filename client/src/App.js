@@ -19,6 +19,7 @@ import VerifyEmail from "./components/verifyemail/verify";
 import Protectedroute from "./components/protectedroutes";
 import ResetPassword from "./components/verifyemail/resetpassword";
 import CreateIdea from "./components/NewIdeas/createIdea";
+import Search from "./components/search/search";
 function App() {
   return (
     <div className="App">
@@ -45,6 +46,7 @@ function App() {
           <Protectedroute path="/feature" exact component={Feature} />
           <Protectedroute path="/graphtest" exact component={GraphTest} />
           <Protectedroute path="/graph" exact component={Graph} />
+          <Protectedroute path="/search/:key" exact component={Search} />
           <Route path="/email/verify/:id" exact component={VerifyEmail} />
           <Route path="/passwordreset/:id" exact component={ResetPassword} />
           <Route path="/" component={Error} />
