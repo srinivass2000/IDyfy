@@ -70,7 +70,7 @@ const Navbar = () => {
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
                   <Link className="links home" to="/feed">
-                    <div className="flex justify-center pt-2 pr-4 pl-4">
+                    <div className="flex justify-center pt-2 pr-10 pl-10">
                       <img className="icon" src={home} alt="home" />
                     </div>
                     <div>
@@ -80,7 +80,7 @@ const Navbar = () => {
                 </li>
                 <li className="nav-item">
                   <Link className="links" to="/createIdea">
-                    <div className="flex justify-center  pt-2 pr-6 pl-6 mr-3 ml-3">
+                    <div className="flex justify-center  pt-2 pr-10 pl-10">
                       <img src={new_idea} alt="Create Idea" />
                     </div>
                     <div>
@@ -90,7 +90,7 @@ const Navbar = () => {
                 </li>
                 <li className="nav-item">
                   <Link className="links" to="/myideas">
-                    <div className="flex justify-center  pt-2 pr-6 pl-6">
+                    <div className="flex justify-center  pt-2 pr-10 pl-10">
                       <img src={my_idea} alt="My Ideas" />
                     </div>
                     <div>
