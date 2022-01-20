@@ -25,6 +25,9 @@ const Notification = () => {
           />
         </div>
       </div>
+      <div className="row">
+        <h1 style={{color:"white",fontSize:"2rem"}}>No Notifications Available Right Now :)</h1>
+      </div>
     </div>
   );
 };

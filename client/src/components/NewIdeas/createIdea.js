@@ -1,23 +1,66 @@
 import React from "react";
+import { useState } from "react";
 import Idyfy_logo from "../../assets/svg/Idyfy_logo.svg";
 import "../Auth/auth.css";
 import Footer from "../Footer/footer";
-import InputTag from "./tags";
+import Tags from "./tagsfunc";
+import axios from "axios";
+import authHeader from "../../services/auth-header";
 
 const CreateIdea = ()=>{
+    
+    const [title,setTitle] = useState("");
+    const [description,setDescription] = useState("");
+    const [tags,setTags] = useState([]);
+    
+    const childToParent = (childdata) => {
+        setTags([...childdata]);
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            let res = await axios({
+                method: 'POST',
+                url: 'http://localhost:5000/api/idea/create-idea',
+                headers:authHeader(),
+                data: {
+                    title: title,
+                    description: description,
+                    tags: tags,
+                },});
+          
+          if (res.status === 200) {
+            setTitle("");
+            setDescription("");
+            setTags([]);
+            //tags not going from the field but anyways we are redirecting to idea page so no issues
+            console.log("idea created sucessfully");
+          } else {
+            console.log("some error occured");
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      };
     
     return(
         <div >
             <h1 className="mb-3 mt-3" style={{color:"white", fontSize:"1.6rem"}}>! Clever Minds Come With Great Ideas !</h1>
-            <div className="relative m-auto container" style={{backgroundColor: "#b6aaf3",borderRadius:"20px"}}>
-                <div className="row z-10">
+            <div className=" m-auto container formsize" style={{backgroundColor: "#b6aaf3",width:"60%",borderRadius:"20px"}}>
+                <div className="row">
                     <img
                     src={Idyfy_logo}
                     style={{ height: "150px" }}
                     alt="IDYFY"
                     className="mt-2"
                     />
-                    <form>
+                    <form onSubmit={handleSubmit}
+                    onKeyPress={event => {
+                        if (event.which === 13 /* Enter */) {
+                          event.preventDefault();
+                        }}
+                    }>
                     
                     <div className="flex justify-center">
                         <h1 className="mt-3" style={{fontSize:"1.6rem",fontWeight:"bold"}}>Create a New Idea !!</h1>
@@ -25,8 +68,8 @@ const CreateIdea = ()=>{
                     <div className="flex justify-center mt-3 mx-3">
                         <input
                         type="text"
-                        name="title"
-                        //onChange={}
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
                         className="form-control form_box"
                         placeholder="Title"
                         />
@@ -35,15 +78,15 @@ const CreateIdea = ()=>{
                         <textarea
                         rows="5"
                         cols="60"
-                        name="description"
-                        //onChange={}
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
                         className="form-control form_box"
                         placeholder="Description"
                         ></textarea>
                     </div>
-                    
+
                     <div className="flex justify-start mt-3 mx-3">
-                        <InputTag/>
+                        <Tags childToParent={childToParent}/>
                     </div>
 
                     <div className="ml-3 mt-2 mb-3 custom-control custom-checkbox">
@@ -51,6 +94,7 @@ const CreateIdea = ()=>{
                         type="checkbox"
                         className="custom-control-input"
                         id="tandc"
+                        required
                         />
                         <label
                         className="pl-3 custom-control-label text-white"
@@ -63,7 +107,7 @@ const CreateIdea = ()=>{
                         </label>
                     </div>
                     <div className="flex justify-center">
-                        <button className="mr-2 h-10 mb-10 btn button" >Create</button>
+                        <button type="submit" className="mr-2 h-10 mb-10 btn button" >Create</button>
                     </div>
                     </form>
                 </div>

@@ -1,3 +1,7 @@
+
+// this page is only for refernce delete once done//
+
+
 import React, { useState, useRef } from "react";
 import Modal from "react-modal";
 import "../Auth/auth.css";
