@@ -3,7 +3,7 @@ import { useState } from "react";
 import Idyfy_logo from "../../assets/svg/Idyfy_logo.svg";
 import "../Auth/auth.css";
 import Footer from "../Footer/footer";
-import InputTag from "./tags";
+import Tags from "./tagsfunc";
 import axios from "axios";
 import authHeader from "../../services/auth-header";
 
@@ -11,8 +11,11 @@ const CreateIdea = ()=>{
     
     const [title,setTitle] = useState("");
     const [description,setDescription] = useState("");
-    const [tags,setTags] = useState(['machine learning','blockchain']);
-    //const [message,setMessage] = useState("");
+    const [tags,setTags] = useState([]);
+    
+    const childToParent = (childdata) => {
+        setTags([...childdata]);
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -30,11 +33,10 @@ const CreateIdea = ()=>{
           if (res.status === 200) {
             setTitle("");
             setDescription("");
-            setTags(['machine learning','blockchain']);
-            //setMessage("User created successfully");
+            setTags([]);
+            //tags not going from the field but anyways we are redirecting to idea page so no issues
             console.log("idea created sucessfully");
           } else {
-            //setMessage("Some error occured");
             console.log("some error occured");
           }
         } catch (err) {
@@ -53,7 +55,12 @@ const CreateIdea = ()=>{
                     alt="IDYFY"
                     className="mt-2"
                     />
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit}
+                    onKeyPress={event => {
+                        if (event.which === 13 /* Enter */) {
+                          event.preventDefault();
+                        }}
+                    }>
                     
                     <div className="flex justify-center">
                         <h1 className="mt-3" style={{fontSize:"1.6rem",fontWeight:"bold"}}>Create a New Idea !!</h1>
@@ -77,9 +84,9 @@ const CreateIdea = ()=>{
                         placeholder="Description"
                         ></textarea>
                     </div>
-                    
+
                     <div className="flex justify-start mt-3 mx-3">
-                        <InputTag/>
+                        <Tags childToParent={childToParent}/>
                     </div>
 
                     <div className="ml-3 mt-2 mb-3 custom-control custom-checkbox">
@@ -87,6 +94,7 @@ const CreateIdea = ()=>{
                         type="checkbox"
                         className="custom-control-input"
                         id="tandc"
+                        required
                         />
                         <label
                         className="pl-3 custom-control-label text-white"
