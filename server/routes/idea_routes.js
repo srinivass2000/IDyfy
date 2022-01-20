@@ -19,7 +19,7 @@ const {
 } = require("../controllers/starred_ideas/starred_ideas");
 
 router.route("/create-idea").post(protect, create_idea);
-router.route("/get-idea").get(get_idea);
+router.route("/get-idea/:id").get(get_idea);
 router.route("/get-ideas/:skip").get(get_ideas);
 router.route("/get-contributed-ideas").get(protect, get_contributed_ideas);
 router.route("/star-idea").get(protect, star_idea);
