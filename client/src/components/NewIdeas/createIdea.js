@@ -3,7 +3,6 @@ import { useState } from "react";
 import Idyfy_logo from "../../assets/svg/Idyfy_logo.svg";
 import "../Auth/auth.css";
 import Footer from "../Footer/footer";
-import InputTag from "./tags";
 import Tags from "./tagsfunc";
 import axios from "axios";
 import authHeader from "../../services/auth-header";
@@ -12,7 +11,7 @@ const CreateIdea = ()=>{
     
     const [title,setTitle] = useState("");
     const [description,setDescription] = useState("");
-    const [tags,setTags] = useState(['machine learning','blockchain']);
+    const [tags,setTags] = useState([]);
     
     const childToParent = (childdata) => {
         setTags([...childdata]);
@@ -34,11 +33,10 @@ const CreateIdea = ()=>{
           if (res.status === 200) {
             setTitle("");
             setDescription("");
-            setTags(['machine learning','blockchain']);
-            //setMessage("User created successfully");
+            setTags([]);
+            //tags not going from the field but anyways we are redirecting to idea page so no issues
             console.log("idea created sucessfully");
           } else {
-            //setMessage("Some error occured");
             console.log("some error occured");
           }
         } catch (err) {
@@ -86,14 +84,6 @@ const CreateIdea = ()=>{
                         placeholder="Description"
                         ></textarea>
                     </div>
-                    
-                    <div className="flex justify-start mt-3 mx-3">
-                        <InputTag/>
-                    </div>
-
-                    <div className="flex justify-start mt-3 mx-3">
-                        <h1>functional tags below </h1>
-                    </div>
 
                     <div className="flex justify-start mt-3 mx-3">
                         <Tags childToParent={childToParent}/>
@@ -104,6 +94,7 @@ const CreateIdea = ()=>{
                         type="checkbox"
                         className="custom-control-input"
                         id="tandc"
+                        required
                         />
                         <label
                         className="pl-3 custom-control-label text-white"
