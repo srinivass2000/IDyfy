@@ -5,8 +5,8 @@ const API_URL = " http://localhost:5000/api/auth";
 
 const notify1 = () => toast.success("You succcessfully logged in!");
 const notify2 = () => toast.success("Email verification mail sent!");
-const notify3 = () => toast.error("No user exists with this email!");
-const notify4 = () => toast.error("Invalid Credentials!");
+const notify3 = (text) => toast.error(text);
+// const notify4 = () => toast.error("Invalid Credentials!");
 const notify5 = () => toast.success("User already exists try to login!");
 const notify6 = () => toast.success("Email sent to reset password!");
 const notify7 = () => toast.error("This email is not registered!");
@@ -65,13 +65,14 @@ const login = (email, remember, password) => {
       (err) => {
         console.log(err.response.status);
         console.log(err.response.data);
-        if (err.response.status === 403) {
-          // alert("No user exists with this email");
-          notify3();
-        } else if (err.response.status === 401) {
-          // alert("invalid Credentials");
-          notify4();
-        }
+        // if (err.response.status === 403) {
+        //   // alert("No user exists with this email");
+        //   notify3();
+        // } else if (err.response.status === 401) {
+        //   // alert("invalid Credentials");
+        //   notify4();
+        // }
+        notify3(err.response.data.error);
       }
     );
 };

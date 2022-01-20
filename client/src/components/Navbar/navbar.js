@@ -147,7 +147,7 @@ const Navbar = () => {
               {/* large */}
               <div className="dropstart  d-flex justify-center d-none d-lg-block">
                 <p
-                  class="mr-5"
+                  className="mr-5"
                   type="button"
                   id="dropdownMenuButton1"
                   data-bs-toggle="dropdown"
@@ -161,7 +161,7 @@ const Navbar = () => {
                 </p>
 
                 <ul
-                  class="dropdown-menu "
+                  className="dropdown-menu "
                   aria-labelledby="dropdownMenuButton1"
                   style={{
                     backgroundColor: "#0a0135",
@@ -170,7 +170,7 @@ const Navbar = () => {
                 >
                   <li className="p-1">
                     <Link
-                      class="dropdown-item text-center text-white hoveritem"
+                      className="dropdown-item text-center text-white hoveritem"
                       to="/profile"
                     >
                       Profile
