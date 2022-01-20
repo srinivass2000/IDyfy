@@ -2,6 +2,9 @@
     background-color: #840FCC;
     color: #FFFF;
 }
+.formsize{
+    width : "20%";
+}
 .button2{
     background-color: #ffffff;
     color: #000000;
@@ -43,3 +46,4 @@
 .stones{
     transform: scaleX(-1);
 }
+
