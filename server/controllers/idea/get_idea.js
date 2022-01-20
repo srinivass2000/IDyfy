@@ -7,8 +7,9 @@ exports.get_idea = async (req, res, next) => {
     const id = req.params.id;
 
     const ideaId = await Idea.findById(id);
-
     //comments
+
+    //give names for contributors
 
     const comment = await Comment.find({
       idea_id: idea_id,

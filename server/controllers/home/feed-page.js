@@ -37,7 +37,7 @@ exports.get_ideas = async (req, res, next) => {
     // console.log(result);
     // const comments = get_comments(result);
     comments_final = {};
-    var me;
+    global.me = {};
     console.log(result);
     const comments = result.forEach(async (idea) => {
       // var comment_count = get_comments();
@@ -50,10 +50,10 @@ exports.get_ideas = async (req, res, next) => {
       }).count();
       // console.log(idea);
       // console.log(comment_count);
-      Object.assign(comments_final, { [idea._id]: comment_count });
+      Object.assign(comments_final, { [idea_id]: comment_count });
       // console.log(comments_final);
       // return comments_final;
-      me = comments_final;
+      // global.me = comments;
     });
 
     console.log(comments);

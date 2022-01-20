@@ -10,7 +10,7 @@ exports.get_starred_ideas = async (req, res, next) => {
       starred_by: {
         $in: [id],
       },
-    });
+    }).sort({ createdAt: -1 });
     res.status(200).json({
       success: true,
       ideas: result,

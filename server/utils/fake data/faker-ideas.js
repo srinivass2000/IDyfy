@@ -18,12 +18,19 @@ exports.fake_idea = async (req, res, next) => {
       var contributors = [
         "61cd6d1f8fca5f2c130865a7",
         "61e55c97e4f68488d6b5e189",
+        "61e7a0b0f43857ea78a9fd5a",
+        "61e704b16d19c8177f7a54c1",
       ];
       // for (var i = 0; i < 3; i++) {
       //   contributors.push(faker.name.firstName());
       // }
 
-      var starred_by = ["61cd6d1f8fca5f2c130865a7", "61e55c97e4f68488d6b5e189"];
+      var starred_by = [
+        "61cd6d1f8fca5f2c130865a7",
+        "61e55c97e4f68488d6b5e189",
+        "61e7a0b0f43857ea78a9fd5a",
+        "61e704b16d19c8177f7a54c1",
+      ];
 
       var tags = [];
       for (var j = 0; j < 5; j++) {
