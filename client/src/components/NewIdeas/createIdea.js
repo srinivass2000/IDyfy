@@ -13,7 +13,10 @@ const CreateIdea = ()=>{
     const [title,setTitle] = useState("");
     const [description,setDescription] = useState("");
     const [tags,setTags] = useState(['machine learning','blockchain']);
-    //const [message,setMessage] = useState("");
+    
+    const childToParent = (childdata) => {
+        setTags([...childdata]);
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -54,7 +57,12 @@ const CreateIdea = ()=>{
                     alt="IDYFY"
                     className="mt-2"
                     />
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit}
+                    onKeyPress={event => {
+                        if (event.which === 13 /* Enter */) {
+                          event.preventDefault();
+                        }}
+                    }>
                     
                     <div className="flex justify-center">
                         <h1 className="mt-3" style={{fontSize:"1.6rem",fontWeight:"bold"}}>Create a New Idea !!</h1>
@@ -88,7 +96,7 @@ const CreateIdea = ()=>{
                     </div>
 
                     <div className="flex justify-start mt-3 mx-3">
-                        <Tags/>
+                        <Tags childToParent={childToParent}/>
                     </div>
 
                     <div className="ml-3 mt-2 mb-3 custom-control custom-checkbox">

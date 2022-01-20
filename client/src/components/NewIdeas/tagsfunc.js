@@ -1,7 +1,7 @@
-import React, {useState, useRef} from "react";
+import React, {useState, useRef, useEffect} from "react";
 import "../NewIdeas/tags.css";
 
-const Tags = ()=> {
+const Tags = ({childToParent})=> {
     
     const [tags,setTags] = useState([]);
 
@@ -26,6 +26,10 @@ const Tags = ()=> {
         //   removeTag(tags.length - 1);
         // }
       }
+    
+    useEffect(() => {
+        childToParent(tags)
+    },[tags])
     
     return(
         
