@@ -4,6 +4,7 @@ import axios from "axios";
 import "./profile.css";
 import profile from "../../assets/svg/Dummy_Profile2.svg";
 import authHeader from "../../services/auth-header";
+import Footer from "../Footer/footer";
 
 const Profile = () => {
   //mama giving later itseems
@@ -97,6 +98,7 @@ const Profile = () => {
             </span>
             <div className="about">{user.about}</div>
           </div>
+          <Footer />
         </div>
       </div>
       <div className="container ">

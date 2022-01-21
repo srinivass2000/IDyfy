@@ -6,14 +6,15 @@ import Chat from "../../assets/icon/chat.svg";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import authHeader from "../../services/auth-header";
-//import authHeader from "../../services/auth-header";
+import Footer from "../Footer/footer";
+import { Link } from "react-router-dom";
 
 const Idea = () => {
+  const [load, setLoad] = useState(true);
   const [idea, setIdea] = useState({});
   const [comments, setComment] = useState([]);
   const { id } = useParams();
-
-  const [load, setLoad] = useState(true);
+  const url = "/ideaEdit/";
 
   const fetchIdea = () => {
     axios
@@ -164,7 +165,31 @@ const Idea = () => {
             </button>
           </div>
         </div>
+        <div className="row justify-content-center">
+          <div className="col-md-4">
+            <Link
+              to={{
+                pathname: url + id,
+                state: { idea },
+              }}
+            >
+              <button
+                className="btn pl-3 pr-3 mb-3 mt-3"
+                style={{
+                  backgroundColor: "#F62F08",
+                  color: "white",
+                  fontSize: "1.7rem",
+                  borderRadius: "1.2rem",
+                  fontWeight: "500",
+                }}
+              >
+                Edit Idea
+              </button>
+            </Link>
+          </div>
+        </div>
       </div>
+      <Footer />
     </div>
   );
 };

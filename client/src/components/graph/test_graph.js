@@ -4,6 +4,7 @@ import TreeView from '@mui/lab/TreeView';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import TreeItem from '@mui/lab/TreeItem';
+import Footer from "../Footer/footer";
 
 const data = {
     id: 'root',
@@ -50,6 +51,7 @@ export default function Graph (){
       );
 
     return(
+        <>
         <TreeView
             style={{color:"white"}}
             aria-label="rich object"
@@ -60,5 +62,7 @@ export default function Graph (){
             >
             {renderTree(data)}
         </TreeView>
+        <Footer/>
+        </>
     );
 }
