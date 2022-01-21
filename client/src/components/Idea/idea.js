@@ -6,7 +6,7 @@ import Chat from "../../assets/icon/chat.svg";
 import { useParams } from 'react-router-dom';
 import axios from "axios";
 import authHeader from "../../services/auth-header";
-//import authHeader from "../../services/auth-header";
+import Footer from "../Footer/footer";
 
 const Idea=() => {
 
@@ -122,6 +122,7 @@ const Idea=() => {
                      </div>
                  </div>
              </div>
+             <Footer/>
         </div>
     );
     

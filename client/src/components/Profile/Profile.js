@@ -4,6 +4,7 @@ import axios from "axios";
 import "./profile.css";
 import profile from "../../assets/svg/Dummy_Profile2.svg";
 import authHeader from "../../services/auth-header";
+import Footer from "../Footer/footer";
 
 const Profile = () => {
 
@@ -87,11 +88,11 @@ const Profile = () => {
             </div>
             <div className="row ">
               {
-                ideas.map((idea,i)=>
+                ideas.filter((id, idx) => idx < 6).map((idea,i)=>
                   <div key={i} className="idea offset-lg-1 col-lg-2 offset-2 col-8 mr-28 text-white mt-10">
                     {
                       idea.tags.filter((t, idx) => idx < 2).map((tag,i)=>
-                        <span key={i} className="text-left p-2">#{tag}</span>
+                        <span key={i} className="text-left p-2">#{tag.replace(/ /g,'')}</span>
                       )
                     }
                     <p className="text-left p-1">{idea.title}</p>
@@ -107,6 +108,7 @@ const Profile = () => {
             </div>
             <div className="row mt-4"></div>
           </div>
+          <Footer/>
         </div>
       );
 };

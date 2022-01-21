@@ -1,9 +1,8 @@
 import React from "react";
 import error from "../../assets/svg/404.svg";
-import Stones from "../../assets/svg/stones1.svg";
-
 import "../Feed_Tile/feed.css";
 import { Link } from "react-router-dom";
+import Footer from "../Footer/footer";
 const Error = () => {
   return (
     <>
@@ -39,9 +38,7 @@ const Error = () => {
           </div>
         </div>
       </div>
-      <div className="">
-        <img src={Stones} alt="footer" style={{ width: "100%" }} />
-      </div>
+      <Footer/>
     </>
   );
 };
