@@ -6,17 +6,18 @@ const ErrorResponse = require("../../utils/errorResponse");
 exports.get_profile = async (req, res, next) => {
   try {
     user_id = req.query.id;
-    var user, id;
+    var user, id, can_edit;
     if (user_id) {
       user = await User.findById(user_id);
       id = user_id;
+      can_edit = false;
     } else {
       console.log(req.user._id);
       user = req.user;
       id = req.user._id;
       id = id.toString();
+      can_edit = true;
     }
-    //user specific using query
     const result = await Idea.find({
       contributors: {
         $in: [id],
@@ -26,6 +27,7 @@ exports.get_profile = async (req, res, next) => {
       success: true,
       user,
       ideas: result,
+      can_edit,
     });
   } catch (err) {
     console.log(err);
