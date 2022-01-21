@@ -13,6 +13,7 @@ import Feature from "./components/feature/feature";
 import GraphTest from "./components/graph/test_graph";
 import Graph from "./components/graph/graph";
 import IdeaEdit from "./components/Idea/ideaedit";
+import ProfileEdit from "./components/Profile/profileedit";
 // import { isMobile } from "react-device-detect";
 import Error from "./components/error/error";
 import VerifyEmail from "./components/verifyemail/verify";
@@ -47,6 +48,7 @@ function App() {
           <Protectedroute path="/graphtest" exact component={GraphTest} />
           <Protectedroute path="/graph" exact component={Graph} />
           <Protectedroute path="/ideaEdit/:id" exact component={IdeaEdit} />
+          <Protectedroute path="/profileEdit/:id" exact component={ProfileEdit} />
           <Protectedroute path="/search/:key" exact component={Search} />
           <Route path="/email/verify/:id" exact component={VerifyEmail} />
           <Route path="/passwordreset/:id" exact component={ResetPassword} />

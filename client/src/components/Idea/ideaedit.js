@@ -16,9 +16,6 @@ const EditIdea = ()=>{
     const [description,setDescription] = useState(loc.state.idea.description);
     //const [tags,setTags] = useState([]);
     
-    const childToParent = (childdata) => {
-        setTags([...childdata]);
-    }
 
     // code for tags
     const [tags,setTags] = useState([...loc.state.idea.tags]);
