@@ -5,16 +5,18 @@ import "./profile.css";
 import profile from "../../assets/svg/Dummy_Profile2.svg";
 import authHeader from "../../services/auth-header";
 import Footer from "../Footer/footer";
+import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
-  //mama giving later itseems
-  //const {id} = useParams();
+  
 
   const [user, setUser] = useState({});
   const [load, setLoad] = useState(true);
   const [ideas, setIdeas] = useState([]);
-  //mama giving later itseems
-  //const {id} = useParams();
+  
+  const {id} = useParams();
+  const url = "/profileEdit/";
 
   useEffect(() => {
     fetchProfile();
@@ -98,17 +100,35 @@ const Profile = () => {
             </span>
             <div className="about">{user.about}</div>
           </div>
-          <Footer />
         </div>
       </div>
       <div className="container ">
         <div className="row mt-4">
           <div className="fs-3 offset-lg-1 col-lg-2 offset-1 col-5 blue border-radius rounded">
             <em>Contributed Ideas</em>
+            <Link
+              to={{
+                pathname: url + id,
+                state: { user },
+              }}
+            >
+              <button
+                className="btn pl-3 pr-3 mb-3 mt-3"
+                style={{
+                  backgroundColor: "#F62F08",
+                  color: "white",
+                  fontSize: "1.7rem",
+                  borderRadius: "1.2rem",
+                  fontWeight: "500",
+                }}
+              >
+                Edit Idea
+              </button>
+            </Link>
           </div>
         </div>
         <div className="row ">
-          {ideas.map((idea, i) => (
+          {ideas.filter((id, idx) => idx < 6).map((idea, i) => (
             <div
               key={i}
               className="idea offset-lg-1 col-lg-2 offset-2 col-8 mr-28 text-white mt-10"
@@ -117,7 +137,7 @@ const Profile = () => {
                 .filter((t, idx) => idx < 2)
                 .map((tag, i) => (
                   <span key={i} className="text-left p-2">
-                    #{tag}
+                    #{tag.replace(/ /g,'')}
                   </span>
                 ))}
               <p className="text-left p-1">{idea.title}</p>
@@ -132,6 +152,7 @@ const Profile = () => {
         </div>
         <div className="row mt-4"></div>
       </div>
+      <Footer/>
     </div>
   );
 };
