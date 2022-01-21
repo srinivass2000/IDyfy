@@ -10,7 +10,11 @@ exports.get_profile = async (req, res, next) => {
     if (user_id) {
       user = await User.findById(user_id);
       id = user_id;
-      can_edit = false;
+      if (req.user._id.toString() == id) {
+        can_edit = true;
+      } else {
+        can_edit = false;
+      }
     } else {
       console.log(req.user._id);
       user = req.user;
