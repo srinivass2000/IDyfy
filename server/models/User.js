@@ -34,6 +34,11 @@ const UserSchema = new mongoose.Schema(
     ideas_contributed: Array,
     engagement_score: Number,
     profile_pic: String,
+    followers: Array,
+    following: Array,
+    job: String,
+    university: String,
+    about: String,
   },
   { timestamps: true }
 );

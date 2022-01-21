@@ -14,9 +14,6 @@ const Idea = () => {
   const { id } = useParams();
 
   const [load, setLoad] = useState(true);
-  const [idea, setIdea] = useState({});
-  const [comments, setComment] = useState([]);
-  const { id } = useParams();
 
   const fetchIdea = () => {
     axios

@@ -1,4 +1,5 @@
 const Idea = require("../../models/Idea");
+const User = require("../../models/User");
 const ErrorResponse = require("../../utils/errorResponse");
 const { FeatureSchema } = require("../../models/Feature");
 const mongoose = require("mongoose");
@@ -26,33 +27,36 @@ exports.create_idea = async (req, res, next) => {
     a = a.toString();
     var ideas_details = {};
     ideas_details[a] = 0;
-    try {
-      const idea = await Idea.create({
-        title,
-        description,
-        tags,
-        contributors: [a],
-        ideas_details,
-      });
 
-      // var table_name = createModelForName(`features_${idea._id}`);
+    const idea = await Idea.create({
+      title,
+      description,
+      tags,
+      contributors: [a],
+      ideas_details,
+    });
 
-      // console.log(table_name)
+    ideas_contributed = req.user.ideas_contributed;
+    idea_id = idea._id.toString();
+    ideas_contributed.push(idea_id);
 
-      console.log(idea.ideas_details[a]);
+    var user = await User.findByIdAndUpdate(a, { ideas_contributed });
 
-      res.status(200).json({
-        success: true,
-        idea,
-      });
-    } catch (err) {
-      console.log(err);
-      // next(err)
-      return next(new ErrorResponse("Oops Something went wrong!", 500));
-    }
+    // var table_name = createModelForName(`features_${idea._id}`);
+
+    // console.log(table_name)
+
+    // console.log(user);
+
+    // console.log(idea.ideas_details[a]);
+
+    res.status(200).json({
+      success: true,
+      idea,
+    });
   } catch (err) {
     console.log(err);
     // next(err)
-    return next(new ErrorResponse(err.message, 500));
+    return next(new ErrorResponse("Oops Something went wrong!", 500));
   }
 };

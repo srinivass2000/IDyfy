@@ -6,8 +6,6 @@ import profile from "../../assets/svg/Dummy_Profile2.svg";
 import authHeader from "../../services/auth-header";
 
 const Profile = () => {
-  const [user, setUser] = useState({});
-  const [ideas, setIdeas] = useState([]);
   //mama giving later itseems
   //const {id} = useParams();
 
@@ -59,15 +57,27 @@ const Profile = () => {
               <h6 className="flex justify-center"> Contributions </h6>
             </div>
             <div className=" col-lg-2 col-md-3">
-              <div className="flex justify-center"> N.A </div>
-              <h6 className="flex justify-center"> Followers </h6>
+              <div className="flex justify-center">
+                {user.engagement_score || "0"}
+              </div>
+              <h6 className="flex justify-center"> Engagement score </h6>
             </div>
+
             <div className="col-lg-4 col-md-3 flex justify-center">
               <img src={profile} alt="My Profile" className="profileimage" />
             </div>
+
             <div className=" col-lg-2 col-md-2">
-              <div className="flex justify-center">N.A</div>
-              <h6 className="flex justify-center"> Engagement score </h6>
+              <div className="flex justify-center">
+                {user.followers.length || "0"}
+              </div>
+              <h6 className="flex justify-center"> Followers </h6>
+            </div>
+            <div className=" col-lg-2 col-md-2">
+              <div className="flex justify-center">
+                {user.following.length || "0"}
+              </div>
+              <h6 className="flex justify-center"> Following </h6>
             </div>
           </div>
           <div className="row mt-10 flex justify-center">
@@ -75,18 +85,17 @@ const Profile = () => {
               {user.name}
             </div>
             <div className="post" style={{ fontSize: "x-large" }}>
-              N.A(job)
+              {user.job || "N.A(job)"}
             </div>
             <div className="university" style={{ fontSize: "x-large" }}>
-              N.A(university)
+              {user.university || "N.A(university)"}
             </div>
-          </div>{" "}
+          </div>
           <div className="row  flex justify-center">
             <span className="name mt-10" style={{ fontSize: "x-large" }}>
-              {" "}
-              About Me{" "}
+              About Me
             </span>
-            <div className="about">N.A</div>
+            <div className="about">{user.about}</div>
           </div>
         </div>
       </div>
