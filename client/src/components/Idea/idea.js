@@ -5,29 +5,49 @@ import Like from "../../assets/icon/heart.svg";
 import Chat from "../../assets/icon/chat.svg";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import authHeader from "../../services/auth-header";
+//import authHeader from "../../services/auth-header";
 
 const Idea = () => {
   const [idea, setIdea] = useState({});
   const [comments, setComment] = useState([]);
   const { id } = useParams();
 
-  useEffect(() => {
-    fetchIdea();
-  }, []);
+  const [load, setLoad] = useState(true);
+  const [idea, setIdea] = useState({});
+  const [comments, setComment] = useState([]);
+  const { id } = useParams();
 
   const fetchIdea = () => {
     axios
-      .get(`http://localhost:5000/api/idea/get-idea?id=${id}`)
+      .get(`http://localhost:5000/api/idea/get-idea?id=${id}`, {
+        headers: authHeader(),
+      })
       .then((res) => {
         setIdea(res.data.idea);
         setComment(res.data.comments);
         console.log(res.data);
+        setLoad(false);
       })
       .catch((err) => console.log(err));
   };
 
+  useEffect(() => {
+    fetchIdea();
+  }, []);
+
+  if (load) {
+    return (
+      <div>
+        {console.log("loading....")}
+        <h1 style={{ color: "white" }}>loading....</h1>
+      </div>
+    );
+  }
+
   return (
     <div>
+      {console.log(idea)}
       <div className="relative flex justify-center">
         <div
           className="absolute top-1/3 sm:text-xl md:text-4xl lg:text-6xl"
@@ -116,7 +136,7 @@ const Idea = () => {
           <div className="col-md-2 p-3 mt-3 ">
             {idea.tags.map((tag, i) => (
               <a key={i} className="m-3" style={{ color: "white" }} href="/">
-                #{tag}
+                #{tag.replace(/ /g, "")}
               </a>
             ))}
           </div>

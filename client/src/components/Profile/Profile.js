@@ -11,6 +11,12 @@ const Profile = () => {
   //mama giving later itseems
   //const {id} = useParams();
 
+  const [user, setUser] = useState({});
+  const [load, setLoad] = useState(true);
+  const [ideas, setIdeas] = useState([]);
+  //mama giving later itseems
+  //const {id} = useParams();
+
   useEffect(() => {
     fetchProfile();
   }, []);
@@ -22,9 +28,19 @@ const Profile = () => {
         setUser(res.data.user);
         setIdeas(res.data.ideas);
         //console.log(res.data);
+        setLoad(false);
       })
       .catch((err) => console.log(err));
   };
+
+  if (load) {
+    return (
+      <div>
+        {console.log("loading....")}
+        <h1 style={{ color: "white" }}>loading....</h1>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -77,18 +93,15 @@ const Profile = () => {
       <div className="container ">
         <div className="row mt-4">
           <div className="fs-3 offset-lg-1 col-lg-2 offset-1 col-5 blue border-radius rounded">
-            <em style={{ color: "white" }}>Contributed Ideas</em>
+            <em>Contributed Ideas</em>
           </div>
         </div>
-        {/* {console.log(ideas[0].title)}
-            {
-              ideas.map((idea,i)=>
-              <p key={i} className="text-left p-2">#{idea.title}</p>
-              )
-            } */}
         <div className="row ">
           {ideas.map((idea, i) => (
-            <div className="idea offset-lg-1 col-lg-2 offset-2 col-8 mr-28 text-white mt-10">
+            <div
+              key={i}
+              className="idea offset-lg-1 col-lg-2 offset-2 col-8 mr-28 text-white mt-10"
+            >
               {idea.tags
                 .filter((t, idx) => idx < 2)
                 .map((tag, i) => (
