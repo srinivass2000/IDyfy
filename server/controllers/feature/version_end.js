@@ -30,7 +30,7 @@ exports.version_end = async (req, res, next) => {
         {
           $and: [
             {
-              updated_version: { $exists: false },
+              updated_feature: { $exists: false },
               deleted_version: { $exists: false },
               version_end: latest_version,
               available: true,
