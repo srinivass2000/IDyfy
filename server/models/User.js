@@ -38,6 +38,10 @@ const UserSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+UserSchema.index({
+  title: "text",
+});
+
 UserSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
     next();
@@ -95,5 +99,7 @@ UserSchema.methods.getemailVerificationToken = function () {
 };
 
 const User = mongoose.model("User", UserSchema);
+
+User.createIndexes();
 
 module.exports = User;

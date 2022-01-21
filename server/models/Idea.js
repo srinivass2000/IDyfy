@@ -24,6 +24,11 @@ const IdeaSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+IdeaSchema.index({
+  title: "text",
+});
+
 const Idea = mongoose.model("Idea", IdeaSchema);
 
+Idea.createIndexes();
 module.exports = Idea;
