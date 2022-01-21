@@ -100,7 +100,6 @@ const Profile = () => {
             </span>
             <div className="about">{user.about}</div>
           </div>
-          <Footer />
         </div>
       </div>
       <div className="container ">
@@ -129,7 +128,7 @@ const Profile = () => {
           </div>
         </div>
         <div className="row ">
-          {ideas.map((idea, i) => (
+          {ideas.filter((id, idx) => idx < 6).map((idea, i) => (
             <div
               key={i}
               className="idea offset-lg-1 col-lg-2 offset-2 col-8 mr-28 text-white mt-10"
@@ -138,7 +137,7 @@ const Profile = () => {
                 .filter((t, idx) => idx < 2)
                 .map((tag, i) => (
                   <span key={i} className="text-left p-2">
-                    #{tag}
+                    #{tag.replace(/ /g,'')}
                   </span>
                 ))}
               <p className="text-left p-1">{idea.title}</p>
@@ -153,6 +152,7 @@ const Profile = () => {
         </div>
         <div className="row mt-4"></div>
       </div>
+      <Footer/>
     </div>
   );
 };

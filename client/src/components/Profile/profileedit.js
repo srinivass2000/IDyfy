@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Idyfy_logo from "../../assets/svg/Idyfy_logo.svg";
 import "../Auth/auth.css";
 import Footer from "../Footer/footer";
@@ -13,6 +13,11 @@ const EditProfile = ()=>{
     
     const [name,setName] = useState(loc.state.user.name);
     const [email,setEmail] = useState(loc.state.user.email);
+    
+    useEffect(() => {
+        window.scrollTo(0, 0)
+      }, [])
+    
     //const [tags,setTags] = useState([]);
     
     

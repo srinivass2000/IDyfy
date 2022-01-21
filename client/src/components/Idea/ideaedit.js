@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Idyfy_logo from "../../assets/svg/Idyfy_logo.svg";
 import "../Auth/auth.css";
 import Footer from "../Footer/footer";
@@ -15,8 +15,11 @@ const EditIdea = ()=>{
     const [title,setTitle] = useState(loc.state.idea.title);
     const [description,setDescription] = useState(loc.state.idea.description);
     //const [tags,setTags] = useState([]);
-    
 
+    useEffect(() => {
+        window.scrollTo(0, 0)
+      }, [])
+    
     // code for tags
     const [tags,setTags] = useState([...loc.state.idea.tags]);
 
