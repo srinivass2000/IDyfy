@@ -6,6 +6,8 @@ const { create_idea } = require("../controllers/idea/create_idea");
 
 const { get_idea } = require("../controllers/idea/get_idea");
 
+const { update_idea } = require("../controllers/idea/update_idea");
+
 const { get_ideas } = require("../controllers/home/feed-page");
 
 const { get_contributed_ideas } = require("../controllers/home/user_ideas");
@@ -20,6 +22,7 @@ const {
 
 router.route("/create-idea").post(protect, create_idea);
 router.route("/get-idea").get(protect, get_idea);
+router.route("/update-idea").post(protect, update_idea);
 router.route("/get-ideas/:skip").get(protect, get_ideas);
 router.route("/get-contributed-ideas").get(protect, get_contributed_ideas);
 router.route("/star-idea").get(protect, star_idea);
