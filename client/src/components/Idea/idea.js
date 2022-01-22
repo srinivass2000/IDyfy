@@ -13,6 +13,9 @@ const Idea = () => {
   const [load, setLoad] = useState(true);
   const [idea, setIdea] = useState({});
   const [comments, setComment] = useState([]);
+  const [contributors, setContributors] = useState([]);
+  const [canEdit, setCanEdit] = useState(false);
+
   const { id } = useParams();
   const url = "/ideaEdit/";
 
@@ -24,6 +27,7 @@ const Idea = () => {
       .then((res) => {
         setIdea(res.data.idea);
         setComment(res.data.comments);
+        setContributors(res.data.contributed_users);
         console.log(res.data);
         setLoad(false);
       })
@@ -45,7 +49,7 @@ const Idea = () => {
 
   return (
     <div>
-      {console.log(idea)}
+      {console.log(contributors)}
       <div className="relative flex justify-center">
         <div
           className="absolute top-1/3 sm:text-xl md:text-4xl lg:text-6xl"
@@ -58,10 +62,49 @@ const Idea = () => {
 
       <div className="container">
         <div className="row">
-          <div className="col-md-2 offset-md-10 d-none d-sm-block mt-6 mb-3">
-            <button className="btn-sm">
+          <div className="dropdown col-md-2 offset-md-10 d-none d-sm-block mt-6 mb-3">
+            {/* <button className="btn-sm">
               <img src={contri} alt="contributors" />
             </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li>
+                <a class="dropdown-item" href="#">
+                  Action
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#">
+                  Another action
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#">
+                  Something else here
+                </a>
+              </li>
+            </ul> */}
+            <div class="dropdown">
+              <button
+                class=""
+                style={{ backgroundColor: "transparent" }}
+                type="button"
+                id="dropdownMenuButton1"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <img src={contri} alt="contributors" />
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                {contributors.map((con, i) => (
+                  <li key={i}>
+                    {/* when you click on a user route him to his profile page */}
+                    <a class="dropdown-item" href="/">
+                      {con.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
           <div className="col-md-2">
             <button
@@ -71,6 +114,7 @@ const Idea = () => {
               Description :
             </button>
           </div>
+
           <div className="col-md-8 pr-3 pl-3">
             <p
               className="p-4"
@@ -165,29 +209,33 @@ const Idea = () => {
             </button>
           </div>
         </div>
-        <div className="row justify-content-center">
-          <div className="col-md-4">
-            <Link
-              to={{
-                pathname: url + id,
-                state: { idea },
-              }}
-            >
-              <button
-                className="btn pl-3 pr-3 mb-3 mt-3"
-                style={{
-                  backgroundColor: "#F62F08",
-                  color: "white",
-                  fontSize: "1.7rem",
-                  borderRadius: "1.2rem",
-                  fontWeight: "500",
+        {canEdit ? (
+          <div className="row justify-content-center">
+            <div className="col-md-4">
+              <Link
+                to={{
+                  pathname: url + id,
+                  state: { idea },
                 }}
               >
-                Edit Idea
-              </button>
-            </Link>
+                <button
+                  className="btn pl-3 pr-3 mb-3 mt-3"
+                  style={{
+                    backgroundColor: "#F62F08",
+                    color: "white",
+                    fontSize: "1.7rem",
+                    borderRadius: "1.2rem",
+                    fontWeight: "500",
+                  }}
+                >
+                  Edit Idea
+                </button>
+              </Link>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div></div>
+        )}
       </div>
       <Footer />
     </div>

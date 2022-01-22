@@ -9,13 +9,12 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 const Profile = () => {
-  
-
   const [user, setUser] = useState({});
   const [load, setLoad] = useState(true);
   const [ideas, setIdeas] = useState([]);
-  
-  const {id} = useParams();
+  const [edit, setEdit] = useState();
+
+  const { id } = useParams();
   const url = "/profileEdit/";
 
   useEffect(() => {
@@ -28,6 +27,7 @@ const Profile = () => {
       .then((res) => {
         setUser(res.data.user);
         setIdeas(res.data.ideas);
+        setEdit(res.data.can_edit);
         //console.log(res.data);
         setLoad(false);
       })
@@ -104,55 +104,66 @@ const Profile = () => {
       </div>
       <div className="container ">
         <div className="row mt-4">
-          <div className="fs-3 offset-lg-1 col-lg-2 offset-1 col-5 blue border-radius rounded">
-            <em>Contributed Ideas</em>
-            <Link
-              to={{
-                pathname: url + id,
-                state: { user },
-              }}
-            >
-              <button
-                className="btn pl-3 pr-3 mb-3 mt-3"
-                style={{
-                  backgroundColor: "#F62F08",
-                  color: "white",
-                  fontSize: "1.7rem",
-                  borderRadius: "1.2rem",
-                  fontWeight: "500",
-                }}
-              >
-                Edit Idea
-              </button>
-            </Link>
+          <div
+            className="fs-3 col-lg-12 col-12 blue border-radius rounded"
+            style={{ color: "white" }}
+          >
+            <em style={{ textAlign: "center" }}>Contributed Ideas</em>
+            {edit ? (
+              <div>
+                <Link
+                  to={{
+                    pathname: url + id,
+                    state: { user },
+                  }}
+                >
+                  <button
+                    className="btn pl-3 pr-3 mb-3 mt-3"
+                    style={{
+                      backgroundColor: "#F62F08",
+                      color: "white",
+                      fontSize: "1.7rem",
+                      borderRadius: "1.2rem",
+                      fontWeight: "500",
+                    }}
+                  >
+                    Edit Profile
+                  </button>
+                </Link>
+              </div>
+            ) : (
+              <div></div>
+            )}
           </div>
         </div>
         <div className="row ">
-          {ideas.filter((id, idx) => idx < 6).map((idea, i) => (
-            <div
-              key={i}
-              className="idea offset-lg-1 col-lg-2 offset-2 col-8 mr-28 text-white mt-10"
-            >
-              {idea.tags
-                .filter((t, idx) => idx < 2)
-                .map((tag, i) => (
-                  <span key={i} className="text-left p-2">
-                    #{tag.replace(/ /g,'')}
-                  </span>
-                ))}
-              <p className="text-left p-1">{idea.title}</p>
-              <p className="text-left p-1">
-                {idea.description.length > 50 &&
-                  idea.description.substring(50, 0) + " . . ."}
-                {idea.description.length <= 50 &&
-                  idea.description.substring(50, 0)}
-              </p>
-            </div>
-          ))}
+          {ideas
+            .filter((id, idx) => idx < 6)
+            .map((idea, i) => (
+              <div
+                key={i}
+                className="idea offset-lg-1 col-lg-2 offset-2 col-8 mr-28 text-white mt-10"
+              >
+                {idea.tags
+                  .filter((t, idx) => idx < 2)
+                  .map((tag, i) => (
+                    <span key={i} className="text-left p-2">
+                      #{tag.replace(/ /g, "")}
+                    </span>
+                  ))}
+                <p className="text-left p-1">{idea.title}</p>
+                <p className="text-left p-1">
+                  {idea.description.length > 50 &&
+                    idea.description.substring(50, 0) + " . . ."}
+                  {idea.description.length <= 50 &&
+                    idea.description.substring(50, 0)}
+                </p>
+              </div>
+            ))}
         </div>
         <div className="row mt-4"></div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

@@ -13,6 +13,7 @@ const data = {
       {
         id: '1',
         name: 'feature 1',
+        children : [],
       },
       {
         id: '2',
@@ -21,10 +22,12 @@ const data = {
             {
               id: '5',
               name: 'feature 5',
+              children : [],
             },
             {
                 id: '6',
                 name: 'feature 6',
+                children : [],
             },
         ],
       },
@@ -35,6 +38,7 @@ const data = {
           {
             id: '4',
             name: 'feature 4',
+            children : [],
           },
         ],
       },
