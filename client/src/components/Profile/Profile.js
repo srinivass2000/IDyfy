@@ -5,7 +5,7 @@ import "./profile.css";
 import profile from "../../assets/svg/Dummy_Profile2.svg";
 import authHeader from "../../services/auth-header";
 import Footer from "../Footer/footer";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 const Profile = () => {
@@ -14,12 +14,16 @@ const Profile = () => {
   const [ideas, setIdeas] = useState([]);
   const [edit, setEdit] = useState();
 
-  const { id } = useParams();
+  const search = useLocation().search;
+
+  const id = new URLSearchParams(search).get("id");
+
+  // const { id } = useParams();
   const url = "/profileEdit/";
 
   useEffect(() => {
     fetchProfile();
-  }, []);
+  });
 
   const fetchProfile = () => {
     if (id) {

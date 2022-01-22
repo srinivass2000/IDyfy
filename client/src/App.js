@@ -40,7 +40,7 @@ function App() {
           <Protectedroute path="/feed" exact component={FeedPage} />
           <Protectedroute path="/notification" exact component={Notification} />
           <Protectedroute path="/starred" exact component={Starred_ideas} />
-          <Protectedroute path="/profile/:id" exact component={Profile} />
+          <Protectedroute path="/profile" exact component={Profile} />
           <Protectedroute path="/myideas" exact component={MyIdeas} />
           <Protectedroute path="/createIdea" exact component={CreateIdea} />
           <Protectedroute path="/idea/:id" exact component={Idea} />
