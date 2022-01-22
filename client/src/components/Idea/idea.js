@@ -14,6 +14,7 @@ const Idea = () => {
   const [idea, setIdea] = useState({});
   const [comments, setComment] = useState([]);
   const [contributors, setContributors] = useState([]);
+  const [canEdit, setCanEdit] = useState(false);
 
   const { id } = useParams();
   const url = "/ideaEdit/";
@@ -208,29 +209,33 @@ const Idea = () => {
             </button>
           </div>
         </div>
-        <div className="row justify-content-center">
-          <div className="col-md-4">
-            <Link
-              to={{
-                pathname: url + id,
-                state: { idea },
-              }}
-            >
-              <button
-                className="btn pl-3 pr-3 mb-3 mt-3"
-                style={{
-                  backgroundColor: "#F62F08",
-                  color: "white",
-                  fontSize: "1.7rem",
-                  borderRadius: "1.2rem",
-                  fontWeight: "500",
+        {canEdit ? (
+          <div className="row justify-content-center">
+            <div className="col-md-4">
+              <Link
+                to={{
+                  pathname: url + id,
+                  state: { idea },
                 }}
               >
-                Edit Idea
-              </button>
-            </Link>
+                <button
+                  className="btn pl-3 pr-3 mb-3 mt-3"
+                  style={{
+                    backgroundColor: "#F62F08",
+                    color: "white",
+                    fontSize: "1.7rem",
+                    borderRadius: "1.2rem",
+                    fontWeight: "500",
+                  }}
+                >
+                  Edit Idea
+                </button>
+              </Link>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div></div>
+        )}
       </div>
       <Footer />
     </div>
