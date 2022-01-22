@@ -48,6 +48,9 @@ const FeatureSchema = new mongoose.Schema(
     available: {
       type: Boolean,
     },
+    level: {
+      type: Number,
+    },
   },
   { timestamps: true }
 );

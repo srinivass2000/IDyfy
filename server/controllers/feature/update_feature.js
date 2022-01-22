@@ -7,7 +7,8 @@ const Idea = require("../../models/Idea");
 
 exports.update_feature = async (req, res, next) => {
   try {
-    const { id, title, idea_id, parent_id, content, version_start } = req.body;
+    const { id, title, idea_id, parent_id, content, version_start, level } =
+      req.body;
 
     // var user_id = req.user._id;
 
@@ -53,6 +54,7 @@ exports.update_feature = async (req, res, next) => {
           idea_id: idea_id,
           parent_id: parent_id,
           content: content,
+          level,
           version_start: version_start,
           content_hash: content_hash,
           updated_content,
@@ -72,6 +74,7 @@ exports.update_feature = async (req, res, next) => {
         idea_id: idea_id,
         parent_id: parent_id,
         content: content,
+        level,
         version_start: version_start,
         content_hash: content_hash,
         updated_content,

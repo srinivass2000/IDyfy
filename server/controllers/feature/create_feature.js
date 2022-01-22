@@ -5,7 +5,8 @@ const { FeatureSchema } = require("../../models/Feature");
 
 exports.create_feature = async (req, res, next) => {
   try {
-    const { title, idea_id, parent_id, content, version_start } = req.body;
+    const { title, idea_id, parent_id, content, version_start, level } =
+      req.body;
 
     var Feature = mongoose.model(`features_${idea_id}`, FeatureSchema);
 
@@ -18,6 +19,7 @@ exports.create_feature = async (req, res, next) => {
       parent_id,
       content,
       version_start,
+      level,
       available: true,
     });
     res.status(200).json({
