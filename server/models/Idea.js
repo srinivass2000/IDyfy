@@ -20,6 +20,7 @@ const IdeaSchema = new mongoose.Schema(
     },
     starred_by: Array,
     ideas_details: Object,
+    links: Object,
   },
   { timestamps: true }
 );
