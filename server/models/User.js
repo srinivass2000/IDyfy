@@ -44,7 +44,7 @@ const UserSchema = new mongoose.Schema(
 );
 
 UserSchema.index({
-  title: "text",
+  name: "text",
 });
 
 UserSchema.pre("save", async function (next) {
