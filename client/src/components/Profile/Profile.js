@@ -22,16 +22,33 @@ const Profile = () => {
   }, []);
 
   const fetchProfile = () => {
-    axios
-      .get(`http://localhost:5000/api/profile`, { headers: authHeader() })
-      .then((res) => {
-        setUser(res.data.user);
-        setIdeas(res.data.ideas);
-        setEdit(res.data.can_edit);
-        //console.log(res.data);
-        setLoad(false);
-      })
-      .catch((err) => console.log(err));
+    if (id) {
+      axios
+        .get(`http://localhost:5000/api/profile?id=${id}`, {
+          headers: authHeader(),
+        })
+        .then((res) => {
+          setUser(res.data.user);
+          setIdeas(res.data.ideas);
+          setEdit(res.data.can_edit);
+          console.log(res.data);
+          setLoad(false);
+        })
+        .catch((err) => console.log(err));
+    } else {
+      axios
+        .get(`http://localhost:5000/api/profile`, {
+          headers: authHeader(),
+        })
+        .then((res) => {
+          setUser(res.data.user);
+          setIdeas(res.data.ideas);
+          setEdit(res.data.can_edit);
+          console.log(res.data);
+          setLoad(false);
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   if (load) {

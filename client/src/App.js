@@ -40,7 +40,7 @@ function App() {
           <Protectedroute path="/feed" exact component={FeedPage} />
           <Protectedroute path="/notification" exact component={Notification} />
           <Protectedroute path="/starred" exact component={Starred_ideas} />
-          <Protectedroute path="/profile" exact component={Profile} />
+          <Protectedroute path="/profile/:id" exact component={Profile} />
           <Protectedroute path="/myideas" exact component={MyIdeas} />
           <Protectedroute path="/createIdea" exact component={CreateIdea} />
           <Protectedroute path="/idea/:id" exact component={Idea} />
@@ -48,7 +48,11 @@ function App() {
           <Protectedroute path="/graphtest" exact component={GraphTest} />
           <Protectedroute path="/graph" exact component={Graph} />
           <Protectedroute path="/ideaEdit/:id" exact component={IdeaEdit} />
-          <Protectedroute path="/profileEdit/:id" exact component={ProfileEdit} />
+          <Protectedroute
+            path="/profileEdit/:id"
+            exact
+            component={ProfileEdit}
+          />
           <Protectedroute path="/search/:key" exact component={Search} />
           <Route path="/email/verify/:id" exact component={VerifyEmail} />
           <Route path="/passwordreset/:id" exact component={ResetPassword} />

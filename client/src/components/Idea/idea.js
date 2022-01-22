@@ -28,6 +28,7 @@ const Idea = () => {
         setIdea(res.data.idea);
         setComment(res.data.comments);
         setContributors(res.data.contributed_users);
+        setCanEdit(res.data.can_edit);
         console.log(res.data);
         setLoad(false);
       })
