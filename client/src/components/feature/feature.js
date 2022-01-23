@@ -3,7 +3,7 @@ import Like from "../../assets/icon/heart.svg";
 import Chat from "../../assets/icon/chat.svg";
 import Footer from "../../components/Footer/footer";
 import Comment from "../../components/comment/comment";
-import { useParams } from "react-router-dom";
+//import { useParams } from "react-router-dom";
 import axios from "axios";
 import authHeader from "../../services/auth-header";
 import { Link } from "react-router-dom";
@@ -14,7 +14,9 @@ const Feature = () => {
   const [canEdit, setCanEdit] = useState(false);
   const [comments, setComment] = useState([]);
 
-  const { idea_id, feature_id } = useParams();
+  //const { idea_id, feature_id } = useParams();
+  const idea_id = "61e6d7312b99cd1f30ff1505";
+  const feature_id = "61ebe4db1e885b2a605d5981";
   const url = "/featureEdit/";
 
   const fetchFeature = () => {
