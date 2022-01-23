@@ -20,7 +20,7 @@ const Profile = () => {
   const id = new URLSearchParams(search).get("id");
 
   // const { id } = useParams();
-  const url = "/profileEdit/";
+  const url = "/profileEdit";
 
   useEffect(() => {
     fetchProfile();
@@ -136,7 +136,7 @@ const Profile = () => {
               <div>
                 <Link
                   to={{
-                    pathname: url + id,
+                    pathname: url,
                     state: { user },
                   }}
                 >

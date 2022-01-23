@@ -6,11 +6,14 @@ import Footer from "../Footer/footer";
 import axios from "axios";
 import authHeader from "../../services/auth-header";
 import { useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const EditProfile = () => {
   const loc = useLocation();
-  console.log(loc.state.user);
+  //console.log(loc.state.user);
 
+  const notify1 = () => toast.success("Profile Edited Sucessfully");
   const [name, setName] = useState(loc.state.user.name);
   const [about, setAbout] = useState(loc.state.user.about);
   const [job, setJob] = useState(loc.state.user.job);
@@ -20,14 +23,14 @@ const EditProfile = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  //const [tags,setTags] = useState([]);
+  const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       let res = await axios({
         method: "POST",
-        url: "http://localhost:5000/api/profile/update-idea",
+        url: "http://localhost:5000/api/profile/update-profile",
         headers: authHeader(),
         data: {
           name,
@@ -38,11 +41,13 @@ const EditProfile = () => {
       });
 
       if (res.status === 200) {
+        notify1();
         setName("");
         setAbout("");
         setJob("");
         setUniversity("");
         console.log("Profile updated sucessfully");
+        history.push("/profile");
       } else {
         console.log("some error occured");
       }
@@ -72,7 +77,7 @@ const EditProfile = () => {
             className="mt-2"
           />
           <form
-            // onSubmit={handleSubmit}
+            onSubmit={handleSubmit}
             onKeyPress={(event) => {
               if (event.which === 13 /* Enter */) {
                 event.preventDefault();
@@ -87,7 +92,7 @@ const EditProfile = () => {
                 Edit Profile !!
               </h1>
             </div>
-            {console.log(name)}
+
             <div className="flex justify-center mt-3 mx-3">
               <input
                 type="text"
