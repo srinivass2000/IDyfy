@@ -64,26 +64,6 @@ const Idea = () => {
       <div className="container">
         <div className="row">
           <div className="dropdown col-md-2 offset-md-10 d-none d-sm-block mt-6 mb-3">
-            {/* <button className="btn-sm">
-              <img src={contri} alt="contributors" />
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li>
-                <a class="dropdown-item" href="#">
-                  Action
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">
-                  Another action
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">
-                  Something else here
-                </a>
-              </li>
-            </ul> */}
             <div class="dropdown">
               <button
                 class=""

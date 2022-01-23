@@ -7,6 +7,7 @@ import authHeader from "../../services/auth-header";
 import Footer from "../Footer/footer";
 import { useParams, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
+import Loader from "../Loader/loader";
 
 const Profile = () => {
   const [user, setUser] = useState({});
@@ -23,7 +24,7 @@ const Profile = () => {
 
   useEffect(() => {
     fetchProfile();
-  });
+  }, []);
 
   const fetchProfile = () => {
     if (id) {
@@ -60,6 +61,7 @@ const Profile = () => {
       <div>
         {console.log("loading....")}
         <h1 style={{ color: "white" }}>loading....</h1>
+        <Loader />
       </div>
     );
   }
