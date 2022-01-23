@@ -23,7 +23,11 @@ exports.fetch_features = async (req, res, next) => {
 
     var limit = await Feature.find().sort({ level: -1 }).limit(1);
 
-    limit = limit[0].level;
+    if (limit[0].level) {
+      limit = limit[0].level;
+    } else {
+      limit = 1;
+    }
 
     var newfea = [];
 
@@ -51,7 +55,6 @@ exports.fetch_features = async (req, res, next) => {
       // children = [];
 
       for (var i = 1; i <= limit; i++) {
-        // if (fea.level === 1) {
         results.map((f, i) => {
           if (fea._id.toString() === f.parent_id.toString()) {
             console.log("im level 2 feature");
