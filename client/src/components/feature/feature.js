@@ -15,9 +15,9 @@ const Feature = () => {
   const [comments, setComment] = useState([]);
 
   //const { idea_id, feature_id } = useParams();
-  const idea_id = "61e6d7312b99cd1f30ff1505";
-  const feature_id = "61ebe4db1e885b2a605d5981";
-  const url = "/featureEdit/";
+  const idea_id = "61ed9740d094048f0a14e56c";
+  const feature_id = "61ed9827d094048f0a14e589";
+  const url = "/feaEdit";
 
   const fetchFeature = () => {
     axios
@@ -129,7 +129,7 @@ const Feature = () => {
               <div className="col-md-4">
                 <Link
                   to={{
-                    pathname: url + "61ed70e6a8199974d917a870",
+                    pathname: url,
                     state: { feature },
                   }}
                 >

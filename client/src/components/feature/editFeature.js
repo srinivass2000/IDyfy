@@ -6,13 +6,23 @@ import Footer from "../Footer/footer";
 import axios from "axios";
 import authHeader from "../../services/auth-header";
 import { useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useHistory } from "react-router-dom";
 
 const EditFeature = () => {
   const loc = useLocation();
-  //console.log(loc.state.idea);
+  console.log(loc.state.feature);
 
-  const [title, setTitle] = useState(loc.state.idea.title);
-  const [description, setDescription] = useState(loc.state.idea.description);
+  const notify1 = () => toast.success("Feature Edited Sucessfully");
+
+  const [title, setTitle] = useState(loc.state.feature.title);
+  const [description, setDescription] = useState(loc.state.feature.content);
+  const id = loc.state.feature._id.toString();
+  const parent_id = loc.state.feature.parent_id.toString();
+  const idea_id = loc.state.feature.idea_id.toString();
+  const version_start = loc.state.feature.version_start;
+
+  const history = useHistory();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -23,18 +33,25 @@ const EditFeature = () => {
     try {
       let res = await axios({
         method: "POST",
-        url: "http://localhost:5000/api/idea/update-feature",
+        url: "http://localhost:5000/api/feature/update-feature",
         headers: authHeader(),
         data: {
+          id: id,
           title: title,
           content: description,
+          idea_id: idea_id,
+          parent_id: parent_id,
+          version_start: version_start,
         },
       });
 
       if (res.status === 200) {
+        notify1();
         setTitle("");
         setDescription("");
         console.log("feature updated sucessfully");
+        //change path according to feaure id later
+        history.push("/feature");
       } else {
         console.log("some error occured");
       }
@@ -64,7 +81,7 @@ const EditFeature = () => {
             className="mt-2"
           />
           <form
-            // onSubmit={handleSubmit}
+            onSubmit={handleSubmit}
             onKeyPress={(event) => {
               if (event.which === 13 /* Enter */) {
                 event.preventDefault();
@@ -76,7 +93,7 @@ const EditFeature = () => {
                 className="mt-3"
                 style={{ fontSize: "1.6rem", fontWeight: "bold" }}
               >
-                Edit Idea !!
+                Edit Feature !!
               </h1>
             </div>
             {/* {console.log(title)} */}

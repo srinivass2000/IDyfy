@@ -35,13 +35,14 @@ exports.update_feature = async (req, res, next) => {
       console.log("here");
     }
 
-    a = req.user._id;
+    a = req.user._id.toString();
     console.log(a);
     console.log(initial.version_start);
     console.log(idea.ideas_details[a] + 1);
 
     if (
-      initial.version_start === idea.ideas_details[req.user._id] + 1 ||
+      initial.version_start ===
+        idea.ideas_details[req.user._id.toString()] + 1 ||
       initial.version_end === 0
     ) {
       const response = await Feature.findOneAndUpdate(
@@ -50,7 +51,7 @@ exports.update_feature = async (req, res, next) => {
         },
         {
           title: title,
-          user_id: req.user._id,
+          user_id: req.user._id.toString(),
           idea_id: idea_id,
           parent_id: parent_id,
           content: content,
@@ -70,7 +71,7 @@ exports.update_feature = async (req, res, next) => {
     } else {
       const response = await Feature.create({
         title: title,
-        user_id: req.user._id,
+        user_id: req.user._id.toString(),
         idea_id: idea_id,
         parent_id: parent_id,
         content: content,

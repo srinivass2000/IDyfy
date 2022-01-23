@@ -42,7 +42,7 @@ function App() {
           <Protectedroute path="/graphtest" exact component={GraphTest} />
           <Protectedroute path="/graph" exact component={Graph} />
           <Protectedroute path="/ideaEdit/:id" exact component={IdeaEdit} />
-          <Protectedroute path="/feaEdit/:id" exact component={FeatureEdit} />
+          <Protectedroute path="/feaEdit" exact component={FeatureEdit} />
           <Protectedroute path="/profileEdit" exact component={ProfileEdit} />
           <Protectedroute path="/search/:key" exact component={Search} />
           <Route path="/email/verify/:id" exact component={VerifyEmail} />
