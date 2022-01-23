@@ -12,7 +12,6 @@ const EditProfile = () => {
   console.log(loc.state.user);
 
   const [name, setName] = useState(loc.state.user.name);
-  //   const [email, setEmail] = useState(loc.state.user.email);
   const [about, setAbout] = useState(loc.state.user.about);
   const [job, setJob] = useState(loc.state.user.job);
   const [university, setUniversity] = useState(loc.state.user.university);
