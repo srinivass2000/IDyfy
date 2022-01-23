@@ -21,6 +21,7 @@ import Protectedroute from "./components/protectedroutes";
 import ResetPassword from "./components/verifyemail/resetpassword";
 import CreateIdea from "./components/NewIdeas/createIdea";
 import Search from "./components/search/search";
+import CreateFeature from "./components/createFeature/createFeature";
 function App() {
   return (
     <div className="App">
@@ -43,6 +44,7 @@ function App() {
           <Protectedroute path="/profile" exact component={Profile} />
           <Protectedroute path="/myideas" exact component={MyIdeas} />
           <Protectedroute path="/createIdea" exact component={CreateIdea} />
+          <Protectedroute path="/createFeat" exact component={CreateFeature} />
           <Protectedroute path="/idea/:id" exact component={Idea} />
           <Protectedroute path="/feature" exact component={Feature} />
           <Protectedroute path="/graphtest" exact component={GraphTest} />
