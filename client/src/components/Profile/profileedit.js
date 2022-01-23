@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 import Idyfy_logo from "../../assets/svg/Idyfy_logo.svg";
 import "../Auth/auth.css";
 import Footer from "../Footer/footer";
-//import axios from "axios";
-//import authHeader from "../../services/auth-header";
+import axios from "axios";
+import authHeader from "../../services/auth-header";
 import { useLocation } from "react-router-dom";
 
 const EditProfile = () => {
@@ -23,31 +23,34 @@ const EditProfile = () => {
 
   //const [tags,setTags] = useState([]);
 
-  // const handleSubmit = async (e) => {
-  //     e.preventDefault();
-  //     try {
-  //         let res = await axios({
-  //             method: 'POST',
-  //             url: 'http://localhost:5000/api/idea/create-idea',
-  //             headers:authHeader(),
-  //             data: {
-  //                 title: title,
-  //                 description: description,
-  //                 tags: tags,
-  //             },});
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      let res = await axios({
+        method: "POST",
+        url: "http://localhost:5000/api/profile/update-idea",
+        headers: authHeader(),
+        data: {
+          name,
+          about,
+          university,
+          job,
+        },
+      });
 
-  //       if (res.status === 200) {
-  //         setTitle("");
-  //         setDescription("");
-  //         setTags([]);
-  //         console.log("idea updated sucessfully");
-  //       } else {
-  //         console.log("some error occured");
-  //       }
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
+      if (res.status === 200) {
+        setName("");
+        setAbout("");
+        setJob("");
+        setUniversity("");
+        console.log("Profile updated sucessfully");
+      } else {
+        console.log("some error occured");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div>
