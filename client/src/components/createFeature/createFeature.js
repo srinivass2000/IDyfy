@@ -20,8 +20,8 @@ const CreateFeature = () => {
         data: {
           title: title,
           content: description,
-          idea_id: "61eaa051ad05014846f6aee9",
-          parent_id: "61eaa051ad05014846f6aee9",
+          idea_id: "61eee0198824f70eb12c7107",
+          parent_id: "61eee0198824f70eb12c7107",
           level: 1,
           version_start: 1,
         },
