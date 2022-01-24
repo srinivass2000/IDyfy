@@ -8,9 +8,9 @@ import "./script";
 const Error = () => {
   return (
     <>
-      <div className="container special">
+      <div className="container special mb-40">
         <div className="row">
-          <div className="col-sm-12 col-md-12 mt-5 mb-5">
+          <div className="col-sm-12 offset-lg-3 col-lg-6 mt-5 mb-5">
             <svg
               width="100%"
               height="auto"
@@ -1183,7 +1183,18 @@ const Error = () => {
             </svg>
           </div>
         </div>
+        <p className="text-white text-xl">
+          Sorry, you are not authorized to access this page.
+        </p>
+        <div className="row mt-3">
+          <div className="text-white offset-lg-4 col-lg-4 offset-1 col-10  flex justify-center">
+            <Link to="/feed">
+              <button className="btn btn-outline-danger">Back Home</button>
+            </Link>
+          </div>
+        </div>
       </div>
+
       <Footer />
     </>
   );

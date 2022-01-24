@@ -15,8 +15,8 @@ const Feature = () => {
   const [comments, setComment] = useState([]);
 
   //const { idea_id, feature_id } = useParams();
-  const idea_id = "61ed9740d094048f0a14e56c";
-  const feature_id = "61ed9827d094048f0a14e589";
+  const idea_id = "61eee0198824f70eb12c7107";
+  const feature_id = "61eeed4daf56b67335d393ab";
   const url = "/feaEdit";
 
   const fetchFeature = () => {

@@ -6,11 +6,16 @@ import Footer from "../Footer/footer";
 import Tags from "./tagsfunc";
 import axios from "axios";
 import authHeader from "../../services/auth-header";
+import { toast } from "react-toastify";
+import { useHistory } from "react-router-dom";
 
 const CreateIdea = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [tags, setTags] = useState([]);
+
+  const notify1 = () => toast.success("Idea Created Sucessfully");
+  const history = useHistory();
 
   const childToParent = (childdata) => {
     setTags([...childdata]);
@@ -31,11 +36,13 @@ const CreateIdea = () => {
       });
 
       if (res.status === 200) {
+        notify1();
         setTitle("");
         setDescription("");
         setTags([]);
         //tags not going from the field but anyways we are redirecting to idea page so no issues
         console.log("idea created sucessfully");
+        history.push("/idea/" + res.data.idea._id.toString());
       } else {
         console.log("some error occured");
       }

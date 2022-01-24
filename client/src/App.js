@@ -16,7 +16,7 @@ import IdeaEdit from "./components/Idea/ideaedit";
 import FeatureEdit from "./components/feature/editFeature";
 import ProfileEdit from "./components/Profile/profileedit";
 // import { isMobile } from "react-device-detect";
-import Error from "./components/error/error";
+import Error from "./components/error/error_2";
 import VerifyEmail from "./components/verifyemail/verify";
 import Protectedroute from "./components/protectedroutes";
 import ResetPassword from "./components/verifyemail/resetpassword";
