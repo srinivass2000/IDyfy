@@ -22,7 +22,7 @@ const FeedPage = () => {
               setIdeas([...ideas, ...res.data.ideas]);
             }
             // console.log(res.data.ideas);
-            console.log(ideas);
+            // console.log(ideas);
           },
           (err) => {
             console.log(err);

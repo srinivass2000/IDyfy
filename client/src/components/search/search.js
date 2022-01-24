@@ -1,15 +1,17 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
+import profile from "../../assets/images/dummy_profile.png";
 import axios from "axios";
 import authHeader from "../../services/auth-header";
 import { useEffect } from "react";
+import FeedTile from "../Feed_Tile/feed";
 const Search = () => {
   const { key } = useParams();
   const [resultTag, setResultTag] = useState();
   const [resultPeople, setResultPeople] = useState();
   const [resultName, setResultName] = useState();
-  const [showvalue, setShowValue] = useState(0);
+  const [showvalue, setShowValue] = useState(1);
 
   const [skip, setskip] = useState(3);
   const [skip1, setskip1] = useState(3);
@@ -19,7 +21,7 @@ const Search = () => {
     try {
       // console.log(skip);
       await axios
-        .get("http://localhost:5000/api/search/all" + key, {
+        .get("http://localhost:5000/api/search/all/" + key, {
           headers: authHeader(),
         })
         .then(
@@ -42,7 +44,7 @@ const Search = () => {
       // console.log(skip);
       await axios
         .get(
-          "http://localhost:5000/api/search/people" + key,
+          "http://localhost:5000/api/search/people/" + key,
           {
             headers: authHeader(),
           },
@@ -67,7 +69,7 @@ const Search = () => {
       // console.log(skip);
       await axios
         .get(
-          "http://localhost:5000/api/search/tags" + key,
+          "http://localhost:5000/api/search/tags/" + key,
           {
             headers: authHeader(),
           },
@@ -92,7 +94,7 @@ const Search = () => {
       // console.log(skip);
       await axios
         .get(
-          "http://localhost:5000/api/search/title" + key,
+          "http://localhost:5000/api/search/title/" + key,
           {
             headers: authHeader(),
           },
@@ -116,31 +118,132 @@ const Search = () => {
     getsearch();
   }, []);
 
+  const active = {
+    backgroundColor: "red",
+    border: "1px solid #840FCC",
+    width: "100%",
+  };
+  const notActive = {
+    backgroundColor: "#0a0135",
+    border: "1px solid #840FCC",
+    width: "80%",
+  };
+  const handleChange = (event) => {
+    if (event.target.value === "1") {
+      setShowValue(1);
+    }
+    if (event.target.value === "2") {
+      setShowValue(2);
+    }
+    if (event.target.value === "3") {
+      setShowValue(3);
+    }
+  };
   return (
     <div className="container">
-      <div className="row mt-12">
-        <div className="offset-lg-2 col-lg-1 text-white">
-          <div className="row" className={showvalue === 0 ? "active" : null}>
-            All
-          </div>
-          <div className="row" className={showvalue === 1 ? "active" : null}>
-            Idea Title
-          </div>
-          <div className="row" className={showvalue === 2 ? "active" : null}>
-            Idea Tag
-          </div>
-          <div className="row" className={showvalue === 3 ? "active" : null}>
-            People
-          </div>
+      <div className="row mt-10">
+        <div className="col-12 flex justify-center d-lg-none mb-10">
+          <select
+            class="form-select form-select-sm mx-2 "
+            aria-label=".form-select-sm example"
+            style={{ width: "150px", backgroundColor: "#B287FF" }}
+            onChange={handleChange}
+          >
+            <option value="1"> Idea Title</option>
+            <option value="2">Idea Tag</option>
+            <option value="3"> People</option>
+          </select>
         </div>
-        {showvalue === 0 && <div className="offset-lg-1 col-lg-6">ALL</div>}
+        <div
+          className="offset-lg-2 col-lg-2 text-white d-none d-lg-block "
+          style={{
+            border: "5px solid #840FCC",
+            borderRadius: "15px",
+            width: "200px",
+            height: "125px",
+          }}
+        >
+          <center>
+            <button
+              className="row mt-2 text-white"
+              onClick={() => setShowValue(1)}
+              style={showvalue === 1 ? active : notActive}
+            >
+              Idea Title
+            </button>
+            <button
+              className="row mt-1 text-white"
+              onClick={() => setShowValue(2)}
+              style={showvalue === 2 ? active : notActive}
+            >
+              Idea Tag
+            </button>
+            <button
+              className="row mt-1 mb-2 text-white"
+              onClick={() => setShowValue(3)}
+              style={showvalue === 3 ? active : notActive}
+            >
+              People
+            </button>
+          </center>
+        </div>
+
         {showvalue === 1 && (
-          <div className="offset-lg-1 col-lg-6">IDEA TITLE</div>
+          <div className="offset-lg-1 col-lg-6">
+            <span
+              className="p-2 text-white d-lg-none"
+              style={{
+                backgroundColor: "red",
+              }}
+            >
+              IDEA TITLE
+            </span>
+            {/* <FeedTile /> */}
+            <button onClick={getideas}>load more</button>
+          </div>
         )}
         {showvalue === 2 && (
-          <div className="offset-lg-1 col-lg-6">IDEA TAG</div>
+          <div className="offset-lg-1 col-lg-6">
+            <span
+              className="p-2 text-white d-lg-none"
+              style={{
+                backgroundColor: "red",
+              }}
+            >
+              IDEA TAG
+            </span>
+            {/* <FeedTile /> */}
+            <button onClick={gettags}>load more</button>
+          </div>
         )}
-        {showvalue === 3 && <div className="offset-lg-1 col-lg-6">PEOPLE</div>}
+        {showvalue === 3 && (
+          <div className="offset-lg-1 col-lg-6">
+            <span
+              className="p-2 text-white d-lg-none"
+              style={{
+                backgroundColor: "red",
+              }}
+            >
+              PEOPLE
+            </span>
+            {/*  */}
+            <div className="row ">
+              <div className="idea col-lg-3 col-md-4 col-5 mr-1 ml-1 text-white ">
+                <img
+                  className="ml-3 mt-1 icon "
+                  src={profile}
+                  alt="My Profile"
+                />
+                <p className="text-left p-1">Name</p>
+                <p className="text-left p-1">
+                  Bio : Some thing is better than nothing
+                </p>
+              </div>
+            </div>
+            {/*  */}
+            <button onClick={getsearch}>load more</button>
+          </div>
+        )}
       </div>
     </div>
   );
