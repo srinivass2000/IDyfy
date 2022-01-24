@@ -1,7 +1,7 @@
 import React from "react";
 // import error from "../../assets/svg/404.svg";
 import "../Feed_Tile/feed.css";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Footer from "../Footer/footer";
 import "./error_2.css";
 import "./script";
