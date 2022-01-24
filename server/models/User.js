@@ -34,9 +34,18 @@ const UserSchema = new mongoose.Schema(
     ideas_contributed: Array,
     engagement_score: Number,
     profile_pic: String,
+    followers: Array,
+    following: Array,
+    job: String,
+    university: String,
+    about: String,
   },
   { timestamps: true }
 );
+
+UserSchema.index({
+  name: "text",
+});
 
 UserSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
@@ -95,5 +104,7 @@ UserSchema.methods.getemailVerificationToken = function () {
 };
 
 const User = mongoose.model("User", UserSchema);
+
+User.createIndexes();
 
 module.exports = User;

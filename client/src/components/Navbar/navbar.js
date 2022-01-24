@@ -173,7 +173,7 @@ const Navbar = () => {
                       className="dropdown-item text-center text-white hoveritem"
                       to="/profile"
                     >
-                      Profile
+                      View Profile
                     </Link>
                   </li>
                   <li className="flex justify-center p-1">

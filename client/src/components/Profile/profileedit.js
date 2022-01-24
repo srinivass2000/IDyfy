@@ -1,41 +1,53 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Idyfy_logo from "../../assets/svg/Idyfy_logo.svg";
 import "../Auth/auth.css";
 import Footer from "../Footer/footer";
-import Tags from "./tagsfunc";
 import axios from "axios";
 import authHeader from "../../services/auth-header";
+import { useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 
-const CreateIdea = () => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [tags, setTags] = useState([]);
+const EditProfile = () => {
+  const loc = useLocation();
+  //console.log(loc.state.user);
 
-  const childToParent = (childdata) => {
-    setTags([...childdata]);
-  };
+  const notify1 = () => toast.success("Profile Edited Sucessfully");
+  const [name, setName] = useState(loc.state.user.name);
+  const [about, setAbout] = useState(loc.state.user.about);
+  const [job, setJob] = useState(loc.state.user.job);
+  const [university, setUniversity] = useState(loc.state.user.university);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       let res = await axios({
         method: "POST",
-        url: "http://localhost:5000/api/idea/create-idea",
+        url: "http://localhost:5000/api/profile/update-profile",
         headers: authHeader(),
         data: {
-          title: title,
-          description: description,
-          tags: tags,
+          name,
+          about,
+          university,
+          job,
         },
       });
 
       if (res.status === 200) {
-        setTitle("");
-        setDescription("");
-        setTags([]);
-        //tags not going from the field but anyways we are redirecting to idea page so no issues
-        console.log("idea created sucessfully");
+        notify1();
+        setName("");
+        setAbout("");
+        setJob("");
+        setUniversity("");
+        console.log("Profile updated sucessfully");
+        history.push("/profile");
       } else {
         console.log("some error occured");
       }
@@ -47,7 +59,7 @@ const CreateIdea = () => {
   return (
     <div>
       <h1 className="mb-3 mt-3" style={{ color: "white", fontSize: "1.6rem" }}>
-        ! Clever Minds Come With Great Ideas !
+        ! Edit Your Profile So You Can Satnd Out In The Crowd !
       </h1>
       <div
         className=" m-auto container formsize"
@@ -77,14 +89,15 @@ const CreateIdea = () => {
                 className="mt-3"
                 style={{ fontSize: "1.6rem", fontWeight: "bold" }}
               >
-                Create a New Idea !!
+                Edit Profile !!
               </h1>
             </div>
+
             <div className="flex justify-center mt-3 mx-3">
               <input
                 type="text"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 className="form-control form_box"
                 placeholder="Title"
               />
@@ -93,37 +106,36 @@ const CreateIdea = () => {
               <textarea
                 rows="5"
                 cols="60"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                value={about}
+                onChange={(e) => setAbout(e.target.value)}
                 className="form-control form_box"
-                placeholder="Description"
+                placeholder="Describe yourself in few lines..."
               ></textarea>
             </div>
-
-            <div className="flex justify-start mt-3 mx-3">
-              <Tags childToParent={childToParent} />
-            </div>
-
-            <div className="ml-3 mt-2 mb-3 custom-control custom-checkbox">
+            <div className="flex justify-center mt-3 mx-3">
               <input
-                type="checkbox"
-                className="custom-control-input"
-                id="tandc"
-                required
+                type="text"
+                value={job}
+                onChange={(e) => setJob(e.target.value)}
+                className="form-control form_box"
+                placeholder="Job"
               />
-              <label
-                className="pl-3 custom-control-label text-white"
-                htmlFor="tandc"
-              >
-                I agree to the{" "}
-                <a href="/" className="link">
-                  T&C
-                </a>
-              </label>
             </div>
+            <div className="flex justify-center mt-3 mx-3">
+              <input
+                type="text"
+                value={university}
+                onChange={(e) => setUniversity(e.target.value)}
+                className="form-control form_box"
+                placeholder="University"
+              />
+            </div>
+
+            <div className="flex justify-start mt-3 mx-3"></div>
+
             <div className="flex justify-center">
               <button type="submit" className="mr-2 h-10 mb-10 btn button">
-                Create
+                Save
               </button>
             </div>
           </form>
@@ -134,4 +146,4 @@ const CreateIdea = () => {
   );
 };
 
-export default CreateIdea;
+export default EditProfile;

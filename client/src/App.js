@@ -12,7 +12,9 @@ import Idea from "./components/Idea/idea";
 import Feature from "./components/feature/feature";
 import GraphTest from "./components/graph/test_graph";
 import Graph from "./components/graph/graph";
-
+import IdeaEdit from "./components/Idea/ideaedit";
+import FeatureEdit from "./components/feature/editFeature";
+import ProfileEdit from "./components/Profile/profileedit";
 // import { isMobile } from "react-device-detect";
 import Error from "./components/error/error";
 import VerifyEmail from "./components/verifyemail/verify";
@@ -20,18 +22,10 @@ import Protectedroute from "./components/protectedroutes";
 import ResetPassword from "./components/verifyemail/resetpassword";
 import CreateIdea from "./components/NewIdeas/createIdea";
 import Search from "./components/search/search";
+import CreateFeature from "./components/createFeature/createFeature";
 function App() {
   return (
     <div className="App">
-      {" "}
-      {/* {isMobile ? (
-                        <>
-                          <h3 className="mt-20 bg-red-200 p-10">
-                            🙏🏼🙏🏼 This content is unavailable on mobile 🙏🏼🙏🏼
-                          </h3>
-                          <h4 className="mt-20 bg-green-200 p-10">😀 😃 Coming Soon 😀 😃</h4>
-                        </>
-                      ) : ( */}{" "}
       <BrowserRouter>
         <Navbar />
         <Switch>
@@ -42,18 +36,20 @@ function App() {
           <Protectedroute path="/profile" exact component={Profile} />
           <Protectedroute path="/myideas" exact component={MyIdeas} />
           <Protectedroute path="/createIdea" exact component={CreateIdea} />
+          <Protectedroute path="/createFeat" exact component={CreateFeature} />
           <Protectedroute path="/idea/:id" exact component={Idea} />
           <Protectedroute path="/feature" exact component={Feature} />
           <Protectedroute path="/graphtest" exact component={GraphTest} />
           <Protectedroute path="/graph" exact component={Graph} />
+          <Protectedroute path="/ideaEdit/:id" exact component={IdeaEdit} />
+          <Protectedroute path="/feaEdit" exact component={FeatureEdit} />
+          <Protectedroute path="/profileEdit" exact component={ProfileEdit} />
           <Protectedroute path="/search/:key" exact component={Search} />
           <Route path="/email/verify/:id" exact component={VerifyEmail} />
           <Route path="/passwordreset/:id" exact component={ResetPassword} />
           <Route path="/" component={Error} />
         </Switch>
-        {/* <Footer /> */}
       </BrowserRouter>
-      {/* )} */}
     </div>
   );
 }

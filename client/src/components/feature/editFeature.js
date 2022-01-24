@@ -1,41 +1,57 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Idyfy_logo from "../../assets/svg/Idyfy_logo.svg";
 import "../Auth/auth.css";
 import Footer from "../Footer/footer";
-import Tags from "./tagsfunc";
 import axios from "axios";
 import authHeader from "../../services/auth-header";
+import { useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useHistory } from "react-router-dom";
 
-const CreateIdea = () => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [tags, setTags] = useState([]);
+const EditFeature = () => {
+  const loc = useLocation();
+  console.log(loc.state.feature);
 
-  const childToParent = (childdata) => {
-    setTags([...childdata]);
-  };
+  const notify1 = () => toast.success("Feature Edited Sucessfully");
+
+  const [title, setTitle] = useState(loc.state.feature.title);
+  const [description, setDescription] = useState(loc.state.feature.content);
+  const id = loc.state.feature._id.toString();
+  const parent_id = loc.state.feature.parent_id.toString();
+  const idea_id = loc.state.feature.idea_id.toString();
+  const version_start = loc.state.feature.version_start;
+
+  const history = useHistory();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       let res = await axios({
         method: "POST",
-        url: "http://localhost:5000/api/idea/create-idea",
+        url: "http://localhost:5000/api/feature/update-feature",
         headers: authHeader(),
         data: {
+          id: id,
           title: title,
-          description: description,
-          tags: tags,
+          content: description,
+          idea_id: idea_id,
+          parent_id: parent_id,
+          version_start: version_start,
         },
       });
 
       if (res.status === 200) {
+        notify1();
         setTitle("");
         setDescription("");
-        setTags([]);
-        //tags not going from the field but anyways we are redirecting to idea page so no issues
-        console.log("idea created sucessfully");
+        console.log("feature updated sucessfully");
+        //change path according to feaure id later
+        history.push("/feature");
       } else {
         console.log("some error occured");
       }
@@ -47,7 +63,7 @@ const CreateIdea = () => {
   return (
     <div>
       <h1 className="mb-3 mt-3" style={{ color: "white", fontSize: "1.6rem" }}>
-        ! Clever Minds Come With Great Ideas !
+        ! Edit Your Feature To Make It More Brilliant !
       </h1>
       <div
         className=" m-auto container formsize"
@@ -77,9 +93,10 @@ const CreateIdea = () => {
                 className="mt-3"
                 style={{ fontSize: "1.6rem", fontWeight: "bold" }}
               >
-                Create a New Idea !!
+                Edit Feature !!
               </h1>
             </div>
+            {/* {console.log(title)} */}
             <div className="flex justify-center mt-3 mx-3">
               <input
                 type="text"
@@ -100,30 +117,9 @@ const CreateIdea = () => {
               ></textarea>
             </div>
 
-            <div className="flex justify-start mt-3 mx-3">
-              <Tags childToParent={childToParent} />
-            </div>
-
-            <div className="ml-3 mt-2 mb-3 custom-control custom-checkbox">
-              <input
-                type="checkbox"
-                className="custom-control-input"
-                id="tandc"
-                required
-              />
-              <label
-                className="pl-3 custom-control-label text-white"
-                htmlFor="tandc"
-              >
-                I agree to the{" "}
-                <a href="/" className="link">
-                  T&C
-                </a>
-              </label>
-            </div>
             <div className="flex justify-center">
               <button type="submit" className="mr-2 h-10 mb-10 btn button">
-                Create
+                Save
               </button>
             </div>
           </form>
@@ -134,4 +130,4 @@ const CreateIdea = () => {
   );
 };
 
-export default CreateIdea;
+export default EditFeature;

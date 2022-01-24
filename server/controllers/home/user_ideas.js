@@ -11,7 +11,7 @@ exports.get_contributed_ideas = async (req, res, next) => {
       contributors: {
         $in: [id],
       },
-    });
+    }).sort({ createdAt: -1 });
     res.status(200).json({
       success: true,
       ideas: result,

@@ -3,39 +3,34 @@ import { useState } from "react";
 import Idyfy_logo from "../../assets/svg/Idyfy_logo.svg";
 import "../Auth/auth.css";
 import Footer from "../Footer/footer";
-import Tags from "./tagsfunc";
 import axios from "axios";
 import authHeader from "../../services/auth-header";
 
-const CreateIdea = () => {
+const CreateFeature = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [tags, setTags] = useState([]);
-
-  const childToParent = (childdata) => {
-    setTags([...childdata]);
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       let res = await axios({
         method: "POST",
-        url: "http://localhost:5000/api/idea/create-idea",
+        url: "http://localhost:5000/api/feature/create-feature",
         headers: authHeader(),
         data: {
           title: title,
-          description: description,
-          tags: tags,
+          content: description,
+          idea_id: "61eaa051ad05014846f6aee9",
+          parent_id: "61eaa051ad05014846f6aee9",
+          level: 1,
+          version_start: 1,
         },
       });
 
       if (res.status === 200) {
         setTitle("");
         setDescription("");
-        setTags([]);
-        //tags not going from the field but anyways we are redirecting to idea page so no issues
-        console.log("idea created sucessfully");
+        console.log("feature created sucessfully");
       } else {
         console.log("some error occured");
       }
@@ -47,7 +42,7 @@ const CreateIdea = () => {
   return (
     <div>
       <h1 className="mb-3 mt-3" style={{ color: "white", fontSize: "1.6rem" }}>
-        ! Clever Minds Come With Great Ideas !
+        ! Clever Minds Come With Great Features For An Idea !
       </h1>
       <div
         className=" m-auto container formsize"
@@ -77,7 +72,7 @@ const CreateIdea = () => {
                 className="mt-3"
                 style={{ fontSize: "1.6rem", fontWeight: "bold" }}
               >
-                Create a New Idea !!
+                Create a New Feature !!
               </h1>
             </div>
             <div className="flex justify-center mt-3 mx-3">
@@ -100,10 +95,6 @@ const CreateIdea = () => {
               ></textarea>
             </div>
 
-            <div className="flex justify-start mt-3 mx-3">
-              <Tags childToParent={childToParent} />
-            </div>
-
             <div className="ml-3 mt-2 mb-3 custom-control custom-checkbox">
               <input
                 type="checkbox"
@@ -123,7 +114,7 @@ const CreateIdea = () => {
             </div>
             <div className="flex justify-center">
               <button type="submit" className="mr-2 h-10 mb-10 btn button">
-                Create
+                Create Feature
               </button>
             </div>
           </form>
@@ -134,4 +125,4 @@ const CreateIdea = () => {
   );
 };
 
-export default CreateIdea;
+export default CreateFeature;

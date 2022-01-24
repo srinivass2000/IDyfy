@@ -7,7 +7,8 @@ const Idea = require("../../models/Idea");
 
 exports.update_feature = async (req, res, next) => {
   try {
-    const { id, title, idea_id, parent_id, content, version_start } = req.body;
+    const { id, title, idea_id, parent_id, content, version_start, level } =
+      req.body;
 
     // var user_id = req.user._id;
 
@@ -34,13 +35,14 @@ exports.update_feature = async (req, res, next) => {
       console.log("here");
     }
 
-    a = req.user._id;
+    a = req.user._id.toString();
     console.log(a);
     console.log(initial.version_start);
     console.log(idea.ideas_details[a] + 1);
 
     if (
-      initial.version_start === idea.ideas_details[req.user._id] + 1 ||
+      initial.version_start ===
+        idea.ideas_details[req.user._id.toString()] + 1 ||
       initial.version_end === 0
     ) {
       const response = await Feature.findOneAndUpdate(
@@ -49,10 +51,11 @@ exports.update_feature = async (req, res, next) => {
         },
         {
           title: title,
-          user_id: req.user._id,
+          user_id: req.user._id.toString(),
           idea_id: idea_id,
           parent_id: parent_id,
           content: content,
+          level,
           version_start: version_start,
           content_hash: content_hash,
           updated_content,
@@ -68,14 +71,16 @@ exports.update_feature = async (req, res, next) => {
     } else {
       const response = await Feature.create({
         title: title,
-        user_id: req.user._id,
+        user_id: req.user._id.toString(),
         idea_id: idea_id,
         parent_id: parent_id,
         content: content,
+        level,
         version_start: version_start,
         content_hash: content_hash,
         updated_content,
         available: true,
+        updated_version: version_start,
       });
 
       var prev_feature = await Feature.findOneAndUpdate(
@@ -85,7 +90,7 @@ exports.update_feature = async (req, res, next) => {
         {
           version_end: version_start,
           updated_version: version_start,
-          updated_feature: response._id,
+          updated_feature: response._id.toString(),
           available: undefined,
         }
       );
