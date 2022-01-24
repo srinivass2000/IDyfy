@@ -1,14 +1,14 @@
 import React from "react";
 // import error from "../../assets/svg/404.svg";
 import "../Feed_Tile/feed.css";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Footer from "../Footer/footer";
 import "./error_2.css";
 import "./script";
 const Error = () => {
   return (
     <>
-      <div className="container special mb-40">
+      <div className="container special mt-20 mb-40">
         <div className="row">
           <div className="col-sm-12 offset-lg-3 col-lg-6 mt-5 mb-5">
             <svg
@@ -1195,7 +1195,7 @@ const Error = () => {
         </div>
       </div>
 
-      <Footer />
+      <Footer className="sm:bottom-0" />
     </>
   );
 };
