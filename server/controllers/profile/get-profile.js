@@ -18,8 +18,7 @@ exports.get_profile = async (req, res, next) => {
     } else {
       console.log(req.user._id);
       user = req.user;
-      id = req.user._id;
-      id = id.toString();
+      id = req.user._id.toString();
       can_edit = true;
     }
     const result = await Idea.find({

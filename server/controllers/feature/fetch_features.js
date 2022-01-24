@@ -61,7 +61,7 @@ exports.fetch_features = async (req, res, next) => {
             featureTree.children.map((prem, i) => {
               if (prem.id === f.parent_id) {
                 prem.children.push({
-                  id: f._id,
+                  id: f._id.toString(),
                   name: f.title,
                   children: [],
                 });

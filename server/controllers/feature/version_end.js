@@ -13,7 +13,7 @@ exports.version_end = async (req, res, next) => {
       _id: idea_id,
     });
 
-    var user_id = req.user._id;
+    var user_id = req.user._id.toString();
 
     var latest_version = parseInt(idea.ideas_details[user_id]);
     // var latest_version = 30;

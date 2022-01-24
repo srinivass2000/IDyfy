@@ -7,8 +7,7 @@ exports.star_idea = async (req, res, next) => {
     // var idea = await Idea.find({ _id: idea_id });
     // idea.starred_by = idea.starred_by.push(req.user._id);
 
-    var id = req.user._id;
-    id = id.toString();
+    var id = req.user._id.toString();
 
     var response = await Idea.findOneAndUpdate(
       { _id: idea_id },

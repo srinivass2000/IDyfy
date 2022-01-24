@@ -19,7 +19,8 @@ exports.delete_feature = async (req, res, next) => {
     const feature = await Feature.findById(id);
 
     if (
-      feature.version_start === idea.ideas_details[req.user._id] + 1 ||
+      feature.version_start ===
+        idea.ideas_details[req.user._id.toString()] + 1 ||
       feature.version_end === 0
     ) {
       const deleted_feature = await Feature.findByIdAndDelete(id);
@@ -34,8 +35,8 @@ exports.delete_feature = async (req, res, next) => {
           _id: id,
         },
         {
-          deleted_version: idea.ideas_details[req.user._id] + 1,
-          version_end: idea.ideas_details[req.user._id] + 1,
+          deleted_version: idea.ideas_details[req.user._id.toString()] + 1,
+          version_end: idea.ideas_details[req.user._id.toString()] + 1,
           available: undefined,
         }
       );

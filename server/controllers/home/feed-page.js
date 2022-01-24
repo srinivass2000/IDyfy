@@ -6,7 +6,7 @@ async function get_comments(result) {
   var comments_final = [];
   result.map(async (idea, i) => {
     // console.log(idea);
-    var idea_id = idea._id;
+    var idea_id = idea._id.toString();
     idea_id = idea_id.toString();
     // console.log(idea_id);
     var comment_count = await Comment.find({
