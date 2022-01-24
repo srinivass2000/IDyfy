@@ -60,7 +60,6 @@ const Profile = () => {
     return (
       <div>
         {console.log("loading....")}
-        <h1 style={{ color: "white" }}>loading....</h1>
         <Loader />
       </div>
     );
