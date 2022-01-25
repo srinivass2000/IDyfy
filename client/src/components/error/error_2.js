@@ -8,7 +8,7 @@ import "./script";
 const Error = () => {
   return (
     <>
-      <div className="container special mb-40">
+      <div className="container special mt-20 mb-40">
         <div className="row">
           <div className="col-sm-12 offset-lg-3 col-lg-6 mt-5 mb-5">
             <svg
@@ -1195,7 +1195,7 @@ const Error = () => {
         </div>
       </div>
 
-      <Footer />
+      <Footer className="sm:bottom-0" />
     </>
   );
 };
