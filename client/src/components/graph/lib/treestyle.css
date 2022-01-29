@@ -12,7 +12,8 @@
 }
 
 .tree__container__step__card p {
-  background-color: white;
+  background-color: #840fcc;
+  color: white;
   padding: 10px;
   box-shadow: 0 0 4px 1px rgba(121, 121, 121, 0.3);
   border-radius: 4px;
@@ -39,5 +40,7 @@
 }
 
 .tree__container__step__card__p:hover {
+  background-color: white;
+  color: black;
   transform: translateX(3px);
 }

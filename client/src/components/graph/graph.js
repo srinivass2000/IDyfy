@@ -312,7 +312,7 @@ const Graph = () => {
               },
               treeParams: treeParams,
               link_width: "4px",
-              link_color: "#2199e8",
+              link_color: "#F62F08",
             });
           }}
         >
