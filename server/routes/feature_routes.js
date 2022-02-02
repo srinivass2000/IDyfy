@@ -21,7 +21,7 @@ const { version_end } = require("../controllers/feature/version_end");
 
 router.route("/create-feature").post(protect, create_feature);
 router.route("/get-feature").get(protect, get_feature);
-router.route("/update-feature").post(protect, update_feature);
+router.route("/update-feature").put(protect, update_feature);
 router.route("/version-end").post(protect, version_end);
 router.route("/fetch-features").get(protect, fetch_features);
 router

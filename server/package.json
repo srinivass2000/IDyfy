@@ -1,22 +1,22 @@
 {
-    "name": "server",
-    "version": "1.0.0",
-    "main": "index.js",
-    "license": "MIT",
-    "scripts": {
-        "start": "node index.js",
-        "dev": "nodemon index.js"
-    },
-    "dependencies": {
-        "bcryptjs": "^2.4.3",
-        "cors": "^2.8.5",
-        "dotenv": "^14.2.0",
-        "express": "^4.17.2",
-        "faker": "^5.5.3",
-        "jsonwebtoken": "^8.5.1",
-        "lodash": "^4.17.21",
-        "mongoose": "^6.1.7",
-        "nodemailer": "^6.7.2",
-        "yarn": "^1.22.17"
-    }
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^14.2.0",
+    "express": "^4.17.2",
+    "faker": "^5.5.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.1.7",
+    "nodemailer": "^6.7.2",
+    "sib-api-v3-sdk": "^8.2.1",
+    "yarn": "^1.22.17"
+  }
 }

@@ -22,7 +22,7 @@ const {
 
 router.route("/create-idea").post(protect, create_idea);
 router.route("/get-idea").get(protect, get_idea);
-router.route("/update-idea").post(protect, update_idea);
+router.route("/update-idea").put(protect, update_idea);
 router.route("/get-ideas/:skip").get(protect, get_ideas);
 router.route("/get-contributed-ideas").get(protect, get_contributed_ideas);
 router.route("/star-idea").get(protect, star_idea);

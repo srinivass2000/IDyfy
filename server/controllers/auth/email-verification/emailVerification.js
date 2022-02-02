@@ -1,6 +1,8 @@
 const crypto = require("crypto");
 const ErrorResponse = require("../../../utils/errorResponse");
 const User = require("../../../models/User");
+const template = require("./welcome-template");
+const sendEmail = require("../../../utils/sibEmail");
 
 module.exports = verifyEmail = async (req, res, next) => {
   const emailVerificationToken = crypto
@@ -25,6 +27,15 @@ module.exports = verifyEmail = async (req, res, next) => {
     user.emailVerificationTokenExpiry = undefined;
 
     await user.save();
+
+    const message = template(user.name);
+
+    await sendEmail({
+      to: user.email,
+      to_name: user.name,
+      subject: "Welcome to Idyfy",
+      text: message,
+    });
 
     res.status(201).json({
       success: true,

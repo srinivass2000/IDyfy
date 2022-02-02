@@ -1,4 +1,4 @@
-const sendEmail = require("../../../utils/sendEmail");
+const sendEmail = require("../../../utils/sibEmail");
 const ErrorResponse = require("../../../utils/errorResponse");
 const template = require("./mail-template");
 
@@ -22,6 +22,7 @@ module.exports = async function emailVerification(user, res, next) {
     try {
       await sendEmail({
         to: user.email,
+        to_name: user.name,
         subject: "Email Verification Request",
         text: message,
       });
