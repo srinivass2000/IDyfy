@@ -29,4 +29,4 @@ jobs:
           yarn install
           pm2 restart 0
           pm2 save
-          # sudo service nginx restart
+          sudo service nginx restart
