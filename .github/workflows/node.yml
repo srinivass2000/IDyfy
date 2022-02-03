@@ -22,7 +22,7 @@ jobs:
           pwd
           ls
           yarn install
-          yarn run build
+          CI=false yarn run build
           cd ..
           cd server
           yarn install
