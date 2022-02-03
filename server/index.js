@@ -6,7 +6,7 @@ const errorHandler = require("./middleware/error");
 const cors = require("cors");
 const path = require("path");
 
-app.use(express.static(path.join(__dirname, "/client/build")));
+app.use(express.static(path.join(__dirname, "../client/build")));
 
 app.use(cors());
 
@@ -16,9 +16,13 @@ connectDB();
 
 app.use(express.json());
 
-app.get("/", (req, res, next) => {
-  res.send("Api's are running absolutely fine!🔥");
-});
+// app.get("/", function (req, res) {
+//   res.sendFile(path.join(__dirname, "../client/build", "index.html"));
+// });
+
+// app.get("/", (req, res, next) => {
+//   res.send("Api's are running absolutely fine!🔥");
+// });
 
 //Routes section
 
