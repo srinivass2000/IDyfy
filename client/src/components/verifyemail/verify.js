@@ -9,7 +9,7 @@ const VerifyEmail = () => {
   const notify1 = () => toast.success("Successfully Logged in !");
   const notify2 = () => toast.error("Something Went Wrong Pls Try again !");
 
-  axios.post("http://localhost:5000/api/auth/email/verify/" + id).then(
+  axios.post("/api/auth/email/verify/" + id).then(
     (res) => {
       // console.log(res.data.token);
       localStorage.setItem("UserToken", res.data.token);

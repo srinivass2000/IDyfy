@@ -21,7 +21,7 @@ const ResetPassword = () => {
     // console.log(id, pswd.password);
     if (pswd.password === pswd.confirmpassword) {
       axios
-        .put("http://localhost:5000/api/auth/passwordreset/" + id, {
+        .put("/api/auth/passwordreset/" + id, {
           password: pswd.password,
         })
         .then(

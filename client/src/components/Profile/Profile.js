@@ -29,7 +29,7 @@ const Profile = () => {
   const fetchProfile = () => {
     if (id) {
       axios
-        .get(`http://localhost:5000/api/profile?id=${id}`, {
+        .get(`/api/profile?id=${id}`, {
           headers: authHeader(),
         })
         .then((res) => {
@@ -42,7 +42,7 @@ const Profile = () => {
         .catch((err) => console.log(err));
     } else {
       axios
-        .get(`http://localhost:5000/api/profile`, {
+        .get(`/api/profile`, {
           headers: authHeader(),
         })
         .then((res) => {

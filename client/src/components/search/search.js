@@ -21,7 +21,7 @@ const Search = () => {
     try {
       // console.log(skip);
       await axios
-        .get("http://localhost:5000/api/search/all/" + key, {
+        .get("/api/search/all/" + key, {
           headers: authHeader(),
         })
         .then(
@@ -44,7 +44,7 @@ const Search = () => {
       // console.log(skip);
       await axios
         .get(
-          "http://localhost:5000/api/search/people/" + key,
+          "/api/search/people/" + key,
           {
             headers: authHeader(),
           },
@@ -69,7 +69,7 @@ const Search = () => {
       // console.log(skip);
       await axios
         .get(
-          "http://localhost:5000/api/search/tags/" + key,
+          "/api/search/tags/" + key,
           {
             headers: authHeader(),
           },
@@ -94,7 +94,7 @@ const Search = () => {
       // console.log(skip);
       await axios
         .get(
-          "http://localhost:5000/api/search/title/" + key,
+          "/api/search/title/" + key,
           {
             headers: authHeader(),
           },

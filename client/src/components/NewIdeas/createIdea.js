@@ -26,7 +26,7 @@ const CreateIdea = () => {
     try {
       let res = await axios({
         method: "POST",
-        url: "http://localhost:5000/api/idea/create-idea",
+        url: "/api/idea/create-idea",
         headers: authHeader(),
         data: {
           title: title,

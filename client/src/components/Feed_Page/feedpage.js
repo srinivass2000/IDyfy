@@ -10,7 +10,7 @@ const FeedPage = () => {
     try {
       // console.log(skip);
       await axios
-        .get("http://localhost:5000/api/idea/get-ideas/" + skip, {
+        .get("/api/idea/get-ideas/" + skip, {
           headers: authHeader(),
         })
         .then(

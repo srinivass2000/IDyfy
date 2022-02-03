@@ -83,7 +83,7 @@ const EditIdea = () => {
     try {
       let res = await axios({
         method: "POST",
-        url: "http://localhost:5000/api/idea/update-idea",
+        url: "/api/idea/update-idea",
         headers: authHeader(),
         data: {
           title: title,

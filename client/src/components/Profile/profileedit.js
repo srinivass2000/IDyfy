@@ -30,7 +30,7 @@ const EditProfile = () => {
     try {
       let res = await axios({
         method: "POST",
-        url: "http://localhost:5000/api/profile/update-profile",
+        url: "/api/profile/update-profile",
         headers: authHeader(),
         data: {
           name,

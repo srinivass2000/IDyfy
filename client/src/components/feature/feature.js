@@ -22,7 +22,7 @@ const Feature = () => {
   const fetchFeature = () => {
     axios
       .get(
-        `http://localhost:5000/api/feature/get-feature?idea_id=${idea_id}&feature_id=${feature_id}`,
+        `/api/feature/get-feature?idea_id=${idea_id}&feature_id=${feature_id}`,
         {
           headers: authHeader(),
         }

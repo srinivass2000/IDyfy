@@ -4,6 +4,10 @@ const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const errorHandler = require("./middleware/error");
 const cors = require("cors");
+const path = require("path");
+
+app.use(express.static(path.join(__dirname, "/client/build")));
+
 app.use(cors());
 
 dotenv.config();

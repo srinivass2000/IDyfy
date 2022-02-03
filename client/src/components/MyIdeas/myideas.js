@@ -10,7 +10,7 @@ const MyIdeas = () => {
     try {
       // console.log(skip);
       await axios
-        .get("http://localhost:5000/api/idea/get-contributed-ideas", {
+        .get("/api/idea/get-contributed-ideas", {
           headers: authHeader(),
         })
         .then(

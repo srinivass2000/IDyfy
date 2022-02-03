@@ -15,7 +15,7 @@ const CreateFeature = () => {
     try {
       let res = await axios({
         method: "POST",
-        url: "http://localhost:5000/api/feature/create-feature",
+        url: "/api/feature/create-feature",
         headers: authHeader(),
         data: {
           title: title,

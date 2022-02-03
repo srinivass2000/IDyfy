@@ -21,7 +21,7 @@ const Idea = () => {
 
   const fetchIdea = () => {
     axios
-      .get(`http://localhost:5000/api/idea/get-idea?id=${id}`, {
+      .get(`/api/idea/get-idea?id=${id}`, {
         headers: authHeader(),
       })
       .then((res) => {

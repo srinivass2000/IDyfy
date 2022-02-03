@@ -33,7 +33,7 @@ const EditFeature = () => {
     try {
       let res = await axios({
         method: "POST",
-        url: "http://localhost:5000/api/feature/update-feature",
+        url: "/api/feature/update-feature",
         headers: authHeader(),
         data: {
           id: id,

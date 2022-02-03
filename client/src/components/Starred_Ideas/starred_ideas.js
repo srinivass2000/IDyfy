@@ -8,7 +8,7 @@ const Starred_ideas = () => {
   const getideas = async () => {
     try {
       await axios
-        .get("http://localhost:5000/api/idea/starred-ideas", {
+        .get("/api/idea/starred-ideas", {
           headers: authHeader(),
         })
         .then(

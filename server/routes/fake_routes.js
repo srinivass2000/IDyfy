@@ -5,7 +5,7 @@ const { fake_idea } = require("../utils/fake data/faker-ideas");
 
 const { fake_features } = require("../utils/fake data/faker-features");
 
-const { testing } = require("../utils/testing");
+const { testing } = require("../tests/testing");
 
 // const { testing_model } = require("../utils/model_testing");
 

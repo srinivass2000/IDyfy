@@ -1,7 +1,7 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const API_URL = " http://localhost:5000/api/auth";
+const API_URL = "/api/auth";
 
 const notify1 = () => toast.success("You succcessfully logged in!");
 const notify2 = () => toast.success("Email verification mail sent!");
