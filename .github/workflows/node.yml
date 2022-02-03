@@ -17,6 +17,18 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
+        env :
+          API_TOKEN: ${{secrets.API_TOKEN}}
+          EMAIL_FROM: ${{EMAIL_FROM}}
+          EMAIL_FROM_NAME: ${{EMAIL_FROM_NAME}}
+          EMAIL_PASSWORD: ${{EMAIL_PASSWORD}}
+          EMAIL_SERVICE: ${{EMAIL_SERVICE}}
+          EMAIL_USERNAME: ${{EMAIL_USERNAME}}
+          JWT_EXPIRE: ${{JWT_EXPIRE}}
+          JWT_SECRET_KEY: ${{JWT_SECRET_KEY}}
+          MONGO_URI: ${{MONGO_URI}}
+          SIB_API_KEY: ${{SIB_API_KEY}}
+          
       - run: |
           pwd
           cd client
