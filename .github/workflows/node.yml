@@ -11,6 +11,7 @@ jobs:
     runs-on: self-hosted
 
     steps:
+      - run: rm -rf server/
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
@@ -22,7 +23,10 @@ jobs:
           pwd
           ls
           yarn install
-          yarn run build
+          CI=false yarn run build
           cd ..
           cd server
           yarn install
+          pm2 restart 0
+          pm2 save
+          # sudo service nginx restart
