@@ -29,16 +29,15 @@ jobs:
           SIB_API_KEY: ${{secrets.SIB_API_KEY}}
           
       - run: |
-          exit 1
-#           pwd
-#           cd client
-#           pwd
-#           ls
-#           yarn install
-#           CI=false yarn run build
-#           cd ..
-#           cd server
-#           yarn install
+          pwd
+          cd client
+          pwd
+          ls
+          yarn install
+          CI=false yarn run build
+          cd ..
+          cd server
+          yarn install
 
           
           
