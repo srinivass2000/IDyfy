@@ -49,7 +49,7 @@ jobs:
           envkey_EMAIL_PASSWORD: ${{secrets.EMAIL_PASSWORD}}
           envkey_EMAIL_SERVICE: ${{secrets.EMAIL_SERVICE}}
           envkey_EMAIL_USERNAME: ${{secrets.EMAIL_USERNAME}}
-          envkey_JWT_EXPIRE: ${{secrets.JWT_EXPIRE}
+          envkey_JWT_EXPIRE: ${{secrets.JWT_EXPIRE}}
           envkey_JWT_SECRET_KEY: ${{secrets.JWT_SECRET_KEY}}
           envkey_MONGO_URI: ${{secrets.MONGO_URI}}
           envkey_SIB_API_KEY: ${{secrets.SIB_API_KEY}}
