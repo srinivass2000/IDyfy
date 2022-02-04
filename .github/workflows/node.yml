@@ -6,8 +6,46 @@ on:
   pull_request:
     branches: [master]
 
-jobs:
-  build:
+jobs: 
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+        env :
+          API_TOKEN: ${{secrets.API_TOKEN}}
+          EMAIL_FROM: ${{secrets.EMAIL_FROM}}
+          EMAIL_FROM_NAME: ${{secrets.EMAIL_FROM_NAME}}
+          EMAIL_PASSWORD: ${{secrets.EMAIL_PASSWORD}}
+          EMAIL_SERVICE: ${{secrets.EMAIL_SERVICE}}
+          EMAIL_USERNAME: ${{secrets.EMAIL_USERNAME}}
+          JWT_EXPIRE: ${{secrets.JWT_EXPIRE}}
+          JWT_SECRET_KEY: ${{secrets.JWT_SECRET_KEY}}
+          MONGO_URI: ${{secrets.MONGO_URI}}
+          SIB_API_KEY: ${{secrets.SIB_API_KEY}}
+          
+      - run: |
+          pwd
+          cd client
+          pwd
+          ls
+          yarn install
+          CI=false yarn run build
+          cd ..
+          cd server
+          yarn install
+          
+          
+          
+
+
+
+
+  deploy:
     runs-on: self-hosted
 
     steps:
