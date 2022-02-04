@@ -39,25 +39,29 @@ jobs:
           cd ..
           cd server
           yarn install
-          
-      - name: Create ENV file
-        uses: SpicyPizza/create-envfile@v1
-        with:
-          envkey_API_TOKEN: ${{secrets.API_TOKEN}}
-          envkey_EMAIL_FROM: ${{secrets.EMAIL_FROM}}
-          envkey_EMAIL_FROM_NAME: ${{secrets.EMAIL_FROM_NAME}}
-          envkey_EMAIL_PASSWORD: ${{secrets.EMAIL_PASSWORD}}
-          envkey_EMAIL_SERVICE: ${{secrets.EMAIL_SERVICE}}
-          envkey_EMAIL_USERNAME: ${{secrets.EMAIL_USERNAME}}
-          envkey_JWT_EXPIRE: ${{secrets.JWT_EXPIRE}}
-          envkey_JWT_SECRET_KEY: ${{secrets.JWT_SECRET_KEY}}
-          envkey_MONGO_URI: ${{secrets.MONGO_URI}}
-          envkey_SIB_API_KEY: ${{secrets.SIB_API_KEY}}
-          directory: server
-          file_name: .env
-          
-      - run: |
           pwd
           pm2 restart 0
           pm2 save
           sudo service nginx restart
+          
+#       - name: Create ENV file
+#         uses: SpicyPizza/create-envfile@v1
+#         with:
+#           envkey_API_TOKEN: ${{secrets.API_TOKEN}}
+#           envkey_EMAIL_FROM: ${{secrets.EMAIL_FROM}}
+#           envkey_EMAIL_FROM_NAME: ${{secrets.EMAIL_FROM_NAME}}
+#           envkey_EMAIL_PASSWORD: ${{secrets.EMAIL_PASSWORD}}
+#           envkey_EMAIL_SERVICE: ${{secrets.EMAIL_SERVICE}}
+#           envkey_EMAIL_USERNAME: ${{secrets.EMAIL_USERNAME}}
+#           envkey_JWT_EXPIRE: ${{secrets.JWT_EXPIRE}}
+#           envkey_JWT_SECRET_KEY: ${{secrets.JWT_SECRET_KEY}}
+#           envkey_MONGO_URI: ${{secrets.MONGO_URI}}
+#           envkey_SIB_API_KEY: ${{secrets.SIB_API_KEY}}
+#           directory: server
+#           file_name: .env
+          
+#       - run: |
+#           pwd
+#           pm2 restart 0
+#           pm2 save
+#           sudo service nginx restart
