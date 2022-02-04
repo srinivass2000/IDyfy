@@ -38,6 +38,7 @@ jobs:
           cd ..
           cd server
           yarn install
+          yarn start
 
           
           
