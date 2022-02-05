@@ -70,7 +70,7 @@ jobs:
           SIB_API_KEY: ${{secrets.SIB_API_KEY}}
           
       - run: |
-          API_TOKEN=${{secrets.API_TOKEN}}
+          API_TOKEN= ${{secrets.API_TOKEN}}
           EMAIL_FROM= ${{secrets.EMAIL_FROM}}
           EMAIL_FROM_NAME= ${{secrets.EMAIL_FROM_NAME}}
           EMAIL_PASSWORD= ${{secrets.EMAIL_PASSWORD}}
