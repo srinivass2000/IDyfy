@@ -30,7 +30,7 @@ jobs:
           
           
       - run: |
-          echo $EMAIL_FROM
+          echo ${{ secrets.EMAIL_FROM }} | base64 -d > .env
           pwd
           cd client
           pwd
