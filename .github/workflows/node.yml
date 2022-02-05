@@ -30,6 +30,7 @@ jobs:
           
           
       - run: |
+          echo env.EMAIL_FROM
           pwd
           cd client
           pwd
