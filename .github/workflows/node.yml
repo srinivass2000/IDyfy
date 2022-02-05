@@ -18,16 +18,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Decode Secrets
         env :
-          API_TOKEN: ${{secrets.API_TOKEN}}
-          EMAIL_FROM: ${{secrets.EMAIL_FROM}}
-          EMAIL_FROM_NAME: ${{secrets.EMAIL_FROM_NAME}}
-          EMAIL_PASSWORD: ${{secrets.EMAIL_PASSWORD}}
-          EMAIL_SERVICE: ${{secrets.EMAIL_SERVICE}}
-          EMAIL_USERNAME: ${{secrets.EMAIL_USERNAME}}
-          JWT_EXPIRE: ${{secrets.JWT_EXPIRE}}
-          JWT_SECRET_KEY: ${{secrets.JWT_SECRET_KEY}}
-          MONGO_URI: ${{secrets.MONGO_URI}}
-          SIB_API_KEY: ${{secrets.SIB_API_KEY}}
           COMBINED_SERVER_SECRETS: ${{secrets.COMBINED_SERVER_SECRETS}}
         run: echo $COMBINED_SERVER_SECRETS | base64 -d > server/.env
           
@@ -63,16 +53,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Decode Secrets
         env :
-          API_TOKEN: ${{secrets.API_TOKEN}}
-          EMAIL_FROM: ${{secrets.EMAIL_FROM}}
-          EMAIL_FROM_NAME: ${{secrets.EMAIL_FROM_NAME}}
-          EMAIL_PASSWORD: ${{secrets.EMAIL_PASSWORD}}
-          EMAIL_SERVICE: ${{secrets.EMAIL_SERVICE}}
-          EMAIL_USERNAME: ${{secrets.EMAIL_USERNAME}}
-          JWT_EXPIRE: ${{secrets.JWT_EXPIRE}}
-          JWT_SECRET_KEY: ${{secrets.JWT_SECRET_KEY}}
-          MONGO_URI: ${{secrets.MONGO_URI}}
-          SIB_API_KEY: ${{secrets.SIB_API_KEY}}
           COMBINED_SERVER_SECRETS: ${{secrets.COMBINED_SERVER_SECRETS}}
         run: echo $COMBINED_SERVER_SECRETS | base64 -d > server/.env
           
