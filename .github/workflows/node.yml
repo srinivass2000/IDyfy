@@ -17,7 +17,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Decode Secrets
-        run: echo $API_TOKEN | base64 -d > server/.env
+        run: echo $COMBINED_SERVER_SECRETS | base64 -d > server/.env
         env :
           API_TOKEN: ${{secrets.API_TOKEN}}
           EMAIL_FROM: ${{secrets.EMAIL_FROM}}
@@ -60,6 +60,8 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
+      - name: Decode Secrets
+        run: echo $COMBINED_SERVER_SECRETS | base64 -d > server/.env
         env :
           API_TOKEN: ${{secrets.API_TOKEN}}
           EMAIL_FROM: ${{secrets.EMAIL_FROM}}
