@@ -16,19 +16,30 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-        env :
-          API_TOKEN: ${{secrets.API_TOKEN}}
-          EMAIL_FROM: ${{secrets.EMAIL_FROM}}
-          EMAIL_FROM_NAME: ${{secrets.EMAIL_FROM_NAME}}
-          EMAIL_PASSWORD: ${{secrets.EMAIL_PASSWORD}}
-          EMAIL_SERVICE: ${{secrets.EMAIL_SERVICE}}
-          EMAIL_USERNAME: ${{secrets.EMAIL_USERNAME}}
-          JWT_EXPIRE: ${{secrets.JWT_EXPIRE}}
-          JWT_SECRET_KEY: ${{secrets.JWT_SECRET_KEY}}
-          MONGO_URI: ${{secrets.MONGO_URI}}
-          SIB_API_KEY: ${{secrets.SIB_API_KEY}}
+#         env :
+#           API_TOKEN: ${{secrets.API_TOKEN}}
+#           EMAIL_FROM: ${{secrets.EMAIL_FROM}}
+#           EMAIL_FROM_NAME: ${{secrets.EMAIL_FROM_NAME}}
+#           EMAIL_PASSWORD: ${{secrets.EMAIL_PASSWORD}}
+#           EMAIL_SERVICE: ${{secrets.EMAIL_SERVICE}}
+#           EMAIL_USERNAME: ${{secrets.EMAIL_USERNAME}}
+#           JWT_EXPIRE: ${{secrets.JWT_EXPIRE}}
+#           JWT_SECRET_KEY: ${{secrets.JWT_SECRET_KEY}}
+#           MONGO_URI: ${{secrets.MONGO_URI}}
+#           SIB_API_KEY: ${{secrets.SIB_API_KEY}}
+          
           
       - run: |
+          API_TOKEN= ${{secrets.API_TOKEN}}
+          EMAIL_FROM= ${{secrets.EMAIL_FROM}}
+          EMAIL_FROM_NAME= ${{secrets.EMAIL_FROM_NAME}}
+          EMAIL_PASSWORD= ${{secrets.EMAIL_PASSWORD}}
+          EMAIL_SERVICE= ${{secrets.EMAIL_SERVICE}}
+          EMAIL_USERNAME= ${{secrets.EMAIL_USERNAME}}
+          JWT_EXPIRE= ${{secrets.JWT_EXPIRE}}
+          JWT_SECRET_KEY= ${{secrets.JWT_SECRET_KEY}}
+          MONGO_URI= ${{secrets.MONGO_URI}}
+          SIB_API_KEY= ${{secrets.SIB_API_KEY}}
           pwd
           cd client
           pwd
