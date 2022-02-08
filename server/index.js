@@ -6,8 +6,6 @@ const errorHandler = require("./middleware/error");
 const cors = require("cors");
 const path = require("path");
 
-app.use(express.static(path.join(__dirname, "../client/build")));
-
 app.use(cors());
 
 dotenv.config();
@@ -35,6 +33,19 @@ app.use("/api/search", require("./routes/search_routes"));
 
 app.use("/api/faker", require("./routes/fake_routes"));
 
+const env = process.env.ENVIRONMENT ? process.env.ENVIRONMENT : "production";
+
+if (env === "production") {
+  app.use(express.static(path.join(__dirname, "../client/build")));
+  app.get("*", function (req, res) {
+    res.sendFile(path.join(__dirname, "../client/build", "index.html"));
+  });
+} else {
+  app.get("/", (req, res, next) => {
+    res.send("Api's are running absolutely fine!🔥");
+  });
+}
+
 // Error Handler Middleware
 app.use(errorHandler);
 
@@ -42,6 +53,7 @@ const port = process.env.PORT || 5000;
 
 const server = app.listen(port, () => {
   console.log(`Server running on port ${port} 🔥`);
+  console.log(`Server is running in ${env} Mode 🏃`);
 });
 
 process.on("unhandledRejection", (err, promise) => {
