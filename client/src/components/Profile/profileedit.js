@@ -29,7 +29,7 @@ const EditProfile = () => {
     e.preventDefault();
     try {
       let res = await axios({
-        method: "POST",
+        method: "PUT",
         url: "/api/profile/update-profile",
         headers: authHeader(),
         data: {
