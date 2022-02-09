@@ -48,7 +48,7 @@ A Community for all your crazy ideas and a place where other crazy people help y
 
 ## License :scroll:
 
-> This project is under the MIT license. See the archive [LICENSE](LICENSE) for more details.
+> This project is under the Creative Commons Zero v1.0 Universal. See the archive [LICENSE](LICENSE) for more details.
 
 ---
 
