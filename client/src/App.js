@@ -2,7 +2,7 @@ import React, { lazy, Suspense } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./App.css";
 const Home = lazy(() => import("./components/Home/home"));
-const Navbar = import("./components/Navbar/navbar");
+const Navbar = lazy(() => import("./components/Navbar/navbar"));
 const FeedPage = lazy(() => import("./components/Feed_Page/feedpage"));
 const Notification = lazy(() =>
   import("./components/Notification/notification")
