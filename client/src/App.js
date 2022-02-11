@@ -1,8 +1,9 @@
 import React, { lazy, Suspense } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./App.css";
+import Navbar from "./components/Navbar/navbar";
+import Loader from "./components/Loader/loader";
 const Home = lazy(() => import("./components/Home/home"));
-const Navbar = import("./components/Navbar/navbar");
 const FeedPage = lazy(() => import("./components/Feed_Page/feedpage"));
 const Notification = lazy(() =>
   import("./components/Notification/notification")
@@ -31,14 +32,13 @@ const Search = lazy(() => import("./components/search/search"));
 const CreateFeature = lazy(() =>
   import("./components/createFeature/createFeature")
 );
-// const Loader = import("./components/Loader/loader");
 
 function App() {
   return (
     <Suspense
       fallback={
         <div>
-          <h1>Loading...</h1>
+          <Loader />
         </div>
       }
     >
