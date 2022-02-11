@@ -1,57 +1,82 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./App.css";
-import Home from "./components/Home/home";
-import Navbar from "./components/Navbar/navbar";
-import FeedPage from "./components/Feed_Page/feedpage";
-import Notification from "./components/Notification/notification";
-import Starred_ideas from "./components/Starred_Ideas/starred_ideas";
-import Profile from "./components/Profile/Profile";
-import MyIdeas from "./components/MyIdeas/myideas";
-import Idea from "./components/Idea/idea";
-import Feature from "./components/feature/feature";
-import GraphTest from "./components/graph/test_graph";
-import Graph from "./components/graph/graph";
-import IdeaEdit from "./components/Idea/ideaedit";
-import FeatureEdit from "./components/feature/editFeature";
-import ProfileEdit from "./components/Profile/profileedit";
+const Home = lazy(() => import("./components/Home/home"));
+const Navbar = lazy(() => import("./components/Navbar/navbar"));
+const FeedPage = lazy(() => import("./components/Feed_Page/feedpage"));
+const Notification = lazy(() =>
+  import("./components/Notification/notification")
+);
+const Starred_ideas = lazy(() =>
+  import("./components/Starred_Ideas/starred_ideas")
+);
+const Profile = lazy(() => import("./components/Profile/Profile"));
+const MyIdeas = lazy(() => import("./components/MyIdeas/myideas"));
+const Idea = lazy(() => import("./components/Idea/idea"));
+const Feature = lazy(() => import("./components/feature/feature"));
+const GraphTest = lazy(() => import("./components/graph/test_graph"));
+const Graph = lazy(() => import("./components/graph/graph"));
+const IdeaEdit = lazy(() => import("./components/Idea/ideaedit"));
+const FeatureEdit = lazy(() => import("./components/feature/editFeature"));
+const ProfileEdit = lazy(() => import("./components/Profile/profileedit"));
 // import { isMobile } from "react-device-detect";
-import Error from "./components/error/error_2";
-import VerifyEmail from "./components/verifyemail/verify";
-import Protectedroute from "./components/protectedroutes";
-import ResetPassword from "./components/verifyemail/resetpassword";
-import CreateIdea from "./components/NewIdeas/createIdea";
-import Search from "./components/search/search";
-import CreateFeature from "./components/createFeature/createFeature";
+const Error = lazy(() => import("./components/error/error_2"));
+const VerifyEmail = lazy(() => import("./components/verifyemail/verify"));
+const Protectedroute = lazy(() => import("./components/protectedroutes"));
+const ResetPassword = lazy(() =>
+  import("./components/verifyemail/resetpassword")
+);
+const CreateIdea = lazy(() => import("./components/NewIdeas/createIdea"));
+const Search = lazy(() => import("./components/search/search"));
+const CreateFeature = lazy(() =>
+  import("./components/createFeature/createFeature")
+);
+// const Loader = import("./components/Loader/loader");
 
 function App() {
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Navbar />
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Protectedroute path="/feed" exact component={FeedPage} />
-          <Protectedroute path="/notification" exact component={Notification} />
-          <Protectedroute path="/starred" exact component={Starred_ideas} />
-          <Protectedroute path="/profile" exact component={Profile} />
-          <Protectedroute path="/myideas" exact component={MyIdeas} />
-          <Protectedroute path="/createIdea" exact component={CreateIdea} />
-          <Protectedroute path="/createFeat" exact component={CreateFeature} />
-          <Protectedroute path="/idea/:id" exact component={Idea} />
-          <Protectedroute path="/feature" exact component={Feature} />
-          <Protectedroute path="/graphtest" exact component={GraphTest} />
-          <Protectedroute path="/graph" exact component={Graph} />
-          <Protectedroute path="/ideaEdit/:id" exact component={IdeaEdit} />
-          <Protectedroute path="/feaEdit" exact component={FeatureEdit} />
-          <Protectedroute path="/profileEdit" exact component={ProfileEdit} />
-          <Protectedroute path="/search/:key" exact component={Search} />
-          <Route path="/email/verify/:id" exact component={VerifyEmail} />
-          <Route path="/passwordreset/:id" exact component={ResetPassword} />
-          <Route path="/" component={Error} />
-        </Switch>
-      </BrowserRouter>
-    </div>
+    <Suspense
+      fallback={
+        <div>
+          <h1>Loading...</h1>
+        </div>
+      }
+    >
+      <div className="App">
+        <BrowserRouter>
+          <Navbar />
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Protectedroute path="/feed" exact component={FeedPage} />
+            <Protectedroute
+              path="/notification"
+              exact
+              component={Notification}
+            />
+            <Protectedroute path="/starred" exact component={Starred_ideas} />
+            <Protectedroute path="/profile" exact component={Profile} />
+            <Protectedroute path="/myideas" exact component={MyIdeas} />
+            <Protectedroute path="/createIdea" exact component={CreateIdea} />
+            <Protectedroute
+              path="/createFeat"
+              exact
+              component={CreateFeature}
+            />
+            <Protectedroute path="/idea/:id" exact component={Idea} />
+            <Protectedroute path="/feature" exact component={Feature} />
+            <Protectedroute path="/graphtest" exact component={GraphTest} />
+            <Protectedroute path="/graph" exact component={Graph} />
+            <Protectedroute path="/ideaEdit/:id" exact component={IdeaEdit} />
+            <Protectedroute path="/feaEdit" exact component={FeatureEdit} />
+            <Protectedroute path="/profileEdit" exact component={ProfileEdit} />
+            <Protectedroute path="/search/:key" exact component={Search} />
+            <Route path="/email/verify/:id" exact component={VerifyEmail} />
+            <Route path="/passwordreset/:id" exact component={ResetPassword} />
+            <Route path="/" component={Error} />
+          </Switch>
+        </BrowserRouter>
+      </div>
+    </Suspense>
   );
 }
 
