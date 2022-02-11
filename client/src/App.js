@@ -35,16 +35,16 @@ const CreateFeature = lazy(() =>
 
 function App() {
   return (
-    <Suspense
-      fallback={
-        <div>
-          <Loader />
-        </div>
-      }
-    >
-      <div className="App">
-        <BrowserRouter>
-          <Navbar />
+    <div className="App">
+      <BrowserRouter>
+        <Navbar />
+        <Suspense
+          fallback={
+            <div>
+              <Loader />
+            </div>
+          }
+        >
           <Switch>
             <Route path="/" exact component={Home} />
             <Protectedroute path="/feed" exact component={FeedPage} />
@@ -74,9 +74,9 @@ function App() {
             <Route path="/passwordreset/:id" exact component={ResetPassword} />
             <Route path="/" component={Error} />
           </Switch>
-        </BrowserRouter>
-      </div>
-    </Suspense>
+        </Suspense>
+      </BrowserRouter>
+    </div>
   );
 }
 
