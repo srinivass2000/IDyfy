@@ -3,7 +3,7 @@ import React from "react";
 import "../Feed_Tile/feed.css";
 import { Link } from "react-router-dom";
 import Footer from "../Footer/footer";
-import "./error_2.css";
+import "./error_404.css";
 import "./script";
 const Error = () => {
   return (
@@ -1184,7 +1184,8 @@ const Error = () => {
           </div>
         </div>
         <p className="text-white text-xl">
-          Sorry, you are not authorized to access this page.
+          {/* Sorry, you are not authorized to access this page. */}
+          Page not found.
         </p>
         <div className="row mt-3">
           <div className="text-white offset-lg-4 col-lg-4 offset-1 col-10  flex justify-center">
