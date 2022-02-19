@@ -31,7 +31,8 @@
   font-size: 236px;
   font-weight: 200;
   margin: 0px;
-  color: #211b19;
+  /* color: #bb86fc; */
+  color: #cc6a2c;
   text-transform: uppercase;
   position: absolute;
   left: 50%;
@@ -65,14 +66,14 @@
   color: #fff;
   text-transform: uppercase;
   padding: 13px 23px;
-  background: #ff6300;
+  background: #bb86fc;
   font-size: 18px;
   -webkit-transition: 0.2s all;
   transition: 0.2s all;
 }
 
 .notfound .link:hover {
-  color: #ff6300;
+  color: white;
   background: #211b19;
 }
 
@@ -93,7 +94,7 @@
   .notfound .notfound-404 h2 {
     font-size: 16px;
   }
-  .notfound a {
+  .notfound .link {
     padding: 7px 15px;
     font-size: 14px;
   }
