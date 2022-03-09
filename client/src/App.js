@@ -23,6 +23,7 @@ import ResetPassword from "./components/verifyemail/resetpassword";
 import CreateIdea from "./components/NewIdeas/createIdea";
 import Search from "./components/search/search";
 import CreateFeature from "./components/createFeature/createFeature";
+import Graph_2 from "./components/graph/graph_2";
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
           <Protectedroute path="/feature" exact component={Feature} />
           <Protectedroute path="/graphtest" exact component={GraphTest} />
           <Protectedroute path="/graph" exact component={Graph} />
+          <Protectedroute path="/graph_2" exact component={Graph_2} />
           <Protectedroute path="/ideaEdit/:id" exact component={IdeaEdit} />
           <Protectedroute path="/feaEdit" exact component={FeatureEdit} />
           <Protectedroute path="/profileEdit" exact component={ProfileEdit} />
