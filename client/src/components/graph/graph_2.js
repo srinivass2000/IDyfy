@@ -6,14 +6,13 @@ const Graph_2 = () => {
 
   let pathNumber = 1;
   let allLinks = [];
+  // not visible
+  const arr = [2, 3, 4];
   let treeParamas;
 
   // scg path params
   let strokeWidth = "5px";
   let strokeColor = "#000000";
-  const fun = () => {
-    console.log("eer");
-  };
 
   function treeMaker(tree, params) {
     //let container = document.getElementById("my_tree");
@@ -92,13 +91,16 @@ const Graph_2 = () => {
   function connectCard() {
     // magic
     let svg = document.getElementById("tree__svg-container__svg");
+
     for (let i = 0; allLinks.length > i; i++) {
-      connectElements(
-        svg,
-        document.getElementById(allLinks[i][0]),
-        document.getElementById(allLinks[i][1]),
-        document.getElementById(allLinks[i][2])
-      );
+      const result = arr.filter((a) => a == allLinks[i][2]);
+      if (!result[0])
+        connectElements(
+          svg,
+          document.getElementById(allLinks[i][0]),
+          document.getElementById(allLinks[i][1]),
+          document.getElementById(allLinks[i][2])
+        );
     }
   }
 
@@ -115,22 +117,41 @@ const Graph_2 = () => {
           ? treeParamas[key].trad
           : key;
 
-      treeContainer.innerHTML +=
-        '<div class="tree__container__step">' +
-        '<div class="tree__container__step__card dropdown" id="' +
-        key +
-        '">' +
-        '<p id="card_' +
-        key +
-        '" class="tree__container__step__card__p" data-bs-toggle="dropdown" aria-expanded="false" ">' +
-        textCard +
-        "</p>" +
-        '<ul class="dropdown-menu">' +
-        '<li><a class="dropdown-item" href="/feature/idea_id/feature_id" > View / Edit</a></li>' +
-        '<li><a class="dropdown-item" href="/createfeature/idea_id/feature_id">Add Child</a></li>' +
-        '<li><a class="dropdown-item" href="/createfeature/idea_id/feature_id">Add Sibling</a></li>' +
-        "</ul>" +
-        "</div></div>";
+      const result = arr.filter((a) => a == key);
+      if (result[0])
+        treeContainer.innerHTML +=
+          '<div class="tree__container__step">' +
+          '<div class="tree__container__step__card dropdown" id="' +
+          key +
+          '">' +
+          '<p id="card_' +
+          key +
+          '" class="tree__container__step__card__p" data-bs-toggle="dropdown" aria-expanded="false" " hidden>' +
+          textCard +
+          "</p>" +
+          '<ul class="dropdown-menu">' +
+          '<li><a class="dropdown-item" href="/feature/idea_id/feature_id" > View / Edit</a></li>' +
+          '<li><a class="dropdown-item" href="/createfeature/idea_id/feature_id">Add Child</a></li>' +
+          '<li><a class="dropdown-item" href="/createfeature/idea_id/feature_id">Add Sibling</a></li>' +
+          "</ul>" +
+          "</div></div>";
+      else
+        treeContainer.innerHTML +=
+          '<div class="tree__container__step">' +
+          '<div class="tree__container__step__card dropdown" id="' +
+          key +
+          '">' +
+          '<p id="card_' +
+          key +
+          '" class="tree__container__step__card__p" data-bs-toggle="dropdown" aria-expanded="false" " >' +
+          textCard +
+          "</p>" +
+          '<ul class="dropdown-menu">' +
+          '<li><a class="dropdown-item" href="/feature/idea_id/feature_id" > View / Edit</a></li>' +
+          '<li><a class="dropdown-item" href="/createfeature/idea_id/feature_id">Add Child</a></li>' +
+          '<li><a class="dropdown-item" href="/createfeature/idea_id/feature_id">Add Sibling</a></li>' +
+          "</ul>" +
+          "</div></div>";
       console.log(treeParamas[key]);
       console.log(key);
       addStyleToCard(treeParamas[key], key);
@@ -295,7 +316,9 @@ const Graph_2 = () => {
       14: {
         15: {
           16: "",
-          17: "",
+          17: {
+            18: "",
+          },
         },
       },
     },
@@ -319,6 +342,7 @@ const Graph_2 = () => {
     15: { trad: "feature 14" },
     16: { trad: "feature 15" },
     17: { trad: "feature 16" },
+    18: { trad: "feature 17" },
   };
   useEffect(() => {
     treeMaker(tree, {
