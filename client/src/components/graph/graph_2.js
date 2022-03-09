@@ -11,6 +11,9 @@ const Graph_2 = () => {
   // scg path params
   let strokeWidth = "5px";
   let strokeColor = "#000000";
+  const fun = () => {
+    console.log("eer");
+  };
 
   function treeMaker(tree, params) {
     //let container = document.getElementById("my_tree");
@@ -59,9 +62,8 @@ const Graph_2 = () => {
       '" data-bs-toggle="dropdown" aria-expanded="false">' +
       trad +
       '</p><ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">' +
-      '<li><a class="dropdown-item" href="#">View / Edit</a></li>' +
-      '<li><a class="dropdown-item" href="#">Add Child</a></li>' +
-      '<li><a class="dropdown-item" href="#">Delete</a></li>' +
+      '<li><a class="dropdown-item" href="/idea">View / Edit</a></li>' +
+      '<li><a class="dropdown-item" href="/createFeature/idea_id/feature_id">Add Child</a></li>' +
       "</ul> </div>";
     addStyleToCard(treeParamas[Object.keys(tree)[0]], Object.keys(tree)[0]);
 
@@ -124,10 +126,9 @@ const Graph_2 = () => {
         textCard +
         "</p>" +
         '<ul class="dropdown-menu">' +
-        '<li><a class="dropdown-item" href="#">View / Edit</a></li>' +
-        '<li><a class="dropdown-item" href="#">Add Child</a></li>' +
-        '<li><a class="dropdown-item" href="#">Add Sibling</a></li>' +
-        '<li><a class="dropdown-item" href="#">Delete</a></li>' +
+        '<li><a class="dropdown-item" href="/feature/idea_id/feature_id" > View / Edit</a></li>' +
+        '<li><a class="dropdown-item" href="/createfeature/idea_id/feature_id">Add Child</a></li>' +
+        '<li><a class="dropdown-item" href="/createfeature/idea_id/feature_id">Add Sibling</a></li>' +
         "</ul>" +
         "</div></div>";
       console.log(treeParamas[key]);
