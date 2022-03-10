@@ -21,7 +21,7 @@ const IdeaEdit = lazy(() => import("./components/Idea/ideaedit"));
 const FeatureEdit = lazy(() => import("./components/feature/editFeature"));
 const ProfileEdit = lazy(() => import("./components/Profile/profileedit"));
 // import { isMobile } from "react-device-detect";
-const Error = lazy(() => import("./components/error/error_500"));
+const Error = lazy(() => import("./components/error/error_404"));
 const VerifyEmail = lazy(() => import("./components/verifyemail/verify"));
 const Protectedroute = lazy(() => import("./components/protectedroutes"));
 const ResetPassword = lazy(() =>
@@ -32,7 +32,7 @@ const Search = lazy(() => import("./components/search/search"));
 const CreateFeature = lazy(() =>
   import("./components/createFeature/createFeature")
 );
-
+const Graph_2 = lazy(() => import("./components/graph/graph_2"));
 function App() {
   return (
     <div className="App">
@@ -66,6 +66,7 @@ function App() {
             <Protectedroute path="/feature" exact component={Feature} />
             <Protectedroute path="/graphtest" exact component={GraphTest} />
             <Protectedroute path="/graph" exact component={Graph} />
+            <Protectedroute path="/graph_2" exact component={Graph_2} />
             <Protectedroute path="/ideaEdit/:id" exact component={IdeaEdit} />
             <Protectedroute path="/feaEdit" exact component={FeatureEdit} />
             <Protectedroute path="/profileEdit" exact component={ProfileEdit} />

@@ -17,15 +17,12 @@ exports.forgotPassword = async (req, res, next) => {
       return next(new ErrorResponse("No email could not be sent", 404));
     }
 
-    // Reset Token Gen and add to database hashed (private) version of token
     const resetToken = user.getResetPasswordToken();
 
     await user.save();
 
-    // Create reset url to email to provided email
     const resetUrl = `http://localhost:3000/passwordreset/${resetToken}`;
 
-    // HTML Message
     const message = template(resetUrl);
 
     try {
