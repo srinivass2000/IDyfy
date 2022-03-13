@@ -23,9 +23,29 @@ const Graph_3 = () => {
   ];
   const [TreeData, SetTreeData] = useState(Data);
 
+  let pathNumber = 1,
+    strokeWidth = "5px",
+    strokeColor = "#FFFFFfff";
+
+  const path = () => {
+    let newpath = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "path"
+    );
+    let svgContainer = document.getElementById("tree__svg-container__svg");
+    newpath.id = "path" + pathNumber;
+    newpath.setAttribute("stroke", strokeColor);
+    newpath.setAttribute("fill", "none");
+    newpath.setAttribute("stroke-width", strokeWidth);
+    svgContainer.appendChild(newpath);
+    pathNumber++;
+  };
+
   function connectCard() {
     let svg = document.getElementById("tree__svg-container__svg");
-
+    for (let i = 0; allLinks.length > i; i++) {
+      path();
+    }
     for (let i = 0; allLinks.length > i; i++) {
       console.log(document.getElementById(allLinks[i][0]));
       connectElements(
@@ -134,37 +154,45 @@ const Graph_3 = () => {
     drawPath(svg, path, startX, startY, endX, endY);
   }
 
+  useEffect(() => {
+    connectCard();
+  });
   return (
     <div>
       <div>
-        <button onClick={connectCard}>svg</button>
         <div id="mytree">
+          <div id="tree__svg-container">
+            <svg id="tree__svg-container__svg"></svg>
+          </div>
           <div id="tree__container">
             <div className="tree__container__step__card" id="1">
-              <div class="dropdown">
+              <div className="dropdown">
                 <p
-                  class="tree__container__step__card__p"
+                  className="tree__container__step__card__p"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
                   {TreeData[0].descp}
                 </p>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <ul
+                  className="dropdown-menu"
+                  aria-labelledby="dropdownMenuButton"
+                >
                   <li>
-                    <a class="dropdown-item" href="/idea">
+                    <a className="dropdown-item" href="/idea">
                       View / Edit
                     </a>
                   </li>
 
                   <li>
                     <a
-                      class="dropdown-item"
+                      className="dropdown-item"
                       href="/createFeature/idea_id/feature_id"
                     >
                       Add Child
                     </a>
                   </li>
-                  <li onclick="HideTree(1)">Hide/Show Children</li>
+                  <li>Hide/Show Children</li>
                 </ul>
               </div>
             </div>
@@ -172,15 +200,11 @@ const Graph_3 = () => {
               id="from_tree__container__step__card__first"
               className="tree__container__branch"
             >
-              <Graph_3_Iterate tree={TreeData} id={1} />
+              <Graph_3_Iterate tree={TreeData} id={1} pathno={1} />
             </div>
-          </div>
-          <div id="tree__svg-container">
-            <svg id="tree__svg-container__svg"></svg>
           </div>
         </div>
       </div>
-      {/* {connectCard()} */}
     </div>
   );
 };
