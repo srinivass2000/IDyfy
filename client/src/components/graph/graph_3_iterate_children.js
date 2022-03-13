@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./lib/treestyle.css";
-const Graph_3_Iterate2 = (props) => {
+const Graph_3_iterate_children = (props) => {
   let TreeData = props.tree,
     cardkey = "",
-    start = props.start,
     id = props.id;
   return (
     // <div className="tree__container__step">
@@ -13,8 +12,8 @@ const Graph_3_Iterate2 = (props) => {
           item.parentid === id ? (
             <>
               <div class="tree__container__step">
-                <div class="tree__container__step__card dropdown" id={key}>
-                  {(cardkey = "card_" + key)}
+                <div class="tree__container__step__card dropdown" id={item.id}>
+                  {(cardkey = "card_" + item.id)}
                   <p
                     id={cardkey}
                     class="tree__container__step__card__p"
@@ -51,7 +50,7 @@ const Graph_3_Iterate2 = (props) => {
                     </li>
                   </ul>
                 </div>
-                <Graph_3_Iterate2 tree={TreeData} id={item.id} start={false} />
+                <Graph_3_iterate_children tree={TreeData} id={item.id} />
               </div>
             </>
           ) : (
@@ -64,4 +63,4 @@ const Graph_3_Iterate2 = (props) => {
   );
 };
 
-export default Graph_3_Iterate2;
+export default Graph_3_iterate_children;

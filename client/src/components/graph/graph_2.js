@@ -6,7 +6,7 @@ const Graph_2 = () => {
   let pathNumber = 1;
   let allLinks = [];
   // not visible
-  const arr = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
+  const arr = [18];
   localStorage.setItem("HideShow", JSON.stringify(arr));
   let treeParamas;
 
@@ -188,6 +188,7 @@ const Graph_2 = () => {
           "tree__container__step__card__first",
           key,
         ]);
+        console.log(allLinks);
         pathNumber++;
       }
 
