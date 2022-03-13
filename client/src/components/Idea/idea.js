@@ -8,7 +8,7 @@ import axios from "axios";
 import authHeader from "../../services/auth-header";
 import Footer from "../Footer/footer";
 import { Link } from "react-router-dom";
-
+import Loader from "../Loader/loader";
 const Idea = () => {
   const [load, setLoad] = useState(true);
   const [idea, setIdea] = useState({});
@@ -42,8 +42,7 @@ const Idea = () => {
   if (load) {
     return (
       <div>
-        {console.log("loading....")}
-        <h1 style={{ color: "white" }}>loading....</h1>
+        <Loader />
       </div>
     );
   }

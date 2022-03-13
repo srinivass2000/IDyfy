@@ -32,7 +32,7 @@ const EditFeature = () => {
     e.preventDefault();
     try {
       let res = await axios({
-        method: "POST",
+        method: "PUT",
         url: "/api/feature/update-feature",
         headers: authHeader(),
         data: {

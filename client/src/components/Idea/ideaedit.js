@@ -82,7 +82,7 @@ const EditIdea = () => {
     e.preventDefault();
     try {
       let res = await axios({
-        method: "POST",
+        method: "PUT",
         url: "/api/idea/update-idea",
         headers: authHeader(),
         data: {

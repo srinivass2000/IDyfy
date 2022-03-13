@@ -1,6 +1,6 @@
 const { spawn } = require("child_process");
 
-sentence = "fuck you bitch";
+sentence = "fuck you";
 
 const childPython = spawn("python", ["predict.py", sentence]);
 
