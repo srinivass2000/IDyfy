@@ -1,26 +1,30 @@
 import React, { useEffect, useState } from "react";
 import "./lib/treestyle.css";
-
 const Graph_2 = () => {
   //const [dis, setDis] = useState(false);
 
   let pathNumber = 1;
   let allLinks = [];
   // not visible
-  const arr = [2, 3, 4];
+  const arr = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
+  localStorage.setItem("HideShow", JSON.stringify(arr));
   let treeParamas;
 
   // scg path params
   let strokeWidth = "5px";
   let strokeColor = "#000000";
-
+  // window.addEventListener("storage", () => {
+  //   // arr = JSON.parse(localStorage.getItem("HideShow"));
+  //   console.log("de");
+  // });
   function treeMaker(tree, params) {
     //let container = document.getElementById("my_tree");
 
     let container = document.getElementById(params.id);
-
+    console.log(tree);
+    localStorage.setItem("Tree", JSON.stringify(tree));
     console.log(params.treeParams);
-    console.log(container);
+    // console.log(container);
     //treeParamas = params.treeParams === undefined ? {} : params.treeParams;
     treeParamas = params.treeParams;
     if (params.link_width !== undefined) strokeWidth = params.link_width;
@@ -63,7 +67,9 @@ const Graph_2 = () => {
       '</p><ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">' +
       '<li><a class="dropdown-item" href="/idea">View / Edit</a></li>' +
       '<li><a class="dropdown-item" href="/createFeature/idea_id/feature_id">Add Child</a></li>' +
+      "<li onclick='HideTree(1)'>Hide/Show Children</li>" +
       "</ul> </div>";
+
     addStyleToCard(treeParamas[Object.keys(tree)[0]], Object.keys(tree)[0]);
 
     iterate(
@@ -129,11 +135,6 @@ const Graph_2 = () => {
           '" class="tree__container__step__card__p" data-bs-toggle="dropdown" aria-expanded="false" " hidden>' +
           textCard +
           "</p>" +
-          '<ul class="dropdown-menu">' +
-          '<li><a class="dropdown-item" href="/feature/idea_id/feature_id" > View / Edit</a></li>' +
-          '<li><a class="dropdown-item" href="/createfeature/idea_id/feature_id">Add Child</a></li>' +
-          '<li><a class="dropdown-item" href="/createfeature/idea_id/feature_id">Add Sibling</a></li>' +
-          "</ul>" +
           "</div></div>";
       else
         treeContainer.innerHTML +=
@@ -150,10 +151,13 @@ const Graph_2 = () => {
           '<li><a class="dropdown-item" href="/feature/idea_id/feature_id" > View / Edit</a></li>' +
           '<li><a class="dropdown-item" href="/createfeature/idea_id/feature_id">Add Child</a></li>' +
           '<li><a class="dropdown-item" href="/createfeature/idea_id/feature_id">Add Sibling</a></li>' +
+          "<li  onclick='HideTree(" +
+          key +
+          ")'>Hide/Show Children</li>" +
           "</ul>" +
           "</div></div>";
-      console.log(treeParamas[key]);
-      console.log(key);
+      // console.log(treeParamas[key]);
+      // console.log(key);
       addStyleToCard(treeParamas[key], key);
       if ("" !== from && !start) {
         let newpath = document.createElementNS(
@@ -344,17 +348,22 @@ const Graph_2 = () => {
     17: { trad: "feature 16" },
     18: { trad: "feature 17" },
   };
+
+  const listener = () => {
+    console.log("ew");
+  };
   useEffect(() => {
     treeMaker(tree, {
       id: "mytree",
       card_click: function (element) {
-        console.log(element);
+        // console.log(element);
       },
       treeParams: treeParams,
       link_width: "4px",
       link_color: "#F62F08",
     });
-  }, []);
+    window.addEventListener("storage", listener);
+  });
 
   return (
     <div>
