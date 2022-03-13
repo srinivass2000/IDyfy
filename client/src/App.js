@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar/navbar";
 import Loader from "./components/Loader/loader";
+import Graph_3 from "./components/graph/graph_3";
 const Home = lazy(() => import("./components/Home/home"));
 const FeedPage = lazy(() => import("./components/Feed_Page/feedpage"));
 const Notification = lazy(() =>
@@ -67,6 +68,7 @@ function App() {
             <Protectedroute path="/graphtest" exact component={GraphTest} />
             <Protectedroute path="/graph" exact component={Graph} />
             <Protectedroute path="/graph_2" exact component={Graph_2} />
+            <Protectedroute path="/graph_3" exact component={Graph_3} />
             <Protectedroute path="/ideaEdit/:id" exact component={IdeaEdit} />
             <Protectedroute path="/feaEdit" exact component={FeatureEdit} />
             <Protectedroute path="/profileEdit" exact component={ProfileEdit} />
