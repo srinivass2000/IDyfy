@@ -82,7 +82,9 @@ const FeedPage = () => {
         </>
       )}
       <div>
-        <button onClick={skipinc}>load more</button>
+        <button onClick={skipinc} style={{ background: "#fff" }}>
+          load more
+        </button>
       </div>
     </div>
   );
