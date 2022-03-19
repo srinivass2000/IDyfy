@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Graph_3_Iterate from "./graph_3_iterate_root";
 import "./lib/treestyle.css";
 const Graph_3 = () => {
-  const Data = [
+  let Data = [
     { id: 1, parentid: "root", descp: "IDYFY" },
     { id: 2, parentid: 1, descp: "feature id 2" },
     { id: 3, parentid: 1, descp: "feature id 3" },
@@ -12,20 +12,36 @@ const Graph_3 = () => {
     { id: 7, parentid: 3, descp: "feature id 7" },
     { id: 8, parentid: 3, descp: "feature id 8" },
   ];
-  const allLinks = [
-    ["path1", "1", "2"],
-    ["path2", "1", "3"],
-    ["path3", "2", "4"],
-    ["path4", "2", "5"],
-    ["path5", "3", "6"],
-    ["path6", "3", "7"],
-    ["path7", "3", "8"],
-  ];
+  const [allLinks, SetAllLinks] = useState([]);
+  // let allLinks = [];
+  let ShowHideArray = new Array(Data.length).fill(0);
+  ShowHideArray[0] = 1;
   const [TreeData, SetTreeData] = useState(Data);
-
+  const Clicked = (p) => {
+    console.log("Clicked on item " + p);
+    if (ShowHideArray[p] === 0) {
+      ShowHideArray[p] = 1;
+    } else {
+      ShowHideArray[p] = 0;
+    }
+    console.log(ShowHideArray);
+    // SetTreeData([
+    //   { id: 1, parentid: "root", descp: "IDYFY" },
+    //   { id: 2, parentid: 1, descp: "feature id 2" },
+    //   { id: 3, parentid: 1, descp: "feature id 3" },
+    //   { id: 4, parentid: 2, descp: "feature id 4" },
+    //   { id: 5, parentid: 2, descp: "feature id 5" },
+    // ]);
+  };
   let pathNumber = 1,
     strokeWidth = "5px",
     strokeColor = "#FFFFFfff";
+
+  function generatepath() {
+    TreeData.map((data, key) => {
+      key == 0 ? <></> : allLinks.push(["path" + key, data.parentid, data.id]);
+    });
+  }
 
   const path = () => {
     let newpath = document.createElementNS(
@@ -43,6 +59,7 @@ const Graph_3 = () => {
 
   function connectCard() {
     let svg = document.getElementById("tree__svg-container__svg");
+    generatepath();
     for (let i = 0; allLinks.length > i; i++) {
       path();
     }
@@ -156,7 +173,7 @@ const Graph_3 = () => {
 
   useEffect(() => {
     connectCard();
-  });
+  }, [TreeData]);
   return (
     <div>
       <div>
@@ -194,13 +211,32 @@ const Graph_3 = () => {
                   </li>
                   <li>Hide/Show Children</li>
                 </ul>
+                <button
+                  className="HideShow relative"
+                  onClick={() => Clicked(1)}
+                  style={{
+                    color: "white",
+                    backgroundColor: "red",
+                    height: "25px",
+                    width: "25px",
+                    right: "-5px",
+                    borderRadius: "20px",
+                  }}
+                >
+                  +
+                </button>
               </div>
             </div>
             <div
               id="from_tree__container__step__card__first"
               className="tree__container__branch"
             >
-              <Graph_3_Iterate tree={TreeData} id={1} pathno={1} />
+              <Graph_3_Iterate
+                tree={TreeData}
+                id={1}
+                pathno={1}
+                Clicked={Clicked}
+              />
             </div>
           </div>
         </div>

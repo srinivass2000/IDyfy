@@ -63,13 +63,31 @@ const Graph_3_Iterate = (props) => {
                     Add Sibling
                   </a>
                 </li>
+                <li>
+                  <a className="dropdown-item">Show/Hide Children </a>
+                </li>
               </ul>
+              <button
+                className="HideShow relative"
+                onClick={() => props.Clicked(item.id)}
+                style={{
+                  color: "white",
+                  backgroundColor: "red",
+                  height: "25px",
+                  width: "25px",
+                  right: "-5px",
+                  borderRadius: "20px",
+                }}
+              >
+                +
+              </button>
             </div>
+
             {/* {path()} */}
             <Graph_3_Iterate2
               tree={TreeData}
               id={item.id}
-              // pathno={pathNumber}
+              Clicked={props.Clicked}
             />
           </div>
         ) : (
