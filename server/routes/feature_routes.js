@@ -14,6 +14,10 @@ const { update_feature } = require("../controllers/feature/update_feature");
 const { delete_feature } = require("../controllers/feature/delete_feature");
 
 const {
+  fetch_features_by_parent,
+} = require("../controllers/feature/feature_by_parent");
+
+const {
   fetch_features_version_wise,
 } = require("../controllers/feature/fetch_features_by_version");
 
@@ -28,5 +32,6 @@ router
   .route("/fetch-features-version-wise")
   .get(protect, fetch_features_version_wise);
 router.route("/delete-feature").get(protect, delete_feature);
+router.route("/features-by-parent").get(protect, fetch_features_by_parent);
 
 module.exports = router;

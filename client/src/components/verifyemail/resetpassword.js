@@ -69,7 +69,11 @@ const ResetPassword = () => {
               onChange={handleChange}
               className="form-control form_box"
             />
-            <input type="submit" className="my-8 h-10 mb-10 btn button" />
+            <input
+              type="submit"
+              className="my-8 h-10 mb-10 btn button"
+              style={{ background: "white" }}
+            />
           </div>
         </form>
       </div>
