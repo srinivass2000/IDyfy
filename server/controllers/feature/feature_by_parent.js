@@ -7,6 +7,12 @@ exports.fetch_features_by_parent = async (req, res, next) => {
   try {
     const { idea_id, parent_id } = req.body;
 
+    if (parent_id == null) {
+      parent_id = idea_id;
+    }
+
+    console.log(idea_id);
+
     var Feature = mongoose.model(`features_${idea_id}`, FeatureSchema);
 
     console.log(Feature);
