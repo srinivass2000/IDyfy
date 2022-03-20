@@ -1,45 +1,113 @@
 import React, { useEffect, useState } from "react";
 import Graph_3_Iterate from "./graph_3_iterate_root";
 import "./lib/treestyle.css";
+import axios from "axios";
+import authHeader from "../../services/auth-header";
+
 const Graph_3 = () => {
-  let Data = [
-    { id: 1, parentid: "root", descp: "IDYFY" },
-    { id: 2, parentid: 1, descp: "feature id 2" },
-    { id: 3, parentid: 1, descp: "feature id 3" },
-    { id: 4, parentid: 2, descp: "feature id 4" },
-    { id: 5, parentid: 2, descp: "feature id 5" },
-    { id: 6, parentid: 3, descp: "feature id 6" },
-    { id: 7, parentid: 3, descp: "feature id 7" },
-    { id: 8, parentid: 3, descp: "feature id 8" },
+  let dodo = [
+    {
+      _id: "61eeed4daf56b67335d393ab", // root ID
+      title: "feature 1 prem  2",
+      user_id: "61eedf338824f70eb12c70e9",
+      idea_id: "61eee0198824f70eb12c7107",
+      parent_id: "61eee0198824f70eb12c7107",
+      show: 0,
+    },
+    {
+      _id: "62361b3407f57f1918170e5d",
+      title: "feature3",
+      user_id: "61eedf338824f70eb12c70e9",
+      idea_id: "61eee0198824f70eb12c7107",
+      parent_id: "61eeed4daf56b67335d393ab",
+      show: 0,
+    },
+    {
+      _id: "62361b3407f57f1918170e5a",
+      title: "feature3",
+      user_id: "61eedf338824f70eb12c70e9",
+      idea_id: "61eee0198824f70eb12c7107",
+      parent_id: "61eeed4daf56b67335d393ab",
+      show: 0,
+    },
+    {
+      _id: "62361b4107f57f1918170e5d",
+      title: "feature4",
+      user_id: "61eedf338824f70eb12c70e9",
+      idea_id: "61eee0198824f70eb12c7107",
+      parent_id: "61eeed4daf56b67335d393ab",
+      show: 0,
+    },
+    {
+      _id: "62361b4107f57f1918170e523",
+      title: "feature4",
+      user_id: "61eedf338824f70eb12c70e9",
+      idea_id: "61eee0198824f70eb12c7107",
+      parent_id: "62361b4107f57f1918170e5d",
+      show: 0,
+    },
+    {
+      _id: "62361b4107f57f1918170e325d",
+      title: "feature4",
+      user_id: "61eedf338824f70eb12c70e9",
+      idea_id: "61eee0198824f70eb12c7107",
+      parent_id: "62361b4107f57f1918170e5d",
+      show: 0,
+    },
   ];
+  let root_id = "";
+  // const [ShowHideArray] = useState(new Array(dodo.length).fill(0));
+  // ShowHideArray[0] = 1;
+
   const [allLinks, SetAllLinks] = useState([]);
-  // let allLinks = [];
-  let ShowHideArray = new Array(Data.length).fill(0);
-  ShowHideArray[0] = 1;
-  const [TreeData, SetTreeData] = useState(Data);
+  const [TreeData, SetTreeData] = useState(dodo);
+  // const [TreeData, SetTreeData] = useState();
+
+  const OnReceiving1stData = () => {
+    TreeData.map((item) => {
+      //if roo
+      if (item.parent_id == item.idea_id) {
+        item.show = 1;
+        root_id = item._id;
+      }
+    });
+  };
+  OnReceiving1stData();
   const Clicked = (p) => {
     console.log("Clicked on item " + p);
-    if (ShowHideArray[p] === 0) {
-      ShowHideArray[p] = 1;
-    } else {
-      ShowHideArray[p] = 0;
-    }
-    console.log(ShowHideArray);
-    // SetTreeData([
-    //   { id: 1, parentid: "root", descp: "IDYFY" },
-    //   { id: 2, parentid: 1, descp: "feature id 2" },
-    //   { id: 3, parentid: 1, descp: "feature id 3" },
-    //   { id: 4, parentid: 2, descp: "feature id 4" },
-    //   { id: 5, parentid: 2, descp: "feature id 5" },
-    // ]);
+    TreeData.map((item) => {
+      if (item._id == p) {
+        if (item.show == 0) {
+          // show kids
+          item.show = 1;
+          SetAllLinks([]);
+          // api call to BE to get children
+          //   CODE HERE
+          //  setTreeData(...TreeData, res)
+        } else {
+          // hide kids
+          SetAllLinks([]);
+          // find only items without that parent id
+          const result = TreeData.filter((node) => node.parent_id !== p);
+          SetTreeData(result);
+          item.show = 0;
+        }
+        console.log(TreeData);
+      }
+    });
   };
+
   let pathNumber = 1,
     strokeWidth = "5px",
     strokeColor = "#FFFFFfff";
 
   function generatepath() {
     TreeData.map((data, key) => {
-      key == 0 ? <></> : allLinks.push(["path" + key, data.parentid, data.id]);
+      key == 0 ? (
+        <></>
+      ) : (
+        allLinks.push(["path" + key, data.parent_id, data._id])
+      );
     });
   }
 
@@ -60,11 +128,13 @@ const Graph_3 = () => {
   function connectCard() {
     let svg = document.getElementById("tree__svg-container__svg");
     generatepath();
+    // console.log(allLinks);
+    svg.innerHTML = "";
     for (let i = 0; allLinks.length > i; i++) {
       path();
     }
     for (let i = 0; allLinks.length > i; i++) {
-      console.log(document.getElementById(allLinks[i][0]));
+      // console.log(document.getElementById(allLinks[i][0]));
       connectElements(
         svg,
         document.getElementById(allLinks[i][0]),
@@ -174,6 +244,29 @@ const Graph_3 = () => {
   useEffect(() => {
     connectCard();
   }, [TreeData]);
+
+  // useEffect(async () => {
+  //   try {
+  //     await axios
+  //       .get(
+  //         "/api/feature/features-by-parent?idea_id=61eee0198824f70eb12c7107",
+  //         {
+  //           headers: authHeader(),
+  //         }
+  //       )
+  //       .then(
+  //         (res) => {
+  //           SetTreeData(res.data.features);
+  //           console.log(res.data.features);
+  //         },
+  //         (err) => {
+  //           console.log(err);
+  //         }
+  //       );
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // }, []);
   return (
     <div>
       <div>
@@ -182,14 +275,14 @@ const Graph_3 = () => {
             <svg id="tree__svg-container__svg"></svg>
           </div>
           <div id="tree__container">
-            <div className="tree__container__step__card" id="1">
+            <div className="tree__container__step__card" id={root_id}>
               <div className="dropdown">
                 <p
                   className="tree__container__step__card__p"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  {TreeData[0].descp}
+                  {TreeData[0].title}
                 </p>
                 <ul
                   className="dropdown-menu"
@@ -211,7 +304,7 @@ const Graph_3 = () => {
                   </li>
                   <li>Hide/Show Children</li>
                 </ul>
-                <button
+                {/* <button
                   className="HideShow relative"
                   onClick={() => Clicked(1)}
                   style={{
@@ -224,7 +317,7 @@ const Graph_3 = () => {
                   }}
                 >
                   +
-                </button>
+                </button> */}
               </div>
             </div>
             <div
@@ -233,8 +326,8 @@ const Graph_3 = () => {
             >
               <Graph_3_Iterate
                 tree={TreeData}
-                id={1}
-                pathno={1}
+                _id={root_id}
+                // pathno={1}
                 Clicked={Clicked}
               />
             </div>
