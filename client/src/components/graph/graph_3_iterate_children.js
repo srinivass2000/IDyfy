@@ -83,7 +83,7 @@ const Graph_3_iterate_children = (props) => {
                     borderRadius: "20px",
                   }}
                 >
-                  +
+                  {(!item.show && "+") || (item.show && "-")}
                 </button>
               </div>
               {/* {path()} */}

@@ -79,7 +79,7 @@ const Graph_3_Iterate = (props) => {
                   borderRadius: "20px",
                 }}
               >
-                +
+                {(!item.show && "+") || (item.show && "-")}
               </button>
             </div>
 
