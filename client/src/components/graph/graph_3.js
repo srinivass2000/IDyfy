@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Graph_3_Iterate from "./graph_3_iterate_root";
 import "./lib/treestyle.css";
 import axios from "axios";
@@ -88,6 +89,8 @@ const Graph_3 = () => {
     },
   ];
   let root_id = "";
+  const { idea_id } = useParams();
+  console.log(idea_id);
   // const [ShowHideArray] = useState(new Array(dodo.length).fill(0));
   // ShowHideArray[0] = 1;
 

@@ -68,7 +68,11 @@ function App() {
             <Protectedroute path="/graphtest" exact component={GraphTest} />
             <Protectedroute path="/graph" exact component={Graph} />
             <Protectedroute path="/graph_2" exact component={Graph_2} />
-            <Protectedroute path="/graph_3" exact component={Graph_3} />
+            <Protectedroute
+              path="/graph_3/:idea_id"
+              exact
+              component={Graph_3}
+            />
             <Protectedroute path="/ideaEdit/:id" exact component={IdeaEdit} />
             <Protectedroute path="/feaEdit" exact component={FeatureEdit} />
             <Protectedroute path="/profileEdit" exact component={ProfileEdit} />
