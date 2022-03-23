@@ -6,108 +6,139 @@ import axios from "axios";
 import authHeader from "../../services/auth-header";
 
 const Graph_3 = () => {
+  // let dodo = [
+  //   {
+  //     _id: "61eeed4daf56b67335d393ab", // root ID
+  //     title: "feature 1 prem  2",
+  //     user_id: "61eedf338824f70eb12c70e9",
+  //     idea_id: "61eee0198824f70eb12c7107",
+  //     parent_id: "61eee0198824f70eb12c7107",
+  //     show: 0,
+  //   },
+  //   {
+  //     _id: "62361b3407f57f19ew18170e5d",
+  //     title: "feature3",
+  //     user_id: "61eedf338824f70eb12c70e9",
+  //     idea_id: "61eee0198824f70eb12c7107",
+  //     parent_id: "61eeed4daf56b67335d393ab",
+  //     show: 0,
+  //   },
+  //   {
+  //     _id: "62361b3407f57f19re18170e5d",
+  //     title: "feature3",
+  //     user_id: "61eedf338824f70eb12c70e9",
+  //     idea_id: "61eee0198824f70eb12c7107",
+  //     parent_id: "61eeed4daf56b67335d393ab",
+  //     show: 0,
+  //   },
+  //   {
+  //     _id: "62361b3407f5tr7f1918170e5d",
+  //     title: "feature3",
+  //     user_id: "61eedf338824f70eb12c70e9",
+  //     idea_id: "61eee0198824f70eb12c7107",
+  //     parent_id: "61eeed4daf56b67335d393ab",
+  //     show: 0,
+  //   },
+  //   {
+  //     _id: "62361b3407ytf57f1918170e5d",
+  //     title: "feature3",
+  //     user_id: "61eedf338824f70eb12c70e9",
+  //     idea_id: "61eee0198824f70eb12c7107",
+  //     parent_id: "61eeed4daf56b67335d393ab",
+  //     show: 0,
+  //   },
+  //   {
+  //     _id: "62361b3407f57f1918170e5d",
+  //     title: "feature3",
+  //     user_id: "61eedf338824f70eb12c70e9",
+  //     idea_id: "61eee0198824f70eb12c7107",
+  //     parent_id: "61eeed4daf56b67335d393ab",
+  //     show: 0,
+  //   },
+  //   {
+  //     _id: "62361b3407f57f1918170e5a",
+  //     title: "feature3",
+  //     user_id: "61eedf338824f70eb12c70e9",
+  //     idea_id: "61eee0198824f70eb12c7107",
+  //     parent_id: "61eeed4daf56b67335d393ab",
+  //     show: 0,
+  //   },
+  //   {
+  //     _id: "62361b4107f57f1918170e5d",
+  //     title: "feature4",
+  //     user_id: "61eedf338824f70eb12c70e9",
+  //     idea_id: "61eee0198824f70eb12c7107",
+  //     parent_id: "61eeed4daf56b67335d393ab",
+  //     show: 0,
+  //   },
+  //   {
+  //     _id: "62361b4107f57f1918170e523",
+  //     title: "feature4",
+  //     user_id: "61eedf338824f70eb12c70e9",
+  //     idea_id: "61eee0198824f70eb12c7107",
+  //     parent_id: "62361b4107f57f1918170e5d",
+  //     show: 0,
+  //   },
+  //   {
+  //     _id: "62361b4107f57f1918170e325d",
+  //     title: "feature4",
+  //     user_id: "61eedf338824f70eb12c70e9",
+  //     idea_id: "61eee0198824f70eb12c7107",
+  //     parent_id: "62361b4107f57f1918170e5d",
+  //     show: 0,
+  //   },
+  // ];
   let dodo = [
     {
-      _id: "61eeed4daf56b67335d393ab", // root ID
-      title: "feature 1 prem  2",
-      user_id: "61eedf338824f70eb12c70e9",
-      idea_id: "61eee0198824f70eb12c7107",
+      _id: "61eee0198824f70eb12c7107",
+
+      title: "IDyfy",
+
+      show: true,
+    },
+
+    {
+      _id: "61eeed4daf56b67335d393ab",
+
+      title: "feature 1",
+
       parent_id: "61eee0198824f70eb12c7107",
-      show: 0,
+
+      version_start: 1,
+
+      version_end: 0,
+
+      available: true,
+
+      show: false,
     },
-    {
-      _id: "62361b3407f57f19ew18170e5d",
-      title: "feature3",
-      user_id: "61eedf338824f70eb12c70e9",
-      idea_id: "61eee0198824f70eb12c7107",
-      parent_id: "61eeed4daf56b67335d393ab",
-      show: 0,
-    },
-    {
-      _id: "62361b3407f57f19re18170e5d",
-      title: "feature3",
-      user_id: "61eedf338824f70eb12c70e9",
-      idea_id: "61eee0198824f70eb12c7107",
-      parent_id: "61eeed4daf56b67335d393ab",
-      show: 0,
-    },
-    {
-      _id: "62361b3407f5tr7f1918170e5d",
-      title: "feature3",
-      user_id: "61eedf338824f70eb12c70e9",
-      idea_id: "61eee0198824f70eb12c7107",
-      parent_id: "61eeed4daf56b67335d393ab",
-      show: 0,
-    },
-    {
-      _id: "62361b3407ytf57f1918170e5d",
-      title: "feature3",
-      user_id: "61eedf338824f70eb12c70e9",
-      idea_id: "61eee0198824f70eb12c7107",
-      parent_id: "61eeed4daf56b67335d393ab",
-      show: 0,
-    },
-    {
-      _id: "62361b3407f57f1918170e5d",
-      title: "feature3",
-      user_id: "61eedf338824f70eb12c70e9",
-      idea_id: "61eee0198824f70eb12c7107",
-      parent_id: "61eeed4daf56b67335d393ab",
-      show: 0,
-    },
+
     {
       _id: "62361b3407f57f1918170e5a",
+
       title: "feature3",
-      user_id: "61eedf338824f70eb12c70e9",
-      idea_id: "61eee0198824f70eb12c7107",
-      parent_id: "61eeed4daf56b67335d393ab",
-      show: 0,
-    },
-    {
-      _id: "62361b4107f57f1918170e5d",
-      title: "feature4",
-      user_id: "61eedf338824f70eb12c70e9",
-      idea_id: "61eee0198824f70eb12c7107",
-      parent_id: "61eeed4daf56b67335d393ab",
-      show: 0,
-    },
-    {
-      _id: "62361b4107f57f1918170e523",
-      title: "feature4",
-      user_id: "61eedf338824f70eb12c70e9",
-      idea_id: "61eee0198824f70eb12c7107",
-      parent_id: "62361b4107f57f1918170e5d",
-      show: 0,
-    },
-    {
-      _id: "62361b4107f57f1918170e325d",
-      title: "feature4",
-      user_id: "61eedf338824f70eb12c70e9",
-      idea_id: "61eee0198824f70eb12c7107",
-      parent_id: "62361b4107f57f1918170e5d",
-      show: 0,
+
+      parent_id: "61eee0198824f70eb12c7107",
+
+      version_start: 3,
+
+      version_end: 0,
+
+      available: true,
+
+      show: false,
     },
   ];
-  let root_id = "";
+  // let root_id = "61eee0198824f70eb12c7107";
   const { idea_id } = useParams();
-  console.log(idea_id);
+  // console.log(idea_id);
   // const [ShowHideArray] = useState(new Array(dodo.length).fill(0));
   // ShowHideArray[0] = 1;
 
   const [allLinks, SetAllLinks] = useState([]);
-  const [TreeData, SetTreeData] = useState(dodo);
-  // const [TreeData, SetTreeData] = useState();
+  // const [TreeData, SetTreeData] = useState(dodo);
+  const [TreeData, SetTreeData] = useState();
 
-  const OnReceiving1stData = () => {
-    TreeData.map((item) => {
-      //if roo
-      if (item.parent_id == item.idea_id) {
-        item.show = 1;
-        root_id = item._id;
-      }
-    });
-  };
-  OnReceiving1stData();
   const Clicked = (p) => {
     console.log("Clicked on item " + p);
     TreeData.map((item) => {
@@ -127,7 +158,7 @@ const Graph_3 = () => {
           SetTreeData(result);
           item.show = 0;
         }
-        console.log(TreeData);
+        // console.log(TreeData);
       }
     });
   };
@@ -137,13 +168,17 @@ const Graph_3 = () => {
     strokeColor = "#FFFFFfff";
 
   function generatepath() {
-    TreeData.map((data, key) => {
-      key == 0 ? (
-        <></>
-      ) : (
-        allLinks.push(["path" + key, data.parent_id, data._id])
-      );
-    });
+    TreeData ? (
+      TreeData.map((data, key) => {
+        key == 0 ? (
+          <></>
+        ) : (
+          allLinks.push(["path" + key, data.parent_id, data._id])
+        );
+      })
+    ) : (
+      <></>
+    );
   }
 
   const path = () => {
@@ -271,7 +306,6 @@ const Graph_3 = () => {
     // calculate path's end (x,y) coords
     let endX = endElem.offsetLeft + 0.5 * endElem.offsetWidth - svgLeft;
     let endY = endElem.offsetTop - svgTop;
-
     // call function for drawing the path
     drawPath(svg, path, startX, startY, endX, endY);
   }
@@ -280,28 +314,28 @@ const Graph_3 = () => {
     connectCard();
   }, [TreeData]);
 
-  // useEffect(async () => {
-  //   try {
-  //     await axios
-  //       .get(
-  //         "/api/feature/features-by-parent?idea_id=61eee0198824f70eb12c7107",
-  //         {
-  //           headers: authHeader(),
-  //         }
-  //       )
-  //       .then(
-  //         (res) => {
-  //           SetTreeData(res.data.features);
-  //           console.log(res.data.features);
-  //         },
-  //         (err) => {
-  //           console.log(err);
-  //         }
-  //       );
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // }, []);
+  useEffect(async () => {
+    try {
+      await axios
+        .get(
+          "/api/feature/features-by-parent?idea_id=61eee0198824f70eb12c7107&parent_id=61eee0198824f70eb12c7107",
+          {
+            headers: authHeader(),
+          }
+        )
+        .then(
+          (res) => {
+            SetTreeData(res.data.features);
+            console.log(res.data.features);
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
+    } catch (e) {
+      console.log(e);
+    }
+  }, []);
   return (
     <div>
       <div>
@@ -310,14 +344,14 @@ const Graph_3 = () => {
             <svg id="tree__svg-container__svg"></svg>
           </div>
           <div id="tree__container">
-            <div className="tree__container__step__card" id={root_id}>
+            <div className="tree__container__step__card" id={idea_id}>
               <div className="dropdown">
                 <p
                   className="tree__container__step__card__p"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  {TreeData[0].title}
+                  {TreeData ? TreeData[0].title : <></>}
                 </p>
                 <ul
                   className="dropdown-menu"
@@ -339,29 +373,16 @@ const Graph_3 = () => {
                   </li>
                   <li>Hide/Show Children</li>
                 </ul>
-                {/* <button
-                  className="HideShow relative"
-                  onClick={() => Clicked(1)}
-                  style={{
-                    color: "white",
-                    backgroundColor: "red",
-                    height: "25px",
-                    width: "25px",
-                    right: "-5px",
-                    borderRadius: "20px",
-                  }}
-                >
-                  +
-                </button> */}
               </div>
             </div>
             <div
               id="from_tree__container__step__card__first"
               className="tree__container__branch"
             >
+              {console.log(TreeData)}
               <Graph_3_Iterate
-                tree={TreeData}
-                _id={root_id}
+                tree={TreeData ? TreeData : []}
+                _id={idea_id}
                 // pathno={1}
                 Clicked={Clicked}
               />
