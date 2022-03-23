@@ -6,7 +6,7 @@ const Graph_3_iterate_children = (props) => {
     //   pathNumber = props.pathno,
     //   strokeWidth = "5px",
     //   strokeColor = "#000000",
-    id = props.id;
+    _id = props._id;
 
   // const path = () => {
   //   let newpath = document.createElementNS(
@@ -26,11 +26,11 @@ const Graph_3_iterate_children = (props) => {
     <>
       <div className="tree__container__branch">
         {TreeData.map((item, key) =>
-          item.parentid === id ? (
+          item.parent_id === _id ? (
             <div className="tree__container__step" key={"div" + key}>
               <div
                 className="tree__container__step__card dropdown"
-                id={item.id}
+                id={item._id}
               >
                 {/* {(cardkey = "card_" + item.id)} */}
                 <p
@@ -39,7 +39,7 @@ const Graph_3_iterate_children = (props) => {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  {item.descp}
+                  {/* {item.title} */}43344
                 </p>
                 <ul className="dropdown-menu">
                   <li>
@@ -67,13 +67,30 @@ const Graph_3_iterate_children = (props) => {
                       Add Sibling
                     </a>
                   </li>
+                  <li>
+                    <a className="dropdown-item">Show/Hide Children </a>
+                  </li>
                 </ul>
+                <button
+                  className="HideShow relative"
+                  onClick={() => props.Clicked(item._id)}
+                  style={{
+                    color: "white",
+                    backgroundColor: "red",
+                    height: "25px",
+                    width: "25px",
+                    right: "-5px",
+                    borderRadius: "20px",
+                  }}
+                >
+                  {(!item.show && "+") || (item.show && "-")}
+                </button>
               </div>
               {/* {path()} */}
               <Graph_3_iterate_children
                 tree={TreeData}
-                id={item.id}
-                // pathno={pathNumber}
+                _id={item._id}
+                Clicked={props.Clicked}
               />
             </div>
           ) : (

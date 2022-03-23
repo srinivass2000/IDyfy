@@ -63,9 +63,9 @@ const Idea = () => {
       <div className="container">
         <div className="row">
           <div className="dropdown col-md-2 offset-md-10 d-none d-sm-block mt-6 mb-3">
-            <div class="dropdown">
+            <div className="dropdown">
               <button
-                class=""
+                className=""
                 style={{ backgroundColor: "transparent" }}
                 type="button"
                 id="dropdownMenuButton1"
@@ -74,11 +74,14 @@ const Idea = () => {
               >
                 <img src={contri} alt="contributors" />
               </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <ul
+                className="dropdown-menu"
+                aria-labelledby="dropdownMenuButton1"
+              >
                 {contributors.map((con, i) => (
                   <li key={i}>
                     {/* when you click on a user route him to his profile page */}
-                    <a class="dropdown-item" href="/">
+                    <a className="dropdown-item" href="/">
                       {con.name}
                     </a>
                   </li>
@@ -175,7 +178,8 @@ const Idea = () => {
         </div>
         <div className="row justify-content-center">
           <div className="col-md-4">
-            <button
+            <Link
+              to={"../graph_3/" + id}
               className="btn pl-3 pr-3 mb-3 mt-3"
               style={{
                 backgroundColor: "#F62F08",
@@ -186,7 +190,7 @@ const Idea = () => {
               }}
             >
               View Graph
-            </button>
+            </Link>
           </div>
         </div>
         {canEdit ? (
