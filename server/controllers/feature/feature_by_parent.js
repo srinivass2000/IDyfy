@@ -15,6 +15,8 @@ exports.fetch_features_by_parent = async (req, res, next) => {
 
         idea = { ...idea._doc, ...obj2 };
 
+        console.log(idea);
+
         return res.status(200).json({
           success: true,
           features: [idea],

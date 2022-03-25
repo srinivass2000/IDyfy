@@ -21,6 +21,7 @@ const IdeaSchema = new mongoose.Schema(
     starred_by: Array,
     ideas_details: Object,
     links: Array,
+    documents: Array,
   },
   { timestamps: true }
 );
