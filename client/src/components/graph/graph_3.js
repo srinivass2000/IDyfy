@@ -279,8 +279,11 @@ const Graph_3 = () => {
                     borderRadius: "20px",
                   }}
                 >
-                  +{" "}
-                  {/* {(!TreeData[0].show && "+") || (TreeData[0].show && "-")} */}
+                  {TreeData ? (
+                    (!TreeData[0].show && "+") || (TreeData[0].show && "-")
+                  ) : (
+                    <></>
+                  )}
                 </button>
               </div>
             </div>
