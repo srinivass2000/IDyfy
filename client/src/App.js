@@ -34,6 +34,7 @@ const CreateFeature = lazy(() =>
   import("./components/createFeature/createFeature")
 );
 const Graph_2 = lazy(() => import("./components/graph/graph_2"));
+const Graph_4 = lazy(() => import("./components/graph/graph_4"));
 function App() {
   return (
     <div className="App">
@@ -68,6 +69,7 @@ function App() {
             <Protectedroute path="/graphtest" exact component={GraphTest} />
             <Protectedroute path="/graph" exact component={Graph} />
             <Protectedroute path="/graph_2" exact component={Graph_2} />
+            <Protectedroute path="/graph_4" exact component={Graph_4} />
             <Protectedroute
               path="/graph_3/:idea_id"
               exact
