@@ -5,7 +5,7 @@ const { FeatureSchema } = require("../../models/Feature");
 
 exports.fetch_features_by_parent = async (req, res, next) => {
   try {
-    var { idea_id, parent_id } = req.body;
+    var { idea_id, parent_id } = req.query;
 
     if (parent_id == null) {
       parent_id = idea_id;

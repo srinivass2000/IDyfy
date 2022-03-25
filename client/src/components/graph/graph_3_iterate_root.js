@@ -24,7 +24,7 @@ const Graph_3_Iterate = (props) => {
   return (
     // <div className="tree__container__step">
     <>
-      {console.log(TreeData)}
+      {/* {console.log(TreeData)} */}
       {TreeData.map((item, key) =>
         item.parent_id == _id ? (
           <div className="tree__container__step" key={"div" + key}>
@@ -37,7 +37,7 @@ const Graph_3_Iterate = (props) => {
                 aria-expanded="false"
               >
                 {item.title}
-                {console.log(item)}
+                {/* {console.log(item)} */}
               </p>
               <ul className="dropdown-menu">
                 <li>

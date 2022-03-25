@@ -6,138 +6,29 @@ import axios from "axios";
 import authHeader from "../../services/auth-header";
 
 const Graph_3 = () => {
-  // let dodo = [
-  //   {
-  //     _id: "61eeed4daf56b67335d393ab", // root ID
-  //     title: "feature 1 prem  2",
-  //     user_id: "61eedf338824f70eb12c70e9",
-  //     idea_id: "61eee0198824f70eb12c7107",
-  //     parent_id: "61eee0198824f70eb12c7107",
-  //     show: 0,
-  //   },
-  //   {
-  //     _id: "62361b3407f57f19ew18170e5d",
-  //     title: "feature3",
-  //     user_id: "61eedf338824f70eb12c70e9",
-  //     idea_id: "61eee0198824f70eb12c7107",
-  //     parent_id: "61eeed4daf56b67335d393ab",
-  //     show: 0,
-  //   },
-  //   {
-  //     _id: "62361b3407f57f19re18170e5d",
-  //     title: "feature3",
-  //     user_id: "61eedf338824f70eb12c70e9",
-  //     idea_id: "61eee0198824f70eb12c7107",
-  //     parent_id: "61eeed4daf56b67335d393ab",
-  //     show: 0,
-  //   },
-  //   {
-  //     _id: "62361b3407f5tr7f1918170e5d",
-  //     title: "feature3",
-  //     user_id: "61eedf338824f70eb12c70e9",
-  //     idea_id: "61eee0198824f70eb12c7107",
-  //     parent_id: "61eeed4daf56b67335d393ab",
-  //     show: 0,
-  //   },
-  //   {
-  //     _id: "62361b3407ytf57f1918170e5d",
-  //     title: "feature3",
-  //     user_id: "61eedf338824f70eb12c70e9",
-  //     idea_id: "61eee0198824f70eb12c7107",
-  //     parent_id: "61eeed4daf56b67335d393ab",
-  //     show: 0,
-  //   },
-  //   {
-  //     _id: "62361b3407f57f1918170e5d",
-  //     title: "feature3",
-  //     user_id: "61eedf338824f70eb12c70e9",
-  //     idea_id: "61eee0198824f70eb12c7107",
-  //     parent_id: "61eeed4daf56b67335d393ab",
-  //     show: 0,
-  //   },
-  //   {
-  //     _id: "62361b3407f57f1918170e5a",
-  //     title: "feature3",
-  //     user_id: "61eedf338824f70eb12c70e9",
-  //     idea_id: "61eee0198824f70eb12c7107",
-  //     parent_id: "61eeed4daf56b67335d393ab",
-  //     show: 0,
-  //   },
-  //   {
-  //     _id: "62361b4107f57f1918170e5d",
-  //     title: "feature4",
-  //     user_id: "61eedf338824f70eb12c70e9",
-  //     idea_id: "61eee0198824f70eb12c7107",
-  //     parent_id: "61eeed4daf56b67335d393ab",
-  //     show: 0,
-  //   },
-  //   {
-  //     _id: "62361b4107f57f1918170e523",
-  //     title: "feature4",
-  //     user_id: "61eedf338824f70eb12c70e9",
-  //     idea_id: "61eee0198824f70eb12c7107",
-  //     parent_id: "62361b4107f57f1918170e5d",
-  //     show: 0,
-  //   },
-  //   {
-  //     _id: "62361b4107f57f1918170e325d",
-  //     title: "feature4",
-  //     user_id: "61eedf338824f70eb12c70e9",
-  //     idea_id: "61eee0198824f70eb12c7107",
-  //     parent_id: "62361b4107f57f1918170e5d",
-  //     show: 0,
-  //   },
-  // ];
-  let dodo = [
-    {
-      _id: "61eee0198824f70eb12c7107",
-
-      title: "IDyfy",
-
-      show: true,
-    },
-
-    {
-      _id: "61eeed4daf56b67335d393ab",
-
-      title: "feature 1",
-
-      parent_id: "61eee0198824f70eb12c7107",
-
-      version_start: 1,
-
-      version_end: 0,
-
-      available: true,
-
-      show: false,
-    },
-
-    {
-      _id: "62361b3407f57f1918170e5a",
-
-      title: "feature3",
-
-      parent_id: "61eee0198824f70eb12c7107",
-
-      version_start: 3,
-
-      version_end: 0,
-
-      available: true,
-
-      show: false,
-    },
-  ];
-  // let root_id = "61eee0198824f70eb12c7107";
   const { idea_id } = useParams();
-  // console.log(idea_id);
-  // const [ShowHideArray] = useState(new Array(dodo.length).fill(0));
-  // ShowHideArray[0] = 1;
 
   const [allLinks, SetAllLinks] = useState([]);
-  // const [TreeData, SetTreeData] = useState(dodo);
+
   const [TreeData, SetTreeData] = useState();
+  const getChilderen = async (p) => {
+    await axios
+      .get(
+        `/api/feature/features-by-parent?idea_id=61eee0198824f70eb12c7107&parent_id=${p}`,
+        {
+          headers: authHeader(),
+        }
+      )
+      .then(
+        (res) => {
+          SetTreeData([...TreeData, ...res.data.features]);
+          // console.log([...TreeData, ...res.data.features]);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+  };
 
   const Clicked = (p) => {
     console.log("Clicked on item " + p);
@@ -149,6 +40,7 @@ const Graph_3 = () => {
           SetAllLinks([]);
           // api call to BE to get children
           //   CODE HERE
+          getChilderen(p);
           //  setTreeData(...TreeData, res)
         } else {
           // hide kids
@@ -158,7 +50,6 @@ const Graph_3 = () => {
           SetTreeData(result);
           item.show = 0;
         }
-        // console.log(TreeData);
       }
     });
   };
@@ -197,14 +88,15 @@ const Graph_3 = () => {
 
   function connectCard() {
     let svg = document.getElementById("tree__svg-container__svg");
+    console.log(TreeData);
     generatepath();
-    // console.log(allLinks);
+    console.log(allLinks);
     svg.innerHTML = "";
     for (let i = 0; allLinks.length > i; i++) {
       path();
     }
     for (let i = 0; allLinks.length > i; i++) {
-      // console.log(document.getElementById(allLinks[i][0]));
+      // console.log(document.getElementById(allLinks[i]));
       connectElements(
         svg,
         document.getElementById(allLinks[i][0]),
@@ -326,7 +218,8 @@ const Graph_3 = () => {
         .then(
           (res) => {
             SetTreeData(res.data.features);
-            console.log(res.data.features);
+            // console.log(res.data.features);
+            console.log("Initial data");
           },
           (err) => {
             console.log(err);
@@ -351,6 +244,7 @@ const Graph_3 = () => {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
+                  {/* {console.log(TreeData)} */}
                   {TreeData ? TreeData[0].title : <></>}
                 </p>
                 <ul
@@ -379,7 +273,7 @@ const Graph_3 = () => {
               id="from_tree__container__step__card__first"
               className="tree__container__branch"
             >
-              {console.log(TreeData)}
+              {/* {console.log(TreeData)} */}
               <Graph_3_Iterate
                 tree={TreeData ? TreeData : []}
                 _id={idea_id}
