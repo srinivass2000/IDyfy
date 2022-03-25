@@ -210,7 +210,7 @@ const Graph_3 = () => {
     try {
       await axios
         .get(
-          "/api/feature/features-by-parent?idea_id=61eee0198824f70eb12c7107&parent_id=61eee0198824f70eb12c7107",
+          "/api/feature/features-by-parent?idea_id=61eee0198824f70eb12c7107",
           {
             headers: authHeader(),
           }
@@ -267,6 +267,21 @@ const Graph_3 = () => {
                   </li>
                   <li>Hide/Show Children</li>
                 </ul>
+                <button
+                  className="HideShow relative"
+                  onClick={() => Clicked(idea_id)}
+                  style={{
+                    color: "white",
+                    backgroundColor: "red",
+                    height: "25px",
+                    width: "25px",
+                    right: "-5px",
+                    borderRadius: "20px",
+                  }}
+                >
+                  +{" "}
+                  {/* {(!TreeData[0].show && "+") || (TreeData[0].show && "-")} */}
+                </button>
               </div>
             </div>
             <div
