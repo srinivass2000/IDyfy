@@ -5,23 +5,15 @@ const { FeatureSchema } = require("../../models/Feature");
 
 exports.fetch_features_by_parent = async (req, res, next) => {
   try {
-    const { idea_id, parent_id } = req.query;
+    var { idea_id, parent_id } = req.body;
 
     if (parent_id == null) {
       parent_id = idea_id;
     }
 
+    //if idea_id isequal to parent_id
+
     var Feature = mongoose.model(`features_${idea_id}`, FeatureSchema);
-
-    if (idea_id != null) {
-      var idea = await Idea.findById(idea_id, { title: true });
-
-      obj2 = { show: true };
-
-      idea = { ...idea._doc, ...obj2 };
-
-      console.log(idea);
-    }
 
     var results = await Feature.find(
       {
@@ -37,11 +29,14 @@ exports.fetch_features_by_parent = async (req, res, next) => {
       }
     );
 
-    if (results == []) {
-      return next(
-        new ErrorResponse("This Parent does'nt have any children", 204)
-      );
+    if (results.length == 0) {
+      return res.status(200).json({
+        success: false,
+        note: "This Parent does'nt have any children",
+      });
+      // new ErrorResponse("This Parent does'nt have any children", 204);
     }
+
     var array = [];
 
     obj3 = { show: false };
@@ -51,7 +46,18 @@ exports.fetch_features_by_parent = async (req, res, next) => {
       array.push(result);
     });
 
-    array.unshift(idea);
+    if (parent_id == idea_id) {
+      if (idea_id != null) {
+        var idea = await Idea.findById(idea_id, { title: true });
+
+        obj2 = { show: true };
+
+        idea = { ...idea._doc, ...obj2 };
+
+        console.log(idea);
+        array.unshift(idea);
+      }
+    }
 
     console.log("here");
     res.status(200).json({

@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar/navbar";
 import Loader from "./components/Loader/loader";
-const Graph_3 = lazy(() => import("./components/graph/graph_3"));
+
 const Home = lazy(() => import("./components/Home/home"));
 const FeedPage = lazy(() => import("./components/Feed_Page/feedpage"));
 const Notification = lazy(() =>
@@ -16,13 +16,11 @@ const Profile = lazy(() => import("./components/Profile/Profile"));
 const MyIdeas = lazy(() => import("./components/MyIdeas/myideas"));
 const Idea = lazy(() => import("./components/Idea/idea"));
 const Feature = lazy(() => import("./components/feature/feature"));
-const GraphTest = lazy(() => import("./components/graph/test_graph"));
-const Graph = lazy(() => import("./components/graph/graph"));
 const IdeaEdit = lazy(() => import("./components/Idea/ideaedit"));
 const FeatureEdit = lazy(() => import("./components/feature/editFeature"));
 const ProfileEdit = lazy(() => import("./components/Profile/profileedit"));
 // import { isMobile } from "react-device-detect";
-const Error = lazy(() => import("./components/error/error_403"));
+const Error = lazy(() => import("./components/error/error_500"));
 const VerifyEmail = lazy(() => import("./components/verifyemail/verify"));
 const Protectedroute = lazy(() => import("./components/protectedroutes"));
 const ResetPassword = lazy(() =>
@@ -33,7 +31,10 @@ const Search = lazy(() => import("./components/search/search"));
 const CreateFeature = lazy(() =>
   import("./components/createFeature/createFeature")
 );
+const GraphTest = lazy(() => import("./components/graph/test_graph"));
+const Graph = lazy(() => import("./components/graph/graph"));
 const Graph_2 = lazy(() => import("./components/graph/graph_2"));
+const Graph_3 = lazy(() => import("./components/graph/graph_3"));
 const Graph_4 = lazy(() => import("./components/graph/graph_4"));
 function App() {
   return (
