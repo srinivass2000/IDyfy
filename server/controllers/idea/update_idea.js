@@ -31,16 +31,29 @@ exports.update_idea = async (req, res, next) => {
             error: `${extension} is not a valid extension`,
           });
         }
-        idea = await Idea.findById(idea_id);
 
-        idea = await Idea.findByIdAndUpdate(idea_id, {
-          title,
-          description,
-          tags,
-          links,
-        });
+        if (req.file) {
+          idea = await Idea.findById(idea_id);
+          console.log(idea.documents);
+          var document = {};
+          document[`${req.file.originalname}`] = req.file.filename;
+          idea.documents.push(document);
+          idea = await Idea.findByIdAndUpdate(idea_id, {
+            title,
+            description,
+            tags,
+            links,
+            documents: idea.documents,
+          });
+        } else {
+          idea = await Idea.findByIdAndUpdate(idea_id, {
+            title,
+            description,
+            tags,
+            links,
+          });
+        }
 
-        console.log(req.file);
         idea = await Idea.findById(idea_id);
 
         res.status(200).json({
