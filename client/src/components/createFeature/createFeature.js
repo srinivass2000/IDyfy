@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { Link, useHistory, useParams } from "react-router-dom";
 import Idyfy_logo from "../../assets/svg/Idyfy_logo.svg";
 import "../Auth/auth.css";
 import Footer from "../Footer/footer";
@@ -9,7 +10,8 @@ import authHeader from "../../services/auth-header";
 const CreateFeature = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-
+  const { idea_id, parent_id } = useParams();
+  const history = useHistory();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -20,8 +22,8 @@ const CreateFeature = () => {
         data: {
           title: title,
           content: description,
-          idea_id: "61eee0198824f70eb12c7107",
-          parent_id: "61eee0198824f70eb12c7107",
+          idea_id,
+          parent_id,
           level: 1,
           version_start: 1,
         },
@@ -31,6 +33,7 @@ const CreateFeature = () => {
         setTitle("");
         setDescription("");
         console.log("feature created sucessfully");
+        history.push("../../graph_3/" + idea_id);
       } else {
         console.log("some error occured");
       }

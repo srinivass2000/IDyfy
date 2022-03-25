@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "./lib/treestyle.css";
 const Graph_3_iterate_children = (props) => {
   let TreeData = props.tree,
@@ -43,32 +44,34 @@ const Graph_3_iterate_children = (props) => {
                 </p>
                 <ul className="dropdown-menu">
                   <li>
-                    <a
+                    <Link
                       className="dropdown-item"
-                      href="/feature/idea_id/feature_id"
+                      to={"../feature/" + TreeData[0]._id + "/" + item._id}
                     >
                       {" "}
                       View / Edit
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
+                    <Link
                       className="dropdown-item"
-                      href="/createfeature/idea_id/feature_id"
+                      to={"/createFeature/" + TreeData[0]._id + "/" + item._id}
                     >
                       Add Child
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
+                    <Link
                       className="dropdown-item"
-                      href="/createfeature/idea_id/feature_id"
+                      to={
+                        "/createFeature/" +
+                        TreeData[0]._id +
+                        "/" +
+                        item.parent_id
+                      }
                     >
                       Add Sibling
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item">Show/Hide Children </a>
+                    </Link>
                   </li>
                 </ul>
                 <button

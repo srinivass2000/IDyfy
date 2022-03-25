@@ -8,10 +8,6 @@ exports.fetch_features_by_parent = async (req, res, next) => {
     var { idea_id, parent_id } = req.query;
 
     if (parent_id == null) {
-      parent_id = idea_id;
-    }
-
-    if (parent_id == idea_id) {
       if (idea_id != null) {
         var idea = await Idea.findById(idea_id, { title: true });
 
@@ -27,6 +23,21 @@ exports.fetch_features_by_parent = async (req, res, next) => {
         });
       }
     }
+
+    // if (parent_id == idea_id) {
+    //   if (idea_id != null) {
+    //     var idea = await Idea.findById(idea_id, { title: true });
+
+    //     obj2 = { show: false };
+
+    //     idea = { ...idea._doc, ...obj2 };
+
+    //     return res.status(200).json({
+    //       success: true,
+    //       features: [idea],
+    //     });
+    //   }
+    // }
 
     //if idea_id isequal to parent_id
 
@@ -71,7 +82,7 @@ exports.fetch_features_by_parent = async (req, res, next) => {
       //   }
       // );
       // if (test.length == 0) {
-      result = { ...feature._doc, ...obj4 };
+      result = { ...feature._doc, ...obj3 };
       // } else {
       //   result = { ...feature._doc, ...obj3 };
       // }

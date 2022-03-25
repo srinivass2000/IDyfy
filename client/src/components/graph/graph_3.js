@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Graph_3_Iterate from "./graph_3_iterate_root";
 import "./lib/treestyle.css";
 import axios from "axios";
@@ -14,7 +14,7 @@ const Graph_3 = () => {
   const getChilderen = async (p) => {
     await axios
       .get(
-        `/api/feature/features-by-parent?idea_id=61eee0198824f70eb12c7107&parent_id=${p}`,
+        `/api/feature/features-by-parent?idea_id=${idea_id}&parent_id=${p}`,
         {
           headers: authHeader(),
         }
@@ -209,12 +209,9 @@ const Graph_3 = () => {
   useEffect(async () => {
     try {
       await axios
-        .get(
-          "/api/feature/features-by-parent?idea_id=61eee0198824f70eb12c7107&parent_id=61eee0198824f70eb12c7107",
-          {
-            headers: authHeader(),
-          }
-        )
+        .get(`/api/feature/features-by-parent?idea_id=${idea_id}`, {
+          headers: authHeader(),
+        })
         .then(
           (res) => {
             SetTreeData(res.data.features);
@@ -252,21 +249,38 @@ const Graph_3 = () => {
                   aria-labelledby="dropdownMenuButton"
                 >
                   <li>
-                    <a className="dropdown-item" href="/idea">
+                    <Link className="dropdown-item" to={"../idea/" + idea_id}>
                       View / Edit
-                    </a>
+                    </Link>
                   </li>
 
                   <li>
-                    <a
+                    <Link
                       className="dropdown-item"
-                      href="/createFeature/idea_id/feature_id"
+                      to={"/createFeature/" + idea_id + "/" + idea_id}
                     >
                       Add Child
-                    </a>
+                    </Link>
                   </li>
-                  <li>Hide/Show Children</li>
                 </ul>
+                <button
+                  className="HideShow relative"
+                  onClick={() => Clicked(idea_id)}
+                  style={{
+                    color: "white",
+                    backgroundColor: "red",
+                    height: "25px",
+                    width: "25px",
+                    right: "-5px",
+                    borderRadius: "20px",
+                  }}
+                >
+                  {TreeData ? (
+                    (!TreeData[0].show && "+") || (TreeData[0].show && "-")
+                  ) : (
+                    <></>
+                  )}
+                </button>
               </div>
             </div>
             <div

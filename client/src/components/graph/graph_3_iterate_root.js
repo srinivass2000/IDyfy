@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Graph_3_Iterate2 from "./graph_3_iterate_children";
 import "./lib/treestyle.css";
+import { Link } from "react-router-dom";
 const Graph_3_Iterate = (props) => {
   let TreeData = props.tree,
     // cardkey = "",
@@ -41,32 +42,30 @@ const Graph_3_Iterate = (props) => {
               </p>
               <ul className="dropdown-menu">
                 <li>
-                  <a
+                  <Link
+                    to={"../feature/" + TreeData[0]._id + "/" + item._id}
                     className="dropdown-item"
-                    href="/feature/idea_id/feature_id"
                   >
-                    {" "}
                     View / Edit
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
                     className="dropdown-item"
-                    href="/createfeature/idea_id/feature_id"
+                    to={"/createFeature/" + TreeData[0]._id + "/" + item._id}
                   >
                     Add Child
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
                     className="dropdown-item"
-                    href="/createfeature/idea_id/feature_id"
+                    to={
+                      "/createFeature/" + TreeData[0]._id + "/" + item.parent_id
+                    }
                   >
                     Add Sibling
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item">Show/Hide Children </a>
+                  </Link>
                 </li>
               </ul>
               <button
