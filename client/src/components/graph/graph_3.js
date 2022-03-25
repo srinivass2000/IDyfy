@@ -213,7 +213,7 @@ const Graph_3 = () => {
 
   useEffect(async () => {
     const idea = JSON.parse(localStorage.getItem("idea"));
-    if (idea ? idea[0]._id : <></> == idea_id) {
+    if ((idea ? idea[0]._id : <></>) === idea_id) {
       console.log("asa");
       SetTreeData(JSON.parse(localStorage.getItem("idea")));
       // console.log(localStorage.getItem(idea_id));
