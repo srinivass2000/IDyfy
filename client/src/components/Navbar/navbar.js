@@ -35,7 +35,7 @@ const Navbar = () => {
     <div>
       <ToastContainer theme="dark" />
       <nav
-        className="navbar navbar-expand-lg "
+        className="navbar navbar-expand-lg"
         style={{ backgroundColor: "#B287FF" }}
       >
         <div className="container-fluid">
