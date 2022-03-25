@@ -36,6 +36,7 @@ exports.update_idea = async (req, res, next) => {
           idea = await Idea.findById(idea_id);
           console.log(idea.documents);
           var document = {};
+          // const imgUrl = `https://idyfy.tech/file/${req.file.filename}`;
           document[`${req.file.originalname}`] = req.file.filename;
           idea.documents.push(document);
           idea = await Idea.findByIdAndUpdate(idea_id, {

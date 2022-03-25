@@ -31,4 +31,6 @@ const storage = new GridFsStorage({
   },
 });
 
+// app.get("/file/:filename", async(req, res) => {
+
 module.exports = multer({ storage });
