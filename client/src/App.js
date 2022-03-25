@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar/navbar";
 import Loader from "./components/Loader/loader";
-import Graph_3 from "./components/graph/graph_3";
+const Graph_3 = lazy(() => import("./components/graph/graph_3"));
 const Home = lazy(() => import("./components/Home/home"));
 const FeedPage = lazy(() => import("./components/Feed_Page/feedpage"));
 const Notification = lazy(() =>
@@ -22,7 +22,7 @@ const IdeaEdit = lazy(() => import("./components/Idea/ideaedit"));
 const FeatureEdit = lazy(() => import("./components/feature/editFeature"));
 const ProfileEdit = lazy(() => import("./components/Profile/profileedit"));
 // import { isMobile } from "react-device-detect";
-const Error = lazy(() => import("./components/error/error_404"));
+const Error = lazy(() => import("./components/error/error_403"));
 const VerifyEmail = lazy(() => import("./components/verifyemail/verify"));
 const Protectedroute = lazy(() => import("./components/protectedroutes"));
 const ResetPassword = lazy(() =>

@@ -5,7 +5,7 @@ const { FeatureSchema } = require("../../models/Feature");
 
 exports.fetch_features_by_parent = async (req, res, next) => {
   try {
-    const { idea_id, parent_id } = req.body;
+    const { idea_id, parent_id } = req.query;
 
     if (parent_id == null) {
       parent_id = idea_id;
@@ -13,19 +13,28 @@ exports.fetch_features_by_parent = async (req, res, next) => {
 
     var Feature = mongoose.model(`features_${idea_id}`, FeatureSchema);
 
-    var idea = await Idea.findById(idea_id, { title: true });
+    if (idea_id != null) {
+      var idea = await Idea.findById(idea_id, { title: true });
 
-    obj2 = { show: true };
+      obj2 = { show: true };
 
-    idea = { ...idea._doc, ...obj2 };
+      idea = { ...idea._doc, ...obj2 };
 
-    console.log(idea);
+      console.log(idea);
+    }
 
     var results = await Feature.find(
       {
         parent_id,
       },
-      { title: 1, parent_id: 1, version_start: 1, version_end: 1, available: 1 }
+      {
+        title: 1,
+        parent_id: 1,
+        version_start: 1,
+        version_end: 1,
+        available: 1,
+        updated_feature: 1,
+      }
     );
 
     if (results == []) {

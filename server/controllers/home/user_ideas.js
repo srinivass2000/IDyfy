@@ -7,11 +7,21 @@ exports.get_contributed_ideas = async (req, res, next) => {
     console.log(req.user._id);
     var id = req.user._id;
     id = id.toString();
-    const result = await Idea.find({
-      contributors: {
-        $in: [id],
+    const result = await Idea.find(
+      {
+        contributors: {
+          $in: [id],
+        },
       },
-    }).sort({ createdAt: -1 });
+      {
+        title: 1,
+        description: 1,
+        contributors: 1,
+        tags: 1,
+        liked_users: 1,
+        starred_by: 1,
+      }
+    ).sort({ createdAt: -1 });
     res.status(200).json({
       success: true,
       ideas: result,
