@@ -22,6 +22,10 @@ const Graph_3 = () => {
       .then(
         (res) => {
           SetTreeData([...TreeData, ...res.data.features]);
+          localStorage.setItem(
+            "idea",
+            JSON.stringify([...TreeData, ...res.data.features])
+          );
           // console.log([...TreeData, ...res.data.features]);
         },
         (err) => {
@@ -48,6 +52,7 @@ const Graph_3 = () => {
           // find only items without that parent id
           const result = TreeData.filter((node) => node.parent_id !== p);
           SetTreeData(result);
+          localStorage.setItem("idea", JSON.stringify(result));
           item.show = 0;
         }
       }
@@ -207,23 +212,32 @@ const Graph_3 = () => {
   }, [TreeData]);
 
   useEffect(async () => {
-    try {
-      await axios
-        .get(`/api/feature/features-by-parent?idea_id=${idea_id}`, {
-          headers: authHeader(),
-        })
-        .then(
-          (res) => {
-            SetTreeData(res.data.features);
-            // console.log(res.data.features);
-            console.log("Initial data");
-          },
-          (err) => {
-            console.log(err);
-          }
-        );
-    } catch (e) {
-      console.log(e);
+    const idea = JSON.parse(localStorage.getItem("idea"));
+    if ((idea ? idea[0]._id : <></>) === idea_id) {
+      console.log("asa");
+      SetTreeData(JSON.parse(localStorage.getItem("idea")));
+      // console.log(localStorage.getItem(idea_id));
+    } else {
+      console.log("na");
+
+      try {
+        await axios
+          .get(`/api/feature/features-by-parent?idea_id=${idea_id}`, {
+            headers: authHeader(),
+          })
+          .then(
+            (res) => {
+              SetTreeData(res.data.features);
+              // console.log(res.data.features);
+              localStorage.setItem("idea", JSON.stringify(res.data.features));
+            },
+            (err) => {
+              console.log(err);
+            }
+          );
+      } catch (e) {
+        console.log(e);
+      }
     }
   }, []);
   return (
