@@ -31,6 +31,12 @@ const Search = lazy(() => import("./components/search/search"));
 const CreateFeature = lazy(() =>
   import("./components/createFeature/createFeature")
 );
+const PrivacyPolicy = lazy(() =>
+  import("./components/policies/privacy-policy")
+);
+const TermsAndConditions = lazy(() =>
+  import("./components/policies/terms_and_conditions")
+);
 const GraphTest = lazy(() => import("./components/graph/test_graph"));
 const Graph = lazy(() => import("./components/graph/graph"));
 const Graph_2 = lazy(() => import("./components/graph/graph_2"));
@@ -86,6 +92,8 @@ function App() {
             <Protectedroute path="/search/:key" exact component={Search} />
             <Route path="/email/verify/:id" exact component={VerifyEmail} />
             <Route path="/passwordreset/:id" exact component={ResetPassword} />
+            <Route path="/privacy-policy" component={PrivacyPolicy} />
+            <Route path="/T&C" component={TermsAndConditions} />
             <Route path="/" component={Error} />
           </Switch>
         </Suspense>
