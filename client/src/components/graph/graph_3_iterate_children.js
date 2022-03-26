@@ -74,20 +74,22 @@ const Graph_3_iterate_children = (props) => {
                     </Link>
                   </li>
                 </ul>
-                <button
-                  className="HideShow relative"
-                  onClick={() => props.Clicked(item._id)}
-                  style={{
-                    color: "white",
-                    backgroundColor: "red",
-                    height: "25px",
-                    width: "25px",
-                    right: "-5px",
-                    borderRadius: "20px",
-                  }}
-                >
-                  {(!item.show && "+") || (item.show && "-")}
-                </button>
+                {!(item.show === "nothing") && (
+                  <button
+                    className="HideShow relative"
+                    onClick={() => props.Clicked(item._id)}
+                    style={{
+                      color: "white",
+                      backgroundColor: "red",
+                      height: "25px",
+                      width: "25px",
+                      right: "-5px",
+                      borderRadius: "20px",
+                    }}
+                  >
+                    {(!item.show && "+") || (item.show && "-")}
+                  </button>
+                )}
               </div>
               {/* {path()} */}
               <Graph_3_iterate_children

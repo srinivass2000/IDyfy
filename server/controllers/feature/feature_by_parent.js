@@ -71,23 +71,24 @@ exports.fetch_features_by_parent = async (req, res, next) => {
     obj3 = { show: false };
     obj4 = { show: "nothing" };
 
-    results.forEach(async function (feature) {
+    for await (const feature of results) {
       // console.log(feature);
-      // var test = await Feature.find(
-      //   {
-      //     parent_id: feature._id.toString(),
-      //   },
-      //   {
-      //     _id: 1,
-      //   }
-      // );
-      // if (test.length == 0) {
-      result = { ...feature._doc, ...obj3 };
-      // } else {
-      //   result = { ...feature._doc, ...obj3 };
-      // }
+      var test = await Feature.find(
+        {
+          parent_id: feature._id.toString(),
+        },
+        {
+          _id: 1,
+        }
+      );
+
+      if (test.length === 0) {
+        result = { ...feature._doc, ...obj4 };
+      } else {
+        result = { ...feature._doc, ...obj3 };
+      }
       array.push(result);
-    });
+    }
 
     // if (parent_id == idea_id) {
     //   if (idea_id != null) {

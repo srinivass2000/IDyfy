@@ -38,9 +38,9 @@ const Graph_3 = () => {
     console.log("Clicked on item " + p);
     TreeData.map((item) => {
       if (item._id == p) {
-        if (item.show == 0) {
+        if (item.show === false) {
           // show kids
-          item.show = 1;
+          item.show = true;
           SetAllLinks([]);
           // api call to BE to get children
           //   CODE HERE
@@ -53,7 +53,7 @@ const Graph_3 = () => {
           const result = TreeData.filter((node) => node.parent_id !== p);
           SetTreeData(result);
           localStorage.setItem("idea", JSON.stringify(result));
-          item.show = 0;
+          item.show = false;
         }
       }
     });
@@ -277,24 +277,30 @@ const Graph_3 = () => {
                     </Link>
                   </li>
                 </ul>
-                <button
-                  className="HideShow relative"
-                  onClick={() => Clicked(idea_id)}
-                  style={{
-                    color: "white",
-                    backgroundColor: "red",
-                    height: "25px",
-                    width: "25px",
-                    right: "-5px",
-                    borderRadius: "20px",
-                  }}
-                >
-                  {TreeData ? (
-                    (!TreeData[0].show && "+") || (TreeData[0].show && "-")
-                  ) : (
-                    <></>
-                  )}
-                </button>
+                {TreeData ? (
+                  !(TreeData[0].show === "nothing") && (
+                    <button
+                      className="HideShow relative"
+                      onClick={() => Clicked(idea_id)}
+                      style={{
+                        color: "white",
+                        backgroundColor: "red",
+                        height: "25px",
+                        width: "25px",
+                        right: "-5px",
+                        borderRadius: "20px",
+                      }}
+                    >
+                      {TreeData ? (
+                        (!TreeData[0].show && "+") || (TreeData[0].show && "-")
+                      ) : (
+                        <></>
+                      )}
+                    </button>
+                  )
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
             <div
