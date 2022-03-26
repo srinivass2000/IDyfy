@@ -97,7 +97,8 @@ const Feature = () => {
               className="p-4"
               style={{ backgroundColor: "#F2F4F7", borderRadius: "20px" }}
             >
-              {feature.content}
+              <div dangerouslySetInnerHTML={{ __html: feature.content }} />
+              {/* {feature.content} */}
             </p>
           </div>
           <div className="mt-3 offset-md-6 offset-7 col-md-1 col-1 flex justify-end">
