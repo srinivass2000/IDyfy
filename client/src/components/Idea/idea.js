@@ -101,7 +101,11 @@ const Idea = () => {
           <div className="col-md-8 pr-3 pl-3">
             <p
               className="p-4"
-              style={{ backgroundColor: "#ffffff", borderRadius: "20px" }}
+              style={{
+                backgroundColor: "#ffffff",
+                borderRadius: "20px",
+                textAlign: "left",
+              }}
             >
               {/* {idea.description} */}
               <div dangerouslySetInnerHTML={{ __html: idea.description }} />
