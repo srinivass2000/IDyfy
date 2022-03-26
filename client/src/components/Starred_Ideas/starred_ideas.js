@@ -3,6 +3,7 @@ import FeedTile from "../Feed_Tile/feed";
 import { useState } from "react";
 import axios from "axios";
 import authHeader from "../../services/auth-header";
+import Loader from "../Loader/loader";
 const Starred_ideas = () => {
   const [ideas, setIdeas] = useState();
   const getideas = async () => {
@@ -64,10 +65,8 @@ const Starred_ideas = () => {
         ))
       ) : (
         <>
-          <div className="mt-10 d-flex justify-content-center">
-            <div className="spinner-border text-light" role="status">
-              <span className="visually-hidden">Loading...</span>
-            </div>
+          <div>
+            <Loader />
           </div>
         </>
       )}
