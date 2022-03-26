@@ -154,6 +154,13 @@ const FeedTile = (props) => {
           Description
         </h2>
         <p className="mt-1">
+          {/* <div
+            dangerouslySetInnerHTML={{
+              __html:
+                props.details.description.length > 200 &&
+                props.details.description.substring(200, 0) + " . . . .",
+            }}
+          /> */}
           {props.details.description.length > 200 &&
             props.details.description.substring(200, 0) + " . . . ."}
           {props.details.description.length <= 200 &&

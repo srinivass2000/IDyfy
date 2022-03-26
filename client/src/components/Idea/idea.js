@@ -103,7 +103,8 @@ const Idea = () => {
               className="p-4"
               style={{ backgroundColor: "#ffffff", borderRadius: "20px" }}
             >
-              {idea.description}
+              {/* {idea.description} */}
+              <div dangerouslySetInnerHTML={{ __html: idea.description }} />
             </p>
           </div>
           <div className="mt-3 offset-md-6 offset-7 col-md-1 flex justify-end col-1">
