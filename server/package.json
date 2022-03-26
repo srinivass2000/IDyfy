@@ -8,9 +8,7 @@
     "dev": "nodemon index.js"
   },
   "dependencies": {
-    "@faker-js/faker": "^6.0.0",
     "bcryptjs": "^2.4.3",
-    "body-parser": "^1.19.2",
     "casual": "^1.6.2",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
