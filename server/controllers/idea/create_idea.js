@@ -40,7 +40,16 @@ exports.create_idea = async (req, res, next) => {
     idea_id = idea._id.toString();
     ideas_contributed.push(idea_id);
 
-    var user = await User.findByIdAndUpdate(a, { ideas_contributed });
+    if (req.user.engagement_score == null) {
+      var engagement_score = 1;
+    } else {
+      var engagement_score = ++req.user.engagement_score;
+    }
+
+    var user = await User.findByIdAndUpdate(a, {
+      ideas_contributed,
+      engagement_score,
+    });
 
     // var table_name = createModelForName(`features_${idea._id}`);
 

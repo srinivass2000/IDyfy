@@ -16,3 +16,9 @@ updates:
     directory: "/server/" # Location of package manifests
     schedule:
       interval: "daily"
+    ignore:
+      - dependency-name: "gridfs-stream"
+      - dependency-name: "mongoose"
+      - dependency-name: "multer"
+      - dependency-name: "multer-gridfs-storage"
+    

@@ -4,6 +4,7 @@ const crypto = require("crypto");
 const mongoose = require("mongoose");
 const { FeatureSchema } = require("../../models/Feature");
 const Idea = require("../../models/Idea");
+const User = require("../../models/User");
 
 exports.update_feature = async (req, res, next) => {
   try {
@@ -14,13 +15,16 @@ exports.update_feature = async (req, res, next) => {
 
     var updated_content, content_hash;
 
-    var Feature = mongoose.model(`features_${idea_id}`, FeatureSchema);
-
-    console.log(Feature);
-
     const idea = await Idea.findById(idea_id);
 
+    if (!idea) {
+      return next(new ErrorResponse("Idea not found!", 404));
+    }
+
+    var Feature = mongoose.model(`features_${idea_id}`, FeatureSchema);
+
     console.log(idea);
+    console.log(Feature);
 
     const initial = await Feature.findById(id);
 
@@ -62,6 +66,15 @@ exports.update_feature = async (req, res, next) => {
           available: true,
         }
       );
+      if (req.user.engagement_score == null) {
+        var engagement_score = 0.1;
+      } else {
+        var engagement_score = req.user.engagement_score + 0.1;
+      }
+
+      var user = await User.findByIdAndUpdate(req.user._id, {
+        engagement_score,
+      });
 
       const feature = await Feature.findById(id);
       res.status(200).json({
@@ -95,6 +108,16 @@ exports.update_feature = async (req, res, next) => {
         }
       );
       prev_feature = await Feature.findById(id);
+      if (req.user.engagement_score == null) {
+        var engagement_score = 0.1;
+      } else {
+        var engagement_score = req.user.engagement_score + 0.1;
+      }
+
+      var user = await User.findByIdAndUpdate(req.user._id, {
+        engagement_score,
+      });
+
       res.status(200).json({
         success: true,
         new_feature: response,

@@ -40,29 +40,6 @@ app.use("/api/search", require("./routes/search_routes"));
 
 app.use("/api/faker", require("./routes/fake_routes"));
 
-const env = process.env.ENVIRONMENT ? process.env.ENVIRONMENT : "production";
-
-if (env === "production") {
-  app.use(express.static(path.join(__dirname, "../client/build")));
-  app.get("*", function (req, res) {
-    res.sendFile(path.join(__dirname, "../client/build", "index.html"));
-  });
-} else {
-  app.get("/", (req, res, next) => {
-    res.send("Api's are running absolutely fine!🔥");
-  });
-}
-
-// Error Handler Middleware
-app.use(errorHandler);
-
-const port = process.env.PORT || 5000;
-
-const server = app.listen(port, () => {
-  console.log(`Server running on port ${port} 🔥`);
-  console.log(`Server is running in ${env} Mode 🏃`);
-});
-
 app.get("/file/:filename", async (req, res) => {
   try {
     console.log(req.params.filename);
@@ -98,6 +75,29 @@ app.get("/file/:filename", async (req, res) => {
     console.log(error);
     return next(new ErrorResponse("Oops Something went wrong!", 500));
   }
+});
+
+const env = process.env.ENVIRONMENT ? process.env.ENVIRONMENT : "production";
+
+if (env === "production") {
+  app.use(express.static(path.join(__dirname, "../client/build")));
+  app.get("*", function (req, res) {
+    res.sendFile(path.join(__dirname, "../client/build", "index.html"));
+  });
+} else {
+  app.get("/", (req, res, next) => {
+    res.send("Api's are running absolutely fine!🔥");
+  });
+}
+
+// Error Handler Middleware
+app.use(errorHandler);
+
+const port = process.env.PORT || 5000;
+
+const server = app.listen(port, () => {
+  console.log(`Server running on port ${port} 🔥`);
+  console.log(`Server is running in ${env} Mode 🏃`);
 });
 
 process.on("unhandledRejection", (err, promise) => {

@@ -1,6 +1,7 @@
 const Idea = require("../../models/Idea");
 const ErrorResponse = require("../../utils/errorResponse");
 // const Comment = require("../../models/Comment");
+const User = require("../../models/User");
 
 exports.update_idea = async (req, res, next) => {
   // console.log("here");
@@ -64,6 +65,16 @@ exports.update_idea = async (req, res, next) => {
       }
 
       idea = await Idea.findById(idea_id);
+
+      if (req.user.engagement_score == null) {
+        var engagement_score = 0.5;
+      } else {
+        var engagement_score = req.user.engagement_score + 0.5;
+      }
+
+      var user = await User.findByIdAndUpdate(req.user._id, {
+        engagement_score,
+      });
 
       res.status(200).json({
         success: true,

@@ -1,51 +1,39 @@
 const Idea = require("../../models/Idea");
 const ErrorResponse = require("../errorResponse");
-
+var casual = require("casual");
 exports.fake_idea = async (req, res, next) => {
   try {
-    var faker = require("faker");
-
     var idea;
 
     var ideas = {};
 
-    for (var i = 0; i < 1000; i++) {
+    for (var i = 0; i < 100; i++) {
       var liked_users = [];
       for (var i = 0; i < 6; i++) {
-        liked_users.push(faker.name.firstName());
+        liked_users.push(casual.random);
       }
 
-      var contributors = [
-        "61cd6d1f8fca5f2c130865a7",
-        "61e55c97e4f68488d6b5e189",
-        "61e7a0b0f43857ea78a9fd5a",
-        "61e704b16d19c8177f7a54c1",
-      ];
+      var contributors = ["623cb04aadbc01062f87fbca"];
       // for (var i = 0; i < 3; i++) {
       //   contributors.push(faker.name.firstName());
       // }
 
-      var starred_by = [
-        "61cd6d1f8fca5f2c130865a7",
-        "61e55c97e4f68488d6b5e189",
-        "61e7a0b0f43857ea78a9fd5a",
-        "61e704b16d19c8177f7a54c1",
-      ];
+      var starred_by = ["61eee3b34e43b5903ff15d7e"];
 
       var tags = [];
       for (var j = 0; j < 5; j++) {
-        tags.push(faker.lorem.word());
+        tags.push(casual.word);
       }
 
       idea = await Idea.create({
-        title: faker.lorem.word(),
-        description: faker.lorem.paragraph(),
+        title: casual.title,
+        description: casual.description,
         tags: tags,
-        liked_users: liked_users,
+        // liked_users: liked_users,
         contributors: contributors,
         starred_by,
-        latest_version: faker.random.number(),
-        date: faker.date.past(),
+        // latest_version: faker.random.number(),
+        // date: faker.date.past(),
       });
 
       console.log(idea);
