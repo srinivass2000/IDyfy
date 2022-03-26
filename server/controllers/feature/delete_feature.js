@@ -3,6 +3,7 @@ const crypto = require("crypto");
 const mongoose = require("mongoose");
 const { FeatureSchema } = require("../../models/Feature");
 const Idea = require("../../models/Idea");
+const User = require("../../models/User");
 
 exports.delete_feature = async (req, res, next) => {
   try {
@@ -42,6 +43,16 @@ exports.delete_feature = async (req, res, next) => {
       );
 
       deleted_feature = await Feature.findById(id);
+
+      if (req.user.engagement_score == null) {
+        var engagement_score = -0.1;
+      } else {
+        var engagement_score = req.user.engagement_score - 0.1;
+      }
+
+      var user = await User.findByIdAndUpdate(req.user._id, {
+        engagement_score,
+      });
 
       res.status(200).json({
         success: true,
