@@ -105,7 +105,7 @@ const CreateIdea = () => {
                 init={{
                   height: 300,
                   width: 1000,
-                  menubar: true,
+                  menubar: false,
                   plugins: [
                     "advlist autolink lists link image charmap print preview anchor",
                     "searchreplace visualblocks code fullscreen",

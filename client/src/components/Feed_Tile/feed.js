@@ -5,8 +5,14 @@ import Share from "../../assets/icon/share.svg";
 import Like from "../../assets/icon/heart.svg";
 import { Link } from "react-router-dom";
 import "../Feed_Tile/feed.css";
+
 const FeedTile = (props) => {
   const url = "/idea/";
+  function removeHTML(str) {
+    var tmp = document.createElement("DIV");
+    tmp.innerHTML = str;
+    return tmp.textContent || tmp.innerText || "";
+  }
   return (
     <div className="text-white p-4 mb-12 tile">
       <div className="row overflow-x-hidden">
@@ -153,19 +159,35 @@ const FeedTile = (props) => {
         <h2 style={{ textDecoration: "underline", fontFamily: "cursive" }}>
           Description
         </h2>
-        <p className="mt-1">
-          {/* <div
-            dangerouslySetInnerHTML={{
-              __html:
-                props.details.description.length > 200 &&
-                props.details.description.substring(200, 0) + " . . . .",
-            }}
-          /> */}
-          {props.details.description.length > 200 &&
+        <div className="mt-1">
+          {/* {props.details.description.length > 200 && (
+            <p
+              dangerouslySetInnerHTML={{
+                __html:
+                  props.details.description.substring(200, 0) + " . . . .",
+              }}
+            />
+          )} */}
+          {/* {html_to_text(props.details.description)} */}
+          {/* {props.details.description.length <= 200 && (
+            <p
+              dangerouslySetInnerHTML={{
+                _html: props.details.description.substring(200, 0),
+              }}
+            />
+          )} */}
+
+          {removeHTML(props.details.description).length > 200 &&
+            removeHTML(props.details.description).substring(200, 0) +
+              " . . . ."}
+          {removeHTML(props.details.description).length <= 200 &&
+            removeHTML(props.details.description).substring(200, 0)}
+
+          {/* {props.details.description.length > 200 &&
             props.details.description.substring(200, 0) + " . . . ."}
           {props.details.description.length <= 200 &&
-            props.details.description.substring(200, 0)}
-        </p>
+            props.details.description.substring(200, 0)} */}
+        </div>
       </div>
       <Link to={url + props.details._id}>
         <button className="my-3 readmore rounded-pill px-2">Read more</button>
