@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import FeedTile from "../Feed_Tile/feed";
 import { useState } from "react";
 import axios from "axios";
+import Loader from "../Loader/loader";
 import authHeader from "../../services/auth-header";
 const FeedPage = () => {
   const [ideas, setIdeas] = useState();
@@ -74,10 +75,8 @@ const FeedPage = () => {
         ))
       ) : (
         <>
-          <div className="mt-10 d-flex justify-content-center">
-            <div className="spinner-border text-light" role="status">
-              <span className="visually-hidden">Loading...</span>
-            </div>
+          <div>
+            <Loader />
           </div>
         </>
       )}

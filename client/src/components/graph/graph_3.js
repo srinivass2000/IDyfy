@@ -58,7 +58,15 @@ const Graph_3 = () => {
       }
     });
   };
-
+  const handleClick = () => {
+    if (TreeData) {
+      if (TreeData[0].show == "nothing") {
+        TreeData[0].show = false;
+        console.log("ew");
+        localStorage.setItem("idea", JSON.stringify(TreeData));
+      }
+    }
+  };
   let pathNumber = 1,
     strokeWidth = "5px",
     strokeColor = "#FFFFFfff";
@@ -272,6 +280,7 @@ const Graph_3 = () => {
                     <Link
                       className="dropdown-item"
                       to={"/createFeature/" + idea_id + "/" + idea_id}
+                      onClick={handleClick}
                     >
                       Add Child
                     </Link>

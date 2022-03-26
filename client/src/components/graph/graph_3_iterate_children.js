@@ -9,19 +9,14 @@ const Graph_3_iterate_children = (props) => {
     //   strokeColor = "#000000",
     _id = props._id;
 
-  // const path = () => {
-  //   let newpath = document.createElementNS(
-  //     "http://www.w3.org/2000/svg",
-  //     "path"
-  //   );
-  //   let svgContainer = document.getElementById("tree__svg-container__svg");
-  //   newpath.id = "path" + pathNumber;
-  //   newpath.setAttribute("stroke", strokeColor);
-  //   newpath.setAttribute("fill", "none");
-  //   newpath.setAttribute("stroke-width", strokeWidth);
-  //   svgContainer.appendChild(newpath);
-  //   pathNumber++;
-  // };
+  const handleClick = (item) => {
+    console.log(item);
+    if (item.show == "nothing") {
+      item.show = false;
+      console.log("ew");
+      localStorage.setItem("idea", JSON.stringify(TreeData));
+    }
+  };
   return (
     // <div className="tree__container__step">
     <>
@@ -56,6 +51,7 @@ const Graph_3_iterate_children = (props) => {
                     <Link
                       className="dropdown-item"
                       to={"/createFeature/" + TreeData[0]._id + "/" + item._id}
+                      onClick={() => handleClick(item)}
                     >
                       Add Child
                     </Link>
