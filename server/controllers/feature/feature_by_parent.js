@@ -87,10 +87,10 @@ exports.fetch_features_by_parent = async (req, res, next) => {
 
     //if idea_id isequal to parent_id
     if (idea_id != null) {
-      var idea = await Idea.findById(idea_id, {
-        title: true,
-        contributors: 1,
-      });
+      // var idea = await Idea.findById(idea_id, {
+      //   title: true,
+      //   contributors: 1,
+      // });
       var Feature = mongoose.model(`features_${idea_id}`, FeatureSchema);
 
       var results = await Feature.find(
@@ -104,7 +104,7 @@ exports.fetch_features_by_parent = async (req, res, next) => {
           version_end: 1,
           available: 1,
           updated_feature: 1,
-          user_id: 1,
+          // user_id: 1,
         }
       );
 
@@ -136,17 +136,17 @@ exports.fetch_features_by_parent = async (req, res, next) => {
           result = { ...feature._doc, ...obj3 };
         }
 
-        console.log(result);
+        // console.log(result);
 
-        if (
-          req.user._id.toString() == feature.user_id &&
-          idea.contributors.includes(req.user._id.toString())
-        ) {
-          var final = { ...result, ...obj5 };
-        } else {
-          var final = { ...result, ...obj6 };
-        }
-        array.push(final);
+        // if (
+        //   req.user._id.toString() == feature.user_id &&
+        //   idea.contributors.includes(req.user._id.toString())
+        // ) {
+        //   var final = { ...result, ...obj5 };
+        // } else {
+        //   var final = { ...result, ...obj6 };
+        // }
+        array.push(result);
       }
 
       // if (parent_id == idea_id) {
