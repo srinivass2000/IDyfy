@@ -26,7 +26,7 @@ exports.get_ideas = async (req, res, next) => {
     // console.log(skip);
     const PAGE_SIZE = 10;
 
-    const result = await Idea.find(
+    var result = await Idea.find(
       {},
       {
         title: 1,
@@ -41,21 +41,22 @@ exports.get_ideas = async (req, res, next) => {
       .skip(skip)
       .limit(PAGE_SIZE);
 
-    // await execute(result);
-    // async function execute(result) {
-    //   try {
-    //     const comments = await get_comments(result);
+    var final = [];
+    for await (var idea of result) {
+      console.log(idea);
+      var comment_count = await Comment.find({
+        idea_id: idea._id.toString(),
+        feature_id: null,
+      }).count();
+      obj = { comment_count: comment_count };
+      idea = { ...idea._doc, ...obj };
+      final.push(idea);
+    }
 
-    //     console.log("here");
     res.status(200).json({
       success: true,
-      ideas: result,
-      // comments: comments,
+      ideas: final,
     });
-    //   } catch (e) {
-    //     console.log(e);
-    //   }
-    // }
   } catch (err) {
     console.log(err);
     return next(new ErrorResponse(err.message, 500));
