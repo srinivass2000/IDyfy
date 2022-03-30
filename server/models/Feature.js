@@ -7,10 +7,11 @@ const FeatureSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please provide Title"],
     },
-    user_id: {
-      type: String,
-      required: true,
-    },
+    // user_id: {
+    //   type: String,
+    //   required: true,
+    // },
+    contributors: Array,
     idea_id: {
       type: String,
       required: true,
