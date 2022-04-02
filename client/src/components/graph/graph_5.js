@@ -1,29 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import DragMove from "./drag";
 import Graph_3 from "./graph_3";
-import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import "./lib/graph4.css";
 
 const Graph_5 = () => {
+  const [translate, setTranslate] = useState({
+    x: 0,
+    y: 0,
+  });
+
+  const handleDragMove = (e) => {
+    setTranslate({
+      x: translate.x + e.movementX,
+      y: translate.y + e.movementY,
+    });
+  };
+
   return (
-    <div>
-      <TransformWrapper
-        defaultScale={1}
-        defaultPositionX={200}
-        defaultPositionY={100}
+    <DragMove onDragMove={handleDragMove}>
+      <div
+        style={{
+          transform: `translateX(${translate.x}px) translateY(${translate.y}px)`,
+        }}
       >
-        {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
-          <React.Fragment>
-            <div className="tools">
-              <button onClick={zoomIn}>+</button>
-              <button onClick={zoomOut}>-</button>
-              <button onClick={resetTransform}>x</button>
-            </div>
-            <TransformComponent>
-              <Graph_3 />
-            </TransformComponent>
-          </React.Fragment>
-        )}
-      </TransformWrapper>
-    </div>
+        <Graph_3 />
+      </div>
+    </DragMove>
   );
 };
 
