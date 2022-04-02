@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import DragMove from "./drag";
 import Graph_3 from "./graph_3";
-import "./lib/graph4.css";
 
 const Graph_5 = () => {
   const [translate, setTranslate] = useState({
@@ -17,7 +16,7 @@ const Graph_5 = () => {
   };
 
   return (
-    <DragMove onDragMove={handleDragMove}>
+    <DragMove className="overflowY-hidden" onDragMove={handleDragMove}>
       <div
         style={{
           transform: `translateX(${translate.x}px) translateY(${translate.y}px)`,
