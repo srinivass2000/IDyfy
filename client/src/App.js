@@ -12,6 +12,7 @@ const Notification = lazy(() =>
 const Starred_ideas = lazy(() =>
   import("./components/Starred_Ideas/starred_ideas")
 );
+const Admin = lazy(() => import("./components/Admin/admin"));
 const Profile = lazy(() => import("./components/Profile/Profile"));
 const MyIdeas = lazy(() => import("./components/MyIdeas/myideas"));
 const Idea = lazy(() => import("./components/Idea/idea"));
@@ -55,6 +56,7 @@ function App() {
           }
         >
           <Switch>
+            <Route path="/noti" exact component={Notification}/>
             <Route path="/" exact component={Home} />
             <Protectedroute path="/feed" exact component={FeedPage} />
             <Protectedroute
@@ -62,6 +64,7 @@ function App() {
               exact
               component={Notification}
             />
+            <Route path="/admin" exact component={Admin} />
             <Protectedroute path="/starred" exact component={Starred_ideas} />
             <Protectedroute path="/profile" exact component={Profile} />
             <Protectedroute path="/myideas" exact component={MyIdeas} />
