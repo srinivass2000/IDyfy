@@ -20,7 +20,7 @@ const IdeaEdit = lazy(() => import("./components/Idea/ideaedit"));
 const FeatureEdit = lazy(() => import("./components/feature/editFeature"));
 const ProfileEdit = lazy(() => import("./components/Profile/profileedit"));
 // import { isMobile } from "react-device-detect";
-const Error = lazy(() => import("./components/error/error_500"));
+const Error = lazy(() => import("./components/error/error_404"));
 const VerifyEmail = lazy(() => import("./components/verifyemail/verify"));
 const Protectedroute = lazy(() => import("./components/protectedroutes"));
 const ResetPassword = lazy(() =>

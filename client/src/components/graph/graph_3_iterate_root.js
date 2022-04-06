@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Graph_3_Iterate = (props) => {
   let TreeData = props.tree,
     // cardkey = "",
-    //   pathNumber = props.pathno,
+    Edit = props.Edit,
     //   strokeWidth = "5px",
     //   strokeColor = "red",
     _id = props._id;
@@ -41,28 +41,39 @@ const Graph_3_Iterate = (props) => {
                     to={"../feature/" + TreeData[0]._id + "/" + item._id}
                     className="dropdown-item"
                   >
-                    View / Edit
+                    {Edit ? <>Edit</> : <>View</>}
                   </Link>
                 </li>
-                <li>
-                  <Link
-                    className="dropdown-item"
-                    to={"/createFeature/" + TreeData[0]._id + "/" + item._id}
-                    onClick={() => handleClick(item)}
-                  >
-                    Add Child
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className="dropdown-item"
-                    to={
-                      "/createFeature/" + TreeData[0]._id + "/" + item.parent_id
-                    }
-                  >
-                    Add Sibling
-                  </Link>
-                </li>
+                {Edit ? (
+                  <>
+                    <li>
+                      <Link
+                        className="dropdown-item"
+                        to={
+                          "/createFeature/" + TreeData[0]._id + "/" + item._id
+                        }
+                        onClick={() => handleClick(item)}
+                      >
+                        Add Child
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        className="dropdown-item"
+                        to={
+                          "/createFeature/" +
+                          TreeData[0]._id +
+                          "/" +
+                          item.parent_id
+                        }
+                      >
+                        Add Sibling
+                      </Link>
+                    </li>
+                  </>
+                ) : (
+                  <></>
+                )}{" "}
               </ul>
               {!(item.show === "nothing") && (
                 <button
@@ -87,6 +98,7 @@ const Graph_3_Iterate = (props) => {
               tree={TreeData}
               _id={item._id}
               Clicked={props.Clicked}
+              Edit={Edit}
             />
           </div>
         ) : (

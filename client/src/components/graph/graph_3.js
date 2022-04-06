@@ -7,7 +7,7 @@ import authHeader from "../../services/auth-header";
 
 const Graph_3 = (props) => {
   const { idea_id } = useParams();
-
+  const [Edit, SetEdit] = useState(false);
   const [allLinks, SetAllLinks] = useState([]);
 
   const [TreeData, SetTreeData] = useState();
@@ -246,8 +246,13 @@ const Graph_3 = (props) => {
       console.log("asa");
       SetTreeData(JSON.parse(localStorage.getItem("idea")));
       // console.log(localStorage.getItem(idea_id));
-      if (idea[0].canEdit == true) props.canIEdit(true);
-      else props.canIEdit(false);
+      if (idea[0].canEdit == true) {
+        props.canIEdit(true);
+        SetEdit(true);
+      } else {
+        props.canIEdit(false);
+        SetEdit(false);
+      }
     } else {
       console.log("na");
 
@@ -260,8 +265,13 @@ const Graph_3 = (props) => {
             (res) => {
               SetTreeData(res.data.features);
               // console.log(res.data.features);
-              if (res.data.features[0].canEdit == true) props.canIEdit(true);
-              else props.canIEdit(false);
+              if (res.data.features[0].canEdit == true) {
+                props.canIEdit(true);
+                SetEdit(true);
+              } else {
+                props.canIEdit(false);
+                SetEdit(false);
+              }
               localStorage.setItem("idea", JSON.stringify(res.data.features));
             },
             (err) => {
@@ -276,7 +286,7 @@ const Graph_3 = (props) => {
   return (
     // <div style={{ height: window.innerHeight, width: window.innerWidth }}>
 
-    <div>
+    <div style={{ height: window.innerHeight, width: window.innerWidth }}>
       <div>
         <div id="mytree">
           <div id="tree__svg-container">
@@ -299,19 +309,23 @@ const Graph_3 = (props) => {
                 >
                   <li>
                     <Link className="dropdown-item" to={"../idea/" + idea_id}>
-                      View / Edit
+                      {Edit ? <>Edit</> : <>View</>}
                     </Link>
                   </li>
 
-                  <li>
-                    <Link
-                      className="dropdown-item"
-                      to={"/createFeature/" + idea_id + "/" + idea_id}
-                      onClick={handleClick}
-                    >
-                      Add Child
-                    </Link>
-                  </li>
+                  {Edit ? (
+                    <li>
+                      <Link
+                        className="dropdown-item"
+                        to={"/createFeature/" + idea_id + "/" + idea_id}
+                        onClick={handleClick}
+                      >
+                        Add Child
+                      </Link>
+                    </li>
+                  ) : (
+                    <></>
+                  )}
                 </ul>
                 {TreeData ? (
                   !(TreeData[0].show === "nothing") && (
@@ -349,6 +363,7 @@ const Graph_3 = (props) => {
                 _id={idea_id}
                 // pathno={1}
                 Clicked={Clicked}
+                Edit={Edit}
               />
             </div>
           </div>

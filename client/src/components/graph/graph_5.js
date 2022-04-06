@@ -36,7 +36,9 @@ const Graph_5 = () => {
             <OtherContributers />
           </div>
           <div className="col-sm-4 col-lg-2 col-4 mt-2">
-            <button className="btn btn-secondary ">Pull Idea</button>
+            <button className="btn btn-secondary ">
+              {Edit ? <>Create Version</> : <>Pull Idea</>}
+            </button>
           </div>
         </div>
       </div>

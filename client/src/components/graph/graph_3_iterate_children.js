@@ -4,7 +4,7 @@ import "./lib/treestyle.css";
 const Graph_3_iterate_children = (props) => {
   let TreeData = props.tree,
     cardkey = "",
-    //   pathNumber = props.pathno,
+    Edit = props.Edit,
     //   strokeWidth = "5px",
     //   strokeColor = "#000000",
     _id = props._id;
@@ -43,32 +43,39 @@ const Graph_3_iterate_children = (props) => {
                       className="dropdown-item"
                       to={"../feature/" + TreeData[0]._id + "/" + item._id}
                     >
-                      {" "}
-                      View / Edit
+                      {Edit ? <>Edit</> : <>View</>}
                     </Link>
                   </li>
-                  <li>
-                    <Link
-                      className="dropdown-item"
-                      to={"/createFeature/" + TreeData[0]._id + "/" + item._id}
-                      onClick={() => handleClick(item)}
-                    >
-                      Add Child
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      className="dropdown-item"
-                      to={
-                        "/createFeature/" +
-                        TreeData[0]._id +
-                        "/" +
-                        item.parent_id
-                      }
-                    >
-                      Add Sibling
-                    </Link>
-                  </li>
+                  {Edit ? (
+                    <>
+                      <li>
+                        <Link
+                          className="dropdown-item"
+                          to={
+                            "/createFeature/" + TreeData[0]._id + "/" + item._id
+                          }
+                          onClick={() => handleClick(item)}
+                        >
+                          Add Child
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          className="dropdown-item"
+                          to={
+                            "/createFeature/" +
+                            TreeData[0]._id +
+                            "/" +
+                            item.parent_id
+                          }
+                        >
+                          Add Sibling
+                        </Link>
+                      </li>
+                    </>
+                  ) : (
+                    <></>
+                  )}
                 </ul>
                 {!(item.show === "nothing") && (
                   <button
