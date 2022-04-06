@@ -184,7 +184,7 @@ const Idea = () => {
         <div className="row justify-content-center">
           <div className="col-md-4">
             <Link
-              to={"../graph_5/" + id}
+              to={"../graph/" + id}
               className="btn pl-3 pr-3 mb-3 mt-3"
               style={{
                 backgroundColor: "#F62F08",

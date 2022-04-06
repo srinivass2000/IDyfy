@@ -1,169 +1,142 @@
 import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import Graph_Iterate_root from "./graph_iterate_root";
 import "./lib/treestyle.css";
+import axios from "axios";
+import authHeader from "../../services/auth-header";
 
-const Graph = () => {
-  //const [dis, setDis] = useState(false);
+const Graph = (props) => {
+  const { idea_id } = useParams();
+  const [Edit, SetEdit] = useState(false);
+  const [allLinks, SetAllLinks] = useState([]);
 
-  let pathNumber = 1;
-  let allLinks = [];
-  let treeParamas;
+  const [TreeData, SetTreeData] = useState();
+  const getChilderen = async (p) => {
+    await axios
+      .get(
+        `/api/feature/features-by-parent?idea_id=${idea_id}&parent_id=${p}`,
+        {
+          headers: authHeader(),
+        }
+      )
+      .then(
+        (res) => {
+          SetTreeData([...TreeData, ...res.data.features]);
+          localStorage.setItem(
+            "idea",
+            JSON.stringify([...TreeData, ...res.data.features])
+          );
+          // console.log([...TreeData, ...res.data.features]);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+  };
 
-  // scg path params
-  let strokeWidth = "5px";
-  let strokeColor = "#000000";
+  const Clicked = (p) => {
+    console.log("Clicked on item " + p);
+    TreeData.map((item) => {
+      if (item._id == p) {
+        if (item.show === false) {
+          // show kids
+          item.show = true;
+          SetAllLinks([]);
+          // api call to BE to get children
+          //   CODE HERE
+          getChilderen(p);
+          //  setTreeData(...TreeData, res)
+        } else {
+          // hide kids
+          SetAllLinks([]);
+          // find only items without that parent id
 
-  function treeMaker(tree, params) {
-    //let container = document.getElementById("my_tree");
+          // closeallchildren(p);
+          // /////////
+          const result = TreeData.filter((node) => node.parent_id !== p);
+          SetTreeData(result);
+          localStorage.setItem("idea", JSON.stringify(result));
+          item.show = false;
+        }
+      }
+    });
+  };
+  // let temp = [];
+  // const closeallchildren = (p) => {
+  //   TreeData.map((item) => {
+  //     console.log(item);
+  //     if (item.parent_id === undefined) {
+  //       console.log("k");
+  //       return false;
+  //     } else if (item.parent_id == p) {
+  //       closeallchildren(item.id);
+  //     } else if (item.parent_id != p) {
+  //       temp.push(item);
+  //     } else {
+  //       return false;
+  //     }
+  //   });
+  //   SetTreeData(TreeData[0], ...temp);
+  // };
 
-    let container = document.getElementById(params.id);
-
-    console.log("ghu");
-    console.log(params.treeParams);
-    console.log("ghu");
-    //treeParamas = params.treeParams === undefined ? {} : params.treeParams;
-    treeParamas = params.treeParams;
-    if (params.link_width !== undefined) strokeWidth = params.link_width;
-    if (params.link_color !== undefined) strokeColor = params.link_color;
-
-    // reset pathNumber and allLinks globals to allow on-click function to re-call treeMaker()
-    pathNumber = 1;
-    allLinks = [];
-
-    // svg part
-    let svgDiv = document.createElement("div");
-    console.log(container);
-    svgDiv.id = "tree__svg-container";
-    container.appendChild(svgDiv);
-    let svgContainer = document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "svg"
-    );
-    svgContainer.id = "tree__svg-container__svg";
-    svgDiv.appendChild(svgContainer);
-
-    // html part
-    let treeContainer = document.createElement("div");
-    treeContainer.id = "tree__container";
-    container.appendChild(treeContainer);
-    let card = document.createElement("div");
-    card.classList = "tree__container__step__card";
-    card.id = "tree__container__step__card__first";
-    treeContainer.appendChild(card);
-    let trad =
-      treeParamas[Object.keys(tree)[0]] !== undefined &&
-      treeParamas[Object.keys(tree)[0]].trad !== undefined
-        ? treeParamas[Object.keys(tree)[0]].trad
-        : Object.keys(tree)[0].trad;
-    card.innerHTML =
-      '<p class="tree__container__step__card__p" id="card_' +
-      Object.keys(tree)[0] +
-      '">' +
-      trad +
-      "</p>";
-
-    addStyleToCard(treeParamas[Object.keys(tree)[0]], Object.keys(tree)[0]);
-
-    iterate(
-      tree[Object.keys(tree)[0]],
-      true,
-      "tree__container__step__card__first"
-    );
-
-    connectCard();
-
-    let allCards = document.querySelectorAll(".tree__container__step__card__p");
-    for (let i = 0; allCards.length > i; i++) {
-      allCards[i].addEventListener("click", function (event) {
-        params.card_click(event.target);
-      });
+  const handleClick = () => {
+    if (TreeData) {
+      if (TreeData[0].show == "nothing") {
+        TreeData[0].show = false;
+        console.log("ew");
+        localStorage.setItem("idea", JSON.stringify(TreeData));
+      }
     }
+  };
+  let pathNumber = 1,
+    strokeWidth = "5px",
+    strokeColor = "#FFFFFfff";
 
-    window.onresize = function () {
-      svgDiv.setAttribute("height", "0");
-      svgDiv.setAttribute("width", "0");
-      connectCard();
-    };
+  function generatepath() {
+    TreeData ? (
+      TreeData.map((data, key) => {
+        key == 0 ? (
+          <></>
+        ) : (
+          allLinks.push(["path" + key, data.parent_id, data._id])
+        );
+      })
+    ) : (
+      <></>
+    );
   }
 
+  const path = () => {
+    let newpath = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "path"
+    );
+    let svgContainer = document.getElementById("tree__svg-container__svg");
+    newpath.id = "path" + pathNumber;
+    newpath.setAttribute("stroke", strokeColor);
+    newpath.setAttribute("fill", "none");
+    newpath.setAttribute("stroke-width", strokeWidth);
+    svgContainer.appendChild(newpath);
+    pathNumber++;
+  };
+
   function connectCard() {
-    // magic
     let svg = document.getElementById("tree__svg-container__svg");
+    // console.log(TreeData);
+    generatepath();
+    // console.log(allLinks);
+    svg.innerHTML = "";
     for (let i = 0; allLinks.length > i; i++) {
+      path();
+    }
+    for (let i = 0; allLinks.length > i; i++) {
+      // console.log(document.getElementById(allLinks[i]));
       connectElements(
         svg,
         document.getElementById(allLinks[i][0]),
         document.getElementById(allLinks[i][1]),
         document.getElementById(allLinks[i][2])
       );
-    }
-  }
-
-  function iterate(tree, start = false, from = "") {
-    let svgContainer = document.getElementById("tree__svg-container__svg");
-    let treeContainer = document.createElement("div");
-    treeContainer.id = "from_" + from;
-    treeContainer.classList.add("tree__container__branch");
-    document.getElementById(from).after(treeContainer);
-
-    for (const key in tree) {
-      let textCard =
-        treeParamas[key] !== undefined && treeParamas[key].trad !== undefined
-          ? treeParamas[key].trad
-          : key;
-
-      treeContainer.innerHTML +=
-        '<div class="tree__container__step"><div class="tree__container__step__card" id="' +
-        key +
-        '"><p id="card_' +
-        key +
-        '" class="tree__container__step__card__p">' +
-        textCard +
-        "</p></div></div>";
-      addStyleToCard(treeParamas[key], key);
-      if ("" !== from && !start) {
-        let newpath = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "path"
-        );
-        newpath.id = "path" + pathNumber;
-        newpath.setAttribute("stroke", strokeColor);
-        newpath.setAttribute("fill", "none");
-        newpath.setAttribute("stroke-width", strokeWidth);
-        svgContainer.appendChild(newpath);
-        allLinks.push(["path" + pathNumber, from, key]);
-        pathNumber++;
-      }
-      if (start) {
-        // svgContainer.innerHTML = svgContainer.innerHTML + '<path id="path' + pathNumber + '" d="M0 0" stroke="#2199e8" fill="none" stroke-width="5";/>';
-        let newpath = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "path"
-        );
-        newpath.id = "path" + pathNumber;
-        newpath.setAttribute("stroke", strokeColor);
-        newpath.setAttribute("fill", "none");
-        newpath.setAttribute("stroke-width", strokeWidth);
-        svgContainer.appendChild(newpath);
-        allLinks.push([
-          "path" + pathNumber,
-          "tree__container__step__card__first",
-          key,
-        ]);
-        pathNumber++;
-      }
-
-      if (Object.keys(tree[key]).length > 0) {
-        iterate(tree[key], false, key);
-      }
-    }
-  }
-
-  function addStyleToCard(card, key) {
-    if (card !== undefined && card.styles !== undefined) {
-      let lastCard = document.getElementById("card_" + key);
-      for (const cssRules in treeParamas[key].styles) {
-        lastCard.style[cssRules] = card.styles[cssRules];
-      }
     }
   }
 
@@ -177,6 +150,7 @@ const Graph = () => {
 
   function drawPath(svg, path, startX, startY, endX, endY) {
     // get the path's stroke width (if one wanted to be  really precize, one could use half the stroke size)
+
     let stroke = parseFloat(path.getAttribute("stroke-width"));
     // check if the svg is big enough to draw the path, if not, set heigh/width
     if (svg.getAttribute("height") < endY) svg.setAttribute("height", endY);
@@ -258,67 +232,142 @@ const Graph = () => {
     // calculate path's end (x,y) coords
     let endX = endElem.offsetLeft + 0.5 * endElem.offsetWidth - svgLeft;
     let endY = endElem.offsetTop - svgTop;
-
     // call function for drawing the path
     drawPath(svg, path, startX, startY, endX, endY);
   }
 
-  const tree = {
-    1: {
-      2: "",
-      3: {
-        6: "",
-        7: "",
-      },
-      4: "",
-      5: "",
-      8: {
-        9: {
-          10: "",
-          11: "",
-        },
-      },
-    },
-  };
+  useEffect(() => {
+    connectCard();
+  }, [TreeData]);
 
-  const treeParams = {
-    1: { trad: "IDyfy" },
-    2: { trad: "feature 1" },
-    3: { trad: "feature 2" },
-    4: { trad: "feature 3" },
-    5: { trad: "feature 4" },
-    6: { trad: "feature 5" },
-    7: { trad: "feature 6" },
-    8: { trad: "feature 7" },
-    9: { trad: "feature 8" },
-    10: { trad: "feature 9" },
-    11: { trad: "feature 10" },
-  };
+  useEffect(async () => {
+    const idea = JSON.parse(localStorage.getItem("idea"));
+    if ((idea ? idea[0]._id : <></>) === idea_id) {
+      console.log("asa");
+      SetTreeData(JSON.parse(localStorage.getItem("idea")));
+      // console.log(localStorage.getItem(idea_id));
+      if (idea[0].canEdit == true) {
+        props.canIEdit(true);
+        SetEdit(true);
+      } else {
+        props.canIEdit(false);
+        SetEdit(false);
+      }
+    } else {
+      console.log("na");
 
+      try {
+        await axios
+          .get(`/api/feature/features-by-parent?idea_id=${idea_id}`, {
+            headers: authHeader(),
+          })
+          .then(
+            (res) => {
+              SetTreeData(res.data.features);
+              // console.log(res.data.features);
+              if (res.data.features[0].canEdit == true) {
+                props.canIEdit(true);
+                SetEdit(true);
+              } else {
+                props.canIEdit(false);
+                SetEdit(false);
+              }
+              localStorage.setItem("idea", JSON.stringify(res.data.features));
+            },
+            (err) => {
+              console.log(err);
+            }
+          );
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  }, []);
   return (
-    <div>
+    // <div style={{ height: window.innerHeight, width: window.innerWidth }}>
+
+    <div style={{ height: window.innerHeight, width: window.innerWidth }}>
       <div>
-        <div id="mytree"></div>
-        {console.log("prem")}
-        <button
-          disabled={false}
-          className="btn-primary"
-          //onClick={console.log("oiada")}
-          onClick={() => {
-            treeMaker(tree, {
-              id: "mytree",
-              card_click: function (element) {
-                console.log(element);
-              },
-              treeParams: treeParams,
-              link_width: "4px",
-              link_color: "#F62F08",
-            });
-          }}
-        >
-          tree display
-        </button>
-        {/* {console.log("prem")} */}
+        <div id="mytree">
+          <div id="tree__svg-container">
+            <svg id="tree__svg-container__svg"></svg>
+          </div>
+          <div id="tree__container">
+            <div className="tree__container__step__card" id={idea_id}>
+              <div className="dropdown">
+                <p
+                  className="tree__container__step__card__p"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  {/* {console.log(TreeData)} */}
+                  {TreeData ? TreeData[0].title : <></>}
+                </p>
+                <ul
+                  className="dropdown-menu"
+                  aria-labelledby="dropdownMenuButton"
+                >
+                  <li>
+                    <Link className="dropdown-item" to={"../idea/" + idea_id}>
+                      {Edit ? <>Edit</> : <>View</>}
+                    </Link>
+                  </li>
+
+                  {Edit ? (
+                    <li>
+                      <Link
+                        className="dropdown-item"
+                        to={"/createFeature/" + idea_id + "/" + idea_id}
+                        onClick={handleClick}
+                      >
+                        Add Child
+                      </Link>
+                    </li>
+                  ) : (
+                    <></>
+                  )}
+                </ul>
+                {TreeData ? (
+                  !(TreeData[0].show === "nothing") && (
+                    <button
+                      className="HideShow relative"
+                      onClick={() => Clicked(idea_id)}
+                      style={{
+                        color: "white",
+                        backgroundColor: "red",
+                        height: "25px",
+                        width: "25px",
+                        right: "-5px",
+                        borderRadius: "20px",
+                      }}
+                    >
+                      {TreeData ? (
+                        (!TreeData[0].show && "+") || (TreeData[0].show && "-")
+                      ) : (
+                        <></>
+                      )}
+                    </button>
+                  )
+                ) : (
+                  <></>
+                )}
+              </div>
+            </div>
+            <div
+              id="from_tree__container__step__card__first"
+              className="tree__container__branch"
+            >
+              {/* {console.log(TreeData)} */}
+              <Graph_Iterate_root
+                tree={TreeData ? TreeData : []}
+                _id={idea_id}
+                // pathno={1}
+                Clicked={Clicked}
+                Edit={Edit}
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

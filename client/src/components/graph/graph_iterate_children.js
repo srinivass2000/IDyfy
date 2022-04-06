@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./lib/treestyle.css";
-const Graph_3_iterate_children = (props) => {
+const Graph_iterate_children = (props) => {
   let TreeData = props.tree,
     cardkey = "",
     Edit = props.Edit,
@@ -95,7 +95,7 @@ const Graph_3_iterate_children = (props) => {
                 )}
               </div>
               {/* {path()} */}
-              <Graph_3_iterate_children
+              <Graph_iterate_children
                 tree={TreeData}
                 _id={item._id}
                 Clicked={props.Clicked}
@@ -111,4 +111,4 @@ const Graph_3_iterate_children = (props) => {
   );
 };
 
-export default Graph_3_iterate_children;
+export default Graph_iterate_children;

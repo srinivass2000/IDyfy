@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Graph_3 from "./graph_3";
+import Graph from "./graph";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import OtherContributers from "./Other_Contributers";
 
-const Graph_5 = () => {
+const Graph_body = () => {
   const [Edit, SetEdit] = useState(false);
   const canIEdit = (a) => {
     SetEdit(a);
@@ -56,7 +56,7 @@ const Graph_5 = () => {
                 <button onClick={resetTransform}>x</button>
               </div>
               <TransformComponent>
-                <Graph_3 canIEdit={canIEdit} />
+                <Graph canIEdit={canIEdit} />
               </TransformComponent>
             </React.Fragment>
           )}
@@ -69,7 +69,7 @@ const Graph_5 = () => {
 // import DragMove from "./drag";
 // import Graph_3 from "./graph_3";
 
-// const Graph_5 = () => {
+// const Graph_body = () => {
 //   const [translate, setTranslate] = useState({
 //     x: 0,
 //     y: 0,
@@ -94,4 +94,4 @@ const Graph_5 = () => {
 //     </DragMove>
 //   );
 // };
-export default Graph_5;
+export default Graph_body;
