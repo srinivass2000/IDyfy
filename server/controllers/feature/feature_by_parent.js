@@ -25,7 +25,7 @@ exports.fetch_features_by_parent = async (req, res, next) => {
           },
           {
             _id: 1,
-            user_id: 1,
+            contributors: 1,
           }
         );
 
@@ -43,7 +43,7 @@ exports.fetch_features_by_parent = async (req, res, next) => {
         var counter = 0;
         test.forEach(function (feature) {
           if (
-            req.user._id.toString() == feature.user_id &&
+            feature.contributors.includes(req.user._id.toString()) &&
             idea.contributors.includes(req.user._id.toString())
           ) {
             // idea = { ...idea, ...obj5 };

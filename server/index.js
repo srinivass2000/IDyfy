@@ -9,6 +9,7 @@ const path = require("path");
 const Grid = require("gridfs-stream");
 const mongoose = require("mongoose");
 const ErrorResponse = require("./utils/errorResponse");
+const fs = require("fs");
 
 app.use(cors());
 
@@ -77,10 +78,21 @@ app.get("/file/:filename", async (req, res) => {
 const env = process.env.ENVIRONMENT ? process.env.ENVIRONMENT : "production";
 
 if (env === "production") {
-  app.use(express.static(path.join(__dirname, "../client/build")));
-  app.get("*", function (req, res) {
-    res.sendFile(path.join(__dirname, "../client/build", "index.html"));
-  });
+  dir = "../client/build";
+  if (fs.existsSync(dir)) {
+    console.log("Directory exists!");
+    app.use(express.static(path.join(__dirname, dir)));
+    app.get("*", function (req, res) {
+      res.sendFile(path.join(__dirname, "../client/build", "index.html"));
+    });
+  } else {
+    console.log("Directory not found.");
+    app.get("/", function (req, res) {
+      res.sendFile(
+        path.join(__dirname + "/utils/maintenance/maintenance.html")
+      );
+    });
+  }
 } else {
   app.get("/", (req, res, next) => {
     res.send("Api's are running absolutely fine!🔥");

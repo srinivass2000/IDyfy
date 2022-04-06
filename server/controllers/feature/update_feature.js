@@ -8,8 +8,7 @@ const User = require("../../models/User");
 
 exports.update_feature = async (req, res, next) => {
   try {
-    const { id, title, idea_id, parent_id, content, version_start, level } =
-      req.body;
+    const { id, title, idea_id, parent_id, content, version_start } = req.body;
 
     // var user_id = req.user._id;
 
@@ -55,15 +54,16 @@ exports.update_feature = async (req, res, next) => {
         },
         {
           title: title,
-          user_id: req.user._id.toString(),
-          idea_id: idea_id,
-          parent_id: parent_id,
+          // user_id: req.user._id.toString(),
+          // $push: { contributors: req.user._id.toString() },
+          // idea_id: idea_id,
+          // parent_id: parent_id,
           content: content,
-          level,
-          version_start: version_start,
+          // level,
+          // version_start: version_start,
           content_hash: content_hash,
           updated_content,
-          available: true,
+          // available: true,
         }
       );
       if (req.user.engagement_score == null) {
@@ -84,11 +84,13 @@ exports.update_feature = async (req, res, next) => {
     } else {
       const response = await Feature.create({
         title: title,
-        user_id: req.user._id.toString(),
+        // user_id: req.user._id.toString(),
+        // $push: { contributors: req.user._id.toString() },
+        contributors: [req.user._id.toString()],
         idea_id: idea_id,
         parent_id: parent_id,
         content: content,
-        level,
+        // level,
         version_start: version_start,
         content_hash: content_hash,
         updated_content,

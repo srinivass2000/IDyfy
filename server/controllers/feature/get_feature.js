@@ -34,7 +34,7 @@ exports.get_feature = async (req, res, next) => {
     if (feature) {
       var can_edit;
 
-      if (feature.user_id === req.user._id.toString()) {
+      if (feature.contributors.includes(req.user._id.toString())) {
         can_edit = true;
       } else {
         can_edit = false;
