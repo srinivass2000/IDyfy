@@ -5,7 +5,7 @@ import "./lib/treestyle.css";
 import axios from "axios";
 import authHeader from "../../services/auth-header";
 
-const Graph_3 = () => {
+const Graph_3 = (props) => {
   const { idea_id } = useParams();
 
   const [allLinks, SetAllLinks] = useState([]);
@@ -50,6 +50,9 @@ const Graph_3 = () => {
           // hide kids
           SetAllLinks([]);
           // find only items without that parent id
+
+          // closeallchildren(p);
+          // /////////
           const result = TreeData.filter((node) => node.parent_id !== p);
           SetTreeData(result);
           localStorage.setItem("idea", JSON.stringify(result));
@@ -58,6 +61,24 @@ const Graph_3 = () => {
       }
     });
   };
+  // let temp = [];
+  // const closeallchildren = (p) => {
+  //   TreeData.map((item) => {
+  //     console.log(item);
+  //     if (item.parent_id === undefined) {
+  //       console.log("k");
+  //       return false;
+  //     } else if (item.parent_id == p) {
+  //       closeallchildren(item.id);
+  //     } else if (item.parent_id != p) {
+  //       temp.push(item);
+  //     } else {
+  //       return false;
+  //     }
+  //   });
+  //   SetTreeData(TreeData[0], ...temp);
+  // };
+
   const handleClick = () => {
     if (TreeData) {
       if (TreeData[0].show == "nothing") {
@@ -101,9 +122,9 @@ const Graph_3 = () => {
 
   function connectCard() {
     let svg = document.getElementById("tree__svg-container__svg");
-    console.log(TreeData);
+    // console.log(TreeData);
     generatepath();
-    console.log(allLinks);
+    // console.log(allLinks);
     svg.innerHTML = "";
     for (let i = 0; allLinks.length > i; i++) {
       path();
@@ -225,6 +246,8 @@ const Graph_3 = () => {
       console.log("asa");
       SetTreeData(JSON.parse(localStorage.getItem("idea")));
       // console.log(localStorage.getItem(idea_id));
+      if (idea[0].canEdit == true) props.canIEdit(true);
+      else props.canIEdit(false);
     } else {
       console.log("na");
 
@@ -237,6 +260,8 @@ const Graph_3 = () => {
             (res) => {
               SetTreeData(res.data.features);
               // console.log(res.data.features);
+              if (res.data.features[0].canEdit == true) props.canIEdit(true);
+              else props.canIEdit(false);
               localStorage.setItem("idea", JSON.stringify(res.data.features));
             },
             (err) => {
@@ -249,6 +274,8 @@ const Graph_3 = () => {
     }
   }, []);
   return (
+    // <div style={{ height: window.innerHeight, width: window.innerWidth }}>
+
     <div>
       <div>
         <div id="mytree">
