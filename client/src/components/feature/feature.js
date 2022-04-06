@@ -95,9 +95,14 @@ const Feature = () => {
           <div className="col-md-8 pr-3 pl-3">
             <p
               className="p-4"
-              style={{ backgroundColor: "#F2F4F7", borderRadius: "20px" }}
+              style={{
+                backgroundColor: "#F2F4F7",
+                borderRadius: "20px",
+                textAlign: "left",
+              }}
             >
-              {feature.content}
+              <div dangerouslySetInnerHTML={{ __html: feature.content }} />
+              {/* {feature.content} */}
             </p>
           </div>
           <div className="mt-3 offset-md-6 offset-7 col-md-1 col-1 flex justify-end">

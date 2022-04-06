@@ -9,12 +9,13 @@ import authHeader from "../../services/auth-header";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
 import { Editor } from "@tinymce/tinymce-react";
+import { Link } from "react-router-dom";
 const CreateIdea = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [tags, setTags] = useState([]);
 
-  const notify1 = () => toast.success("Idea Created Sucessfully");
+  const notify1 = () => toast.success("Idea Created Successfully");
   const history = useHistory();
 
   const childToParent = (childdata) => {
@@ -150,10 +151,14 @@ const CreateIdea = () => {
                 className="pl-3 custom-control-label text-white"
                 htmlFor="tandc"
               >
-                I agree to the{" "}
-                <a href="/" className="link">
+                I agree to{" "}
+                <Link to="/T&C" className="link">
                   T&C
-                </a>
+                </Link>
+                {""} and {""}
+                <Link to="/privacy-policy" className="link">
+                  Privacy Policy
+                </Link>
               </label>
             </div>
             <div className="flex justify-center">

@@ -25,7 +25,9 @@ exports.create_feature = async (req, res, next) => {
 
     const feature = await Feature.create({
       title,
-      user_id: req.user._id.toString(),
+      // user_id: req.user._id.toString(),
+      // $push: { contributors: req.user._id.toString() },
+      contributors: [req.user._id.toString()],
       idea_id,
       parent_id,
       content,

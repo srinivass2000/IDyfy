@@ -8,6 +8,7 @@ import authHeader from "../../services/auth-header";
 import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
+import { Editor } from "@tinymce/tinymce-react";
 
 const EditFeature = () => {
   const loc = useLocation();
@@ -106,7 +107,7 @@ const EditFeature = () => {
                 placeholder="Title"
               />
             </div>
-            <div className="flex justify-center mt-3 mx-3">
+            {/* <div className="flex justify-center mt-3 mx-3">
               <textarea
                 rows="5"
                 cols="60"
@@ -115,6 +116,36 @@ const EditFeature = () => {
                 className="form-control form_box"
                 placeholder="Description"
               ></textarea>
+            </div> */}
+
+            <div className="flex justify-center mt-3 mx-3">
+              <Editor
+                textareaName="Body"
+                value={description}
+                // initialValue={description}
+                apiKey="krw1cp6qqs9hj1oedlcjumsizty01tq1ksvpxkn9d94pr3qj"
+                // value={description},
+                init={{
+                  height: 300,
+                  width: 1000,
+                  menubar: true,
+                  // setContent: "<strong>Some contents</strong>",
+                  plugins: [
+                    "advlist autolink lists link image charmap print preview anchor",
+                    "searchreplace visualblocks code fullscreen",
+                    "insertdatetime media table paste code help wordcount",
+                  ],
+                  toolbar:
+                    "undo redo | formatselect | " +
+                    "bold italic backcolor | alignleft aligncenter " +
+                    "alignright alignjustify | bullist numlist outdent indent | " +
+                    "removeformat | help",
+                  content_style:
+                    "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+                  placeholder: "Description",
+                }}
+                onEditorChange={(newText) => setDescription(newText)}
+              />
             </div>
 
             <div className="flex justify-center">

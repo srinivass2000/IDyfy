@@ -4,10 +4,10 @@ on:
   push:
     branches: [master]
 
-jobs: 
+jobs:
   test:
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
@@ -15,11 +15,10 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Decode Secrets
-        env :
+        env:
           COMBINED_SERVER_SECRETS: ${{secrets.COMBINED_SERVER_SECRETS}}
         run: echo $COMBINED_SERVER_SECRETS | base64 -d > server/.env
-          
-          
+
       - run: |
           pwd
           cd client
@@ -31,29 +30,25 @@ jobs:
           cd server
           yarn install
 
-          
-          
-          
-
-
-
-
   deploy:
     needs: test
     runs-on: self-hosted
 
     steps:
       # - run: rm -rf server/
+
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
+     # - name: Restart Process
+     #   run: pm2 restart 0
       - name: Decode Secrets
-        env :
+        env:
           COMBINED_SERVER_SECRETS: ${{secrets.COMBINED_SERVER_SECRETS}}
         run: echo $COMBINED_SERVER_SECRETS | base64 -d > server/.env
-          
+
       - run: |
           pwd
           cd client
@@ -68,5 +63,3 @@ jobs:
           pm2 restart 0
           pm2 save
           sudo service nginx restart
-          
-

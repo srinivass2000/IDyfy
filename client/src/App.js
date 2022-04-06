@@ -41,7 +41,8 @@ const TermsAndConditions = lazy(() =>
 const GraphTest = lazy(() => import("./components/graph/test_graph"));
 const Graph = lazy(() => import("./components/graph/graph"));
 const Graph_2 = lazy(() => import("./components/graph/graph_2"));
-const Graph_3 = lazy(() => import("./components/graph/graph_3"));
+//const Graph_3 = lazy(() => import("./components/graph/graph_3"));
+const Graph_5 = lazy(() => import("./components/graph/graph_5"));
 const Graph_4 = lazy(() => import("./components/graph/graph_4"));
 function App() {
   return (
@@ -84,10 +85,15 @@ function App() {
             <Protectedroute path="/graph" exact component={Graph} />
             <Protectedroute path="/graph_2" exact component={Graph_2} />
             <Protectedroute path="/graph_4" exact component={Graph_4} />
-            <Protectedroute
+            {/* <Protectedroute
               path="/graph_3/:idea_id"
               exact
               component={Graph_3}
+            /> */}
+            <Protectedroute
+              path="/graph_5/:idea_id"
+              exact
+              component={Graph_5}
             />
             <Protectedroute path="/ideaEdit/:id" exact component={IdeaEdit} />
             <Protectedroute path="/feaEdit" exact component={FeatureEdit} />

@@ -101,7 +101,11 @@ const Idea = () => {
           <div className="col-md-8 pr-3 pl-3">
             <p
               className="p-4"
-              style={{ backgroundColor: "#ffffff", borderRadius: "20px" }}
+              style={{
+                backgroundColor: "#ffffff",
+                borderRadius: "20px",
+                textAlign: "left",
+              }}
             >
               {/* {idea.description} */}
               <div dangerouslySetInnerHTML={{ __html: idea.description }} />
@@ -180,7 +184,7 @@ const Idea = () => {
         <div className="row justify-content-center">
           <div className="col-md-4">
             <Link
-              to={"../graph_3/" + id}
+              to={"../graph_5/" + id}
               className="btn pl-3 pr-3 mb-3 mt-3"
               style={{
                 backgroundColor: "#F62F08",

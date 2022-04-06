@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "./lib/graph4.css";
+import Graph_3 from "./graph_3";
 const Graph_4 = () => {
   const handle = () => {
     let canvas = document.getElementById("canvas");
@@ -30,6 +30,7 @@ const Graph_4 = () => {
       drawRect(-30, -35, 40, 40);
       drawRect(40, -35, 40, 40);
       drawRect(-25, 40, 100, 40);
+      <Graph_3 />;
 
       requestAnimationFrame(draw);
     }
@@ -139,7 +140,7 @@ const Graph_4 = () => {
 
   return (
     <div>
-      <canvas id="canvas" height="1000"></canvas>
+      <canvas id="canvas"></canvas>
     </div>
   );
 };

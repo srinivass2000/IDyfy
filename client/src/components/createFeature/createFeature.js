@@ -6,6 +6,7 @@ import "../Auth/auth.css";
 import Footer from "../Footer/footer";
 import axios from "axios";
 import authHeader from "../../services/auth-header";
+import { Editor } from "@tinymce/tinymce-react";
 
 const CreateFeature = () => {
   const [title, setTitle] = useState("");
@@ -33,7 +34,7 @@ const CreateFeature = () => {
         setTitle("");
         setDescription("");
         console.log("feature created sucessfully");
-        history.push("../../graph_3/" + idea_id);
+        history.push("../../graph_5/" + idea_id);
       } else {
         console.log("some error occured");
       }
@@ -87,7 +88,7 @@ const CreateFeature = () => {
                 placeholder="Title"
               />
             </div>
-            <div className="flex justify-center mt-3 mx-3">
+            {/* <div className="flex justify-center mt-3 mx-3">
               <textarea
                 rows="5"
                 cols="60"
@@ -96,6 +97,33 @@ const CreateFeature = () => {
                 className="form-control form_box"
                 placeholder="Description"
               ></textarea>
+            </div> */}
+
+            <div className="flex justify-center mt-3 mx-3">
+              <Editor
+                textareaName="Body"
+                // initialValue="<p>Description</p>"
+                apiKey="krw1cp6qqs9hj1oedlcjumsizty01tq1ksvpxkn9d94pr3qj"
+                init={{
+                  height: 300,
+                  width: 1000,
+                  menubar: true,
+                  plugins: [
+                    "advlist autolink lists link image charmap print preview anchor",
+                    "searchreplace visualblocks code fullscreen",
+                    "insertdatetime media table paste code help wordcount",
+                  ],
+                  toolbar:
+                    "undo redo | formatselect | " +
+                    "bold italic backcolor | alignleft aligncenter " +
+                    "alignright alignjustify | bullist numlist outdent indent | " +
+                    "removeformat | help",
+                  content_style:
+                    "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+                  placeholder: "Description",
+                }}
+                onEditorChange={(newText) => setDescription(newText)}
+              />
             </div>
 
             <div className="ml-3 mt-2 mb-3 custom-control custom-checkbox">
@@ -109,10 +137,14 @@ const CreateFeature = () => {
                 className="pl-3 custom-control-label text-white"
                 htmlFor="tandc"
               >
-                I agree to the{" "}
-                <a href="/" className="link">
+                I agree to{" "}
+                <Link to="/T&C" className="link">
                   T&C
-                </a>
+                </Link>
+                {""} and {""}
+                <Link to="/privacy-policy" className="link">
+                  Privacy Policy
+                </Link>
               </label>
             </div>
             <div className="flex justify-center">
