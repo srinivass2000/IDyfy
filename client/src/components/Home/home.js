@@ -6,7 +6,10 @@ const Home = () => {
   return (
     <div className="container">
       <div className="row mt-5">
-        <p className="offset-2 col-8 text-white text-3xl italic">
+        <h1 className="offset-2 col-8 text-white text-6xl bold mb-8">
+          Welcome to IDyfy!
+        </h1>
+        <p className="offset-2 col-8 text-white text-2xl italic mb-4">
           Grow Ideas Like Trees
         </p>
         <div className="row">

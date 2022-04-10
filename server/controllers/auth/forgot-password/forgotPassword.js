@@ -21,7 +21,7 @@ exports.forgotPassword = async (req, res, next) => {
 
     await user.save();
 
-    const resetUrl = `http://localhost:3000/passwordreset/${resetToken}`;
+    const resetUrl = `https://idyfy.tech/passwordreset/${resetToken}`;
 
     const message = template(resetUrl);
 

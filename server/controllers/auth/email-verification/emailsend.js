@@ -15,7 +15,7 @@ module.exports = async function emailVerification(user, res, next) {
 
     await user.save();
 
-    const emailVerificationUrl = `http://localhost:3000/email/verify/${emailVerificationToken}`;
+    const emailVerificationUrl = `https://idyfy.tech/email/verify/${emailVerificationToken}`;
 
     const message = template(emailVerificationUrl);
 

@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
-
 const errorHandler = require("./middleware/error");
 const cors = require("cors");
 const path = require("path");
@@ -35,7 +34,6 @@ app.use("/api/feature", require("./routes/feature_routes"));
 app.use("/api/comment", require("./routes/comment_routes"));
 app.use("/api/profile", require("./routes/profile_routes"));
 app.use("/api/search", require("./routes/search_routes"));
-
 app.use("/api/faker", require("./routes/fake_routes"));
 
 app.get("/file/:filename", async (req, res) => {
@@ -87,16 +85,19 @@ if (env === "production") {
     });
   } else {
     console.log("Directory not found.");
-    app.get("/", function (req, res) {
+    app.get("*", function (req, res) {
       res.sendFile(
         path.join(__dirname + "/utils/maintenance/maintenance.html")
       );
     });
   }
 } else {
-  app.get("/", (req, res, next) => {
-    res.send("Api's are running absolutely fine!🔥");
+  app.get("/", function (req, res) {
+    res.sendFile(path.join(__dirname + "/utils/maintenance/maintenance.html"));
   });
+  // app.get("/", (req, res, next) => {
+  //   res.send("Api's are running absolutely fine!🔥");
+  // });
 }
 
 // Error Handler Middleware
