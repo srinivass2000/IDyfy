@@ -1,10 +1,10 @@
 import React from 'react'
-import axios from "axios";
-import { useEffect } from "react";
+//import axios from "axios";
+//import { useEffect } from "react";
 import { useState } from "react";
 import { Chart } from 'react-charts';
-import { Bar } from 'react-charts';
-import authHeader from "../../../services/auth-header";
+//import { Bar } from 'react-charts';
+//import authHeader from "../../../services/auth-header";
 import Navbar from '../Navbar/Navbar';
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 
