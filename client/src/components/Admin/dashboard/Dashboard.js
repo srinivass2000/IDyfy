@@ -85,29 +85,29 @@ const Dashboard = () => {
 
   const [ideas, setIdeas] = useState();
   const [User, setUser] = useState();
-  const getideas = async () => {
-    try {
-      // console.log(skip);
-      await axios
-        .get("/api/idea/get-ideaadmin/", {
-          headers: authHeader(),
-        })
-        .then(
-          (res) => {
-            setIdeas(res.data.ideas);
-            console.log(res);
-          },
-          (err) => {
-            console.log(err);
-          }
-        );
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  useEffect(() => {
-    getideas();
-  }, []);
+  // const getideas = async () => {
+  //   try {
+  //     // console.log(skip);
+  //     await axios
+  //       .get("/api/idea/get-ideaadmin/", {
+  //         headers: authHeader(),
+  //       })
+  //       .then(
+  //         (res) => {
+  //           setIdeas(res.data.ideas);
+  //           console.log(res);
+  //         },
+  //         (err) => {
+  //           console.log(err);
+  //         }
+  //       );
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
+  // useEffect(() => {
+  //   getideas();
+  // }, []);
   return (
     <div>
       <div class="">
