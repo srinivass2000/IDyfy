@@ -14,6 +14,8 @@ import AuthService from "../../services/authservices";
 import { useHistory } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
+import authHeader from "../../services/auth-header";
 
 const Navbar = () => {
   const url = "/search/";
@@ -29,7 +31,19 @@ const Navbar = () => {
     setSearchdata({ ...searchdata, [e.target.name]: e.target.value });
   };
   useEffect(() => {
-    setUser(AuthService.getUser);
+    axios
+      .get("/api/profile", {
+        headers: authHeader(),
+      })
+      .then((res) => {
+        setUser(AuthService.getUser);
+      })
+      .catch((err) => {
+        if (err.response.status === 401) {
+          localStorage.removeItem("UserToken");
+          setUser("");
+        }
+      });
   }, [location]);
   return (
     <div>

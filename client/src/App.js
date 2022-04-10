@@ -12,6 +12,7 @@ const Notification = lazy(() =>
 const Starred_ideas = lazy(() =>
   import("./components/Starred_Ideas/starred_ideas")
 );
+const Admin = lazy(() => import("./components/Admin/admin"));
 const Profile = lazy(() => import("./components/Profile/Profile"));
 const MyIdeas = lazy(() => import("./components/MyIdeas/myideas"));
 const Idea = lazy(() => import("./components/Idea/idea"));
@@ -20,7 +21,7 @@ const IdeaEdit = lazy(() => import("./components/Idea/ideaedit"));
 const FeatureEdit = lazy(() => import("./components/feature/editFeature"));
 const ProfileEdit = lazy(() => import("./components/Profile/profileedit"));
 // import { isMobile } from "react-device-detect";
-const Error = lazy(() => import("./components/error/error_500"));
+const Error = lazy(() => import("./components/error/error_404"));
 const VerifyEmail = lazy(() => import("./components/verifyemail/verify"));
 const Protectedroute = lazy(() => import("./components/protectedroutes"));
 const ResetPassword = lazy(() =>
@@ -37,12 +38,12 @@ const PrivacyPolicy = lazy(() =>
 const TermsAndConditions = lazy(() =>
   import("./components/policies/terms_and_conditions")
 );
-const GraphTest = lazy(() => import("./components/graph/test_graph"));
-const Graph = lazy(() => import("./components/graph/graph"));
-const Graph_2 = lazy(() => import("./components/graph/graph_2"));
+// const GraphTest = lazy(() => import("./components/oldGraphs/test_graph"));
+// const Graph = lazy(() => import("./components/oldGraphs/graph"));
+// const Graph_2 = lazy(() => import("./components/oldGraphs/graph_2"));
 //const Graph_3 = lazy(() => import("./components/graph/graph_3"));
-const Graph_5 = lazy(() => import("./components/graph/graph_5"));
-const Graph_4 = lazy(() => import("./components/graph/graph_4"));
+const Graph = lazy(() => import("./components/graph/graph_body"));
+// const Graph_4 = lazy(() => import("./components/oldGraphs/graph_4"));
 function App() {
   return (
     <div className="App">
@@ -56,6 +57,7 @@ function App() {
           }
         >
           <Switch>
+            <Route path="/noti" exact component={Notification} />
             <Route path="/" exact component={Home} />
             <Protectedroute path="/feed" exact component={FeedPage} />
             <Protectedroute
@@ -63,6 +65,7 @@ function App() {
               exact
               component={Notification}
             />
+            <Route path="/admin" exact component={Admin} />
             <Protectedroute path="/starred" exact component={Starred_ideas} />
             <Protectedroute path="/profile" exact component={Profile} />
             <Protectedroute path="/myideas" exact component={MyIdeas} />
@@ -78,20 +81,16 @@ function App() {
               exact
               component={Feature}
             />
-            <Protectedroute path="/graphtest" exact component={GraphTest} />
-            <Protectedroute path="/graph" exact component={Graph} />
-            <Protectedroute path="/graph_2" exact component={Graph_2} />
-            <Protectedroute path="/graph_4" exact component={Graph_4} />
+            {/* <Protectedroute path="/graphtest" exact component={GraphTest} /> */}
+            {/* <Protectedroute path="/graph" exact component={Graph} /> */}
+            {/* <Protectedroute path="/graph_2" exact component={Graph_2} /> */}
+            {/* <Protectedroute path="/graph_4" exact component={Graph_4} /> */}
             {/* <Protectedroute
               path="/graph_3/:idea_id"
               exact
               component={Graph_3}
             /> */}
-            <Protectedroute
-              path="/graph_5/:idea_id"
-              exact
-              component={Graph_5}
-            />
+            <Protectedroute path="/graph/:idea_id" exact component={Graph} />
             <Protectedroute path="/ideaEdit/:id" exact component={IdeaEdit} />
             <Protectedroute path="/feaEdit" exact component={FeatureEdit} />
             <Protectedroute path="/profileEdit" exact component={ProfileEdit} />

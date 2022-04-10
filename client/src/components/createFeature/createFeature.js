@@ -34,7 +34,7 @@ const CreateFeature = () => {
         setTitle("");
         setDescription("");
         console.log("feature created sucessfully");
-        history.push("../../graph_5/" + idea_id);
+        history.push("../../graph/" + idea_id);
       } else {
         console.log("some error occured");
       }

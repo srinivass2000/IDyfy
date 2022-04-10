@@ -42,8 +42,8 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Restart Process
-        run: pm2 restart 0
+     # - name: Restart Process
+     #   run: pm2 restart 0
       - name: Decode Secrets
         env:
           COMBINED_SERVER_SECRETS: ${{secrets.COMBINED_SERVER_SECRETS}}

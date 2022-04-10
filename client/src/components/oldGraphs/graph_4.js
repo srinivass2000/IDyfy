@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import Graph_3 from "./graph_3";
-import "./lib/graph4.css";
+import Graph_3 from "../graph/graph";
 const Graph_4 = () => {
   const handle = () => {
     let canvas = document.getElementById("canvas");
