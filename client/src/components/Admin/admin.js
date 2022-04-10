@@ -1,14 +1,14 @@
 import React from 'react';
-//import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Navbar from './Navbar/Navbar';
 import Dashboard from './dashboard/Dashboard';
-import Tables from './tables/Tables';
+import Auth from "./auth/Auth";
+
 
 const admin = () => {
   return (
     <div>
-        <Navbar />  
-        <Tables />
+      <Route path="/admin" exact component={Auth} />
     </div>
   )
 }

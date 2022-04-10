@@ -13,6 +13,8 @@ const Starred_ideas = lazy(() =>
   import("./components/Starred_Ideas/starred_ideas")
 );
 const Admin = lazy(() => import("./components/Admin/admin"));
+const User_table = lazy(() => import("./components/Admin/tables/User_table"));
+const Project_table = lazy(() => import("./components/Admin/tables/Project_table"));
 const Profile = lazy(() => import("./components/Profile/Profile"));
 const MyIdeas = lazy(() => import("./components/MyIdeas/myideas"));
 const Idea = lazy(() => import("./components/Idea/idea"));
@@ -38,6 +40,7 @@ const PrivacyPolicy = lazy(() =>
 const TermsAndConditions = lazy(() =>
   import("./components/policies/terms_and_conditions")
 );
+
 // const GraphTest = lazy(() => import("./components/oldGraphs/test_graph"));
 // const Graph = lazy(() => import("./components/oldGraphs/graph"));
 // const Graph_2 = lazy(() => import("./components/oldGraphs/graph_2"));
@@ -66,6 +69,8 @@ function App() {
               component={Notification}
             />
             <Route path="/admin" exact component={Admin} />
+            <Route path="/admin/users" exact component={User_table} />
+            <Route path="/admin/projects" exact component={Project_table} />
             <Protectedroute path="/starred" exact component={Starred_ideas} />
             <Protectedroute path="/profile" exact component={Profile} />
             <Protectedroute path="/myideas" exact component={MyIdeas} />

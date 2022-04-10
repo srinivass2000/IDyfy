@@ -2,9 +2,87 @@ import React from 'react'
 import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
+import { Chart } from 'react-charts';
+import { Bar } from 'react-charts';
 import authHeader from "../../../services/auth-header";
+import Navbar from '../Navbar/Navbar';
+import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
+
 
 const Dashboard = () => {
+
+  const data1 = {
+    columns: [
+      {
+        label: 'Sr. No.',
+        field: 'id',
+        sort: 'asc'
+      },
+      {
+        label: 'Idea Name',
+        field: 'heading0',
+        sort: 'asc'
+      },
+      {
+        label: 'No. of members',
+        field: 'heading1',
+        sort: 'asc'
+      },
+      {
+        label: 'No. of Likes',
+        field: 'heading2',
+        sort: 'asc'
+      },
+    ],
+    
+  };
+
+  const data2 = {
+    columns: [
+      {
+        label: 'Sr. No.',
+        field: 'id',
+        sort: 'asc'
+      },
+      {
+        label: 'Name',
+        field: 'heading0',
+        sort: 'asc'
+      },
+      {
+        label: 'Engage Score',
+        field: 'heading2',
+        sort: 'asc'
+      },
+    ],
+    
+  };
+
+  const data = React.useMemo(
+    () => [
+      {
+        label: 'Series 1',
+        data: [[0, 1], [1, 2], [2, 4], [3, 2], [4, 7]]
+      }
+    ],
+    []
+  )
+
+  const axes = React.useMemo(
+    () => [
+      { primary: true, type: 'linear', position: 'bottom' },
+      { type: 'linear', position: 'left' }
+    ],
+    []
+  );
+  const axes2 = React.useMemo(
+    () => [
+      { primary: true, type: 'linear', position: 'bottom' },
+      { type: 'linear', position: 'left' }
+    ],
+    []
+  )
+
   const [ideas, setIdeas] = useState();
   const [User, setUser] = useState();
   const getideas = async () => {
@@ -32,13 +110,27 @@ const Dashboard = () => {
   }, []);
   return (
     <div>
-      <div class="container my-4">
+      <div class="">
+        <div class="row mx-3"> 
+          <div class="col-2 ">
+            <div class="my-5">
+              <Navbar/>
+            </div>
+            
+          </div>
+          
+          <div class="col-10">
+
+          <div class="container ">
         <div class="row mx-4 my-5">
           <div class="col-sm">
-            <div className="px-4 rounded" style={{background:"white"}}>
+            <div className="px-4 shadow bg-white rounded" style={{background:"white"}}>
                     <div className="row">
                       <div className="my-4 text-left col-9">
-                        <h1 style={{ "fontSize":"1.6rem" ,fontWeight:"bolder","height":"5rem"}}>Total Users</h1>
+                      <div style={{height:"5rem"}}>
+                        <h1 style={{ "fontSize":"1.6rem" ,fontWeight:"bolder",}}>Total Users :</h1>
+                        <h2 style={{ "fontSize":"1.3rem" }}> 23243</h2>
+                      </div>
                         </div>
                       <div className="col-3">
                         <div className='my-4 mx-2'>
@@ -51,10 +143,13 @@ const Dashboard = () => {
                   </div>
             </div>
           <div class="col-sm">
-          <div className="px-4" style={{background:"white"}}>
+          <div className="px-4 shadow bg-white rounded" style={{background:"white"}}>
                   <div className="row">
                   <div className="my-4 text-left col-9">
-                        <h1 style={{ "fontSize":"1.6rem" ,fontWeight:"bolder","height":"5rem"}}>Total Projects</h1>
+                      <div style={{height:"5rem"}}>
+                        <h1 style={{ "fontSize":"1.6rem" ,fontWeight:"bolder",}}>Total Projects :</h1>
+                        <h2 style={{ "fontSize":"1.3rem" }}> 23243</h2>
+                      </div>                        
                         </div>
                         <div className="col-3">
                         <div className='my-4 mx-2'>
@@ -67,10 +162,13 @@ const Dashboard = () => {
                 </div>
           </div>
           <div class="col-sm">
-          <div className="px-4" style={{background:"white"}}>
+          <div className="px-4 shadow bg-white rounded" style={{background:"white"}}>
                   <div className="row">
                   <div className="my-4 text-left col-9">
-                        <h1 style={{ "fontSize":"1.6rem" ,fontWeight:"bolder","height":"5rem"}}>Total Activities</h1>
+                  <div style={{height:"5rem"}}>
+                        <h1 style={{ "fontSize":"1.6rem" ,fontWeight:"bolder",}}>Total Projects :</h1>
+                        <h2 style={{ "fontSize":"1.3rem" }}> 23243</h2>
+                      </div>
                         </div>
                         <div className="col-3">
                         <div className='my-4 mx-2'>
@@ -85,56 +183,69 @@ const Dashboard = () => {
         </div>
         <div>
         <div class='row mx-4 my-5' >
+          <div class='col-6 ' >
+            <div class="p-4 shadow bg-white rounded" style={{"background":"white"}}>
+              <center>
+                <div style={{ width: '400px',height: '300px' }}>
+                  <Chart data={data} axes={axes} />
+                </div>
+              </center>
+            </div>
+          </div>
+          <div class='col-6 ' >
+            <div class="p-4 shadow bg-white rounded" style={{"background":"white"}}>
+              <center>
+                <div style={{ width: '400px', height: '300px' }}>
+                  <Chart data={data} axes={axes} />
+                </div>
+              </center>
+            </div>
+          </div>  
+        </div>  
+        <div class='row mx-4 my-5' >
           <div class='col-8 '>  
-            <table class="table ml-2" style={{background:"white"}}>
-              <thead>
-                <tr>
-                  <th scope="col">Sr. No.</th>
-                  <th scope="col">Idea Name</th>
-                  <th scope="col">No. of members</th>
-                  <th scope="col">Likes</th>
-                </tr>
-              </thead>
-            <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-            </tbody>
-          </table>
+          <div class="ml-2 shadow bg-white rounded" style={{"background":"white"}}>
+            <div className="row my-3 mx-1">
+              <div
+                className="mt-2"
+                style={{ backgroundColor: "white", color: "#B287FF", "fontWeight":"bolder" ,"fontSize":"1.5rem"}}
+              >
+                Top Projects
+              </div>
+            </div>
+          <MDBTable responsive>
+            <MDBTableHead columns={data1.columns} style={{backgroundColor: "#B787FF",color:"white"}}/>
+            <MDBTableBody rows={data1.rows} />
+          </MDBTable>
+            
+        </div>
+            
           </div>
           <div class='col-4'>  
-            <table class="table mr-2" style={{background:"white"}}>
-              <thead>
-                <tr>
-                  <th scope="col">Sr. No.</th>
-                  <th scope="col">Idea Name</th>
-                  <th scope="col">No. of members</th>
-                </tr>
-              </thead>
-            <tbody>
-            {ideas ? (
-                ideas.map((idea, index) => (
-                <tr>
-                  <th scope="row">1</th>
-                  <td>{idea.title}</td>
-                  <td>{(idea.contributors)}</td>
-                </tr>
-                ))
-              ) : (
-                    <>
-                    <div>
-                    </div>
-                    </>
-                )}
-            </tbody>
-          </table>
+          <div class="ml-2 shadow bg-white rounded" style={{"background":"white"}}>
+            <div className="row my-3 mx-1">
+                <div
+                  className="mt-2"
+                  style={{ backgroundColor: "white", color: "#B287FF", "fontWeight":"bolder" ,"fontSize":"1.5rem"}}
+                >
+                  Popular Users
+                </div>
+              </div>
+          <MDBTable responsive>
+            <MDBTableHead columns={data2.columns} style={{backgroundColor: "#B287FF",color:"white"}}/>
+            <MDBTableBody rows={data2.rows} />
+          </MDBTable>
+            
+        </div>
           </div>
         </div>
       </div>
     </div>
+
+          </div>
+        </div>
+      </div>
+      
     </div>
   )
 }
