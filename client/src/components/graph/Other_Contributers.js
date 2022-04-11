@@ -6,8 +6,9 @@ import Idyfy_name from "../../assets/svg/Idyfy_name_Signup.svg";
 import { isMobile } from "react-device-detect";
 import AuthService from "../../services/authservices";
 import { useHistory } from "react-router-dom";
+import profile from "../../assets/svg/Dummy_Profile2.svg";
 
-const OtherContributers = () => {
+const OtherContributers = (props) => {
   //   let subtitle;
   let customStyles;
   if (isMobile) {
@@ -37,6 +38,12 @@ const OtherContributers = () => {
       },
     };
   }
+
+  const selectWhoseIdea = (id) => {
+    props.SetWhosegraph(id);
+    closeModal();
+  };
+
   const [modalIsOpen, setIsOpen] = React.useState(false);
   function openModal() {
     setIsOpen(true);
@@ -63,21 +70,26 @@ const OtherContributers = () => {
         contentLabel="Example Modal"
         ariaHideApp={false}
       >
-        <div className="relative m-auto container">
-          <div className="row">
-            {" "}
-            <img
-              className="mt-2"
-              src={Idyfy_logo}
-              alt="IDYFY "
-              style={{ height: "55px" }}
-            />
+        <div className>
+          <div
+            className="row justify-center p-2 text-white"
+            style={{ "background-color": " #840fcc" }}
+          >
+            Idea name
           </div>
-          <div className="row justify-center m-2">Idea name</div>
-          <div className="row">
-            <div className="col-6"> Profile</div>
-            <div className="col-6">
-              <div class="dropdown mt-2 offset-7 ">
+          <div className="row" style={{ "background-color": "#B287FF" }}>
+            <div className="col-6 ">
+              <div className="row flex justify-center">
+                <div className="row flex justify-center text-white">
+                  Heighest Contributer
+                </div>
+                <img src={profile} alt="My Profile" className="profileimage" />
+              </div>
+              <div className="row flex justify-center">name</div>
+            </div>
+            <div className="col-6 ">
+              <p className="row flex justify-center">Checkout others work</p>
+              <div class="dropdown mt-2  flex justify-center">
                 <button
                   class="btn btn-secondary dropdown-toggle"
                   type="button"
@@ -88,10 +100,8 @@ const OtherContributers = () => {
                   Other Contributers
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <li>
-                    <a class="dropdown-item" href="">
-                      Lex
-                    </a>
+                  <li onClick={() => selectWhoseIdea(/*id*/)}>
+                    <a class="dropdown-item">Lex</a>
                   </li>
                 </ul>
               </div>
