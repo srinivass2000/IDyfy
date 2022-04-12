@@ -25,6 +25,8 @@ const { version_end } = require("../controllers/feature/version_end");
 
 const { idea_details } = require("../controllers/graph/idea_details");
 
+const { pull_idea } = require("../controllers/graph/pull");
+
 router.route("/create-feature").post(protect, create_feature);
 router.route("/get-feature").get(protect, get_feature);
 router.route("/update-feature").put(protect, update_feature);
@@ -36,5 +38,6 @@ router
 router.route("/delete-feature").get(protect, delete_feature);
 router.route("/features-by-parent").get(protect, fetch_features_by_parent);
 router.route("/idea-details").get(protect, idea_details);
+router.route("/pull").get(protect, pull_idea);
 
 module.exports = router;
