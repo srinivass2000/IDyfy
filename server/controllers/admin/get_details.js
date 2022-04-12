@@ -5,28 +5,48 @@ const Comment = require("../../models/Comment");
 
 exports.get_details = async (req, res, next) => {
   
-  let count_ideas = await Idea.count();
-  console.log(count_ideas);
+  try{
+    let count_ideas = await Idea.count();
+    console.log(count_ideas);
 
-  let count_users = await User.count();
-  console.log(count_users);
+    let count_users = await User.count();
+    console.log(count_users);
 
-  let count_comments = await Comment.count();
-  console.log(count_comments);
+    let count_comments = await Comment.count();
+    console.log(count_comments);
 
-  var active_users = await Idea.find().sort(
-    {
-      date:1
-    }
-  );
-  console.log(active_users);
+    var active_ideas = await Idea.find({},{
+      title:1,
+      contributors:1,
+      liked_users:1
+    }).sort(
+      {
+        date:1
+      }
+    ).limit( 20 );
+    console.log(active_users);
 
-  var active_ideas = await User.find().sort(
-    {
+    var active_users = await User.find({},{
+      name:1,
       engagement_score:1
-    }
-  );
-  console.log(active_ideas);
-  
-  };
+    }).sort(
+      {
+        engagement_score:1
+      }
+    );
+    console.log(active_ideas);
+    
+    res.status(200).json({
+      success: true,
+      count_ideas,
+      count_users,
+      count_comments,
+      active_ideas,
+      active_users
+    });
+  } catch (err) {
+    console.log(err);
+    return next(new ErrorResponse(err.message, 500));
+}
+};
   

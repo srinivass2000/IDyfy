@@ -2,10 +2,13 @@ import React from 'react'
 import { useState, useEffect } from "react";
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import Navbar from '../Navbar/Navbar';
+import authHeader from "../../../services/auth-header";
+import axios from "axios";
 
 const User_table = () => {
     const [ideas, setIdeas] = useState([]);
     const [user, setUser] = useState({});
+
 
     const data = {
       columns: [
@@ -35,29 +38,6 @@ const User_table = () => {
           sort: 'asc'
         },
       ],
-      rows: [
-        {
-          'id': 1,
-          'heading0': 'Cell',
-          'heading1': 'Cell',
-          'heading2': 'Cell',
-          'heading3': 'Cell',
-        },
-        {
-          'id': 2,
-          'heading0': 'Cell',
-          'heading1': 'Cell',
-          'heading2': 'Cell',
-          'heading3': 'Cell',
-        },
-        {
-          'id': 3,
-          'heading0': 'Cell',
-          'heading1': 'Cell',
-          'heading2': 'Cell',
-          'heading3': 'Cell',
-        }
-      ]
     };
   
 

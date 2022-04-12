@@ -35,6 +35,7 @@ app.use("/api/comment", require("./routes/comment_routes"));
 app.use("/api/profile", require("./routes/profile_routes"));
 app.use("/api/search", require("./routes/search_routes"));
 app.use("/api/faker", require("./routes/fake_routes"));
+app.use("/api/admin", require("./routes/admin_routes"));
 
 app.get("/file/:filename", async (req, res) => {
   try {

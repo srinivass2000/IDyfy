@@ -1,15 +1,40 @@
 import React from 'react'
 //import axios from "axios";
-//import { useEffect } from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import { Chart } from 'react-charts';
 //import { Bar } from 'react-charts';
-//import authHeader from "../../../services/auth-header";
+import authHeader from "../../../services/auth-header";
 import Navbar from '../Navbar/Navbar';
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
+import axios from "axios";
 
 
 const Dashboard = () => {
+  const [load, setLoad] = useState(true);
+  const [idea, setIdea] = useState({});
+  const [user, setUsers] = useState({});
+  const [contributors, setContributors] = useState([]);
+  
+  const fetchIdea = () => {
+    axios
+      .get(`/api/admin/get-details`, {
+        headers: authHeader(),
+      })
+      .then((res) => {
+        setIdea(res.data.active_users);
+        setUsers(res.data.active_ideas);
+        //setContributors(res.data.contributed_users);
+        console.log(res.data);
+        //setLoad(false);
+      })
+      .catch((err) => console.log(err));
+  };
+  console.log(idea);
+  console.log(user);
+  useEffect(() => {
+    fetchIdea();
+  }, []);
 
   const data1 = {
     columns: [
