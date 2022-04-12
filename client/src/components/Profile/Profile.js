@@ -89,7 +89,11 @@ const Profile = () => {
             </div>
 
             <div className="col-lg-4 col-md-3 flex justify-center">
-              <img src={profile} alt="My Profile" className="profileimage" />
+              <img
+                src={user.profile_pic}
+                alt="My Profile"
+                className="profileimage"
+              />
             </div>
 
             <div className=" col-lg-2 col-md-2">
