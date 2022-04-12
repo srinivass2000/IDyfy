@@ -1,7 +1,7 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import { MDBTable, MDBTableBody, MDBTableHead } from "mdbreact";
-import Navbar from "../Navbar/Navbar";
+// import { useState, useEffect } from "react";
+// import { MDBTable, MDBTableBody, MDBTableHead } from "mdbreact";
+// import Navbar from "../Navbar/Navbar";
 
 const User_table = () => {
   // const [ideas, setIdeas] = useState([]);
