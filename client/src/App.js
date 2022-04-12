@@ -14,7 +14,9 @@ const Starred_ideas = lazy(() =>
 );
 const Admin = lazy(() => import("./components/Admin/admin"));
 const User_table = lazy(() => import("./components/Admin/tables/User_table"));
-const Project_table = lazy(() => import("./components/Admin/tables/Project_table"));
+const Project_table = lazy(() =>
+  import("./components/Admin/tables/Project_table")
+);
 const Profile = lazy(() => import("./components/Profile/Profile"));
 const MyIdeas = lazy(() => import("./components/MyIdeas/myideas"));
 const Idea = lazy(() => import("./components/Idea/idea"));
@@ -45,7 +47,7 @@ const TermsAndConditions = lazy(() =>
 // const Graph = lazy(() => import("./components/oldGraphs/graph"));
 // const Graph_2 = lazy(() => import("./components/oldGraphs/graph_2"));
 //const Graph_3 = lazy(() => import("./components/graph/graph_3"));
-const Graph = lazy(() => import("./components/graph/graph_body"));
+const Graph_body = lazy(() => import("./components/graph/graph_body"));
 // const Graph_4 = lazy(() => import("./components/oldGraphs/graph_4"));
 function App() {
   return (
@@ -95,7 +97,12 @@ function App() {
               exact
               component={Graph_3}
             /> */}
-            <Protectedroute path="/graph/:idea_id" exact component={Graph} />
+            <Protectedroute
+              path="/graph/:idea_id"
+              exact
+              component={Graph_body}
+            />
+
             <Protectedroute path="/ideaEdit/:id" exact component={IdeaEdit} />
             <Protectedroute path="/feaEdit" exact component={FeatureEdit} />
             <Protectedroute path="/profileEdit" exact component={ProfileEdit} />

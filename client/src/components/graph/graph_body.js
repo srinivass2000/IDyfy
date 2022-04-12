@@ -4,12 +4,14 @@ import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import OtherContributers from "./Other_Contributers";
 
 const Graph_body = () => {
+  const [Version, SetVersion] = useState(null);
+  const [Whosegraph, SetWhosegraph] = useState(null);
   const [Edit, SetEdit] = useState(false);
   const canIEdit = (a) => {
     SetEdit(a);
     console.log(a);
   };
-
+  // use params to get ideaId  make api call to get details
   return (
     <>
       <div className="container">
@@ -33,7 +35,7 @@ const Graph_body = () => {
             </ul>
           </div>
           <div className="col-sm-4 col-lg-2 col-4 mt-2">
-            <OtherContributers />
+            <OtherContributers SetWhosegraph={SetWhosegraph} />
           </div>
           <div className="col-sm-4 col-lg-2 col-4 mt-2">
             <button className="btn btn-secondary ">
@@ -56,7 +58,11 @@ const Graph_body = () => {
                 <button onClick={resetTransform}>x</button>
               </div>
               <TransformComponent>
-                <Graph canIEdit={canIEdit} />
+                <Graph
+                  canIEdit={canIEdit}
+                  version={Version}
+                  whosegraph={Whosegraph}
+                />
               </TransformComponent>
             </React.Fragment>
           )}

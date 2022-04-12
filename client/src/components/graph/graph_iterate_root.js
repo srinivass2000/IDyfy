@@ -13,7 +13,7 @@ const Graph_Iterate_root = (props) => {
     console.log(item);
     if (item.show == "nothing") {
       item.show = false;
-      console.log("ew");
+      // console.log("ew");
       localStorage.setItem("idea", JSON.stringify(TreeData));
     }
   };

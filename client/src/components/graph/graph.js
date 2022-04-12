@@ -9,12 +9,13 @@ const Graph = (props) => {
   const { idea_id } = useParams();
   const [Edit, SetEdit] = useState(false);
   const [allLinks, SetAllLinks] = useState([]);
-
+  let version = props.version;
+  let whosegraph = props.whosegraph;
   const [TreeData, SetTreeData] = useState();
   const getChilderen = async (p) => {
     await axios
       .get(
-        `/api/feature/features-by-parent?idea_id=${idea_id}&parent_id=${p}`,
+        `/api/feature/features-by-parent?idea_id=${idea_id}&parent_id=${p}&version=${version}&whosegraph=${whosegraph}`,
         {
           headers: authHeader(),
         }
@@ -243,9 +244,11 @@ const Graph = (props) => {
   useEffect(async () => {
     const idea = JSON.parse(localStorage.getItem("idea"));
     if ((idea ? idea[0]._id : <></>) === idea_id) {
+      // check if the idea is of the same person
       console.log("asa");
+
       SetTreeData(JSON.parse(localStorage.getItem("idea")));
-      // console.log(localStorage.getItem(idea_id));
+
       if (idea[0].canEdit == true) {
         props.canIEdit(true);
         SetEdit(true);
@@ -258,9 +261,12 @@ const Graph = (props) => {
 
       try {
         await axios
-          .get(`/api/feature/features-by-parent?idea_id=${idea_id}`, {
-            headers: authHeader(),
-          })
+          .get(
+            `/api/feature/features-by-parent?idea_id=${idea_id}&version=${version}&whosegraph=${whosegraph}`,
+            {
+              headers: authHeader(),
+            }
+          )
           .then(
             (res) => {
               SetTreeData(res.data.features);
