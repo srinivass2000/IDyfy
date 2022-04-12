@@ -1,10 +1,9 @@
-import React from 'react'
+import React from "react";
 import { useState, useEffect } from "react";
-import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import Navbar from '../Navbar/Navbar';
 import authHeader from "../../../services/auth-header";
 import axios from "axios";
-
+import Table from 'react-bootstrap/Table'
 
 const Project_table = () => {
     const [ideas, setIdeas] = useState([]);
@@ -74,10 +73,26 @@ const Project_table = () => {
           </div>
 
           <div class="mx-5 shadow-lg rounded" style={{"background":"white"}}>
-          <MDBTable responsive>
-            <MDBTableHead columns={data.columns} style={{backgroundColor: "#B787FF"}}/>
-            <MDBTableBody rows={data.rows} />
-          </MDBTable>
+          <Table responsive="sm">
+    <thead>
+      <tr>
+        <th>Sr. No.</th>
+        <th>Idea Name</th>
+        <th>No. of Contributors</th>
+        <th>No. of Likes</th>
+        <th>No. of Comments</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Table cell</td>
+        <td>Table cell</td>
+        <td>Table cell</td>
+        <td>Table cell</td>
+      </tr>
+    </tbody>
+  </Table>
           </div>
         </div>
       </div>

@@ -21,20 +21,18 @@ exports.get_details = async (req, res, next) => {
       liked_users:1
     }).sort(
       {
-        date:1
+        date:-1
       }
     ).limit( 20 );
-    console.log(active_users);
 
     var active_users = await User.find({},{
       name:1,
       engagement_score:1
     }).sort(
       {
-        engagement_score:1
+        engagement_score:-1
       }
     );
-    console.log(active_ideas);
     
     res.status(200).json({
       success: true,

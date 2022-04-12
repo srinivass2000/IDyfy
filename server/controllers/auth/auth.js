@@ -43,11 +43,13 @@ exports.register = async (req, res, next) => {
 
   if (!user) {
     try {
+      const profile_pic = `https://ui-avatars.com/api/?name=${name}`;
       user = await User.create({
         name,
         email,
         password,
         emailVerified: false,
+        profile_pic,
       });
 
       emailVerification(user, res, next);

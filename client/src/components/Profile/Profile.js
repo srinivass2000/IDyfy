@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./profile.css";
-import profile from "../../assets/svg/Dummy_Profile2.svg";
+// import profile from "../../assets/svg/Dummy_Profile2.svg";
 import authHeader from "../../services/auth-header";
 import Footer from "../Footer/footer";
 import { useLocation } from "react-router-dom";
@@ -83,13 +83,17 @@ const Profile = () => {
             </div>
             <div className=" col-lg-2 col-md-3">
               <div className="flex justify-center">
-                {user.engagement_score || "0"}
+                {user.engagement_score.toFixed(2) || "0"}
               </div>
               <h6 className="flex justify-center"> Engagement score </h6>
             </div>
 
             <div className="col-lg-4 col-md-3 flex justify-center">
-              <img src={profile} alt="My Profile" className="profileimage" />
+              <img
+                src={user.profile_pic}
+                alt="My Profile"
+                className="profileimage"
+              />
             </div>
 
             <div className=" col-lg-2 col-md-2">

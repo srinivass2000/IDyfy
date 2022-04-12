@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar/navbar";
 import Loader from "./components/Loader/loader";
-
+// const AdminNavbar = lazy(() => import("./components/Admin/Navbar/AdminNavbar"));
 const Home = lazy(() => import("./components/Home/home"));
 const FeedPage = lazy(() => import("./components/Feed_Page/feedpage"));
 const Notification = lazy(() =>
@@ -14,7 +14,9 @@ const Starred_ideas = lazy(() =>
 );
 const Admin = lazy(() => import("./components/Admin/admin"));
 const User_table = lazy(() => import("./components/Admin/tables/User_table"));
-const Project_table = lazy(() => import("./components/Admin/tables/Project_table"));
+const Project_table = lazy(() =>
+  import("./components/Admin/tables/Project_table")
+);
 const Profile = lazy(() => import("./components/Profile/Profile"));
 const MyIdeas = lazy(() => import("./components/MyIdeas/myideas"));
 const Idea = lazy(() => import("./components/Idea/idea"));
@@ -22,7 +24,6 @@ const Feature = lazy(() => import("./components/feature/feature"));
 const IdeaEdit = lazy(() => import("./components/Idea/ideaedit"));
 const FeatureEdit = lazy(() => import("./components/feature/editFeature"));
 const ProfileEdit = lazy(() => import("./components/Profile/profileedit"));
-// import { isMobile } from "react-device-detect";
 const Error = lazy(() => import("./components/error/error_404"));
 const VerifyEmail = lazy(() => import("./components/verifyemail/verify"));
 const Protectedroute = lazy(() => import("./components/protectedroutes"));
@@ -41,13 +42,9 @@ const TermsAndConditions = lazy(() =>
   import("./components/policies/terms_and_conditions")
 );
 
-// const GraphTest = lazy(() => import("./components/oldGraphs/test_graph"));
-// const Graph = lazy(() => import("./components/oldGraphs/graph"));
-// const Graph_2 = lazy(() => import("./components/oldGraphs/graph_2"));
-//const Graph_3 = lazy(() => import("./components/graph/graph_3"));
-const Graph = lazy(() => import("./components/graph/graph_body"));
-// const Graph_4 = lazy(() => import("./components/oldGraphs/graph_4"));
-function App() {
+const Graph_body = lazy(() => import("./components/graph/graph_body"));
+
+const home = ({ match }) => {
   return (
     <div className="App">
       <BrowserRouter>
@@ -60,17 +57,13 @@ function App() {
           }
         >
           <Switch>
-            <Route path="/noti" exact component={Notification} />
-            <Route path="/" exact component={Home} />
+            <Route path={match.url} exact={true} component={Home} />
             <Protectedroute path="/feed" exact component={FeedPage} />
             <Protectedroute
               path="/notification"
               exact
               component={Notification}
             />
-            <Route path="/admin" exact component={Admin} />
-            <Route path="/admin/users" exact component={User_table} />
-            <Route path="/admin/projects" exact component={Project_table} />
             <Protectedroute path="/starred" exact component={Starred_ideas} />
             <Protectedroute path="/profile" exact component={Profile} />
             <Protectedroute path="/myideas" exact component={MyIdeas} />
@@ -86,16 +79,11 @@ function App() {
               exact
               component={Feature}
             />
-            {/* <Protectedroute path="/graphtest" exact component={GraphTest} /> */}
-            {/* <Protectedroute path="/graph" exact component={Graph} /> */}
-            {/* <Protectedroute path="/graph_2" exact component={Graph_2} /> */}
-            {/* <Protectedroute path="/graph_4" exact component={Graph_4} /> */}
-            {/* <Protectedroute
-              path="/graph_3/:idea_id"
+            <Protectedroute
+              path="/graph/:idea_id"
               exact
-              component={Graph_3}
-            /> */}
-            <Protectedroute path="/graph/:idea_id" exact component={Graph} />
+              component={Graph_body}
+            />
             <Protectedroute path="/ideaEdit/:id" exact component={IdeaEdit} />
             <Protectedroute path="/feaEdit" exact component={FeatureEdit} />
             <Protectedroute path="/profileEdit" exact component={ProfileEdit} />
@@ -107,6 +95,47 @@ function App() {
             <Route path="/" component={Error} />
           </Switch>
         </Suspense>
+      </BrowserRouter>
+    </div>
+  );
+};
+
+const AdminSection = ({ match }) => {
+  return (
+    <div>
+      <BrowserRouter>
+        <Suspense
+          fallback={
+            <div>
+              <Loader />
+            </div>
+          }
+        >
+          {/* <AdminNavbar /> */}
+          <Switch>
+            <Route path={match.url} exact component={Admin} />
+            <Route path={match.url + "/users"} exact component={User_table} />
+            <Route
+              path={match.url + "/projects"}
+              exact
+              component={Project_table}
+            />
+            <Route path="/" component={Error} />
+          </Switch>
+        </Suspense>
+      </BrowserRouter>
+    </div>
+  );
+};
+
+function App() {
+  return (
+    <div>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/admin" component={AdminSection} />
+          <Route path="/" component={home} />
+        </Switch>
       </BrowserRouter>
     </div>
   );
