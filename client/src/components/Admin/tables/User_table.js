@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from "react";
-import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
+//import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import Navbar from '../Navbar/Navbar';
 import authHeader from "../../../services/auth-header";
 import axios from "axios";
@@ -143,10 +143,7 @@ return (
         </div>
 
         <div class="mx-5 shadow-lg rounded" style={{"background":"white"}}>
-        <MDBTable responsive>
-          <MDBTableHead columns={data.columns} style={{backgroundColor: "#B787FF"}}/>
-          <MDBTableBody rows={data.rows} />
-        </MDBTable>
+        
         </div>
       </div>
     </div>
