@@ -87,10 +87,6 @@ exports.fetch_features_by_parent = async (req, res, next) => {
 
     //if idea_id isequal to parent_id
     if (idea_id != null) {
-      // var idea = await Idea.findById(idea_id, {
-      //   title: true,
-      //   contributors: 1,
-      // });
       var Feature = mongoose.model(`features_${idea_id}`, FeatureSchema);
 
       var results = await Feature.find(

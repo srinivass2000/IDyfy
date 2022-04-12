@@ -15,13 +15,15 @@ const { delete_feature } = require("../controllers/feature/delete_feature");
 
 const {
   fetch_features_by_parent,
-} = require("../controllers/feature/feature_by_parent");
+} = require("../controllers/graph/feature_by_parent");
 
 const {
   fetch_features_version_wise,
 } = require("../controllers/feature/fetch_features_by_version");
 
 const { version_end } = require("../controllers/feature/version_end");
+
+const { idea_details } = require("../controllers/graph/idea_details");
 
 router.route("/create-feature").post(protect, create_feature);
 router.route("/get-feature").get(protect, get_feature);
@@ -33,5 +35,6 @@ router
   .get(protect, fetch_features_version_wise);
 router.route("/delete-feature").get(protect, delete_feature);
 router.route("/features-by-parent").get(protect, fetch_features_by_parent);
+router.route("/idea-details").get(protect, idea_details);
 
 module.exports = router;
