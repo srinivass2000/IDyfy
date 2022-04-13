@@ -1,5 +1,5 @@
-module.exports = function template (emailVerificationUrl) {
-    let message=`
+module.exports = function template(emailVerificationUrl) {
+  let message = `
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
   <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
@@ -222,7 +222,7 @@ module.exports = function template (emailVerificationUrl) {
                               <div>
                                 <a
                                   href=${emailVerificationUrl}
-                                  class="button button--blue"
+                                  class="button button--blue text-white"
                                   >Verify Email</a
                                 >
                               </div>
@@ -274,6 +274,6 @@ module.exports = function template (emailVerificationUrl) {
         </tr>
       </table>
     </body>
-  </html>`
+  </html>`;
   return message;
-}
+};

@@ -12,12 +12,28 @@ exports.pull_idea = async (req, res, next) => {
     if (idea) {
       var Feature = mongoose.model(`features_${idea_id}`, FeatureSchema);
 
+      console.log(Feature);
+      console.log(idea);
+      let contributors;
+      contributors = idea.contributors;
+      contributors.push(req.user._id.toString());
+      // console.log(contributors);
+      let ideas_details;
+      ideas_details = idea.ideas_details;
+      console.log(ideas_details);
+      ideas_details[req.user._id.toString()] = ideas_details[from.toString()];
       var idea = await Idea.findByIdAndUpdate(idea._id, {
-        $push: { contributers: req.user._id.toString() },
+        // $push: { contributers: [req.user._id.toString()] },
+        contributors,
+        ideas_details,
       });
 
-      var user = await User.findByIdAndUpdate(req.user._id, {
-        $push: { ideas_contributed: idea._id.toString() },
+      await User.findByIdAndUpdate(req.user._id, {
+        $push: { ideas_contributed: [idea._id.toString()] },
+      });
+
+      await User.findByIdAndUpdate(from.toString(), {
+        $inc: { engagement_score: 5 },
       });
 
       var result = await Feature.updateMany(
@@ -26,7 +42,7 @@ exports.pull_idea = async (req, res, next) => {
           contributors: { $in: [from.toString()] },
         },
         {
-          $push: { contributors: req.user._id.toString() },
+          $push: { contributors: [req.user._id.toString()] },
           // contributors: { $push: req.user._id.toString() },
         }
       );

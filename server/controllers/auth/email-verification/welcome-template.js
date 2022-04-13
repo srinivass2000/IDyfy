@@ -267,9 +267,9 @@ module.exports = function template(name) {
                                     style="text-decoration: none; color: #ffffff"
                                   >
                                     <img
-                                      src="../../../client/src/assets/svg/Idyfy_name.svg"
-                                      width="140"
-                                      height="47"
+                                      src="https://i.ibb.co/7p0d0K5/idyfy-footer-1.png"
+                                      width=auto
+                                      height="300"
                                       alt="IDyfy"
                                       border="0"
                                       style="
