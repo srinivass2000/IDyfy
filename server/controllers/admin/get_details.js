@@ -7,13 +7,13 @@ exports.get_details = async (req, res, next) => {
   
   try{
     let count_ideas = await Idea.count();
-    console.log(count_ideas);
+    //console.log(count_ideas);
 
     let count_users = await User.count();
-    console.log(count_users);
+    //console.log(count_users);
 
     let count_comments = await Comment.count();
-    console.log(count_comments);
+    //console.log(count_comments);
 
     var active_ideas = await Idea.find({},{
       title:1,
