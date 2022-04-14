@@ -7,13 +7,13 @@ import axios from "axios";
 
 const User_table = () => {
   const [idea, setIdea] = useState({});
-  const [user, setUsers] = useState({});
+  const [user, setUsers] = useState();
   //const [count_ideas, setCount_ideas] = useState([]);
   //const [count_users, setCount_users] = useState([]);
   //const [count_comments, setCount_comments] = useState([]);
 
-  const fetchIdea = () => {
-    axios
+  const fetchIdea = async () => {
+    await axios
       .get(`/api/admin/get-users`, {
         headers: authHeader(),
       })
@@ -24,23 +24,25 @@ const User_table = () => {
         //setCount_users(res.data.count_users);
         //setCount_comments(res.data.count_comments);
         //setContributors(res.data.contributed_users);
-        //console.log(res.data);
+        console.log(res.data);
         //setLoad(false);
       })
       .catch((err) => console.log(err));
   };
+
+  // const userarray =[];
+  // user.map((use, index) => (
+  //   console.log(use)
+  //  ));
+
+  //console.log(userarray);
+
   useEffect(() => {
     fetchIdea();
   }, []);
 
-// const userarray =[]; 
-// user.map((use, index) => (   
-//   console.log(use)
-//  ));
- 
-//console.log(userarray);
+  console.log(user);
 
-console.log(user);
   const data = {
     columns: [
       {
@@ -73,15 +75,15 @@ console.log(user);
 
   return (
     <div>
-      <div class="my-5">
+      <div className="my-5">
         <div className="row my-3 mx-3">
-          <div class="col-2 ">
-            <div class="">
+          <div className="col-2 ">
+            <div className="">
               <Navbar />
             </div>
           </div>
-          <div class="col-10 ">
-            <div class="my-5">
+          <div className="col-10 ">
+            <div className="my-5">
               <div
                 className="mx-5 mb-3 shadow-lg  rounded-2"
                 style={{
@@ -95,11 +97,11 @@ console.log(user);
               </div>
 
               <div
-                class="mx-5 shadow-lg rounded"
+                className="mx-5 shadow-lg rounded"
                 style={{ background: "white" }}
               >
-                <div class="table-responsive">
-                  <table class="table">
+                <div className="table-responsive">
+                  <table className="table">
                     <thead>
                       <tr>
                         <th>Sr. No.</th>
@@ -112,16 +114,32 @@ console.log(user);
                       </tr>
                     </thead>
                     <tbody>
-                      {/* {user.map((use, index) => (   
-                              <tr key={index}>
-                                <td>{index}</td>
-                                <td>{use.name}</td>
-                                <td>{(use.ideas_contributed).length}</td>
-                                <td>{(use.following).length}</td>
-                                <td>{(use.followers).length}</td>
-                                <td>{(use.engagement_score).toFixed(2)}</td>
-                              </tr>
-                          ))}   */}
+                      {user ? (
+                        user.map((use, index) => (
+                          <tr key={index + 1}>
+                            <td>{index + 1}</td>
+                            <td>{use.name}</td>
+                            <td>{use.email}</td>
+                            <td>{use.ideas_contributed.length}</td>
+                            <td>{use.following.length}</td>
+                            <td>{use.followers.length}</td>
+                            <td>
+                              {use.engagement_score
+                                ? use.engagement_score.toFixed(2)
+                                : "N.A"}
+                            </td>
+                          </tr>
+                        ))
+                      ) : (
+                        <>
+                          <div
+                            className="spinner-border place-content-center"
+                            role="status"
+                          >
+                            <span class="visually-hidden">Loading...</span>
+                          </div>
+                        </>
+                      )}
                     </tbody>
                   </table>
                 </div>

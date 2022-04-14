@@ -14,7 +14,7 @@ const Project_table = () => {
       })
       .then((res) => {
         setIdeas(res.data.final);
-        //console.log(res.data.result);
+        console.log(res.data);
       })
       .catch((err) => console.log(err));
   };
@@ -22,19 +22,19 @@ const Project_table = () => {
     fetchIdea();
   }, []);
 
-  console.log(ideas);
+  // console.log(ideas);
 
   return (
     <div>
-      <div class="my-5">
+      <div className="my-5">
         <div className="row my-3 mx-3">
-          <div class="col-2 ">
-            <div class="">
+          <div className="col-2 ">
+            <div className="">
               <Navbar />
             </div>
           </div>
-          <div class="col-10 ">
-            <div class="my-5">
+          <div className="col-10 ">
+            <div className="my-5">
               <div
                 className="mx-5 mb-3 shadow-lg  rounded-2"
                 style={{
@@ -48,11 +48,11 @@ const Project_table = () => {
               </div>
 
               <div
-                class="mx-5 shadow-lg rounded"
+                className="mx-5 shadow-lg rounded"
                 style={{ background: "white" }}
               >
-                <div class="table-responsive">
-                  <table class="table">
+                <div className="table-responsive">
+                  <table className="table">
                     <thead>
                       <tr>
                         <th>Sr. No.</th>
@@ -64,14 +64,27 @@ const Project_table = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                      </tr>
+                      {ideas ? (
+                        ideas.map((idea, index) => (
+                          <tr key={index + 1}>
+                            <td>{index + 1}</td>
+                            <td>{idea.title}</td>
+                            <td>{idea.contributors.length}</td>
+                            <td>{idea.liked_users.length}</td>
+                            <td>{idea.shares.length}</td>
+                            <td>{idea.comment_count}</td>
+                          </tr>
+                        ))
+                      ) : (
+                        <>
+                          <div
+                            className="spinner-border place-content-center"
+                            role="status"
+                          >
+                            <span class="visually-hidden">Loading...</span>
+                          </div>
+                        </>
+                      )}
                     </tbody>
                   </table>
                 </div>

@@ -9,13 +9,13 @@ const Error_500 = () => {
   return (
     <>
       <div id="notfound">
-        <div class="notfound">
-          <div class="notfound-404">
+        <div className="notfound">
+          <div className="notfound-404">
             <h1>Oops!</h1>
             <h2>500 - Internal Server Error</h2>
             {/* <p> Please try again later</p> */}
           </div>
-          <Link class="link" to="/">
+          <Link className="link" to="/">
             Go TO Homepage
           </Link>
         </div>
