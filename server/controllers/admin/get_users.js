@@ -9,12 +9,15 @@ exports.get_users = async (req, res, next) => {
           name:1,
           email:1,
           ideas_contributed:1,
+          followers:1,
+          following:1,
           engagement_score:1 
         })
           .sort({ createdAt: -1 });
+        //console.log(result);
         res.status(200).json({
           success: true,
-          users: result,
+          result,
         });
       } catch (err) {
         console.log(err);

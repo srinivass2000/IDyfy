@@ -1,39 +1,37 @@
-import React from 'react'
+import React from "react";
 //import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
-import { Chart } from 'react-charts';
-//import { Bar } from 'react-charts';
+import { Chart } from "react-charts";
+import { Bar } from "react-charts";
 import authHeader from "../../../services/auth-header";
-import Navbar from '../Navbar/Navbar';
+import Navbar from "../Navbar/Navbar";
+import "../dashboard/Dashboard.css";
 //import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import axios from "axios";
 //import Table from 'react-bootstrap/Table'
 
-
 const Dashboard = () => {
-  const [load, setLoad] = useState(true);
+  const [ideas, setIdeas] = useState();
+  const [User, setUser] = useState();
   const [idea, setIdea] = useState({});
   const [user, setUsers] = useState({});
-  const [contributors, setContributors] = useState([]);
   const [count_ideas, setCount_ideas] = useState([]);
   const [count_users, setCount_users] = useState([]);
   const [count_comments, setCount_comments] = useState([]);
-  
+
   const fetchIdea = () => {
     axios
       .get(`/api/admin/get-details`, {
         headers: authHeader(),
       })
       .then((res) => {
-        setIdea(res.data.active_users);
-        setUsers(res.data.active_ideas);
+        setUsers(res.data.active_users);
+        setIdea(res.data.active_ideas);
         setCount_ideas(res.data.count_ideas);
         setCount_users(res.data.count_users);
         setCount_comments(res.data.count_comments);
-        //setContributors(res.data.contributed_users);
         //console.log(res.data);
-        //setLoad(false);
       })
       .catch((err) => console.log(err));
   };
@@ -41,36 +39,14 @@ const Dashboard = () => {
     fetchIdea();
   }, []);
 
-  //  {idea ? (
-  //    idea.map((ide, index) => (
-  //     console.log(ide.title)  
-  //    ))
-  //    ) : (
-  //      <>
-  //        <div>
-  //        </div>
-  //      </>
-  //    )}
+  //console.log(1);
+  console.log(idea);
+  console.log(user);
+  // idea.map((ide, index) => (
+  //console.log(ide.title)
+  //))
+
   //console.log(count_ideas);
-  const data2 = { 
-    columns: [
-      {
-        label: "Sr. No.",
-        field: "id",
-        sort: "asc",
-      },
-      {
-        label: "Name",
-        field: "heading0",
-        sort: "asc",
-      },
-      {
-        label: "Engage Score",
-        field: "heading2",
-        sort: "asc",
-      },
-    ],
-  };
 
   const data = React.useMemo(
     () => [
@@ -95,37 +71,39 @@ const Dashboard = () => {
     ],
     []
   );
+  const series = React.useMemo(
+    () => ({
+      type: "bar",
+    }),
+    []
+  );
   const axes2 = React.useMemo(
     () => [
-      { primary: true, type: "linear", position: "bottom" },
-      { type: "linear", position: "left" },
+      { primary: true, type: "ordinal", position: "bottom" },
+      { position: "left", type: "linear", stacked: false, show: false },
     ],
     []
   );
-
-  const [ideas, setIdeas] = useState();
-  const [User, setUser] = useState();
 
   return (
     <div>
       <div class="">
         <div class="row mx-3">
-          <div class="col-2 ">
-            <div class="my-5">
+          <div class="col-2 my-5">
+            <div class="my-3">
               <Navbar />
             </div>
           </div>
-
           <div class="col-10">
-            <div class="container ">
+            <div class="container-fluid mn">
               <div class="row mx-4 my-5">
-                <div class="col-sm">
+                <div class="col-md-4 my-3">
                   <div
-                    className="px-4 shadow bg-white rounded"
+                    class="px-4 shadow bg-white rounded"
                     style={{ background: "white" }}
                   >
-                    <div className="row">
-                      <div className="my-4 text-left col-9">
+                    <div class="row">
+                      <div class="my-4 text-left col-9">
                         <div style={{ height: "5rem" }}>
                           <h1
                             style={{ fontSize: "1.6rem", fontWeight: "bolder" }}
@@ -135,12 +113,12 @@ const Dashboard = () => {
                           <h2 style={{ fontSize: "1.3rem" }}> {count_users}</h2>
                         </div>
                       </div>
-                      <div className="col-3">
-                        <div className="my-4 mx-2">
+                      <div class="col-3">
+                        <div class="my-4 mx-2 man">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            width="56"
-                            height="56"
+                            width="3rem"
+                            height="3rem"
                             fill="currentColor"
                             class="bi bi-people"
                             viewBox="0 0 16 16"
@@ -152,24 +130,24 @@ const Dashboard = () => {
                     </div>
                   </div>
                 </div>
-                <div class="col-sm">
+                <div class="col-md-4 my-3">
                   <div
-                    className="px-4 shadow bg-white rounded"
+                    class="px-4 shadow bg-white rounded"
                     style={{ background: "white" }}
                   >
-                    <div className="row">
-                      <div className="my-4 text-left col-9">
+                    <div class="row">
+                      <div class="my-4 text-left col-9">
                         <div style={{ height: "5rem" }}>
                           <h1
                             style={{ fontSize: "1.6rem", fontWeight: "bolder" }}
                           >
-                            Total Projects : 
+                            Total Projects :
                           </h1>
                           <h2 style={{ fontSize: "1.3rem" }}> {count_ideas}</h2>
                         </div>
                       </div>
-                      <div className="col-3">
-                        <div className="my-4 mx-2">
+                      <div class="col-3">
+                        <div class="my-4 mx-2 ">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="56"
@@ -185,24 +163,27 @@ const Dashboard = () => {
                     </div>
                   </div>
                 </div>
-                <div class="col-sm">
+                <div class="col-md-4 my-3">
                   <div
-                    className="px-4 shadow bg-white rounded"
+                    class="px-4 shadow bg-white rounded"
                     style={{ background: "white" }}
                   >
-                    <div className="row">
-                      <div className="my-4 text-left col-9">
+                    <div class="row">
+                      <div class="my-4 text-left col-9">
                         <div style={{ height: "5rem" }}>
                           <h1
                             style={{ fontSize: "1.6rem", fontWeight: "bolder" }}
                           >
                             Total Activities :
                           </h1>
-                          <h2 style={{ fontSize: "1.3rem" }}> {count_comments}</h2>
+                          <h2 style={{ fontSize: "1.3rem" }}>
+                            {" "}
+                            {count_comments}
+                          </h2>
                         </div>
                       </div>
-                      <div className="col-3">
-                        <div className="my-4 mx-2">
+                      <div class="col-3">
+                        <div class="my-4 mx-2 ">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="56"
@@ -223,41 +204,49 @@ const Dashboard = () => {
                 </div>
               </div>
               <div>
+                
+              </div>
+              <div class=" container-fluid">
                 <div class="row mx-4 my-5">
-                  <div class="col-6 ">
+                  <div class="col-md my-3">
                     <div
                       class="p-4 shadow bg-white rounded"
                       style={{ background: "white" }}
                     >
                       <center>
-                        <div style={{ width: "400px", height: "300px" }}>
+                        <div style={{ width: "19rem", height: "19rem" }}>
                           <Chart data={data} axes={axes} />
                         </div>
                       </center>
                     </div>
                   </div>
-                  <div class="col-6 ">
+                  <div class="col-md my-3">
                     <div
                       class="p-4 shadow bg-white rounded"
                       style={{ background: "white" }}
                     >
                       <center>
-                        <div style={{ width: "400px", height: "300px" }}>
-                          <Chart data={data} axes={axes} />
+                        <div style={{ width: "19rem", height: "19rem" }}>
+                          <Chart
+                            data={data}
+                            series={series}
+                            axes={axes2}
+                            tooltip
+                          />
                         </div>
                       </center>
                     </div>
                   </div>
                 </div>
                 <div class="row mx-4 my-5">
-                  <div class="col-8 ">
+                  <div class="col-md">
                     <div
                       class="ml-2 shadow bg-white rounded"
                       style={{ background: "white" }}
                     >
-                      <div className="row my-3 mx-1">
+                      <div class="row my-3 mx-1">
                         <div
-                          className="mt-2"
+                          class="mt-2"
                           style={{
                             backgroundColor: "white",
                             color: "#B287FF",
@@ -269,43 +258,42 @@ const Dashboard = () => {
                         </div>
                       </div>
                       <div class="table-responsive">
-                      <table class="table">
-                        <thead>
-                          <tr style={{ backgroundColor: "#B287FF", color: "white" }}>
-                            <th>Sr. No.</th>
-                            <th>Idea Name</th>
-                            <th>No. of Contributors</th>
-                            <th>No. of Likes</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                           {/* {idea ? ( 
-                          idea.map((ide, index) => (   
-                              <tr>
-                                <td>{index}</td>
-                                <td>{ide.title}</td>
-                                <td>{(ide.contributors).length}</td>
-                                <td>{(ide.liked_users).length}</td>
-                              </tr>
-                          ))
-                             ) : (
-                               <>
-                                 <div>
-                                 </div>
-                               </>
-                             )}          */}
-                        </tbody>
-                      </table></div>
+                        <table class="table">
+                          <thead>
+                            <tr
+                              style={{
+                                backgroundColor: "#B287FF",
+                                color: "white",
+                              }}
+                            >
+                              <th>Sr. No.</th>
+                              <th>Idea Name</th>
+                              <th>No. of Contributors</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {/* {idea.map((ide, index) => (   
+                                <tr key={index}>
+                                  <td>{index}</td>
+                                  <td>{ide.title}</td>
+                                  <td>{(ide.contributors).length}</td>
+                                  <td>{(ide.liked_users).length}</td>
+                                </tr>
+                            ))
+                              }           */}
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
                   </div>
-                  <div class="col-4">
+                  <div class="col-md">
                     <div
                       class="ml-2 shadow bg-white rounded"
                       style={{ background: "white" }}
                     >
-                      <div className="row my-3 mx-1">
+                      <div class="row my-3 mx-1">
                         <div
-                          className="mt-2"
+                          class="mt-2"
                           style={{
                             backgroundColor: "white",
                             color: "#B287FF",
@@ -317,31 +305,29 @@ const Dashboard = () => {
                         </div>
                       </div>
                       <div class="table-responsive">
-                      <table class="table">
-                        <thead>
-                          <tr style={{ backgroundColor: "#B287FF", color: "white" }}>
-                            <th>Sr. No.</th>
-                            <th>Name</th>
-                            <th>Engagement Score</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {/* {user ? ( 
-                          user.map((use, index) => (   
-                              <tr>
+                        <table class="table">
+                          <thead>
+                            <tr
+                              style={{
+                                backgroundColor: "#B287FF",
+                                color: "white",
+                              }}
+                            >
+                              <th>Sr. No.</th>
+                              <th>Name</th>
+                              <th>Engagement Score</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {/* {user.map((use, index) => (   
+                              <tr key={index}>
                                 <td>{index}</td>
                                 <td>{use.name}</td>
-                                <td>{(use.engagement_score)}</td>
+                                <td>{(use.engagement_score).toFixed(2)}</td>
                               </tr>
-                          ))
-                             ) : (
-                               <>
-                                 <div>
-                                 </div>
-                               </>
-                             )}         */}
-                        </tbody>
-                      </table>
+                          ))}          */}
+                          </tbody>
+                        </table>
                       </div>
                     </div>
                   </div>

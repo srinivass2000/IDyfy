@@ -23,7 +23,7 @@ exports.get_details = async (req, res, next) => {
       {
         date:-1
       }
-    ).limit( 20 );
+    ).limit( 10 );
 
     var active_users = await User.find({},{
       name:1,
@@ -32,7 +32,7 @@ exports.get_details = async (req, res, next) => {
       {
         engagement_score:-1
       }
-    );
+    ).limit( 10 );
     
     res.status(200).json({
       success: true,

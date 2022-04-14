@@ -1,0 +1,12 @@
+@media (max-width: 1400px) {
+    .mn{
+        width: 1360px;
+    }
+}
+
+
+@media (max-width: 1100px) {
+    .man{
+        width: 900px;
+    }
+}
