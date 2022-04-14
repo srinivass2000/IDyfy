@@ -59,7 +59,7 @@ const home = ({ match }) => {
           <Switch>
             <Route path={match.url} exact={true} component={Home} />
             <Protectedroute path="/feed" exact component={FeedPage} />
-            <Protectedroute
+            <Route
               path="/notification"
               exact
               component={Notification}

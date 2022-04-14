@@ -41,7 +41,7 @@ const Notification = () => {
                 <div className="px-4" style={{background:"#D6BEFF"}}>
                   <div className="row">
                     <div className="my-2 text-left col-10">
-                      <h1 style={{ "fontSize":"1.2rem" ,fontWeight:"bolder"}}>Head</h1>
+                      <h1 style={{ "fontSize":"1.2rem" ,fontWeight:"bolder"}}>Deleted</h1>
                       <p>lorem...</p>
                       <div className="mt-4"><button className="btn btn-sm" style={{border:"1px solid black"}}>Close</button></div>
                     </div>
@@ -63,7 +63,7 @@ const Notification = () => {
                 <div className="px-4" style={{background:"#D6BEFF"}}>
                   <div className="row">
                     <div className="my-2 text-left col-10">
-                      <h1 style={{ "fontSize":"1.2rem" ,fontWeight:"bolder"}}>Head</h1>
+                      <h1 style={{ "fontSize":"1.2rem" ,fontWeight:"bolder"}}>Feature Added</h1>
                       <p>lorem...</p>
                       <div className="mt-4"><button className="btn btn-sm" style={{border:"1px solid black"}}>Close</button></div>
                     </div>
@@ -89,7 +89,7 @@ const Notification = () => {
                 <div className="px-4" style={{background:"#D6BEFF"}}>
                   <div className="row">
                     <div className="my-2 text-left col-10">
-                      <h1 style={{ "fontSize":"1.2rem" ,fontWeight:"bolder"}}>Head</h1>
+                      <h1 style={{ "fontSize":"1.2rem" ,fontWeight:"bolder"}}>Idea Pulled</h1>
                       <p>lorem...</p>
                       <div className="mt-4"><button className="btn btn-sm" style={{border:"1px solid black"}}>Close</button></div>
                     </div>
@@ -111,7 +111,7 @@ const Notification = () => {
                 <div className="px-4" style={{background:"#D6BEFF"}}>
                   <div className="row">
                     <div className="my-2 text-left col-10">
-                      <h1 style={{ "fontSize":"1.2rem" ,fontWeight:"bolder"}}>Head</h1>
+                      <h1 style={{ "fontSize":"1.2rem" ,fontWeight:"bolder"}}>Idea Created</h1>
                       <p>lorem...</p>
                       <div className="mt-4"><button className="btn btn-sm" style={{border:"1px solid black"}}>Close</button></div>
                     </div>
@@ -126,7 +126,7 @@ const Notification = () => {
               </div>
             </div>
           </div>
-          <div className="row mx-2">
+          {/* <div className="row mx-2">
             <div className="col col-4">
               <div className="mx-5" style={{background:"#D6BEFF"}}>
               
@@ -138,7 +138,7 @@ const Notification = () => {
                   <button className="btn my-2" style={{"background":"#840FCC","color":"white","width":"80%"}}>Open</button>                                  </div>
                 </div>
               </div>  
-            </div>
+            </div> */}
           </div>
       </div>
     </div>

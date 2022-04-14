@@ -1,19 +1,18 @@
-// import { MDBNavLink } from "mdbreact";
 import React from "react";
 import { Link } from "react-router-dom";
 import "../Navbar/Navbar.css";
 const Navbar = () => {
   return (
   <div>
-    <nav>
-        <ul class="mcd-menu">
-          <div>
+    <nav class="">
+        <ul class="mcd-menu bg-white">
+          <div class="">
             <center>
-              <div class="py-4">
+              <div class="py-4 d-none d-lg-block">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="76"
-                  height="76"
+                  width="6rem"
+                  height="6rem"
                   fill="currentColor"
                   class="bi bi-person-circle"
                   viewBox="0 0 16 16"
@@ -25,29 +24,59 @@ const Navbar = () => {
                   />
                 </svg>
               </div>
-              Tejas Zambaulikar
+              <span class = "d-none d-lg-block man">Tejas Zambaulikar</span>
             </center>
           </div>
           <hr class="mt-3" style={{ height: "4px", background: "purple" }} />
           <li>
             <Link to="/admin">
-              <center>
-                <strong>Dashboard</strong>
-              </center>
+                <strong>
+                  <div class="row">
+                    <div class="col-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-back" viewBox="0 0 16 16">
+                        <path d="M0 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2z"/>
+                      </svg>  
+                    </div>
+                    <div class="col-10 d-none d-lg-block man">
+                      Dashboard
+                    </div>
+                  </div>
+                  </strong>
             </Link>
           </li>
           <li>
             <Link to="/admin/projects">
-              <center>
-                <strong>Projects</strong>
-              </center>
+            <strong>
+                  <div class="row">
+                    <div class="col-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-terminal-fill" viewBox="0 0 16 16">
+  <path d="M0 3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3zm9.5 5.5h-3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1zm-6.354-.354a.5.5 0 1 0 .708.708l2-2a.5.5 0 0 0 0-.708l-2-2a.5.5 0 1 0-.708.708L4.793 6.5 3.146 8.146z"/>
+</svg> 
+                    </div>
+                    <div class="col-10 d-none d-lg-block man">
+                      Projects
+                    </div>
+                  </div>
+                  </strong>
             </Link>
           </li>
           <li>
             <Link to="/admin/users">
-              <center>
-                <strong>Users</strong>
-              </center>
+            <strong>
+                  <div class="row">
+                    <div class="col-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+                          <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                          <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/>
+                          <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+                        </svg>  
+                    </div>
+
+                    <div class="col-md-10 d-none d-lg-block man">
+                      Users
+                    </div>
+                  </div>
+                  </strong>
             </Link>
           </li>
         </ul>
