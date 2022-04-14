@@ -8,17 +8,17 @@ const User = require("../../models/User");
 
 exports.update_feature = async (req, res, next) => {
   try {
-    const { id, title, idea_id, parent_id, content, version_start } = req.body;
+    const { id, title, idea_id, parent_id, content } = req.body;
 
-    // var user_id = req.user._id;
-
-    var updated_content, content_hash;
+    var updated_content, content_hash, version;
 
     const idea = await Idea.findById(idea_id);
 
     if (!idea) {
       return next(new ErrorResponse("Idea not found!", 404));
     }
+
+    version = idea.ideas_details[req.user._id.toString()] + 1;
 
     var Feature = mongoose.model(`features_${idea_id}`, FeatureSchema);
 
@@ -28,27 +28,35 @@ exports.update_feature = async (req, res, next) => {
     const initial = await Feature.findById(id);
 
     hashed_content = crypto.createHash("sha256").update(content).digest("hex");
+
+    console.log("----------------------------------------------------");
+
     console.log(hashed_content);
+
+    console.log("----------------------------------------------------");
+
+    console.log(initial.content_hash);
+
+    console.log("----------------------------------------------------");
 
     if (hashed_content === initial.content_hash) {
       updated_content = 0;
+      return next(new ErrorResponse("No Change Detected", 500));
     } else {
       updated_content = 1;
       content_hash = hashed_content;
       console.log("here");
     }
 
-    a = req.user._id.toString();
-    console.log(a);
     console.log(initial.version_start);
-    console.log(idea.ideas_details[a] + 1);
+    console.log(idea.ideas_details[req.user._id.toString()] + 1);
 
     if (
       initial.version_start ===
         idea.ideas_details[req.user._id.toString()] + 1 ||
       initial.version_end === 0
     ) {
-      const response = await Feature.findOneAndUpdate(
+      await Feature.findOneAndUpdate(
         {
           _id: id,
         },
@@ -72,7 +80,7 @@ exports.update_feature = async (req, res, next) => {
         var engagement_score = req.user.engagement_score + 0.1;
       }
 
-      var user = await User.findByIdAndUpdate(req.user._id, {
+      await User.findByIdAndUpdate(req.user._id, {
         engagement_score,
       });
 
@@ -84,18 +92,15 @@ exports.update_feature = async (req, res, next) => {
     } else {
       const response = await Feature.create({
         title: title,
-        // user_id: req.user._id.toString(),
-        // $push: { contributors: req.user._id.toString() },
         contributors: [req.user._id.toString()],
         idea_id: idea_id,
         parent_id: parent_id,
         content: content,
-        // level,
-        version_start: version_start,
+        version_start: version,
         content_hash: content_hash,
         updated_content,
         available: true,
-        updated_version: version_start,
+        updated_version: version,
       });
 
       var prev_feature = await Feature.findOneAndUpdate(
@@ -103,8 +108,8 @@ exports.update_feature = async (req, res, next) => {
           _id: id,
         },
         {
-          version_end: version_start,
-          updated_version: version_start,
+          version_end: version,
+          updated_version: version,
           updated_feature: response._id.toString(),
           available: undefined,
         }
@@ -116,7 +121,7 @@ exports.update_feature = async (req, res, next) => {
         var engagement_score = req.user.engagement_score + 0.1;
       }
 
-      var user = await User.findByIdAndUpdate(req.user._id, {
+      await User.findByIdAndUpdate(req.user._id, {
         engagement_score,
       });
 

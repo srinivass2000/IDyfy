@@ -50,7 +50,7 @@ exports.delete_feature = async (req, res, next) => {
         var engagement_score = req.user.engagement_score - 0.1;
       }
 
-      var user = await User.findByIdAndUpdate(req.user._id, {
+      await User.findByIdAndUpdate(req.user._id, {
         engagement_score,
       });
 

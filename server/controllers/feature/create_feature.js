@@ -6,8 +6,7 @@ const User = require("../../models/User");
 
 exports.create_feature = async (req, res, next) => {
   try {
-    const { title, idea_id, parent_id, content, version_start, level } =
-      req.body;
+    const { title, idea_id, parent_id, content } = req.body;
 
     var Feature = mongoose.model(`features_${idea_id}`, FeatureSchema);
 
@@ -23,16 +22,17 @@ exports.create_feature = async (req, res, next) => {
       engagement_score,
     });
 
+    const idea = await Idea.findById(idea_id);
+
+    var version = idea.ideas_details[req.user._id.toString()];
+
     const feature = await Feature.create({
       title,
-      // user_id: req.user._id.toString(),
-      // $push: { contributors: req.user._id.toString() },
       contributors: [req.user._id.toString()],
       idea_id,
       parent_id,
       content,
-      version_start,
-      level,
+      version_start: ++version,
       available: true,
     });
     res.status(200).json({

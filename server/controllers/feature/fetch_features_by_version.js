@@ -6,7 +6,7 @@ const { FeatureSchema } = require("../../models/Feature");
 
 exports.fetch_features_version_wise = async (req, res, next) => {
   try {
-    const { idea_id, version_start, version_end } = req.body;
+    const { idea_id, version } = req.body;
 
     var Feature = mongoose.model(`features_${idea_id}`, FeatureSchema);
 
@@ -16,15 +16,12 @@ exports.fetch_features_version_wise = async (req, res, next) => {
       //   $and: [
       //     {
       version_start: {
-        $gte: version_start,
+        $lte: version,
       },
-      // },
-      // {
       version_end: {
-        $lte: version_end,
+        $gte: version,
       },
-      //     },
-      //   ],
+
       contributors: { $in: [req.user._id.toString()] },
     });
 
