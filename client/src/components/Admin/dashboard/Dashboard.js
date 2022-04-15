@@ -13,9 +13,9 @@ import axios from "axios";
 
 const Dashboard = () => {
   const [ideas, setIdeas] = useState();
-  const [User, setUser] = useState();
-  const [idea, setIdea] = useState({});
-  const [user, setUsers] = useState({});
+  const [users, setUsers] = useState();
+  // const [idea, setIdea] = useState({});
+  // const [user, setUsers] = useState({});
   const [count_ideas, setCount_ideas] = useState([]);
   const [count_users, setCount_users] = useState([]);
   const [count_comments, setCount_comments] = useState([]);
@@ -27,11 +27,11 @@ const Dashboard = () => {
       })
       .then((res) => {
         setUsers(res.data.active_users);
-        setIdea(res.data.active_ideas);
+        setIdeas(res.data.active_ideas);
         setCount_ideas(res.data.count_ideas);
         setCount_users(res.data.count_users);
         setCount_comments(res.data.count_comments);
-        //console.log(res.data);
+        console.log(res.data);
       })
       .catch((err) => console.log(err));
   };
@@ -40,8 +40,8 @@ const Dashboard = () => {
   }, []);
 
   //console.log(1);
-  console.log(idea);
-  console.log(user);
+  console.log(ideas);
+  console.log(users);
   // idea.map((ide, index) => (
   //console.log(ide.title)
   //))
@@ -177,7 +177,6 @@ const Dashboard = () => {
                             Total Activities :
                           </h1>
                           <h2 style={{ fontSize: "1.3rem" }}>
-                            {" "}
                             {count_comments}
                           </h2>
                         </div>
@@ -270,15 +269,29 @@ const Dashboard = () => {
                             </tr>
                           </thead>
                           <tbody>
-                            {/* {idea.map((ide, index) => (   
-                                <tr key={index}>
-                                  <td>{index}</td>
-                                  <td>{ide.title}</td>
-                                  <td>{(ide.contributors).length}</td>
-                                  <td>{(ide.liked_users).length}</td>
+                            {ideas ? (
+                              ideas.map((idea, index) => (
+                                <tr key={index + 1}>
+                                  <td>{index + 1}</td>
+                                  <td>{idea.title}</td>
+                                  <td align="center">
+                                    {idea.contributors.length}
+                                  </td>
+                                  {/* <td>{idea.liked_users.length}</td> */}
                                 </tr>
-                            ))
-                              }           */}
+                              ))
+                            ) : (
+                              <>
+                                <div
+                                  className="spinner-border place-content-center"
+                                  role="status"
+                                >
+                                  <span class="visually-hidden">
+                                    Loading...
+                                  </span>
+                                </div>
+                              </>
+                            )}
                           </tbody>
                         </table>
                       </div>
@@ -317,13 +330,30 @@ const Dashboard = () => {
                             </tr>
                           </thead>
                           <tbody>
-                            {/* {user.map((use, index) => (   
-                              <tr key={index}>
-                                <td>{index}</td>
-                                <td>{use.name}</td>
-                                <td>{(use.engagement_score).toFixed(2)}</td>
-                              </tr>
-                          ))}          */}
+                            {users ? (
+                              users.map((user, index) => (
+                                <tr key={index + 1}>
+                                  <td>{index + 1}</td>
+                                  <td>{user.name}</td>
+                                  <td>
+                                    {user.engagement_score
+                                      ? user.engagement_score.toFixed(2)
+                                      : "N.A"}
+                                  </td>
+                                </tr>
+                              ))
+                            ) : (
+                              <>
+                                <div
+                                  className="spinner-border place-content-center"
+                                  role="status"
+                                >
+                                  <span class="visually-hidden">
+                                    Loading...
+                                  </span>
+                                </div>
+                              </>
+                            )}
                           </tbody>
                         </table>
                       </div>
