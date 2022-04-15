@@ -1,10 +1,42 @@
-@media all and (min-width: 480px) {
-    .Login {
-      padding: 60px 0;
-    }
+body { 
+	background: #EEE; 
+	overflow-x:hidden;
+}
+
+.formsize{
+  width : "20%";
+}
+.button2{
+  background-color: #ffffff;
+  color: #000000;
+}
+.button:hover{
+  background-color: #000153;
+  color: #ffffff;
+}
+.button2:hover{
+  background-color: #000000;
+  color: #ffffff
+}
+.right{
+  background-color: #00255C;
+}
+.heighty{
+  margin: auto;
+}
+.welcome{
+  color: #B287FF;
+  font-size:large;
   
-    .Login form {
-      margin: 0 auto;
-      max-width: 320px;
-    }
-  }
+}
+.create_text{
+  color: #C7A8FF;
+  font-size: small;
+}
+.form_box{
+  background-color: #E5D7FF;
+}
+.stones{
+  transform: scaleX(-1);
+}
+

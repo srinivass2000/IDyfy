@@ -1,36 +1,33 @@
 import React from "react";
-//import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Chart } from "react-charts";
-import { Bar } from "react-charts";
+//import { Bar } from "react-charts";
 import authHeader from "../../../services/auth-header";
 import Navbar from "../Navbar/Navbar";
 import "../dashboard/Dashboard.css";
-//import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import axios from "axios";
-//import Table from 'react-bootstrap/Table'
 
 const Dashboard = () => {
-  const [ideas, setIdeas] = useState();
-  const [User, setUser] = useState();
+  //const [ideas, setIdeas] = useState();
+  //const [User, setUser] = useState();
   const [idea, setIdea] = useState({});
   const [user, setUsers] = useState({});
   const [count_ideas, setCount_ideas] = useState([]);
   const [count_users, setCount_users] = useState([]);
   const [count_comments, setCount_comments] = useState([]);
 
-  const fetchIdea = () => {
-    axios
+  const fetchIdea = async () => {
+    await axios
       .get(`/api/admin/get-details`, {
         headers: authHeader(),
       })
       .then((res) => {
-        setUsers(res.data.active_users);
         setIdea(res.data.active_ideas);
+        setUsers(res.data.active_users);
+        setCount_comments(res.data.count_comments);
         setCount_ideas(res.data.count_ideas);
         setCount_users(res.data.count_users);
-        setCount_comments(res.data.count_comments);
         //console.log(res.data);
       })
       .catch((err) => console.log(err));
@@ -42,11 +39,13 @@ const Dashboard = () => {
   //console.log(1);
   console.log(idea);
   console.log(user);
+  console.log(count_users);
+  console.log(count_comments);
   // idea.map((ide, index) => (
   //console.log(ide.title)
   //))
 
-  //console.log(count_ideas);
+  console.log(count_ideas);
 
   const data = React.useMemo(
     () => [
@@ -270,15 +269,24 @@ const Dashboard = () => {
                             </tr>
                           </thead>
                           <tbody>
-                            {/* {idea.map((ide, index) => (   
-                                <tr key={index}>
-                                  <td>{index}</td>
-                                  <td>{ide.title}</td>
-                                  <td>{(ide.contributors).length}</td>
-                                  <td>{(ide.liked_users).length}</td>
-                                </tr>
-                            ))
-                              }           */}
+                          {/* {idea ? (
+                        idea.map((idea, index) => (
+                          <tr key={index + 1}>
+                            <td>{index + 1}</td>
+                            <td>{idea.title}</td>
+                            <td>{idea.contributors.length}</td>
+                            </tr>
+                        ))
+                      ) : (
+                        <>
+                          <div
+                            className="spinner-border place-content-center"
+                            role="status"
+                          >
+                            <span className="visually-hidden">Loading...</span>
+                          </div>
+                        </>
+                      )} */}
                           </tbody>
                         </table>
                       </div>
@@ -317,13 +325,28 @@ const Dashboard = () => {
                             </tr>
                           </thead>
                           <tbody>
-                            {/* {user.map((use, index) => (   
-                              <tr key={index}>
-                                <td>{index}</td>
-                                <td>{use.name}</td>
-                                <td>{(use.engagement_score).toFixed(2)}</td>
-                              </tr>
-                          ))}          */}
+                          {/* {user ? (
+                        user.map((use, index) => (
+                          <tr key={index + 1}>
+                            <td>{index + 1}</td>
+                            <td>{use.name}</td>
+                            <td>
+                              {use.engagement_score
+                                ? use.engagement_score.toFixed(2)
+                                : "N.A"}
+                            </td>
+                          </tr>
+                        ))
+                      ) : (
+                        <>
+                          <div
+                            className="spinner-border place-content-center"
+                            role="status"
+                          >
+                            <span className="visually-hidden">Loading...</span>
+                          </div>
+                        </>
+                      )} */}
                           </tbody>
                         </table>
                       </div>

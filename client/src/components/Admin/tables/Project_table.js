@@ -81,7 +81,7 @@ const Project_table = () => {
                             className="spinner-border place-content-center"
                             role="status"
                           >
-                            <span class="visually-hidden">Loading...</span>
+                            <span className="visually-hidden">Loading...</span>
                           </div>
                         </>
                       )}

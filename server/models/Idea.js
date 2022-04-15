@@ -32,5 +32,5 @@ IdeaSchema.index({
 
 const Idea = mongoose.model("Idea", IdeaSchema);
 
-Idea.ensureIndexes();
+Idea.createIndexes();
 module.exports = Idea;

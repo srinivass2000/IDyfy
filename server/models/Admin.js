@@ -3,9 +3,10 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 
 const AdminSchema = new mongoose.Schema({
-    name: {
+    username: {
         type: String,
-        required: [true, "Please provide fullname"],
+        required: [true, "Please provide user name"],
+        unique: true,
       },
       email: {
         type: String,
@@ -38,7 +39,7 @@ const AdminSchema = new mongoose.Schema({
   next();
 });
 
-UserSchema.methods.matchPassword = async function (password) {
+AdminSchema.methods.matchPassword = async function (password) {
     return await bcrypt.compare(password, this.password);
   };
 

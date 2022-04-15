@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar/navbar";
 import Loader from "./components/Loader/loader";
+import Login from "./components/Auth/Login";
 // const AdminNavbar = lazy(() => import("./components/Admin/Navbar/AdminNavbar"));
 const Home = lazy(() => import("./components/Home/home"));
 const FeedPage = lazy(() => import("./components/Feed_Page/feedpage"));
@@ -13,6 +14,7 @@ const Starred_ideas = lazy(() =>
   import("./components/Starred_Ideas/starred_ideas")
 );
 const Admin = lazy(() => import("./components/Admin/admin"));
+const A_Login = lazy(() => import("./components/Admin/auth/Auth"));
 const User_table = lazy(() => import("./components/Admin/tables/User_table"));
 const Project_table = lazy(() =>
   import("./components/Admin/tables/Project_table")
@@ -114,6 +116,7 @@ const AdminSection = ({ match }) => {
           {/* <AdminNavbar /> */}
           <Switch>
             <Route path={match.url} exact component={Admin} />
+            <Route path={match.url + "/login"} exact component={A_Login} />
             <Route path={match.url + "/users"} exact component={User_table} />
             <Route
               path={match.url + "/projects"}
