@@ -1,11 +1,15 @@
 import React from "react";
 import SignUp from "../Auth/SignUp";
 import Login from "../Auth/Login";
+import Banner from "./landing-page/banner";
+import About from "./landing-page/about";
 
 const Home = () => {
   return (
-    <div className="container">
-      <div className="row mt-5">
+    <div>
+      <Banner />
+      <About />
+      {/* <div className="row mt-5">
         <h1 className="offset-2 col-8 text-white text-6xl bold mb-8">
           Welcome to IDyfy!
         </h1>
@@ -19,7 +23,7 @@ const Home = () => {
         <div className="row">
           <Login />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
