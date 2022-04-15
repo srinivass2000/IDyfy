@@ -22,7 +22,7 @@ exports.fetch_features_version_wise = async (req, res, next) => {
         $gte: version,
       },
 
-      contributors: { $in: [req.user._id.toString()] },
+      // contributors: { $in: [req.user._id.toString()] },
     });
 
     res.status(200).json({

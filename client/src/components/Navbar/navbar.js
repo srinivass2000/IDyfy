@@ -16,6 +16,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import authHeader from "../../services/auth-header";
+import SignUp from "../Auth/SignUp";
+import Login from "../Auth/Login";
 
 const Navbar = () => {
   const url = "/search/";
@@ -227,6 +229,14 @@ const Navbar = () => {
                     <img src={search} alt="Search" style={{ height: "20px" }} />
                   </Link>
                 </form>
+              </div>
+              <div className="md:flex pl-8">
+                <button className="text-white mr-4">
+                  <Login />
+                </button>
+                <button className="text-white px-4 py-3">
+                  <SignUp />
+                </button>
               </div>
             </div>
           )}
