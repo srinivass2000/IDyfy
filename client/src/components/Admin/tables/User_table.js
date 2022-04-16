@@ -8,7 +8,7 @@ import axios from "axios";
 const User_table = () => {
   const [idea, setIdea] = useState({});
   const [user, setUsers] = useState();
-  
+
   const fetchIdea = async () => {
     await axios
       .get(`/api/admin/get-users`, {

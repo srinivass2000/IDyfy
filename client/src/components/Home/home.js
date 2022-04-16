@@ -3,12 +3,16 @@ import SignUp from "../Auth/SignUp";
 import Login from "../Auth/Login";
 import Banner from "./landing-page/banner";
 import About from "./landing-page/about";
+import Features from "./landing-page/features";
+import Footer from "./landing-page/footer";
 
 const Home = () => {
   return (
     <div>
       <Banner />
       <About />
+      <Features />
+      <Footer />
       {/* <div className="row mt-5">
         <h1 className="offset-2 col-8 text-white text-6xl bold mb-8">
           Welcome to IDyfy!

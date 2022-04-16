@@ -2,8 +2,8 @@ import React from "react";
 
 const About = () => {
   return (
-    <div name="about" className="w-full my-32">
-      <div className="max-w-[1240px] mx-auto">
+    <div name="about" className="w-full lg:mt-56 xl:mt-8">
+      <div className="max-w-[1240px] mx-auto px-2">
         <div className="text-center">
           <h2 className="text-5xl font-bold text-white">
             Trusted by public across the world
@@ -20,7 +20,7 @@ const About = () => {
             <p className="text-6xl font-bold text-indigo-600">500+</p>
             <p className="text-gray-400 mt-2">IDEAS</p>
           </div>
-          <div className="border py-8 rounded-xl shadow-xl mx-4">
+          <div className="border py-8 rounded-xl shadow-xl mx-4 sm:my-4 md:my-0">
             <p className="text-6xl font-bold text-indigo-600">24/7</p>
             <p className="text-gray-400 mt-2">SUPPORT</p>
           </div>

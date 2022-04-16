@@ -211,10 +211,10 @@ const Navbar = () => {
           ) : (
             <div className=" d-flex justify-content-end">
               <div
-                className="collapse navbar-collapse"
+                className="collapse navbar-collapse items-center"
                 id="navbarSupportedContent"
               >
-                <form>
+                <form className="items-center">
                   <input
                     type="search"
                     className="h-10 mr-2 p-1 rounded-xl z-0 focus:shadow focus:outline-none border"
@@ -229,14 +229,14 @@ const Navbar = () => {
                     <img src={search} alt="Search" style={{ height: "20px" }} />
                   </Link>
                 </form>
-              </div>
-              <div className="md:flex pl-8">
-                <button className="text-white mr-4">
-                  <Login />
-                </button>
-                <button className="text-white px-4 py-3">
-                  <SignUp />
-                </button>
+                <div className="md:flex pl-8">
+                  <button className="text-white mr-4">
+                    <Login />
+                  </button>
+                  <button className="text-white px-4 py-3">
+                    <SignUp />
+                  </button>
+                </div>
               </div>
             </div>
           )}
