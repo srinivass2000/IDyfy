@@ -6,7 +6,6 @@ const AdminSchema = new mongoose.Schema({
     username: {
         type: String,
         required: [true, "Please provide user name"],
-        unique: true,
       },
       email: {
         type: String,

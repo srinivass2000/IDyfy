@@ -26,25 +26,25 @@ const Project_table = () => {
 
   return (
     <div>
-      <div className="my-5">
-        <div className="row my-3 mx-3">
-          <div className="col-2 ">
+      <div className="col-12 ">
             <div className="">
               <Navbar />
             </div>
           </div>
-          <div className="col-10 ">
+      <div className="my-5">
+        <div className="row my-3 mx-3">
+          <div className="col-12">
             <div className="my-5">
               <div
                 className="mx-5 mb-3 shadow-lg  rounded-2"
                 style={{
-                  backgroundColor: "#BF51FF",
+                  backgroundColor: "midnightblue",
                   color: "white",
                   fontWeight: "bolder",
                   fontSize: "2rem",
                 }}
               >
-                PROJECT TABLE
+                <div class="d-flex justify-content-center my-9">PROJECT TABLE</div>
               </div>
 
               <div

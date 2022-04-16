@@ -10,7 +10,7 @@ import { useHistory } from "react-router-dom";
 
 const Login = () => {
   const initialState = {
-    username: "",
+    email: "",
     password: "",
   };
   const history = useHistory();
@@ -21,7 +21,7 @@ const Login = () => {
       await AuthService.login(formdata.username, formdata.password).then(
         (res) => {
           if (res.status === 202) {
-            history.push("/admin");
+            history.push("/admin/Dashboard");
             closeModal();
             setFormData(initialState);
           }
@@ -30,7 +30,7 @@ const Login = () => {
     } catch (e) {
       console.log(e);
     }
-    console.log(formdata);
+    // console.log(formdata);
   };
   // const forgotpassword = async (e) => {
   //   e.preventDefault();
@@ -118,7 +118,7 @@ const Login = () => {
               <div className="flex justify-center mt-4 mx-3">
                 <input
                   type="text"
-                  name="username"
+                  name="email"
                   onChange={handleChange}
                   className="form-control form_box"
                   placeholder="User Name"

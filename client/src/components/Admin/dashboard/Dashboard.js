@@ -84,39 +84,40 @@ const Dashboard = () => {
 
   return (
     <div>
-      <div className="">
-        <div className="row mx-3">
-          <div className="col-2 my-5">
+      <div className=" my-5">
             <div className="my-3">
               <Navbar />
             </div>
           </div>
-          <div className="col-10">
+      <div className="">
+        <div className="row mx-3">
+          <div className="col-12">
             <div className="container-fluid mn">
-              <div className="row mx-4 my-5">
-                <div className="col-md-4 my-3">
+              <div className="row mx-5 my-5">
+                <div className="col-4 my-3">
                   <div
-                    className="px-4 shadow bg-white rounded"
-                    style={{ background: "white" }}
+                    className="px-4 shadow  rounded"
+                    style={{ background: "#321FDB",height:"180px" }}
                   >
                     <div className="row">
-                      <div className="my-4 text-left col-9">
+                      <div className="my-4 text-left col-8">
                         <div style={{ height: "5rem" }}>
-                          <h1
-                            style={{ fontSize: "1.6rem", fontWeight: "bolder" }}
+                          <h1 
+                            className="ml-3"
+                            style={{ fontSize: "1.7rem", fontWeight: "bold",color:"white" }}
                           >
                             Total Users :
                           </h1>
-                          <h2 style={{ fontSize: "1.3rem" }}> {count_users}</h2>
+                          <h2 className="mt-1" style={{ fontSize: "1.3rem" }}> {count_users}</h2>
                         </div>
                       </div>
-                      <div className="col-3">
-                        <div className="my-4 mx-2 man">
+                      <div className="col-4">
+                        <div className="my-4 ml-5 ">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="3rem"
                             height="3rem"
-                            fill="currentColor"
+                            fill="white"
                             className="bi bi-people"
                             viewBox="0 0 16 16"
                           >
@@ -127,29 +128,30 @@ const Dashboard = () => {
                     </div>
                   </div>
                 </div>
-                <div className="col-md-4 my-3">
+                <div className="col-4 my-3">
                   <div
-                    className="px-4 shadow bg-white rounded"
-                    style={{ background: "white" }}
+                    className="px-4 shadow  rounded"
+                    style={{ background: "#F9B115",height:"180px" }}
                   >
                     <div className="row">
-                      <div className="my-4 text-left col-9">
+                      <div className="my-4 text-left col-8">
                         <div style={{ height: "5rem" }}>
                           <h1
-                            style={{ fontSize: "1.6rem", fontWeight: "bolder" }}
+                            className="ml-3"
+                            style={{ fontSize: "1.7rem", fontWeight: "bold",color:"white" }}
                           >
                             Total Projects :
                           </h1>
-                          <h2 style={{ fontSize: "1.3rem" }}> {count_ideas}</h2>
+                          <h2 className="mt-1" style={{ fontSize: "1.3rem" }}> {count_ideas}</h2>
                         </div>
                       </div>
-                      <div className="col-3">
-                        <div className="my-4 mx-2 ">
+                      <div className="col-4">
+                        <div className="my-4 ml-5 ">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="56"
                             height="56"
-                            fill="currentColor"
+                            fill="white"
                             className="bi bi-people"
                             viewBox="0 0 16 16"
                           >
@@ -160,31 +162,32 @@ const Dashboard = () => {
                     </div>
                   </div>
                 </div>
-                <div className="col-md-4 my-3">
+                <div className="col-4 my-3">
                   <div
-                    className="px-4 shadow bg-white rounded"
-                    style={{ background: "white" }}
+                    className="px-4 shadow  rounded"
+                    style={{ background: "#E55353" ,height:"180px"}}
                   >
                     <div className="row">
-                      <div className="my-4 text-left col-9">
+                      <div className="my-4 text-left col-8">
                         <div style={{ height: "5rem" }}>
                           <h1
-                            style={{ fontSize: "1.6rem", fontWeight: "bolder" }}
+                            className="ml-3"
+                            style={{ fontSize: "1.7rem", fontWeight: "bold",color:"white" }}
                           >
                             Total Activities :
                           </h1>
-                          <h2 style={{ fontSize: "1.3rem" }}>
+                          <h2 className="mt-1" style={{ fontSize: "1.3rem" }}>
                             {count_comments}
                           </h2>
                         </div>
                       </div>
-                      <div className="col-3">
-                        <div className="my-4 mx-2 ">
+                      <div className="col-4">
+                        <div className="my-4 ml-5 ">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="56"
                             height="56"
-                            fill="currentColor"
+                            fill="white"
                             className="bi bi-people"
                             viewBox="0 0 16 16"
                           >
@@ -206,15 +209,15 @@ const Dashboard = () => {
                     <div
                       className="p-4 shadow bg-white rounded"
                       style={{ background: "white" }}
-                    >
+                    ><h1 className="mb-4 ml-3" style={{ fontSize: "2.0rem", fontWeight: "bold",color:"black" }}>Traffic</h1>
                       <center>
-                        <div style={{ width: "19rem", height: "19rem" }}>
+                        <div style={{ width: "69rem", height: "19rem" }}>
                           <Chart data={data} axes={axes} />
                         </div>
                       </center>
                     </div>
                   </div>
-                  <div className="col-md my-3">
+                  {/* <div className="col-md my-3">
                     <div
                       className="p-4 shadow bg-white rounded"
                       style={{ background: "white" }}
@@ -230,7 +233,7 @@ const Dashboard = () => {
                         </div>
                       </center>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="row mx-4 my-5">
                   <div className="col-md">
@@ -243,7 +246,7 @@ const Dashboard = () => {
                           className="mt-2"
                           style={{
                             backgroundColor: "white",
-                            color: "#B287FF",
+                            color: "midnightblue",
                             fontWeight: "bolder",
                             fontSize: "1.5rem",
                           }}
@@ -256,7 +259,7 @@ const Dashboard = () => {
                           <thead>
                             <tr
                               style={{
-                                backgroundColor: "#B287FF",
+                                backgroundColor: "midnightblue",
                                 color: "white",
                               }}
                             >
@@ -304,7 +307,7 @@ const Dashboard = () => {
                           className="mt-2"
                           style={{
                             backgroundColor: "white",
-                            color: "#B287FF",
+                            color: "midnightblue",
                             fontWeight: "bolder",
                             fontSize: "1.5rem",
                           }}
@@ -317,7 +320,7 @@ const Dashboard = () => {
                           <thead>
                             <tr
                               style={{
-                                backgroundColor: "#B287FF",
+                                backgroundColor: "midnightblue",
                                 color: "white",
                               }}
                             >

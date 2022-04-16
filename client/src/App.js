@@ -111,8 +111,8 @@ const AdminSection = ({ match }) => {
         >
           {/* <AdminNavbar /> */}
           <Switch>
-            <Route path={match.url} exact component={Admin} />
-            <Route path={match.url + "/login"} exact component={A_Login} />
+            <Route path={match.url} exact component={A_Login} />
+            <Route path={match.url + "/dashboard"} exact component={Admin} />
             <Route path={match.url + "/users"} exact component={User_table} />
             <Route
               path={match.url + "/projects"}
