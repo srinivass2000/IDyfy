@@ -53,6 +53,8 @@ const login = (email, remember, password) => {
         // console.log(res.status);
         // console.log(res.data);
         if (res.status === 202) {
+          if (localStorage.getItem("AdminToken"))
+            localStorage.removeItem("AdminToken");
           localStorage.setItem("UserToken", res.data.token);
           // alert("succcessfully logged in");
           notify1();

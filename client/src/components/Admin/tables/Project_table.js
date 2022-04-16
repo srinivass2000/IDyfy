@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import Navbar from "../Navbar/Navbar";
-import authHeader from "../../../services/auth-header";
+import authHeader from "../auth/auth-header";
 import axios from "axios";
 
 const Project_table = () => {
@@ -27,10 +27,10 @@ const Project_table = () => {
   return (
     <div>
       <div className="col-12 ">
-            <div className="">
-              <Navbar />
-            </div>
-          </div>
+        <div className="">
+          <Navbar />
+        </div>
+      </div>
       <div className="my-5">
         <div className="row my-3 mx-3">
           <div className="col-12">
@@ -44,7 +44,9 @@ const Project_table = () => {
                   fontSize: "2rem",
                 }}
               >
-                <div class="d-flex justify-content-center my-9">PROJECT TABLE</div>
+                <div class="d-flex justify-content-center my-9">
+                  PROJECT TABLE
+                </div>
               </div>
 
               <div

@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 //import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import Navbar from "../Navbar/Navbar";
-import authHeader from "../../../services/auth-header";
+import authHeader from "../auth/auth-header";
 import axios from "axios";
 
 const User_table = () => {

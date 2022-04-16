@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import "../auth/Login.css";
 import Idyfy_logo from "../../../assets/svg/Idyfy_logo.svg";
 import Stones from "../../../assets/svg/stones1.svg";
 import Idyfy_name from "../../../assets/svg/Idyfy_name_Signup.svg";
 import { isMobile } from "react-device-detect";
-import AuthService from "../../../services/authservices";
+import AuthService from "./authservices";
 import { useHistory } from "react-router-dom";
 
 const Login = () => {
@@ -18,29 +18,18 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await AuthService.login(formdata.username, formdata.password).then(
-        (res) => {
-          if (res.status === 202) {
-            history.push("/admin/Dashboard");
-            closeModal();
-            setFormData(initialState);
-          }
+      await AuthService.login(formdata.email, formdata.password).then((res) => {
+        if (res.status === 202) {
+          history.push("/admin/dashboard");
+          closeModal();
+          setFormData(initialState);
         }
-      );
+      });
     } catch (e) {
       console.log(e);
     }
     // console.log(formdata);
   };
-  // const forgotpassword = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     await AuthService.forgotpswd(formdata.email);
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
-
   const GoBack = () => {
     history.push("/feed");
   };
@@ -90,6 +79,16 @@ const Login = () => {
   }
   //modal end
 
+  const check_if_token = () => {
+    if (localStorage.getItem("AdminToken")) {
+      history.push("/admin/dashboard");
+    }
+  };
+
+  useEffect(() => {
+    check_if_token();
+  });
+
   return (
     <div className="">
       <div className="mr-1 h-10 px-3 rounded">
@@ -100,6 +99,8 @@ const Login = () => {
             alt="IDYFY "
             style={{ height: "250px" }}
           />
+
+          <h1> Welcome to the Admin Section of IDyfy</h1>
           <button
             type="button"
             className="text-white mt-4 bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -110,7 +111,7 @@ const Login = () => {
           <br />
           <button
             type="button"
-            class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-black dark:hover:bg-gray-700"
+            className="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-black dark:hover:bg-gray-700"
             onClick={GoBack}
           >
             Go Back
@@ -137,11 +138,11 @@ const Login = () => {
               </div>
               <div className="flex justify-center mt-4 mx-3">
                 <input
-                  type="text"
+                  type="email"
                   name="email"
                   onChange={handleChange}
                   className="form-control form_box"
-                  placeholder="User Name"
+                  placeholder="Email Address"
                 />
               </div>
               <div className="flex justify-center mt-3 mx-3">

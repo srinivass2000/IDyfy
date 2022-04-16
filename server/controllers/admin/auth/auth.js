@@ -25,8 +25,34 @@ exports.login = async (req, res, next) => {
       return next(new ErrorResponse("Invalid credentials", 401));
     }
 
-    
+    sendToken(user, 202, res);
   } catch (err) {
     next(err);
   }
+};
+
+exports.register = async (req, res, next) => {
+  const { username, email, password } = req.body;
+  let user = await User.findOne({ email });
+
+  if (!user) {
+    try {
+      user = await User.create({
+        username,
+        email,
+        password,
+      });
+
+      sendToken(user, 202, res);
+    } catch (err) {
+      next(err);
+    }
+  } else {
+    return next(new ErrorResponse("User already Exists!", 401));
+  }
+};
+
+const sendToken = (user, statusCode, res) => {
+  const token = user.getSignedJwtToken();
+  res.status(statusCode).json({ success: true, token });
 };
