@@ -33,7 +33,7 @@ const Banner = () => {
         </div>
         <div
           className=" flex flex-col py-8 md:min-w-[760px] bottom-[5%]
-                 md:left-1/2 transform md:translate-x-56 bg-zinc-200
+                 md:left-1/2 transform  lg:translate-x-32 xl:translate-x-56 bg-zinc-200
                 border border-slate-800 rounded-xl text-center shadow-xl"
           style={{ width: "auto", height: "auto" }}
         >

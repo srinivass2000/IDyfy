@@ -225,8 +225,8 @@ const Dashboard = () => {
                 <div className="row mx-4 my-5">
                   <div className="col-md my-3">
                     <div
-                      className="p-4 shadow bg-white rounded"
-                      style={{ background: "white" }}
+                      className="p-4 shadow rounded bg-white"
+                      style={{ background: "bg-dark" }}
                     >
                       <h1
                         className="mb-4 ml-3"

@@ -1,17 +1,13 @@
-.links:hover{
-    text-decoration: none;    
-    color: white;
-    filter: grayscale(100);
+.links:hover {
+  text-decoration: none;
+  color: white;
+  filter: grayscale(100);
 }
-.links{
-    color: #2E008E;
-    font-weight:500;
-}
-
-.hoveritem:hover{
-    background-color: #B287FF;
+.links {
+  color: #2e008e;
+  font-weight: 500;
 }
 
-
-
-
+.hoveritem:hover {
+  background-color: #b287ff;
+}
