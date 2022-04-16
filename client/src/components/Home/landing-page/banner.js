@@ -1,7 +1,9 @@
 import React from "react";
 import bgImg from "../../../assets/images/idea_ng.png";
+// import smallImg from "../../../assets/images/idea-icon.jpg";
 import { Link } from "react-router-dom";
 const Banner = () => {
+  console.log(window.innerWidth);
   return (
     <div name="home" className="w-full h-screen flex flex-col justify-between">
       <div className="grid md:grid-cols-2 max-w-[1240px] m-auto">
@@ -23,12 +25,17 @@ const Banner = () => {
           </Link>
         </div>
         <div>
-          <img className="w-full" src={bgImg} alt="/" />
+          <img
+            className="w-full d-none d-lg-block d-xl-block d-xxl-block d-md-block d-sm-hidden"
+            src={bgImg}
+            alt="/"
+          />
         </div>
         <div
-          className="absolute flex flex-col py-8 md:min-w-[760px] bottom-[5%]
-                mx-1 md:left-1/2 transform md:-translate-x-1/2 bg-zinc-200
-                border border-slate-300 rounded-xl text-center shadow-xl"
+          className=" flex flex-col py-8 md:min-w-[760px] bottom-[5%]
+                 md:left-1/2 transform md:translate-x-56 bg-zinc-200
+                border border-slate-800 rounded-xl text-center shadow-xl"
+          style={{ width: "auto", height: "auto" }}
         >
           <p className="text-slate-500">Our Services</p>
           <div className="flex justify-between flex-wrap px-4">
