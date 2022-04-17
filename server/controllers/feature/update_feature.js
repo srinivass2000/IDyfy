@@ -29,15 +29,15 @@ exports.update_feature = async (req, res, next) => {
 
     hashed_content = crypto.createHash("sha256").update(content).digest("hex");
 
-    console.log("----------------------------------------------------");
+    // console.log("----------------------------------------------------");
 
-    console.log(hashed_content);
+    // console.log(hashed_content);
 
-    console.log("----------------------------------------------------");
+    // console.log("----------------------------------------------------");
 
-    console.log(initial.content_hash);
+    // console.log(initial.content_hash);
 
-    console.log("----------------------------------------------------");
+    // console.log("----------------------------------------------------");
 
     if (hashed_content === initial.content_hash) {
       updated_content = 0;
@@ -84,6 +84,14 @@ exports.update_feature = async (req, res, next) => {
         engagement_score,
       });
 
+      var user_scores = idea.user_scores;
+      user_scores[req.user._id.toString()] =
+        user_scores[req.user._id.toString()] + 0.1;
+
+      await Idea.findByIdAndUpdate(idea_id, {
+        user_scores,
+      });
+
       const feature = await Feature.findById(id);
       res.status(200).json({
         success: true,
@@ -123,6 +131,14 @@ exports.update_feature = async (req, res, next) => {
 
       await User.findByIdAndUpdate(req.user._id, {
         engagement_score,
+      });
+
+      var user_scores = idea.user_scores;
+      user_scores[req.user._id.toString()] =
+        user_scores[req.user._id.toString()] + 0.1;
+
+      await Idea.findByIdAndUpdate(idea_id, {
+        user_scores,
       });
 
       res.status(200).json({

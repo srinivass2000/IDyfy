@@ -54,6 +54,14 @@ exports.delete_feature = async (req, res, next) => {
         engagement_score,
       });
 
+      var user_scores = idea.user_scores;
+      user_scores[req.user._id.toString()] =
+        user_scores[req.user._id.toString()] - 0.1;
+
+      await Idea.findByIdAndUpdate(idea_id, {
+        user_scores,
+      });
+
       res.status(200).json({
         success: true,
         deleted_feature: deleted_feature,

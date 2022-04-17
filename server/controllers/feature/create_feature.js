@@ -19,7 +19,7 @@ exports.create_feature = async (req, res, next) => {
       var engagement_score = req.user.engagement_score + 0.2;
     }
 
-    var user = await User.findByIdAndUpdate(req.user._id, {
+    await User.findByIdAndUpdate(req.user._id, {
       engagement_score,
     });
 
@@ -36,6 +36,15 @@ exports.create_feature = async (req, res, next) => {
       version_start: ++version,
       available: true,
     });
+
+    var user_scores = idea.user_scores;
+    user_scores[req.user._id.toString()] =
+      user_scores[req.user._id.toString()] + 0.1;
+
+    await Idea.findByIdAndUpdate(idea_id, {
+      user_scores,
+    });
+
     res.status(200).json({
       success: true,
       feature,

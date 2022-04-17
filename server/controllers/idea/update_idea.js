@@ -48,19 +48,27 @@ exports.update_idea = async (req, res, next) => {
           // idea.documents[0].push(document);
           console.log("inserted");
         });
+        var user_scores = idea.user_scores;
+        user_scores[req.user._id.toString()] =
+          user_scores[req.user._id.toString()] + 0.2;
         idea = await Idea.findByIdAndUpdate(idea_id, {
           title,
           description,
           tags,
           links,
           documents: document,
+          user_scores,
         });
       } else {
+        var user_scores = idea.user_scores;
+        user_scores[req.user._id.toString()] =
+          user_scores[req.user._id.toString()] + 0.2;
         idea = await Idea.findByIdAndUpdate(idea_id, {
           title,
           description,
           tags,
           links,
+          user_scores,
         });
       }
 
@@ -72,7 +80,7 @@ exports.update_idea = async (req, res, next) => {
         var engagement_score = req.user.engagement_score + 0.5;
       }
 
-      var user = await User.findByIdAndUpdate(req.user._id, {
+      await User.findByIdAndUpdate(req.user._id, {
         engagement_score,
       });
 
