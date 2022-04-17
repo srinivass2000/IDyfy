@@ -1,19 +1,23 @@
 import React from "react";
 import { useState, useEffect } from "react";
+//import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import Navbar from "../Navbar/Navbar";
 import authHeader from "../auth/auth-header";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import Modal from "react-modal";
-import { useHistory } from "react-router-dom";
 import "../auth/Login.css";
-//import Idyfy_logo from "../../../assets/svg/Idyfy_logo.svg";
+import Idyfy_logo from "../../../assets/svg/Idyfy_logo.svg";
 import Stones from "../../../assets/svg/stones1.svg";
-//import Idyfy_name from "../../../assets/svg/Idyfy_name_Signup.svg";
+import Idyfy_name from "../../../assets/svg/Idyfy_name_Signup.svg";
 import { isMobile } from "react-device-detect";
+import AuthService from "../../../services/authservices";
+import { useHistory } from "react-router-dom";
 import "./tables.css";
 
 const Project_table = () => {
-  const [ideas, setIdeas] = useState([]);
+  const [ideas, setIdeas] = useState({});
+  const [user, setUsers] = useState();
   const history = useHistory();
 
   const handleSubmit = async (e) => {
@@ -22,7 +26,7 @@ const Project_table = () => {
       //await AuthService.login(formdata.username, formdata.password).then(
       // (res) => {
       //   if (res.status === 202) {
-      history.push("/admin/Dashboard/projects");
+      history.push("/admin/Dashboard");
       closeModal();
       //setFormData(initialState);
       //    }
@@ -34,7 +38,10 @@ const Project_table = () => {
   };
 
   const GoBack = () => {
-    history.push("/admin/users");
+    history.push("/admin/projects");
+  };
+  const handleChange = (e) => {
+    //setFormData({ ...formdata, [e.target.name]: e.target.value });
   };
 
   const [modalIsOpen, setIsOpen] = React.useState(false);
@@ -49,6 +56,20 @@ const Project_table = () => {
     setIsOpen(false);
     //  setFormData(initialState);
   }
+
+  const fetchIdea = async () => {
+    //const history = useHistory();
+    await axios
+      .get(`/api/admin/get-ideas`, {
+        headers: authHeader(),
+      })
+      .then((res) => {
+        setIdeas(res.data.final);
+
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
 
   //   let subtitle;
   let customStyles;
@@ -80,22 +101,41 @@ const Project_table = () => {
     };
   }
 
-  const fetchIdea = () => {
-    axios
-      .get(`/api/admin/get-ideas`, {
-        headers: authHeader(),
-      })
-      .then((res) => {
-        setIdeas(res.data.final);
-        console.log(res.data);
-      })
-      .catch((err) => console.log(err));
-  };
   useEffect(() => {
     fetchIdea();
   }, []);
 
-  // console.log(ideas);
+  console.log(user);
+
+  const data = {
+    columns: [
+      {
+        label: "Sr. No.",
+        field: "id",
+        sort: "asc",
+      },
+      {
+        label: "Name",
+        field: "heading0",
+        sort: "asc",
+      },
+      {
+        label: "Email",
+        field: "heading1",
+        sort: "asc",
+      },
+      {
+        label: "No. of Ideas",
+        field: "heading2",
+        sort: "asc",
+      },
+      {
+        label: "Engage Score",
+        field: "heading3",
+        sort: "asc",
+      },
+    ],
+  };
 
   return (
     <div>
@@ -109,7 +149,7 @@ const Project_table = () => {
           <div className="col-12">
             <div className="my-5">
               <div
-                className="mx-5 mb-3 shadow-lg  rounded-2"
+                className="mx-5 mb-3 shadow-lg  rounded-2 "
                 style={{
                   backgroundColor: "midnightblue",
                   color: "white",
@@ -117,9 +157,7 @@ const Project_table = () => {
                   fontSize: "2rem",
                 }}
               >
-                <div class="d-flex justify-content-center my-9">
-                  PROJECT TABLE
-                </div>
+                <div class="d-flex justify-content-center my-9">USER TABLE</div>
               </div>
 
               <div
@@ -131,11 +169,12 @@ const Project_table = () => {
                     <thead>
                       <tr>
                         <th>Sr. No.</th>
-                        <th>Idea Name</th>
-                        <th>No. of Contributors</th>
-                        <th>No. of Likes</th>
-                        <th>No. of Shares</th>
-                        <th>No. of Comments</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Following</th>
+                        <th>Followers</th>
+                        <th>Ideas Contributed</th>
+                        <th>Engagement Score</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -148,147 +187,147 @@ const Project_table = () => {
                             <td>{idea.liked_users.length}</td>
                             <td>{idea.shares.length}</td>
                             <td>{idea.comment_count}</td>
-                            
                             <Modal
-                              isOpen={modalIsOpen}
-                              // onAfterOpen={afterOpenModal}
-                              onRequestClose={closeModal}
-                              style={customStyles}
-                              contentLabel="Example Modal"
-                              ariaHideApp={false}
-                            >
-                              <div
-                                className="relative  rounded"
-                                style={{
-                                  background:
-                                    "linear-gradient(75deg, rgb(4, 4, 4), midnightblue)",
-                                }}
-                              >
-                                <div className="row">
-                                  <div className="col-lg-12 col-12 px-4 py-9 container">
-                                    <div className="flex justify-center mt-4">
-                                      <div>
-                                        <h1
-                                          className="my-2 mb-3 text-center"
-                                          style={{
-                                            color: "white",
-                                            fontSize: "2rem",
-                                          }}
-                                        >
-                                          {idea.title}
-                                        </h1>
-                                      </div>
-                                    </div>
-                                    {/* <div className="flex justify-left">
-                                      <h1
-                                        className="my-1 ml-3 text-left"
-                                        style={{
-                                          color: "white",
-                                          fontSize: "1.2rem",
-                                        }}
-                                      >
-                                        Description
-                                      </h1>
-                                    </div> */}
-                                    <div className="flex justify-center">
-                                      <h1
-                                        className="my-1 ml-3 text-left"
-                                        style={{
-                                          color: "white",
-                                          fontSize: "1rem",
-                                        }}
-                                      >
-                                        {idea.description}
-                                      </h1>
-                                    </div>
-                                    <div className="flex justify-left">
-                                      <h1
-                                        className="my-2 ml-3 text-left"
-                                        style={{
-                                          color: "white",
-                                          fontSize: "1rem",
-                                        }}
-                                      >
-                                        Likes : {idea.liked_users.length}
-                                      </h1>
-                                    </div>
-                                    <div className="flex justify-left">
-                                      <h1
-                                        className="my-2 ml-3 text-left"
-                                        style={{
-                                          color: "white",
-                                          fontSize: "1rem",
-                                        }}
-                                      >
-                                        Shares : {idea.shares.length}
-                                      </h1>
-                                    </div>
-                                    <div className="flex justify-left">
-                                      <h1
-                                        className="my-2 ml-3 text-left"
-                                        style={{
-                                          color: "white",
-                                          fontSize: "1rem",
-                                        }}
-                                      >
-                                        Contributors :{" "}
-                                        {idea.contributors.length}
-                                      </h1>
-                                    </div>
-                                    <div className="flex justify-left">
-                                      <h1
-                                        className="my-2 ml-3 text-left"
-                                        style={{
-                                          color: "white",
-                                          fontSize: "1rem",
-                                        }}
-                                      >
-                                        Stars :{idea.starred_by.length}
-                                      </h1>
-                                    </div>
-
-                                    <div className="row mx-3 mt-5 flex justify-center">
-                                      <div className="col-4   flex justify-center">
-                                        <button
-                                          className="button-6"
-                                          style={{ background: "#FF9900" }}
-                                          onClick={GoBack}
-                                        >
-                                          Warn
-                                        </button>
-                                      </div>
-                                      <div className="col-4   flex justify-center">
-                                        <button
-                                          className="button-6"
-                                          style={{ background: "#EE0000" }}
-                                          onClick={GoBack}
-                                        >
-                                          Delete
-                                        </button>
-                                      </div>
-                                      <div className="col-4  flex justify-center">
-                                        <button
-                                          className="button-6"
-                                          style={{ background: "#222222" }}
-                                          onClick={GoBack}
-                                        >
-                                          Close
-                                        </button>
-                                      </div>
-                                    </div>
+                          isOpen={modalIsOpen}
+                          // onAfterOpen={afterOpenModal}
+                          onRequestClose={closeModal}
+                          style={customStyles}
+                          contentLabel="Example Modal"
+                          ariaHideApp={false}
+                        >
+                          <div
+                            className="relative  rounded"
+                            style={{
+                              background:
+                                "linear-gradient(75deg, rgb(4, 4, 4), midnightblue)",
+                            }}
+                          >
+                            <div className="row">
+                              <div className="col-lg-12 col-12 px-4 py-9 container">
+                                <div className="flex justify-center mt-4">
+                                  <div>
+                                    <h1
+                                      className="my-2 mb-3 text-center"
+                                      style={{
+                                        color: "white",
+                                        fontSize: "2rem",
+                                      }}
+                                    >
+                                      {idea.title}
+                                    </h1>
                                   </div>
                                 </div>
+                                {/* <div className="flex justify-left">
+                                  <h1
+                                    className="my-1 ml-3 text-left"
+                                    style={{
+                                      color: "white",
+                                      fontSize: "1.2rem",
+                                    }}
+                                  >
+                                    Description
+                                  </h1>
+                                </div> */}
+                                <div className="flex justify-center">
+                                  <h1
+                                    className="my-1 ml-3 text-left"
+                                    style={{
+                                      color: "white",
+                                      fontSize: "1rem",
+                                    }}
+                                  >
+                                    {idea.description}
+                                  </h1>
+                                </div>
+                                <div className="flex justify-left">
+                                  <h1
+                                    className="my-2 ml-3 text-left"
+                                    style={{
+                                      color: "white",
+                                      fontSize: "1rem",
+                                    }}
+                                  >
+                                    Likes : {idea.liked_users.length}
+                                  </h1>
+                                </div>
+                                <div className="flex justify-left">
+                                  <h1
+                                    className="my-2 ml-3 text-left"
+                                    style={{
+                                      color: "white",
+                                      fontSize: "1rem",
+                                    }}
+                                  >
+                                    Shares : {idea.shares.length}
+                                  </h1>
+                                </div>
+                                <div className="flex justify-left">
+                                  <h1
+                                    className="my-2 ml-3 text-left"
+                                    style={{
+                                      color: "white",
+                                      fontSize: "1rem",
+                                    }}
+                                  >
+                                    Contributors :{" "}
+                                    {idea.contributors.length}
+                                  </h1>
+                                </div>
+                                <div className="flex justify-left">
+                                  <h1
+                                    className="my-2 ml-3 text-left"
+                                    style={{
+                                      color: "white",
+                                      fontSize: "1rem",
+                                    }}
+                                  >
+                                    Stars :{idea.starred_by.length}
+                                  </h1>
+                                </div>
 
-                                 <div className="">
-                                  <img
-                                    className="stones"
-                                    src={Stones}
-                                    alt="Stone Art"
-                                  />
-                                </div> 
+                                <div className="row mx-3 mt-5 flex justify-center">
+                                  <div className="col-4   flex justify-center">
+                                    <button
+                                      className="button-6"
+                                      style={{ background: "#FF9900" }}
+                                      onClick={GoBack}
+                                    >
+                                      Warn
+                                    </button>
+                                  </div>
+                                  <div className="col-4   flex justify-center">
+                                    <button
+                                      className="button-6"
+                                      style={{ background: "#EE0000" }}
+                                      onClick={GoBack}
+                                    >
+                                      Delete
+                                    </button>
+                                  </div>
+                                  <div className="col-4  flex justify-center">
+                                    <button
+                                      className="button-6"
+                                      style={{ background: "#222222" }}
+                                      onClick={GoBack}
+                                    >
+                                      Close
+                                    </button>
+                                  </div>
+                                </div>
                               </div>
-                            </Modal>
+                            </div>
+
+                             <div className="">
+                              <img
+                                className="stones"
+                                src={Stones}
+                                alt="Stone Art"
+                              />
+                            </div> 
+                          </div>
+                        </Modal>
                           </tr>
+                          
                         ))
                       ) : (
                         <>
@@ -296,7 +335,7 @@ const Project_table = () => {
                             className="spinner-border place-content-center"
                             role="status"
                           >
-                            <span className="visually-hidden">Loading...</span>
+                            <span class="visually-hidden">Loading...</span>
                           </div>
                         </>
                       )}

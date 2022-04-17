@@ -3,24 +3,22 @@ const User = require("../../models/User");
 const Comment = require("../../models/Comment");
 const ErrorResponse = require("../../utils/errorResponse");
 exports.get_ideas = async (req, res, next) => {
-  
-  try{
-
-    var result = await Idea.find({},{
-      title:1,
-      contributors:1,
-      liked_users:1,
-      shares:1,
-      description:1,
-      starred_by:1
-    }).sort(
+  try {
+    var result = await Idea.find(
+      {},
       {
         title: 1,
         contributors: 1,
         liked_users: 1,
         shares: 1,
+        description: 1,
+        starred_by: 1,
       }
-    ).limit(20);
+    )
+      .sort({
+        Date: -1,
+      })
+      .limit(20);
     console.log(result);
     var final = [];
     for await (var idea of result) {

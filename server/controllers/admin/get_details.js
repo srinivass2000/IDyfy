@@ -38,12 +38,7 @@ exports.get_details = async (req, res, next) => {
           job:1,
           profile_pic:1,
           email:1
-    }).sort(
-      {
-        name: 1,
-        engagement_score: 1,
-      }
-    )
+    })
       .sort({
         engagement_score: -1,
       })
