@@ -11,6 +11,7 @@ exports.idea_details = async (req, res, next) => {
       title: true,
       contributors: 1,
       ideas_details: 1,
+      user_scores: 1,
     });
 
     // if (idea.idea_details) {
@@ -27,28 +28,43 @@ exports.idea_details = async (req, res, next) => {
       contributor_names.push(name);
     }
 
-    var highest_contributor = await User.find(
-      {
-        ideas_contributed: {
-          $in: [idea_id],
-        },
-      },
-      { name: 1, engagement_score: 1, profile_pic: 1 }
-    ).sort({
-      engagement_score: -1,
+    let sortable = [];
+    for (var user in idea.user_scores) {
+      sortable.push([user, idea.user_scores[user]]);
+    }
+
+    sortable.sort(function (a, b) {
+      return a[1] - b[1];
+    });
+
+    console.log(idea.user_scores);
+    console.log(sortable);
+    console.log(sortable[0]);
+
+    console.log(sortable[0][0]);
+    console.log(sortable[0][1]);
+
+    var highest_contributor = await User.findById(sortable[0][0], {
+      name: 1,
+      profile_pic: 1,
     });
 
     if (highest_contributor) {
       var latest_version =
-        idea.ideas_details[highest_contributor[0]._id.toString()];
+        idea.ideas_details[highest_contributor._id.toString()];
     }
+
+    console.log(latest_version);
+
+    var temp = { user_score: sortable[0][1], latest_version: latest_version };
+
+    highest_contributor = { ...highest_contributor._doc, ...temp };
 
     res.status(200).json({
       success: true,
       idea,
-      latest_version,
       contributor_names,
-      highest_contributor: highest_contributor[0],
+      highest_contributor,
     });
   } catch (err) {
     console.log(err);

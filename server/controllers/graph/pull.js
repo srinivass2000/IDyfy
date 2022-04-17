@@ -36,6 +36,15 @@ exports.pull_idea = async (req, res, next) => {
         $inc: { engagement_score: 5 },
       });
 
+      var user_scores = idea.user_scores;
+      if (user_scores[from.toString()]) {
+        user_scores[from.toString()] = user_scores[from.toString()] + 0.75;
+      } else {
+        user_scores[from.toString()] = 0.75;
+      }
+      await Idea.findByIdAndUpdate(idea_id, {
+        user_scores,
+      });
       var result = await Feature.updateMany(
         {
           version_end: { $ne: 0 },

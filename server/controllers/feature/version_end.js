@@ -70,6 +70,14 @@ exports.version_end = async (req, res, next) => {
       version_end: latest_version,
     });
 
+    var user_scores = idea.user_scores;
+    user_scores[req.user._id.toString()] =
+      user_scores[req.user._id.toString()] + 0.75;
+
+    await Idea.findByIdAndUpdate(idea_id, {
+      user_scores,
+    });
+
     res.status(200).json({
       success: true,
       features,

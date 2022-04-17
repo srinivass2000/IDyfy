@@ -27,6 +27,8 @@ exports.create_idea = async (req, res, next) => {
     a = a.toString();
     var ideas_details = {};
     ideas_details[a] = 0;
+    var user_scores = {};
+    user_scores[a] = 1;
 
     const idea = await Idea.create({
       title,
@@ -34,6 +36,7 @@ exports.create_idea = async (req, res, next) => {
       tags,
       contributors: [a],
       ideas_details,
+      user_scores,
     });
 
     ideas_contributed = req.user.ideas_contributed;
