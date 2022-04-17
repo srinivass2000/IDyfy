@@ -249,7 +249,7 @@ const Team = () => {
                     <h3 class="text-base font-semibold text-dark">
                       Anmol Singh
                     </h3>
-                    <p class="text-sm text-body-color">MD and CEO</p>
+                    <p class="text-sm text-body-color">ML Engineer</p>
                     <div>
                       <span class="absolute left-0 bottom-0">
                         <svg
