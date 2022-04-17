@@ -26,8 +26,16 @@ exports.get_details = async (req, res, next) => {
     ).limit( 10 );
 
     var active_users = await User.find({},{
-      name:1,
-      engagement_score:1
+          name:1,
+          email:1,
+          ideas_contributed:1,
+          followers:1,
+          following:1,
+          engagement_s:1,core:1,
+          university:1,
+          job:1,
+          profile_pic:1,
+          email:1
     }).sort(
       {
         engagement_score:-1

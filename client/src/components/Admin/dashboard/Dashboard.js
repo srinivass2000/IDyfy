@@ -90,9 +90,9 @@ const Dashboard = () => {
             </div>
           </div>
       <div className="">
-        <div className="row mx-3">
+        <div className="row mx-3 mn">
           <div className="col-12">
-            <div className="container-fluid mn">
+            <div className="container-fluid ">
               <div className="row mx-5 my-5">
                 <div className="col-4 my-3">
                   <div
@@ -104,11 +104,11 @@ const Dashboard = () => {
                         <div style={{ height: "5rem" }}>
                           <h1 
                             className="ml-3"
-                            style={{ fontSize: "1.7rem", fontWeight: "bold",color:"white" }}
+                            style={{ fontSize: "1.6rem", fontWeight: "bold",color:"white" }}
                           >
-                            Total Users :
+                            Total Users 
                           </h1>
-                          <h2 className="mt-1" style={{ fontSize: "1.3rem" }}> {count_users}</h2>
+                          <h2 className="mt-2 ml-4" style={{ color:"white",fontSize: "1.5rem" }}> {count_users}</h2>
                         </div>
                       </div>
                       <div className="col-4">
@@ -138,11 +138,11 @@ const Dashboard = () => {
                         <div style={{ height: "5rem" }}>
                           <h1
                             className="ml-3"
-                            style={{ fontSize: "1.7rem", fontWeight: "bold",color:"white" }}
+                            style={{ fontSize: "1.6rem", fontWeight: "bold",color:"white" }}
                           >
-                            Total Projects :
+                            Total Projects 
                           </h1>
-                          <h2 className="mt-1" style={{ fontSize: "1.3rem" }}> {count_ideas}</h2>
+                          <h2 className="mt-2 ml-4" style={{ color:"white",fontSize: "1.5rem" }}> {count_ideas}</h2>
                         </div>
                       </div>
                       <div className="col-4">
@@ -172,13 +172,11 @@ const Dashboard = () => {
                         <div style={{ height: "5rem" }}>
                           <h1
                             className="ml-3"
-                            style={{ fontSize: "1.7rem", fontWeight: "bold",color:"white" }}
+                            style={{ fontSize: "1.6rem", fontWeight: "bold",color:"white" }}
                           >
-                            Total Activities :
+                            Total Activities 
                           </h1>
-                          <h2 className="mt-1" style={{ fontSize: "1.3rem" }}>
-                            {count_comments}
-                          </h2>
+                          <h2 className="mt-2 ml-4" style={{ color:"white",fontSize: "1.5rem" }}> {count_comments}</h2>
                         </div>
                       </div>
                       <div className="col-4">
@@ -211,7 +209,7 @@ const Dashboard = () => {
                       style={{ background: "white" }}
                     ><h1 className="mb-4 ml-3" style={{ fontSize: "2.0rem", fontWeight: "bold",color:"black" }}>Traffic</h1>
                       <center>
-                        <div style={{ width: "69rem", height: "19rem" }}>
+                        <div style={{ width: "94%", height: "23%" }}>
                           <Chart data={data} axes={axes} />
                         </div>
                       </center>
@@ -255,7 +253,7 @@ const Dashboard = () => {
                         </div>
                       </div>
                       <div className="table-responsive">
-                        <table className="table">
+                        <table className="table table-hover">
                           <thead>
                             <tr
                               style={{
@@ -316,7 +314,7 @@ const Dashboard = () => {
                         </div>
                       </div>
                       <div className="table-responsive">
-                        <table className="table">
+                        <table className="table table-hover">
                           <thead>
                             <tr
                               style={{

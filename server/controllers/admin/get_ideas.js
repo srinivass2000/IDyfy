@@ -12,6 +12,8 @@ exports.get_ideas = async (req, res, next) => {
       contributors:1,
       liked_users:1,
       shares:1,
+      description:1,
+      starred_by:1
     }).sort(
       {
         date:-1

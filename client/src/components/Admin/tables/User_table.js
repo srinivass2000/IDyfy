@@ -4,35 +4,102 @@ import { useState, useEffect } from "react";
 import Navbar from "../Navbar/Navbar";
 import authHeader from "../../../services/auth-header";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import Modal from "react-modal";
+import "../auth/Login.css";
+import Idyfy_logo from "../../../assets/svg/Idyfy_logo.svg";
+import Stones from "../../../assets/svg/stones1.svg";
+import Idyfy_name from "../../../assets/svg/Idyfy_name_Signup.svg";
+import { isMobile } from "react-device-detect";
+import AuthService from "../../../services/authservices";
+import { useHistory } from "react-router-dom";
+import "./tables.css";
 
 const User_table = () => {
   const [idea, setIdea] = useState({});
   const [user, setUsers] = useState();
+  const history = useHistory();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      //await AuthService.login(formdata.username, formdata.password).then(
+      // (res) => {
+      //   if (res.status === 202) {
+      history.push("/admin/Dashboard");
+      closeModal();
+      //setFormData(initialState);
+      //    }
+      //  }
+      //  );
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const GoBack = () => {
+    history.push("/admin/projects");
+  };
+  const handleChange = (e) => {
+    //setFormData({ ...formdata, [e.target.name]: e.target.value });
+  };
+
+  const [modalIsOpen, setIsOpen] = React.useState(false);
+  function openModal() {
+    setIsOpen(true);
+  }
+  //   function afterOpenModal() {
+  //     // references are now sync'd and can be accessed.
+  //     subtitle.style.color = "#f00";
+  //   }
+  function closeModal() {
+    setIsOpen(false);
+    //  setFormData(initialState);
+  }
 
   const fetchIdea = async () => {
+    //const history = useHistory();
     await axios
       .get(`/api/admin/get-users`, {
         headers: authHeader(),
       })
       .then((res) => {
         setUsers(res.data.result);
-        //setIdea(res.data.active_ideas);
-        //setCount_ideas(res.data.count_ideas);
-        //setCount_users(res.data.count_users);
-        //setCount_comments(res.data.count_comments);
-        //setContributors(res.data.contributed_users);
+
         console.log(res.data);
-        //setLoad(false);
       })
       .catch((err) => console.log(err));
   };
 
-  // const userarray =[];
-  // user.map((use, index) => (
-  //   console.log(use)
-  //  ));
-
-  //console.log(userarray);
+  //   let subtitle;
+  let customStyles;
+  if (isMobile) {
+    customStyles = {
+      content: {
+        top: "50%",
+        left: "50%",
+        right: "auto",
+        bottom: "auto",
+        width: "80%",
+        transform: "translate(-50%, -50%)",
+        padding: "0px",
+        overflow: "hidden",
+      },
+    };
+  } else {
+    customStyles = {
+      content: {
+        top: "50%",
+        left: "50%",
+        right: "auto",
+        bottom: "auto",
+        width: "30%",
+        transform: "translate(-50%, -50%)",
+        padding: "0px",
+        overflow: "hidden",
+      },
+    };
+  }
 
   useEffect(() => {
     fetchIdea();
@@ -98,7 +165,7 @@ const User_table = () => {
                 style={{ background: "white" }}
               >
                 <div className="table-responsive">
-                  <table className="table">
+                  <table className="table table-hover">
                     <thead>
                       <tr>
                         <th>Sr. No.</th>
@@ -113,7 +180,7 @@ const User_table = () => {
                     <tbody>
                       {user ? (
                         user.map((use, index) => (
-                          <tr key={index + 1}>
+                          <tr key={index + 1} onClick={openModal}>
                             <td>{index + 1}</td>
                             <td>{use.name}</td>
                             <td>{use.email}</td>
@@ -125,6 +192,140 @@ const User_table = () => {
                                 ? use.engagement_score.toFixed(2)
                                 : "N.A"}
                             </td>
+                            <Modal
+                              isOpen={modalIsOpen}
+                              // onAfterOpen={afterOpenModal}
+                              onRequestClose={closeModal}
+                              style={customStyles}
+                              contentLabel="Example Modal"
+                              ariaHideApp={false}
+                            >
+                              <div
+                                className="relative  rounded"
+                                style={{
+                                  background:
+                                    "linear-gradient(75deg, rgb(4, 4, 4), midnightblue)",
+                                }}
+                              >
+                                <div className="row">
+                                  <div className="col-lg-12 col-12 px-4 py-9 container">
+                                    <div className="flex justify-center ">
+                                      <img
+                                        src={use.profile_pic}
+                                        alt="Profile Pic "
+                                      />
+                                    </div>
+                                    <div className="flex justify-center mt-4">
+                                      <div>
+                                        <h1
+                                          className="my-2 mb-3 text-center"
+                                          style={{
+                                            color: "white",
+                                            fontSize: "2rem",
+                                          }}
+                                        >
+                                          {use.name}
+                                        </h1>
+                                      </div>
+                                    </div>
+                                    {/* <div className="flex justify-left">
+                                      <h1
+                                        className="my-1 ml-3 text-left"
+                                        style={{
+                                          color: "white",
+                                          fontSize: "1.2rem",
+                                        }}
+                                      >
+                                        Description
+                                      </h1>
+                                    </div> */}
+                                    <div className="flex justify-center">
+                                      <h1
+                                        className="my-1 ml-3 text-left"
+                                        style={{
+                                          color: "white",
+                                          fontSize: "1rem",
+                                        }}
+                                      >
+                                        {use.job}
+                                      </h1>
+                                    </div>
+                                    <div className="flex justify-left">
+                                      <h1
+                                        className="my-2 ml-3 text-left"
+                                        style={{
+                                          color: "white",
+                                          fontSize: "1rem",
+                                        }}
+                                      >
+                                        Ideas Contributed :{" "}
+                                        {use.ideas_contributed.length}
+                                      </h1>
+                                    </div>
+                                    <div className="flex justify-left">
+                                      <h1
+                                        className="my-2 ml-3 text-left"
+                                        style={{
+                                          color: "white",
+                                          fontSize: "1rem",
+                                        }}
+                                      >
+                                        Followers : {use.followers.length}
+                                      </h1>
+                                    </div>
+                                    <div className="flex justify-left">
+                                      <h1
+                                        className="my-2 ml-3 text-left"
+                                        style={{
+                                          color: "white",
+                                          fontSize: "1rem",
+                                        }}
+                                      >
+                                        Following :{use.following.length}
+                                      </h1>
+                                    </div>
+
+                                    <div className="row mx-3 mt-5 flex justify-center">
+                                      <div className="col-4   flex justify-center">
+                                        <button
+                                          className="button-6"
+                                          style={{ background: "#FF9900" }}
+                                          onClick={GoBack}
+                                        >
+                                          Warn
+                                        </button>
+                                      </div>
+                                      <div className="col-4   flex justify-center">
+                                        <button
+                                          className="button-6"
+                                          style={{ background: "#EE0000" }}
+                                          onClick={GoBack}
+                                        >
+                                          Delete
+                                        </button>
+                                      </div>
+                                      <div className="col-4  flex justify-center">
+                                        <button
+                                          className="button-6"
+                                          style={{ background: "#222222" }}
+                                          onClick={GoBack}
+                                        >
+                                          Close
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div className="">
+                                  <img
+                                    className="stones"
+                                    src={Stones}
+                                    alt="Stone Art"
+                                  />
+                                </div>
+                              </div>
+                            </Modal>
                           </tr>
                         ))
                       ) : (
