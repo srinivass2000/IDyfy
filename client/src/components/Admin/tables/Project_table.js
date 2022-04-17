@@ -1,14 +1,14 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import Navbar from "../Navbar/Navbar";
-import authHeader from "../../../services/auth-header";
+import authHeader from "../auth/auth-header";
 import axios from "axios";
 import Modal from "react-modal";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import "../auth/Login.css";
-import Idyfy_logo from "../../../assets/svg/Idyfy_logo.svg";
+//import Idyfy_logo from "../../../assets/svg/Idyfy_logo.svg";
 import Stones from "../../../assets/svg/stones1.svg";
-import Idyfy_name from "../../../assets/svg/Idyfy_name_Signup.svg";
+//import Idyfy_name from "../../../assets/svg/Idyfy_name_Signup.svg";
 import { isMobile } from "react-device-detect";
 import "./tables.css";
 
@@ -148,7 +148,7 @@ const Project_table = () => {
                             <td>{idea.liked_users.length}</td>
                             <td>{idea.shares.length}</td>
                             <td>{idea.comment_count}</td>
-
+                            
                             <Modal
                               isOpen={modalIsOpen}
                               // onAfterOpen={afterOpenModal}

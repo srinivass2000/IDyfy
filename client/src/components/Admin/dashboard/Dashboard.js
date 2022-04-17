@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { Chart } from "react-charts";
 //import { Bar } from "react-charts";
-import authHeader from "../../../services/auth-header";
+import authHeader from "../auth/auth-header";
 import Navbar from "../Navbar/Navbar";
 import "../dashboard/Dashboard.css";
 import axios from "axios";
@@ -37,13 +37,13 @@ const Dashboard = () => {
   }, []);
 
   //console.log(1);
-  console.log(ideas);
-  console.log(users);
+  // console.log(ideas);
+  // console.log(users);
   // idea.map((ide, index) => (
   //console.log(ide.title)
   //))
 
-  console.log(count_ideas);
+  // console.log(count_ideas);
 
   const data = React.useMemo(
     () => [
@@ -85,10 +85,10 @@ const Dashboard = () => {
   return (
     <div>
       <div className=" my-5">
-            <div className="my-3">
-              <Navbar />
-            </div>
-          </div>
+        <div className="my-3">
+          <Navbar />
+        </div>
+      </div>
       <div className="">
         <div className="row mx-3 mn">
           <div className="col-12">
@@ -97,18 +97,25 @@ const Dashboard = () => {
                 <div className="col-4 my-3">
                   <div
                     className="px-4 shadow  rounded"
-                    style={{ background: "#321FDB",height:"180px" }}
+                    style={{ background: "#321FDB", height: "180px" }}
                   >
                     <div className="row">
                       <div className="my-4 text-left col-8">
                         <div style={{ height: "5rem" }}>
-                          <h1 
+                          <h1
                             className="ml-3"
-                            style={{ fontSize: "1.6rem", fontWeight: "bold",color:"white" }}
+                            style={{
+                              fontSize: "1.7rem",
+                              fontWeight: "bold",
+                              color: "white",
+                            }}
                           >
                             Total Users 
                           </h1>
-                          <h2 className="mt-2 ml-4" style={{ color:"white",fontSize: "1.5rem" }}> {count_users}</h2>
+                          <h2 className="mt-1" style={{ fontSize: "1.3rem" }}>
+                            {" "}
+                            {count_users}
+                          </h2>
                         </div>
                       </div>
                       <div className="col-4">
@@ -131,14 +138,18 @@ const Dashboard = () => {
                 <div className="col-4 my-3">
                   <div
                     className="px-4 shadow  rounded"
-                    style={{ background: "#F9B115",height:"180px" }}
+                    style={{ background: "#F9B115", height: "180px" }}
                   >
                     <div className="row">
                       <div className="my-4 text-left col-8">
                         <div style={{ height: "5rem" }}>
                           <h1
                             className="ml-3"
-                            style={{ fontSize: "1.6rem", fontWeight: "bold",color:"white" }}
+                            style={{
+                              fontSize: "1.7rem",
+                              fontWeight: "bold",
+                              color: "white",
+                            }}
                           >
                             Total Projects 
                           </h1>
@@ -165,7 +176,7 @@ const Dashboard = () => {
                 <div className="col-4 my-3">
                   <div
                     className="px-4 shadow  rounded"
-                    style={{ background: "#E55353" ,height:"180px"}}
+                    style={{ background: "#E55353", height: "180px" }}
                   >
                     <div className="row">
                       <div className="my-4 text-left col-8">
@@ -205,9 +216,19 @@ const Dashboard = () => {
                 <div className="row mx-4 my-5">
                   <div className="col-md my-3">
                     <div
-                      className="p-4 shadow bg-white rounded"
-                      style={{ background: "white" }}
-                    ><h1 className="mb-4 ml-3" style={{ fontSize: "2.0rem", fontWeight: "bold",color:"black" }}>Traffic</h1>
+                      className="p-4 shadow rounded bg-white"
+                      style={{ background: "bg-dark" }}
+                    >
+                      <h1
+                        className="mb-4 ml-3"
+                        style={{
+                          fontSize: "2.0rem",
+                          fontWeight: "bold",
+                          color: "black",
+                        }}
+                      >
+                        Traffic
+                      </h1>
                       <center>
                         <div style={{ width: "94%", height: "23%" }}>
                           <Chart data={data} axes={axes} />

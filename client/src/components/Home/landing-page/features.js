@@ -8,9 +8,9 @@ const Features = () => {
           All-In-One Platform
         </h2>
         <p className="text-2xl py-8 text-gray-400 text-center">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis,
-          ab. Officia sunt nulla aspernatur culpa, eaque tenetur excepturi
-          nostrum tempore.
+          Our platform IDyfy brings like minded people to work for a common goal
+          without much friction and make the whole brainstorming part of the
+          ideation phase effortless.
         </p>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">

@@ -1,11 +1,10 @@
 const Idea = require("../../models/Idea");
 const User = require("../../models/User");
 const Comment = require("../../models/Comment");
-
+const ErrorResponse = require("../../utils/errorResponse");
 
 exports.get_details = async (req, res, next) => {
-  
-  try{
+  try {
     let count_ideas = await Idea.count();
     //console.log(count_ideas);
 
@@ -15,15 +14,18 @@ exports.get_details = async (req, res, next) => {
     let count_comments = await Comment.count();
     //console.log(count_comments);
 
-    var active_ideas = await Idea.find({},{
-      title:1,
-      contributors:1,
-      liked_users:1
-    }).sort(
+    var active_ideas = await Idea.find(
+      {},
       {
-        date:-1
+        title: 1,
+        contributors: 1,
+        liked_users: 1,
       }
-    ).limit( 10 );
+    )
+      .sort({
+        date: -1,
+      })
+      .limit(10);
 
     var active_users = await User.find({},{
           name:1,
@@ -38,21 +40,25 @@ exports.get_details = async (req, res, next) => {
           email:1
     }).sort(
       {
-        engagement_score:-1
+        name: 1,
+        engagement_score: 1,
       }
-    ).limit( 10 );
-    
+    )
+      .sort({
+        engagement_score: -1,
+      })
+      .limit(10);
+
     res.status(200).json({
       success: true,
       count_ideas,
       count_users,
       count_comments,
       active_ideas,
-      active_users
+      active_users,
     });
   } catch (err) {
     console.log(err);
     return next(new ErrorResponse(err.message, 500));
-}
+  }
 };
-  

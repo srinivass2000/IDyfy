@@ -1,6 +1,7 @@
-body { 
-	background: #EEE; 
-	overflow-x:hidden;
+body {
+  /* background: #111; */
+  background: linear-gradient(45deg, rgb(4, 4, 4), midnightblue);
+  overflow-x: hidden;
 }
 
 nav {
@@ -34,7 +35,7 @@ nav {
   right: 10px;
   top: 7px;
   padding: 5px;
-  color: #EEE;
+  color: #eee;
   font-size: 18px;
 }
 
@@ -42,30 +43,30 @@ button:hover {
   background-color: white;
 }
 
-.items:hover{
+.items:hover {
   font-weight: bolder;
   transition: 0.25s;
   color: inherit;
   text-decoration: none;
 }
 
-@media screen and (max-width: 500px){
+@media screen and (max-width: 500px) {
   .list {
-      flex-direction: column;
-      height: auto;
+    flex-direction: column;
+    height: auto;
   }
-  .items:nth-child(1){
-      border-top: 1px solid rgba(255, 255, 255, 0.555);
-      margin-top: 50px;
+  .items:nth-child(1) {
+    border-top: 1px solid rgba(255, 255, 255, 0.555);
+    margin-top: 50px;
   }
   .items {
-      width: 100%;
-      border-top: 1px solid rgba(255, 255, 255, 0.555);
-      text-align: center;
-      margin-right: 0px;
-      padding: 20px 0;
+    width: 100%;
+    border-top: 1px solid rgba(255, 255, 255, 0.555);
+    text-align: center;
+    margin-right: 0px;
+    padding: 20px 0;
   }
   .btn {
-      display: block;
+    display: block;
   }
 }

@@ -3,6 +3,7 @@ const ErrorResponse = require("../../utils/errorResponse");
 const mongoose = require("mongoose");
 const { FeatureSchema } = require("../../models/Feature");
 const User = require("../../models/User");
+const Idea = require("../../models/Idea");
 
 exports.create_feature = async (req, res, next) => {
   try {
