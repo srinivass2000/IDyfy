@@ -32,7 +32,7 @@ exports.version_end = async (req, res, next) => {
             {
               updated_feature: { $exists: false },
               deleted_version: { $exists: false },
-              version_end: latest_version,
+              // version_end: latest_version,
               available: true,
               contributors: { $in: [req.user._id.toString()] },
             },

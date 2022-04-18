@@ -5,7 +5,7 @@ const { FeatureSchema } = require("../../models/Feature");
 
 exports.fetch_features_by_parent = async (req, res, next) => {
   try {
-    var { idea_id, parent_id } = req.query;
+    var { idea_id, parent_id, version } = req.query;
 
     obj3 = { show: false };
     obj4 = { show: "nothing" };
@@ -92,6 +92,12 @@ exports.fetch_features_by_parent = async (req, res, next) => {
       var results = await Feature.find(
         {
           parent_id,
+          version_start: {
+            $lte: version,
+          },
+          version_end: {
+            $gte: version,
+          },
         },
         {
           title: 1,
