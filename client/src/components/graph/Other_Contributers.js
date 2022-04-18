@@ -101,6 +101,7 @@ const OtherContributers = (props) => {
             </div>
             <div className="col-6 ">
               <p className="row flex justify-center">Checkout others work</p>
+
               <div class="dropdown mt-2  flex justify-center">
                 <button
                   class="btn btn-secondary dropdown-toggle"
@@ -112,25 +113,17 @@ const OtherContributers = (props) => {
                   Other Contributers
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  {/* {console.log(contributers)} */}
                   {contributers ? (
-                    <>
-                      {/* {console.log(contributers)} */}
-                      {contributers.map((contributer, idx) => {
-                        <li
-                          key={idx}
-                          onClick={() => selectWhoseIdea(contributer._id)}
-                        >
-                          <a class="dropdown-item">{contributer.name}</a>
-                          kkk
-                        </li>;
-                      })}
-                    </>
+                    contributers.map((contributer, idx) => (
+                      <li
+                        key={idx}
+                        onClick={() => selectWhoseIdea(contributer._id)}
+                      >
+                        {contributer.name}
+                      </li>
+                    ))
                   ) : (
-                    <li>
-                      {/* <a class="dropdown-item">{contributer.name}</a> */}
-                      kkk
-                    </li>
+                    <>{console.log("hill")}</>
                   )}
                 </ul>
               </div>
