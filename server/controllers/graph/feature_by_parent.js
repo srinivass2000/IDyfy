@@ -122,7 +122,7 @@ exports.fetch_features_by_parent = async (req, res, next) => {
         return res.status(200).json({
           success: true,
           features: [idea],
-          whose_id: user._id.toString(),
+          whose_id: user.toString(),
         });
       }
     }
