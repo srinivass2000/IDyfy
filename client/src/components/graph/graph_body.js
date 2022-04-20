@@ -8,8 +8,8 @@ import authHeader from "../../services/auth-header";
 import { toast } from "react-toastify";
 
 const Graph_body = () => {
-  const [Version, SetVersion] = useState(null);
-  const [Whosegraph, SetWhosegraph] = useState(null);
+  const [Version, SetVersion] = useState("null");
+  const [Whosegraph, SetWhosegraph] = useState("null");
   const [Edit, SetEdit] = useState(false);
   const [Contributers, SetContributers] = useState();
   const [Heighest, SetHeighest] = useState();

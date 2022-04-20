@@ -14,8 +14,11 @@ exports.version_end = async (req, res, next) => {
     });
 
     var user_id = req.user._id.toString();
-
-    var latest_version = parseInt(idea.ideas_details[user_id]);
+    if (idea) {
+      var latest_version = parseInt(idea.ideas_details[user_id]);
+    } else {
+      return new ErrorResponse("Idea not found", 404);
+    }
     // var latest_version = 30;
 
     console.log(latest_version);
@@ -24,7 +27,27 @@ exports.version_end = async (req, res, next) => {
 
     console.log(Feature);
 
-    var features_affected;
+    var features_affected, features_modified_before_versioning;
+
+    features_modified_before_versioning = await Feature.find({
+      $or: [
+        {
+          updated_feature: latest_version + 1,
+          deleted_version: latest_version + 1,
+          version_end: 0,
+        },
+      ],
+      contributors: { $in: [req.user._id.toString()] },
+    }).count();
+
+    console.log("--------------------------------------");
+    console.log(features_modified_before_versioning);
+    console.log("--------------------------------------");
+
+    if (features_modified_before_versioning == 0) {
+      return next(new ErrorResponse("No Changes detected!", 403));
+    }
+
     try {
       features_affected = await Feature.updateMany(
         {
