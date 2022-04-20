@@ -6,7 +6,7 @@ const { FeatureSchema } = require("../../models/Feature");
 
 exports.pull_idea = async (req, res, next) => {
   try {
-    const { idea_id, from } = req.body;
+    const { idea_id, from } = req.query;
 
     var idea = await Idea.findById(idea_id);
     if (idea) {

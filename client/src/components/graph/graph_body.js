@@ -5,6 +5,7 @@ import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import OtherContributers from "./Other_Contributers";
 import axios from "axios";
 import authHeader from "../../services/auth-header";
+import { toast } from "react-toastify";
 
 const Graph_body = () => {
   const [Version, SetVersion] = useState(null);
@@ -18,6 +19,31 @@ const Graph_body = () => {
     SetEdit(a);
     // console.log(a);
   };
+
+  const notify = () => toast.success("You succcessfully Pulled the Idea!");
+  const notify1 = () => toast.error("There was an error pulling the Idea!");
+  const createVersion = () => {};
+
+  const pullIdea = async () => {
+    await axios
+      .get(`/api/features/pull?idea_id=${idea_id}&from=${Whosegraph}`, {
+        headers: authHeader(),
+      })
+      .then(
+        (res) => {
+          // console.log(res.data);
+          if (res.data.success == true) {
+            notify();
+          } else {
+            notify1();
+          }
+        },
+        (err) => {
+          notify1();
+        }
+      );
+  };
+
   useEffect(async () => {
     await axios
       .get(`/api/feature/idea-details?idea_id=${idea_id}`, {
@@ -82,9 +108,15 @@ const Graph_body = () => {
             />
           </div>
           <div className="col-sm-4 col-lg-2 col-4 mt-2">
-            <button className="btn btn-secondary ">
-              {Edit ? <>Create Version</> : <>Pull Idea</>}
-            </button>
+            {Edit ? (
+              <button className="btn btn-secondary" onClick={createVersion}>
+                Create Version
+              </button>
+            ) : (
+              <button className="btn btn-secondary" onClick={pullIdea}>
+                Pull Idea
+              </button>
+            )}
           </div>
         </div>
       </div>
