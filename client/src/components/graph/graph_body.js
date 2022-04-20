@@ -26,7 +26,7 @@ const Graph_body = () => {
   const notify3 = () => toast.error("There was an error while versioning !");
   const createVersion = async () => {
     await axios
-      .post(`/api/features/version-end?idea_id=${idea_id}`, {
+      .post(`/api/feature/version-end?idea_id=${idea_id}`, {
         headers: authHeader(),
       })
       .then(

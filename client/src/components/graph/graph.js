@@ -243,18 +243,22 @@ const Graph = (props) => {
 
   useEffect(async () => {
     const idea = JSON.parse(localStorage.getItem("idea"));
+    const id = localStorage.getItem("whose_id");
+    // also check user_id == whosegraph
     if ((idea ? idea[0]._id : <></>) === idea_id) {
       // check if the idea is of the same person
-      console.log("asa");
+      if (whosegraph == id) {
+        console.log("asa");
 
-      SetTreeData(JSON.parse(localStorage.getItem("idea")));
+        SetTreeData(JSON.parse(localStorage.getItem("idea")));
 
-      if (idea[0].canEdit == true) {
-        props.canIEdit(true);
-        SetEdit(true);
-      } else {
-        props.canIEdit(false);
-        SetEdit(false);
+        if (idea[0].canEdit == true) {
+          props.canIEdit(true);
+          SetEdit(true);
+        } else {
+          props.canIEdit(false);
+          SetEdit(false);
+        }
       }
     } else {
       console.log("na");
@@ -279,6 +283,7 @@ const Graph = (props) => {
                 SetEdit(false);
               }
               localStorage.setItem("idea", JSON.stringify(res.data.features));
+              localStorage.setItem("whose_id", res.data.whose_id);
             },
             (err) => {
               console.log(err);
