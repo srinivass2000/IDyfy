@@ -1,4 +1,5 @@
 const Idea = require("../../models/Idea");
+const User = require("../../models/User");
 const ErrorResponse = require("../../utils/errorResponse");
 const mongoose = require("mongoose");
 const { FeatureSchema } = require("../../models/Feature");
@@ -12,16 +13,52 @@ exports.fetch_features_by_parent = async (req, res, next) => {
     obj5 = { canEdit: true };
     obj6 = { canEdit: false };
 
-    console.log("----------------------------------------");
-    console.log(whosegraph);
-    console.log("----------------------------------------");
     var user;
-    if (!whosegraph) {
-      console.log(whosegraph);
-      user = whosegraph.toString();
+    if (whosegraph == "null" || whosegraph == undefined) {
+      // console.log(whosegraph);
+      console.log("here");
+      // user = req.user._id.toString();
+      idea = await Idea.findById(idea_id);
+
+      var contributor_names = [];
+
+      for await (var contributor of idea.contributors) {
+        console.log(contributor);
+        var name = await User.findById(contributor, {
+          name: 1,
+        });
+        contributor_names.push(name);
+      }
+
+      let sortable = [];
+      for (var user in idea.user_scores) {
+        sortable.push([user, idea.user_scores[user]]);
+      }
+
+      sortable.sort(function (a, b) {
+        return a[1] - b[1];
+      });
+
+      console.log(idea.user_scores);
+      console.log(sortable);
+      console.log(sortable[0]);
+
+      console.log(sortable[0][0]);
+      console.log(sortable[0][1]);
+
+      var highest_contributor = await User.findById(sortable[0][0]);
+
+      user = highest_contributor._id.toString();
+
+      console.log("highest contributor" + user);
     } else {
-      user = req.user._id.toString();
+      console.log("whosegraph :" + whosegraph);
+      user = whosegraph.toString();
     }
+
+    console.log("----------------------------------------");
+    console.log(user);
+    console.log("----------------------------------------");
 
     if (parent_id == null) {
       if (idea_id != null) {
@@ -85,6 +122,7 @@ exports.fetch_features_by_parent = async (req, res, next) => {
         return res.status(200).json({
           success: true,
           features: [idea],
+          whose_id: user._id.toString(),
         });
       }
     }
@@ -108,26 +146,51 @@ exports.fetch_features_by_parent = async (req, res, next) => {
     if (idea_id != null) {
       var Feature = mongoose.model(`features_${idea_id}`, FeatureSchema);
 
-      var results = await Feature.find(
-        {
-          parent_id,
-          version_start: {
-            $lte: version,
+      if (version == "null" || version == undefined) {
+        var results = await Feature.find(
+          {
+            parent_id,
+            version_start: {
+              $lte: version,
+            },
+            version_end: {
+              $gte: version,
+            },
+            contributors: { $in: [user.toString()] },
           },
-          version_end: {
-            $gte: version,
+          {
+            title: 1,
+            parent_id: 1,
+            version_start: 1,
+            version_end: 1,
+            available: 1,
+            updated_feature: 1,
+            // user_id: 1,
+          }
+        );
+      } else {
+        var results = await Feature.find(
+          {
+            parent_id,
+            version_start: {
+              $lte: version,
+            },
+            version_end: {
+              $gte: version,
+            },
+            contributors: { $in: [user.toString()] },
           },
-        },
-        {
-          title: 1,
-          parent_id: 1,
-          version_start: 1,
-          version_end: 1,
-          available: 1,
-          updated_feature: 1,
-          // user_id: 1,
-        }
-      );
+          {
+            title: 1,
+            parent_id: 1,
+            version_start: 1,
+            version_end: 1,
+            available: 1,
+            updated_feature: 1,
+            // user_id: 1,
+          }
+        );
+      }
 
       // console.log("initial" + results);
       if (results.length == 0) {
