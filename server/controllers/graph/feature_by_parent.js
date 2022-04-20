@@ -12,6 +12,9 @@ exports.fetch_features_by_parent = async (req, res, next) => {
     obj5 = { canEdit: true };
     obj6 = { canEdit: false };
 
+    console.log("----------------------------------------");
+    console.log(whosegraph);
+    console.log("----------------------------------------");
     var user;
     if (!whosegraph) {
       console.log(whosegraph);
@@ -30,7 +33,6 @@ exports.fetch_features_by_parent = async (req, res, next) => {
         var test = await Feature.find(
           {
             parent_id: idea_id.toString(),
-            contributors: { $in: [user] },
           },
           {
             _id: 1,
@@ -45,7 +47,6 @@ exports.fetch_features_by_parent = async (req, res, next) => {
             user === req.user._id.toString()
           ) {
             idea = { ...idea, ...obj5 };
-            console.log("can edit=true");
           } else {
             idea = { ...idea, ...obj6 };
           }
@@ -57,20 +58,20 @@ exports.fetch_features_by_parent = async (req, res, next) => {
         test.forEach(function (feature) {
           if (
             feature.contributors.includes(req.user._id.toString()) &&
-            idea.contributors.includes(req.user._id.toString())
+            idea.contributors.includes(req.user._id.toString()) &&
+            user === req.user._id.toString()
           ) {
             // idea = { ...idea, ...obj5 };
             counter++;
           }
         });
 
-        if (
-          counter == test.length &&
-          idea.contributors.includes(req.user._id.toString()) &&
-          user === req.user._id.toString()
-        ) {
-          idea = { ...idea, ...obj5 };
-          console.log("can edit=true");
+        if (counter == test.length) {
+          if (
+            idea.contributors.includes(req.user._id.toString()) &&
+            user === req.user._id.toString()
+          )
+            idea = { ...idea, ...obj5 };
         } else {
           idea = { ...idea, ...obj6 };
         }
@@ -78,7 +79,6 @@ exports.fetch_features_by_parent = async (req, res, next) => {
         // idea = { ...idea._doc, ...obj2 };
 
         console.log(idea);
-        console.log(idea.canEdit);
 
         idea.contributors = undefined;
 
@@ -108,45 +108,26 @@ exports.fetch_features_by_parent = async (req, res, next) => {
     if (idea_id != null) {
       var Feature = mongoose.model(`features_${idea_id}`, FeatureSchema);
 
-      if (!version) {
-        var results = await Feature.find(
-          {
-            available: true,
-            contributors: { $in: [user] },
+      var results = await Feature.find(
+        {
+          parent_id,
+          version_start: {
+            $lte: version,
           },
-          {
-            title: 1,
-            parent_id: 1,
-            version_start: 1,
-            version_end: 1,
-            available: 1,
-            updated_feature: 1,
-            // user_id: 1,
-          }
-        );
-      } else {
-        var results = await Feature.find(
-          {
-            parent_id,
-            version_start: {
-              $lte: version,
-            },
-            version_end: {
-              $gte: version,
-            },
-            contributors: { $in: [user] },
+          version_end: {
+            $gte: version,
           },
-          {
-            title: 1,
-            parent_id: 1,
-            version_start: 1,
-            version_end: 1,
-            available: 1,
-            updated_feature: 1,
-            // user_id: 1,
-          }
-        );
-      }
+        },
+        {
+          title: 1,
+          parent_id: 1,
+          version_start: 1,
+          version_end: 1,
+          available: 1,
+          updated_feature: 1,
+          // user_id: 1,
+        }
+      );
 
       // console.log("initial" + results);
       if (results.length == 0) {
@@ -164,7 +145,6 @@ exports.fetch_features_by_parent = async (req, res, next) => {
         var test = await Feature.find(
           {
             parent_id: feature._id.toString(),
-            contributors: { $in: [user] },
           },
           {
             _id: 1,
