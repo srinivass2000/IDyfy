@@ -22,7 +22,27 @@ const Graph_body = () => {
 
   const notify = () => toast.success("You succcessfully Pulled the Idea!");
   const notify1 = () => toast.error("There was an error pulling the Idea!");
-  const createVersion = () => {};
+  const notify2 = () => toast.success("Versioned succcessfully !");
+  const notify3 = () => toast.error("There was an error while versioning !");
+  const createVersion = async () => {
+    await axios
+      .post(`/api/features/version-end?idea_id=${idea_id}`, {
+        headers: authHeader(),
+      })
+      .then(
+        (res) => {
+          // console.log(res.data);
+          if (res.data.success == true) {
+            notify2();
+          } else {
+            notify3();
+          }
+        },
+        (err) => {
+          notify3();
+        }
+      );
+  };
 
   const pullIdea = async () => {
     await axios

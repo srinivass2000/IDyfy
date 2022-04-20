@@ -7,7 +7,7 @@ const { FeatureSchema } = require("../../models/Feature");
 
 exports.version_end = async (req, res, next) => {
   try {
-    const { idea_id } = req.body;
+    const { idea_id } = req.query;
 
     const idea = await Idea.findOne({
       _id: idea_id,
