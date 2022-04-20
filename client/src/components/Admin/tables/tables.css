@@ -1,3 +1,9 @@
+body {
+  /* background: #111; */
+  background: rgb(6, 6, 55);
+  overflow-x: hidden;
+  background-size: cover;
+}
 
 .button-6 {
   align-items: center;

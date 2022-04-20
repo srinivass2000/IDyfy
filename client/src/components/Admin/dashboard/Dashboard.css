@@ -1,5 +1,13 @@
-@media (max-width: 1400px) {
+body {
+  /* background: #111; */
+  background: rgb(6, 6, 55);
+  overflow-x: hidden;
+  background-size: cover;
+}
+@media (max-width: 700px) {
   .mn {
-    width: 1360px;
+    width: 700px;
   }
 }
+
+

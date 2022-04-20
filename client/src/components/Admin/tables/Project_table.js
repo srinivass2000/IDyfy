@@ -1,60 +1,32 @@
 import React from "react";
 import { useState, useEffect } from "react";
-//import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import Navbar from "../Navbar/Navbar";
 import authHeader from "../auth/auth-header";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import Modal from "react-modal";
 import "../auth/Login.css";
-import Idyfy_logo from "../../../assets/svg/Idyfy_logo.svg";
 import Stones from "../../../assets/svg/stones1.svg";
-import Idyfy_name from "../../../assets/svg/Idyfy_name_Signup.svg";
 import { isMobile } from "react-device-detect";
-import AuthService from "../../../services/authservices";
-import { useHistory } from "react-router-dom";
+//import { useHistory } from "react-router-dom";
 import "./tables.css";
 
 const Project_table = () => {
   const [ideas, setIdeas] = useState({});
   const [user, setUsers] = useState();
-  const history = useHistory();
+  //const history = useHistory();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      //await AuthService.login(formdata.username, formdata.password).then(
-      // (res) => {
-      //   if (res.status === 202) {
-      history.push("/admin/Dashboard");
-      closeModal();
-      //setFormData(initialState);
-      //    }
-      //  }
-      //  );
-    } catch (e) {
-      console.log(e);
-    }
-  };
+
 
   const GoBack = () => {
-    history.push("/admin/projects");
-  };
-  const handleChange = (e) => {
-    //setFormData({ ...formdata, [e.target.name]: e.target.value });
+    window.location.reload(false);
   };
 
   const [modalIsOpen, setIsOpen] = React.useState(false);
   function openModal() {
     setIsOpen(true);
   }
-  //   function afterOpenModal() {
-  //     // references are now sync'd and can be accessed.
-  //     subtitle.style.color = "#f00";
-  //   }
   function closeModal() {
     setIsOpen(false);
-    //  setFormData(initialState);
   }
 
   const fetchIdea = async () => {
@@ -66,7 +38,7 @@ const Project_table = () => {
       .then((res) => {
         setIdeas(res.data.final);
 
-        console.log(res.data);
+        //console.log(res.data);
       })
       .catch((err) => console.log(err));
   };
@@ -106,36 +78,6 @@ const Project_table = () => {
   }, []);
 
   console.log(user);
-
-  const data = {
-    columns: [
-      {
-        label: "Sr. No.",
-        field: "id",
-        sort: "asc",
-      },
-      {
-        label: "Name",
-        field: "heading0",
-        sort: "asc",
-      },
-      {
-        label: "Email",
-        field: "heading1",
-        sort: "asc",
-      },
-      {
-        label: "No. of Ideas",
-        field: "heading2",
-        sort: "asc",
-      },
-      {
-        label: "Engage Score",
-        field: "heading3",
-        sort: "asc",
-      },
-    ],
-  };
 
   return (
     <div>
@@ -308,7 +250,7 @@ const Project_table = () => {
                                     <button
                                       className="button-6"
                                       style={{ background: "#222222" }}
-                                      onClick={GoBack}
+                                      onClick={closeModal}
                                     >
                                       Close
                                     </button>
