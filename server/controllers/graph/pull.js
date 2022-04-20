@@ -6,7 +6,7 @@ const { FeatureSchema } = require("../../models/Feature");
 
 exports.pull_idea = async (req, res, next) => {
   try {
-    const { idea_id, from } = req.body;
+    const { idea_id, from } = req.query;
 
     var idea = await Idea.findById(idea_id);
     if (idea) {
@@ -29,7 +29,7 @@ exports.pull_idea = async (req, res, next) => {
       });
 
       await User.findByIdAndUpdate(req.user._id, {
-        $push: { ideas_contributed: [idea._id.toString()] },
+        $push: { ideas_contributed: idea._id.toString() },
       });
 
       await User.findByIdAndUpdate(from.toString(), {

@@ -1,22 +1,88 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Graph from "./graph";
+import { useParams } from "react-router-dom";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import OtherContributers from "./Other_Contributers";
+import axios from "axios";
+import authHeader from "../../services/auth-header";
+import { toast } from "react-toastify";
 
 const Graph_body = () => {
-  const [Version, SetVersion] = useState(null);
-  const [Whosegraph, SetWhosegraph] = useState(null);
+  const [Version, SetVersion] = useState("null");
+  const [Whosegraph, SetWhosegraph] = useState("null");
   const [Edit, SetEdit] = useState(false);
+  const [Contributers, SetContributers] = useState();
+  const [Heighest, SetHeighest] = useState();
+
+  const { idea_id } = useParams();
   const canIEdit = (a) => {
     SetEdit(a);
-    console.log(a);
+    // console.log(a);
   };
-  // use params to get ideaId  make api call to get details
+
+  const notify = () => toast.success("You succcessfully Pulled the Idea!");
+  const notify1 = () => toast.error("There was an error pulling the Idea!");
+  const createVersion = () => {};
+
+  const pullIdea = async () => {
+    await axios
+      .get(`/api/features/pull?idea_id=${idea_id}&from=${Whosegraph}`, {
+        headers: authHeader(),
+      })
+      .then(
+        (res) => {
+          // console.log(res.data);
+          if (res.data.success == true) {
+            notify();
+          } else {
+            notify1();
+          }
+        },
+        (err) => {
+          notify1();
+        }
+      );
+  };
+
+  useEffect(async () => {
+    await axios
+      .get(`/api/feature/idea-details?idea_id=${idea_id}`, {
+        headers: authHeader(),
+      })
+      .then(
+        (res) => {
+          // console.log(res.data);
+          SetVersion(res.data.highest_contributor.latest_version);
+          SetWhosegraph(res.data.highest_contributor._id);
+          SetContributers(res.data.contributor_names);
+          console.log(res.data.contributor_names);
+          SetHeighest(res.data.highest_contributor);
+        },
+        (err) => {
+          //
+        }
+      );
+  }, []);
+
   return (
     <>
       <div className="container">
         <div className="row">
-          <div class="dropdown mt-2 offset-lg-6 col-sm-4 col-lg-2 col-4 ">
+          <div className="col-lg-3 col-12">
+            {Contributers ? (
+              Contributers.map(
+                (contributor, idx) =>
+                  Whosegraph == contributor._id && (
+                    <p className="text-white mt-2">
+                      You a viewing {contributor.name}'s idea
+                    </p>
+                  )
+              )
+            ) : (
+              <>{console.log("fs")}</>
+            )}
+          </div>
+          <div class="dropdown mt-2 offset-lg-3 col-sm-4 col-lg-2 col-4 ">
             <button
               class="btn btn-secondary dropdown-toggle "
               type="button"
@@ -26,21 +92,46 @@ const Graph_body = () => {
             >
               Versions
             </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li>
-                <a class="dropdown-item" href="">
-                  Version 1
-                </a>
-              </li>
+            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              {Version == 0 ? (
+                <>
+                  <li>
+                    <a class="dropdown-item" href="">
+                      Not yet versioned
+                    </a>
+                  </li>
+                </>
+              ) : (
+                <>
+                  {[...Array(Version)].map((elem, index) => (
+                    <li key={index}>
+                      <a class="dropdown-item" href="">
+                        Version {index + 1}
+                      </a>
+                    </li>
+                  ))}
+                </>
+              )}
             </ul>
           </div>
           <div className="col-sm-4 col-lg-2 col-4 mt-2">
-            <OtherContributers SetWhosegraph={SetWhosegraph} />
+            {/* {console.log(Contributers)} */}
+            <OtherContributers
+              SetWhosegraph={SetWhosegraph}
+              Contributers={Contributers}
+              heighest={Heighest}
+            />
           </div>
           <div className="col-sm-4 col-lg-2 col-4 mt-2">
-            <button className="btn btn-secondary ">
-              {Edit ? <>Create Version</> : <>Pull Idea</>}
-            </button>
+            {Edit ? (
+              <button className="btn btn-secondary" onClick={createVersion}>
+                Create Version
+              </button>
+            ) : (
+              <button className="btn btn-secondary" onClick={pullIdea}>
+                Pull Idea
+              </button>
+            )}
           </div>
         </div>
       </div>

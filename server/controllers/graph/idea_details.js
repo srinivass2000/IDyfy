@@ -6,7 +6,7 @@ const { FeatureSchema } = require("../../models/Feature");
 
 exports.idea_details = async (req, res, next) => {
   try {
-    const { idea_id } = req.body;
+    const { idea_id } = req.query;
     var idea = await Idea.findById(idea_id, {
       title: true,
       contributors: 1,
@@ -62,7 +62,7 @@ exports.idea_details = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      idea,
+      // idea,
       contributor_names,
       highest_contributor,
     });

@@ -22,15 +22,17 @@ const Project_table = () => {
   };
 
   const [modalIsOpen, setIsOpen] = React.useState(false);
-  function openModal() {
+  const openModal = () => {
     setIsOpen(true);
-  }
-  function closeModal() {
+  };
+
+  const closeModal = () => {
     setIsOpen(false);
-  }
+  };
 
   const fetchIdea = async () => {
     //const history = useHistory();
+    console.log("here");
     await axios
       .get(`/api/admin/get-ideas`, {
         headers: authHeader(),
@@ -77,7 +79,7 @@ const Project_table = () => {
     fetchIdea();
   }, []);
 
-  console.log(user);
+  // console.log(user);
 
   return (
     <div>
@@ -99,7 +101,9 @@ const Project_table = () => {
                   fontSize: "2rem",
                 }}
               >
-                <div class="d-flex justify-content-center my-9">USER TABLE</div>
+                <div class="d-flex justify-content-center my-9">
+                  PROJECTS TABLE
+                </div>
               </div>
 
               <div
@@ -130,36 +134,36 @@ const Project_table = () => {
                             <td>{idea.shares.length}</td>
                             <td>{idea.comment_count}</td>
                             <Modal
-                          isOpen={modalIsOpen}
-                          // onAfterOpen={afterOpenModal}
-                          onRequestClose={closeModal}
-                          style={customStyles}
-                          contentLabel="Example Modal"
-                          ariaHideApp={false}
-                        >
-                          <div
-                            className="relative  rounded"
-                            style={{
-                              background:
-                                "linear-gradient(75deg, rgb(4, 4, 4), midnightblue)",
-                            }}
-                          >
-                            <div className="row">
-                              <div className="col-lg-12 col-12 px-4 py-9 container">
-                                <div className="flex justify-center mt-4">
-                                  <div>
-                                    <h1
-                                      className="my-2 mb-3 text-center"
-                                      style={{
-                                        color: "white",
-                                        fontSize: "2rem",
-                                      }}
-                                    >
-                                      {idea.title}
-                                    </h1>
-                                  </div>
-                                </div>
-                                {/* <div className="flex justify-left">
+                              isOpen={modalIsOpen}
+                              // onAfterOpen={afterOpenModal}
+                              onRequestClose={closeModal}
+                              style={customStyles}
+                              contentLabel="Example Modal"
+                              ariaHideApp={false}
+                            >
+                              <div
+                                className="relative  rounded"
+                                style={{
+                                  background:
+                                    "linear-gradient(75deg, rgb(4, 4, 4), midnightblue)",
+                                }}
+                              >
+                                <div className="row">
+                                  <div className="col-lg-12 col-12 px-4 py-9 container">
+                                    <div className="flex justify-center mt-4">
+                                      <div>
+                                        <h1
+                                          className="my-2 mb-3 text-center"
+                                          style={{
+                                            color: "white",
+                                            fontSize: "2rem",
+                                          }}
+                                        >
+                                          {idea.title}
+                                        </h1>
+                                      </div>
+                                    </div>
+                                    {/* <div className="flex justify-left">
                                   <h1
                                     className="my-1 ml-3 text-left"
                                     style={{
@@ -170,106 +174,105 @@ const Project_table = () => {
                                     Description
                                   </h1>
                                 </div> */}
-                                <div className="flex justify-center">
-                                  <h1
-                                    className="my-1 ml-3 text-left"
-                                    style={{
-                                      color: "white",
-                                      fontSize: "1rem",
-                                    }}
-                                  >
-                                    {idea.description}
-                                  </h1>
-                                </div>
-                                <div className="flex justify-left">
-                                  <h1
-                                    className="my-2 ml-3 text-left"
-                                    style={{
-                                      color: "white",
-                                      fontSize: "1rem",
-                                    }}
-                                  >
-                                    Likes : {idea.liked_users.length}
-                                  </h1>
-                                </div>
-                                <div className="flex justify-left">
-                                  <h1
-                                    className="my-2 ml-3 text-left"
-                                    style={{
-                                      color: "white",
-                                      fontSize: "1rem",
-                                    }}
-                                  >
-                                    Shares : {idea.shares.length}
-                                  </h1>
-                                </div>
-                                <div className="flex justify-left">
-                                  <h1
-                                    className="my-2 ml-3 text-left"
-                                    style={{
-                                      color: "white",
-                                      fontSize: "1rem",
-                                    }}
-                                  >
-                                    Contributors :{" "}
-                                    {idea.contributors.length}
-                                  </h1>
-                                </div>
-                                <div className="flex justify-left">
-                                  <h1
-                                    className="my-2 ml-3 text-left"
-                                    style={{
-                                      color: "white",
-                                      fontSize: "1rem",
-                                    }}
-                                  >
-                                    Stars :{idea.starred_by.length}
-                                  </h1>
+                                    <div className="flex justify-center">
+                                      <h1
+                                        className="my-1 ml-3 text-left"
+                                        style={{
+                                          color: "white",
+                                          fontSize: "1rem",
+                                        }}
+                                      >
+                                        {idea.description}
+                                      </h1>
+                                    </div>
+                                    <div className="flex justify-left">
+                                      <h1
+                                        className="my-2 ml-3 text-left"
+                                        style={{
+                                          color: "white",
+                                          fontSize: "1rem",
+                                        }}
+                                      >
+                                        Likes : {idea.liked_users.length}
+                                      </h1>
+                                    </div>
+                                    <div className="flex justify-left">
+                                      <h1
+                                        className="my-2 ml-3 text-left"
+                                        style={{
+                                          color: "white",
+                                          fontSize: "1rem",
+                                        }}
+                                      >
+                                        Shares : {idea.shares.length}
+                                      </h1>
+                                    </div>
+                                    <div className="flex justify-left">
+                                      <h1
+                                        className="my-2 ml-3 text-left"
+                                        style={{
+                                          color: "white",
+                                          fontSize: "1rem",
+                                        }}
+                                      >
+                                        Contributors :{" "}
+                                        {idea.contributors.length}
+                                      </h1>
+                                    </div>
+                                    <div className="flex justify-left">
+                                      <h1
+                                        className="my-2 ml-3 text-left"
+                                        style={{
+                                          color: "white",
+                                          fontSize: "1rem",
+                                        }}
+                                      >
+                                        Stars :{idea.starred_by.length}
+                                      </h1>
+                                    </div>
+
+                                    <div className="row mx-3 mt-5 flex justify-center">
+                                      <div className="col-4   flex justify-center">
+                                        <button
+                                          className="button-6"
+                                          style={{ background: "#FF9900" }}
+                                          onClick={closeModal}
+                                        >
+                                          Warn
+                                        </button>
+                                      </div>
+                                      <div className="col-4   flex justify-center">
+                                        <button
+                                          className="button-6"
+                                          style={{ background: "#EE0000" }}
+                                          onClick={closeModal}
+                                        >
+                                          Delete
+                                        </button>
+                                      </div>
+                                      <div className="col-4  flex justify-center">
+                                        <button
+                                          className="button-6"
+                                          style={{ background: "#222222" }}
+                                          onClick={closeModal}
+                                        >
+                                          Close
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </div>
                                 </div>
 
-                                <div className="row mx-3 mt-5 flex justify-center">
-                                  <div className="col-4   flex justify-center">
-                                    <button
-                                      className="button-6"
-                                      style={{ background: "#FF9900" }}
-                                      onClick={GoBack}
-                                    >
-                                      Warn
-                                    </button>
-                                  </div>
-                                  <div className="col-4   flex justify-center">
-                                    <button
-                                      className="button-6"
-                                      style={{ background: "#EE0000" }}
-                                      onClick={GoBack}
-                                    >
-                                      Delete
-                                    </button>
-                                  </div>
-                                  <div className="col-4  flex justify-center">
-                                    <button
-                                      className="button-6"
-                                      style={{ background: "#222222" }}
-                                      onClick={closeModal}
-                                    >
-                                      Close
-                                    </button>
-                                  </div>
+                                <div className="">
+                                  <img
+                                    className="stones"
+                                    src={Stones}
+                                    alt="Stone Art"
+                                  />
                                 </div>
                               </div>
-                            </div>
-
-                             <div className="">
-                              <img
-                                className="stones"
-                                src={Stones}
-                                alt="Stone Art"
-                              />
-                            </div> 
-                          </div>
-                        </Modal>
+                            </Modal>
                           </tr>
-                          
                         ))
                       ) : (
                         <>

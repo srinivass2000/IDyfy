@@ -1,12 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import Modal from "react-modal";
-import Idyfy_logo from "../../assets/svg/Idyfy_logo.svg";
-import Stones from "../../assets/svg/stones1.svg";
-import Idyfy_name from "../../assets/svg/Idyfy_name_Signup.svg";
 import { isMobile } from "react-device-detect";
-import AuthService from "../../services/authservices";
-import { useHistory } from "react-router-dom";
-import profile from "../../assets/svg/Dummy_Profile2.svg";
 
 const OtherContributers = (props) => {
   //   let subtitle;
@@ -39,11 +33,6 @@ const OtherContributers = (props) => {
     };
   }
 
-  const selectWhoseIdea = (id) => {
-    props.SetWhosegraph(id);
-    closeModal();
-  };
-
   const [modalIsOpen, setIsOpen] = React.useState(false);
   function openModal() {
     setIsOpen(true);
@@ -53,6 +42,13 @@ const OtherContributers = (props) => {
     setIsOpen(false);
   }
   //modal end
+  const selectWhoseIdea = (id) => {
+    props.SetWhosegraph(id);
+    closeModal();
+  };
+
+  let contributers = props.Contributers;
+  let heighest = props.heighest;
 
   return (
     <div>
@@ -70,7 +66,7 @@ const OtherContributers = (props) => {
         contentLabel="Example Modal"
         ariaHideApp={false}
       >
-        <div className>
+        <div>
           <div
             className="row justify-center p-2 text-white"
             style={{ "background-color": " #840fcc" }}
@@ -83,12 +79,29 @@ const OtherContributers = (props) => {
                 <div className="row flex justify-center text-white">
                   Heighest Contributer
                 </div>
-                <img src={profile} alt="My Profile" className="profileimage" />
+                <img
+                  style={{
+                    "border-radius": "100%",
+                    height: "200px",
+                    width: "200px",
+                  }}
+                  src={heighest ? heighest.profile_pic : <></>}
+                  alt="My Profile"
+                  className="profileimage"
+                />
               </div>
-              <div className="row flex justify-center">name</div>
+              <div className="row flex justify-center">
+                {heighest ? (
+                  //  console.log(heighest)
+                  heighest.name
+                ) : (
+                  <></>
+                )}
+              </div>
             </div>
             <div className="col-6 ">
               <p className="row flex justify-center">Checkout others work</p>
+
               <div class="dropdown mt-2  flex justify-center">
                 <button
                   class="btn btn-secondary dropdown-toggle"
@@ -100,9 +113,18 @@ const OtherContributers = (props) => {
                   Other Contributers
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <li onClick={() => selectWhoseIdea(/*id*/)}>
-                    <a class="dropdown-item">Lex</a>
-                  </li>
+                  {contributers ? (
+                    contributers.map((contributer, idx) => (
+                      <li
+                        key={idx}
+                        onClick={() => selectWhoseIdea(contributer._id)}
+                      >
+                        {contributer.name}
+                      </li>
+                    ))
+                  ) : (
+                    <>{console.log("hill")}</>
+                  )}
                 </ul>
               </div>
             </div>

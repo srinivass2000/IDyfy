@@ -83,7 +83,7 @@ const Profile = () => {
             </div>
             <div className=" col-lg-2 col-md-3">
               <div className="flex justify-center">
-                {user.engagement_score.toFixed(2) || "0"}
+                {user.engagement_score ? user.engagement_score.toFixed(2) : "0"}
               </div>
               <h6 className="flex justify-center"> Engagement score </h6>
             </div>
