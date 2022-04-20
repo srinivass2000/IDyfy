@@ -5,6 +5,7 @@ import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import OtherContributers from "./Other_Contributers";
 import axios from "axios";
 import authHeader from "../../services/auth-header";
+import { toast } from "react-toastify";
 
 const Graph_body = () => {
   const [Version, SetVersion] = useState(null);
@@ -18,6 +19,31 @@ const Graph_body = () => {
     SetEdit(a);
     // console.log(a);
   };
+
+  const notify = () => toast.success("You succcessfully Pulled the Idea!");
+  const notify1 = () => toast.error("There was an error pulling the Idea!");
+  const createVersion = () => {};
+
+  const pullIdea = async () => {
+    await axios
+      .get(`/api/features/pull?idea_id=${idea_id}&from=${Whosegraph}`, {
+        headers: authHeader(),
+      })
+      .then(
+        (res) => {
+          // console.log(res.data);
+          if (res.data.success == true) {
+            notify();
+          } else {
+            notify1();
+          }
+        },
+        (err) => {
+          notify1();
+        }
+      );
+  };
+
   useEffect(async () => {
     await axios
       .get(`/api/feature/idea-details?idea_id=${idea_id}`, {
@@ -25,10 +51,11 @@ const Graph_body = () => {
       })
       .then(
         (res) => {
-          console.log(res.data);
+          // console.log(res.data);
           SetVersion(res.data.highest_contributor.latest_version);
           SetWhosegraph(res.data.highest_contributor._id);
           SetContributers(res.data.contributor_names);
+          console.log(res.data.contributor_names);
           SetHeighest(res.data.highest_contributor);
         },
         (err) => {
@@ -41,7 +68,21 @@ const Graph_body = () => {
     <>
       <div className="container">
         <div className="row">
-          <div class="dropdown mt-2 offset-lg-6 col-sm-4 col-lg-2 col-4 ">
+          <div className="col-lg-3 col-12">
+            {Contributers ? (
+              Contributers.map(
+                (contributor, idx) =>
+                  Whosegraph == contributor._id && (
+                    <p className="text-white mt-2">
+                      You a viewing {contributor.name}'s idea
+                    </p>
+                  )
+              )
+            ) : (
+              <>{console.log("fs")}</>
+            )}
+          </div>
+          <div class="dropdown mt-2 offset-lg-3 col-sm-4 col-lg-2 col-4 ">
             <button
               class="btn btn-secondary dropdown-toggle "
               type="button"
@@ -82,9 +123,15 @@ const Graph_body = () => {
             />
           </div>
           <div className="col-sm-4 col-lg-2 col-4 mt-2">
-            <button className="btn btn-secondary ">
-              {Edit ? <>Create Version</> : <>Pull Idea</>}
-            </button>
+            {Edit ? (
+              <button className="btn btn-secondary" onClick={createVersion}>
+                Create Version
+              </button>
+            ) : (
+              <button className="btn btn-secondary" onClick={pullIdea}>
+                Pull Idea
+              </button>
+            )}
           </div>
         </div>
       </div>
