@@ -51,10 +51,11 @@ const Graph_body = () => {
       })
       .then(
         (res) => {
-          console.log(res.data);
+          // console.log(res.data);
           SetVersion(res.data.highest_contributor.latest_version);
           SetWhosegraph(res.data.highest_contributor._id);
           SetContributers(res.data.contributor_names);
+          console.log(res.data.contributor_names);
           SetHeighest(res.data.highest_contributor);
         },
         (err) => {
@@ -67,7 +68,21 @@ const Graph_body = () => {
     <>
       <div className="container">
         <div className="row">
-          <div class="dropdown mt-2 offset-lg-6 col-sm-4 col-lg-2 col-4 ">
+          <div className="col-lg-3 col-12">
+            {Contributers ? (
+              Contributers.map(
+                (contributor, idx) =>
+                  Whosegraph == contributor._id && (
+                    <p className="text-white mt-2">
+                      You a viewing {contributor.name}'s idea
+                    </p>
+                  )
+              )
+            ) : (
+              <>{console.log("fs")}</>
+            )}
+          </div>
+          <div class="dropdown mt-2 offset-lg-3 col-sm-4 col-lg-2 col-4 ">
             <button
               class="btn btn-secondary dropdown-toggle "
               type="button"
