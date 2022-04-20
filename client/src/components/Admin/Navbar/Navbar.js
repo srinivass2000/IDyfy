@@ -10,7 +10,7 @@ const Navbar = () => {
 
   const logout = () => {
     AuthService.logout();
-    history.push("/");
+    history.push("/admin");
   };
   const history = useHistory();
   const [toggleMenu, setToggleMenu] = useState(false);

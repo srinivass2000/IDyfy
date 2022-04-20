@@ -12,9 +12,8 @@ import "./tables.css";
 
 const Project_table = () => {
   const [ideas, setIdeas] = useState({});
-  const [user, setUsers] = useState();
+  //const [user, setUsers] = useState();
   //const history = useHistory();
-
 
 
   const GoBack = () => {
@@ -32,7 +31,7 @@ const Project_table = () => {
 
   const fetchIdea = async () => {
     //const history = useHistory();
-    console.log("here");
+    //console.log("here");
     await axios
       .get(`/api/admin/get-ideas`, {
         headers: authHeader(),
@@ -163,17 +162,6 @@ const Project_table = () => {
                                         </h1>
                                       </div>
                                     </div>
-                                    {/* <div className="flex justify-left">
-                                  <h1
-                                    className="my-1 ml-3 text-left"
-                                    style={{
-                                      color: "white",
-                                      fontSize: "1.2rem",
-                                    }}
-                                  >
-                                    Description
-                                  </h1>
-                                </div> */}
                                     <div className="flex justify-center">
                                       <h1
                                         className="my-1 ml-3 text-left"
@@ -254,7 +242,7 @@ const Project_table = () => {
                                         <button
                                           className="button-6"
                                           style={{ background: "#222222" }}
-                                          onClick={closeModal}
+                                          onClick={GoBack}
                                         >
                                           Close
                                         </button>

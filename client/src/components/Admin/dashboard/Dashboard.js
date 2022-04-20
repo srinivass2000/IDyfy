@@ -52,9 +52,9 @@ const Dashboard = () => {
         data: [
           [0, 1],
           [1, 2],
-          [2, 4],
+          [2, 3],
           [3, 2],
-          [4, 7],
+          [4, 1],
         ],
       },
     ],
@@ -65,19 +65,6 @@ const Dashboard = () => {
     () => [
       { primary: true, type: "linear", position: "bottom" },
       { type: "linear", position: "left" },
-    ],
-    []
-  );
-  const series = React.useMemo(
-    () => ({
-      type: "bar",
-    }),
-    []
-  );
-  const axes2 = React.useMemo(
-    () => [
-      { primary: true, type: "ordinal", position: "bottom" },
-      { position: "left", type: "linear", stacked: false, show: false },
     ],
     []
   );

@@ -12,6 +12,7 @@ import "./tables.css";
 
 const User_table = () => {
   const [user, setUsers] = useState();
+  let [tid, settid] = useState();
   //const history = useHistory();
 
   const GoBack = () => {
@@ -19,8 +20,11 @@ const User_table = () => {
   };
 
   const [modalIsOpen, setIsOpen] = React.useState(false);
-  function openModal() {
+  function openModal(use) {
     setIsOpen(true);
+    tid = settid(use);
+    console.log(tid);
+
   }
   function closeModal() {
     setIsOpen(false);
@@ -76,7 +80,6 @@ const User_table = () => {
 
   console.log(user);
 
-  
   return (
     <div>
       <div className="col-12 ">
@@ -121,6 +124,7 @@ const User_table = () => {
                       {user ? (
                         user.map((use, index) => (
                           <tr key={index + 1} onClick={openModal}>
+                           
                             <td>{index + 1}</td>
                             <td>{use.name}</td>
                             <td>{use.email}</td>
@@ -131,141 +135,132 @@ const User_table = () => {
                               {use.engagement_score
                                 ? use.engagement_score.toFixed(2)
                                 : "N.A"}
+                              
                             </td>
                             <Modal
-                              isOpen={modalIsOpen}
-                              // onAfterOpen={afterOpenModal}
-                              onRequestClose={closeModal}
-                              style={customStyles}
-                              contentLabel="Example Modal"
-                              ariaHideApp={false}
-                            >
-                              <div
-                                className="relative  rounded"
-                                style={{
-                                  background:
-                                    "linear-gradient(75deg, rgb(4, 4, 4), midnightblue)",
-                                }}
-                              >
-                                <div className="row">
-                                  <div className="col-lg-12 col-12 px-4 py-9 container">
-                                    <div className="flex justify-center ">
+                                  isOpen={modalIsOpen}
+                                  // onAfterOpen={afterOpenModal}
+                                  onRequestClose={closeModal}
+                                  style={customStyles}
+                                  contentLabel="Example Modal"
+                                  ariaHideApp={false}
+                                >
+                                  <div
+                                    className="relative  rounded"
+                                    style={{
+                                      background:
+                                        "linear-gradient(75deg, rgb(4, 4, 4), midnightblue)",
+                                    }}
+                                  >
+                                    <div className="row">
+                                      <div className="col-lg-12 col-12 px-4 py-9 container">
+                                        <div className="flex justify-center ">
+                                          
+                                          <img
+                                            src={use.profile_pic}
+                                            alt="Profile Pic "
+                                          />
+                                        </div>
+                                        <div className="flex justify-center mt-4">
+                                          <div>
+                                            <h1
+                                              className="my-2 mb-3 text-center"
+                                              style={{
+                                                color: "white",
+                                                fontSize: "2rem",
+                                              }}
+                                            >
+                                              {use.name}
+                                            </h1>
+                                          </div>
+                                        </div>
+                                        <div className="flex justify-center">
+                                          <h1
+                                            className="my-1 ml-3 text-left"
+                                            style={{
+                                              color: "white",
+                                              fontSize: "1rem",
+                                            }}
+                                          >
+                                            {use.job}
+                                          </h1>
+                                        </div>
+                                        <div className="flex justify-left">
+                                          <h1
+                                            className="my-2 ml-3 text-left"
+                                            style={{
+                                              color: "white",
+                                              fontSize: "1rem",
+                                            }}
+                                          >
+                                            Ideas Contributed :{" "}
+                                            {use.ideas_contributed.length}
+                                          </h1>
+                                        </div>
+                                        <div className="flex justify-left">
+                                          <h1
+                                            className="my-2 ml-3 text-left"
+                                            style={{
+                                              color: "white",
+                                              fontSize: "1rem",
+                                            }}
+                                          >
+                                            Followers : {use.followers.length}
+                                          </h1>
+                                        </div>
+                                        <div className="flex justify-left">
+                                          <h1
+                                            className="my-2 ml-3 text-left"
+                                            style={{
+                                              color: "white",
+                                              fontSize: "1rem",
+                                            }}
+                                          >
+                                            Following :{use.following.length}
+                                          </h1>
+                                        </div>
+
+                                        <div className="row mx-3 mt-5 flex justify-center">
+                                          <div className="col-4   flex justify-center">
+                                            <button
+                                              className="button-6"
+                                              style={{ background: "#FF9900" }}
+                                              onClick={GoBack}
+                                            >
+                                              Warn
+                                            </button>
+                                          </div>
+                                          <div className="col-4   flex justify-center">
+                                            <button
+                                              className="button-6"
+                                              style={{ background: "#EE0000" }}
+                                              onClick={GoBack}
+                                            >
+                                              Delete
+                                            </button>
+                                          </div>
+                                          <div className="col-4  flex justify-center">
+                                            <button
+                                              className="button-6"
+                                              style={{ background: "#222222" }}
+                                              onClick={GoBack}
+                                            >
+                                              Close
+                                            </button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div className="">
                                       <img
-                                        src={use.profile_pic}
-                                        alt="Profile Pic "
+                                        className="stones"
+                                        src={Stones}
+                                        alt="Stone Art"
                                       />
                                     </div>
-                                    <div className="flex justify-center mt-4">
-                                      <div>
-                                        <h1
-                                          className="my-2 mb-3 text-center"
-                                          style={{
-                                            color: "white",
-                                            fontSize: "2rem",
-                                          }}
-                                        >
-                                          {use.name}
-                                        </h1>
-                                      </div>
-                                    </div>
-                                    {/* <div className="flex justify-left">
-                                      <h1
-                                        className="my-1 ml-3 text-left"
-                                        style={{
-                                          color: "white",
-                                          fontSize: "1.2rem",
-                                        }}
-                                      >
-                                        Description
-                                      </h1>
-                                    </div> */}
-                                    <div className="flex justify-center">
-                                      <h1
-                                        className="my-1 ml-3 text-left"
-                                        style={{
-                                          color: "white",
-                                          fontSize: "1rem",
-                                        }}
-                                      >
-                                        {use.job}
-                                      </h1>
-                                    </div>
-                                    <div className="flex justify-left">
-                                      <h1
-                                        className="my-2 ml-3 text-left"
-                                        style={{
-                                          color: "white",
-                                          fontSize: "1rem",
-                                        }}
-                                      >
-                                        Ideas Contributed :{" "}
-                                        {use.ideas_contributed.length}
-                                      </h1>
-                                    </div>
-                                    <div className="flex justify-left">
-                                      <h1
-                                        className="my-2 ml-3 text-left"
-                                        style={{
-                                          color: "white",
-                                          fontSize: "1rem",
-                                        }}
-                                      >
-                                        Followers : {use.followers.length}
-                                      </h1>
-                                    </div>
-                                    <div className="flex justify-left">
-                                      <h1
-                                        className="my-2 ml-3 text-left"
-                                        style={{
-                                          color: "white",
-                                          fontSize: "1rem",
-                                        }}
-                                      >
-                                        Following :{use.following.length}
-                                      </h1>
-                                    </div>
-
-                                    <div className="row mx-3 mt-5 flex justify-center">
-                                      <div className="col-4   flex justify-center">
-                                        <button
-                                          className="button-6"
-                                          style={{ background: "#FF9900" }}
-                                          onClick={GoBack}
-                                        >
-                                          Warn
-                                        </button>
-                                      </div>
-                                      <div className="col-4   flex justify-center">
-                                        <button
-                                          className="button-6"
-                                          style={{ background: "#EE0000" }}
-                                          onClick={GoBack}
-                                        >
-                                          Delete
-                                        </button>
-                                      </div>
-                                      <div className="col-4  flex justify-center">
-                                        <button
-                                          className="button-6"
-                                          style={{ background: "#222222" }}
-                                          onClick={GoBack}
-                                        >
-                                          Close
-                                        </button>
-                                      </div>
-                                    </div>
                                   </div>
-                                </div>
-
-                                <div className="">
-                                  <img
-                                    className="stones"
-                                    src={Stones}
-                                    alt="Stone Art"
-                                  />
-                                </div>
-                              </div>
-                            </Modal>
+                                </Modal>
                           </tr>
                         ))
                       ) : (
@@ -280,6 +275,7 @@ const User_table = () => {
                       )}
                     </tbody>
                   </table>
+                  
                 </div>
               </div>
             </div>
