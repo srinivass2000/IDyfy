@@ -5,12 +5,20 @@ const { FeatureSchema } = require("../../models/Feature");
 
 exports.fetch_features_by_parent = async (req, res, next) => {
   try {
-    var { idea_id, parent_id, version } = req.query;
+    var { idea_id, parent_id, version, whosegraph } = req.query;
 
     obj3 = { show: false };
     obj4 = { show: "nothing" };
     obj5 = { canEdit: true };
     obj6 = { canEdit: false };
+
+    var user;
+    if (!whosegraph) {
+      console.log(whosegraph);
+      user = whosegraph.toString();
+    } else {
+      user = req.user._id.toString();
+    }
 
     if (parent_id == null) {
       if (idea_id != null) {
@@ -22,6 +30,7 @@ exports.fetch_features_by_parent = async (req, res, next) => {
         var test = await Feature.find(
           {
             parent_id: idea_id.toString(),
+            contributors: { $in: [user] },
           },
           {
             _id: 1,
@@ -31,8 +40,12 @@ exports.fetch_features_by_parent = async (req, res, next) => {
 
         if (test.length === 0) {
           idea = { ...idea._doc, ...obj4 };
-          if (idea.contributors.includes(req.user._id.toString())) {
+          if (
+            idea.contributors.includes(req.user._id.toString()) &&
+            user === req.user._id.toString()
+          ) {
             idea = { ...idea, ...obj5 };
+            console.log("can edit=true");
           } else {
             idea = { ...idea, ...obj6 };
           }
@@ -51,8 +64,13 @@ exports.fetch_features_by_parent = async (req, res, next) => {
           }
         });
 
-        if (counter == test.length) {
+        if (
+          counter == test.length &&
+          idea.contributors.includes(req.user._id.toString()) &&
+          user === req.user._id.toString()
+        ) {
           idea = { ...idea, ...obj5 };
+          console.log("can edit=true");
         } else {
           idea = { ...idea, ...obj6 };
         }
@@ -60,6 +78,7 @@ exports.fetch_features_by_parent = async (req, res, next) => {
         // idea = { ...idea._doc, ...obj2 };
 
         console.log(idea);
+        console.log(idea.canEdit);
 
         idea.contributors = undefined;
 
@@ -89,26 +108,45 @@ exports.fetch_features_by_parent = async (req, res, next) => {
     if (idea_id != null) {
       var Feature = mongoose.model(`features_${idea_id}`, FeatureSchema);
 
-      var results = await Feature.find(
-        {
-          parent_id,
-          version_start: {
-            $lte: version,
+      if (!version) {
+        var results = await Feature.find(
+          {
+            available: true,
+            contributors: { $in: [user] },
           },
-          version_end: {
-            $gte: version,
+          {
+            title: 1,
+            parent_id: 1,
+            version_start: 1,
+            version_end: 1,
+            available: 1,
+            updated_feature: 1,
+            // user_id: 1,
+          }
+        );
+      } else {
+        var results = await Feature.find(
+          {
+            parent_id,
+            version_start: {
+              $lte: version,
+            },
+            version_end: {
+              $gte: version,
+            },
+            contributors: { $in: [user] },
           },
-        },
-        {
-          title: 1,
-          parent_id: 1,
-          version_start: 1,
-          version_end: 1,
-          available: 1,
-          updated_feature: 1,
-          // user_id: 1,
-        }
-      );
+          {
+            title: 1,
+            parent_id: 1,
+            version_start: 1,
+            version_end: 1,
+            available: 1,
+            updated_feature: 1,
+            // user_id: 1,
+          }
+        );
+      }
 
       // console.log("initial" + results);
       if (results.length == 0) {
@@ -126,6 +164,7 @@ exports.fetch_features_by_parent = async (req, res, next) => {
         var test = await Feature.find(
           {
             parent_id: feature._id.toString(),
+            contributors: { $in: [user] },
           },
           {
             _id: 1,
