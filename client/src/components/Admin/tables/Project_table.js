@@ -114,11 +114,10 @@ const Project_table = () => {
                       <tr>
                         <th>Sr. No.</th>
                         <th>Name</th>
-                        <th>Email</th>
-                        <th>Following</th>
-                        <th>Followers</th>
-                        <th>Ideas Contributed</th>
-                        <th>Engagement Score</th>
+                        <th>Conributors</th>
+                        <th>Likes</th>
+                        <th>Shares</th>
+                        <th>Comments</th>
                       </tr>
                     </thead>
                     <tbody>
