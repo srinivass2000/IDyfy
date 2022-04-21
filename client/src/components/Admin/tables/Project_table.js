@@ -11,10 +11,9 @@ import { isMobile } from "react-device-detect";
 import "./tables.css";
 
 const Project_table = () => {
-  const [ideas, setIdeas] = useState({});
+  const [ideas, setIdeas] = useState();
   //const [user, setUsers] = useState();
   //const history = useHistory();
-
 
   const GoBack = () => {
     window.location.reload(false);
