@@ -146,16 +146,15 @@ exports.fetch_features_by_parent = async (req, res, next) => {
     if (idea_id != null) {
       var Feature = mongoose.model(`features_${idea_id}`, FeatureSchema);
 
-      if (version == "null" || version == undefined) {
+      console.log("-------------------------------------");
+      console.log("Version: " + version);
+      console.log("-------------------------------------");
+
+      if (version == "null" || version == undefined || version == 0) {
+        console.log("Inside version");
         var results = await Feature.find(
           {
             parent_id,
-            version_start: {
-              $lte: version,
-            },
-            version_end: {
-              $gte: version,
-            },
             contributors: { $in: [user.toString()] },
           },
           {
@@ -169,6 +168,7 @@ exports.fetch_features_by_parent = async (req, res, next) => {
           }
         );
       } else {
+        console.log("Inside version else");
         var results = await Feature.find(
           {
             parent_id,
@@ -194,6 +194,7 @@ exports.fetch_features_by_parent = async (req, res, next) => {
 
       // console.log("initial" + results);
       if (results.length == 0) {
+        console.log("This Parent does'nt have any children");
         return res.status(204).json({
           success: false,
           note: "This Parent does'nt have any children",
