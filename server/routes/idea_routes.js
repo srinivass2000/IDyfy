@@ -18,6 +18,9 @@ const { star_idea } = require("../controllers/starred_ideas/star_idea");
 
 const { unstar_idea } = require("../controllers/starred_ideas/unstar_idea");
 
+const { like_idea } = require("../controllers/like_ideas/like_idea");
+
+const { unlike_idea } = require("../controllers/like_ideas/unlike_idea");
 
 const {
   get_starred_ideas,
@@ -31,5 +34,7 @@ router.route("/get-contributed-ideas").get(protect, get_contributed_ideas);
 router.route("/star-idea").get(protect, star_idea);
 router.route("/unstar-idea").get(protect, unstar_idea);
 router.route("/starred-ideas").get(protect, get_starred_ideas);
+router.route("/unlike-idea").get(protect, unlike_idea);
+router.route("/like-idea").get(protect, like_idea);
 
 module.exports = router;

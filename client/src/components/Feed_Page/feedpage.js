@@ -22,7 +22,7 @@ const FeedPage = () => {
             if (skip !== 0) {
               setIdeas([...ideas, ...res.data.ideas]);
             }
-            // console.log(res.data.ideas);
+            console.log(res.data.ideas);
             // console.log(ideas);
           },
           (err) => {
