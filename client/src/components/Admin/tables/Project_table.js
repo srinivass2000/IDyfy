@@ -11,22 +11,44 @@ import { useHistory } from "react-router-dom";
 import "./tables.css";
 
 const Project_table = () => {
-  const [ideas, setIdeas] = useState({});
+  const [ideas, setIdeas] = useState();
+  //const [ideast, setIdeast] = useState();
+
   //const [user, setUsers] = useState();
   const history = useHistory();
 
-  const Closemodal = () => {
-    history.push("/admin/projects");
-    closeModal();
-  };
 
   const GoBack = () => {
     history.push("/admin/projects");
   };
 
+
   const [modalIsOpen, setIsOpen] = React.useState(false);
-  const openModal = () => {
+
+  const toggleinfo = () =>{
     setIsOpen(true);
+  }
+  
+  const handleclose = () =>{
+    setIsOpen(false);
+  }
+  const viewinfo = (idea) =>{
+      setIsOpen(!modalIsOpen);
+      localStorage.setItem("ideatitle",idea.title);
+      //setIdeast(idea);
+      //console.log(ideast);
+  }
+
+
+  const openModal = (idea) => {
+    setIsOpen(true);
+    console.log(idea);
+    localStorage.setItem("ideatitle",idea.title);
+    localStorage.setItem("ideadescription",idea.description);
+    localStorage.setItem("idealiked_users",idea.liked_users.length);
+    localStorage.setItem("ideacontributors",idea.contributors.length);
+    localStorage.setItem("ideastarred_by",idea.starred_by.length);
+    console.log()
   };
 
   const closeModal = () => {
@@ -119,24 +141,41 @@ const Project_table = () => {
                       <tr>
                         <th>Sr. No.</th>
                         <th>Name</th>
-                        <th>Email</th>
-                        <th>Following</th>
-                        <th>Followers</th>
-                        <th>Ideas Contributed</th>
-                        <th>Engagement Score</th>
+                        <th>Conributors</th>
+                        <th>Likes</th>
+                        <th>Shares</th>
+                        <th>Comments</th>
                       </tr>
                     </thead>
                     <tbody>
                       {ideas ? (
                         ideas.map((idea, index) => (
-                          <tr key={index + 1} onClick={openModal}>
+                          <>
+                          <tr key={index + 1} onClick={() =>openModal(idea)}>
+                            
                             <td>{index + 1}</td>
                             <td>{idea.title}</td>
                             <td>{idea.contributors.length}</td>
                             <td>{idea.liked_users.length}</td>
                             <td>{idea.shares.length}</td>
                             <td>{idea.comment_count}</td>
-                            <Modal
+                            </tr>
+                            
+                          </>
+                        ))
+                      ) : (
+                        <>
+                          <div
+                            className="spinner-border place-content-center"
+                            role="status"
+                          >
+                            <span class="visually-hidden">Loading...</span>
+                          </div>
+                        </>
+                      )}
+                    </tbody>
+                  </table>
+                  <Modal
                               isOpen={modalIsOpen}
                               // onAfterOpen={afterOpenModal}
                               onRequestClose={closeModal}
@@ -162,7 +201,7 @@ const Project_table = () => {
                                             fontSize: "2rem",
                                           }}
                                         >
-                                          {idea.title}
+                                          {localStorage.getItem("ideatitle")}
                                         </h1>
                                       </div>
                                     </div>
@@ -174,7 +213,7 @@ const Project_table = () => {
                                           fontSize: "1rem",
                                         }}
                                       >
-                                        {idea.description}
+                                        {localStorage.getItem("ideadescription")}
                                       </h1>
                                     </div>
                                     <div className="flex justify-left">
@@ -185,7 +224,7 @@ const Project_table = () => {
                                           fontSize: "1rem",
                                         }}
                                       >
-                                        Likes : {idea.liked_users.length}
+                                        Likes : {localStorage.getItem("idealiked_users")}
                                       </h1>
                                     </div>
                                     <div className="flex justify-left">
@@ -196,7 +235,7 @@ const Project_table = () => {
                                           fontSize: "1rem",
                                         }}
                                       >
-                                        Shares : {idea.shares.length}
+                                        Shares : {localStorage.getItem("ideashares")}
                                       </h1>
                                     </div>
                                     <div className="flex justify-left">
@@ -208,7 +247,7 @@ const Project_table = () => {
                                         }}
                                       >
                                         Contributors :{" "}
-                                        {idea.contributors.length}
+                                        {localStorage.getItem("ideacontributors")}
                                       </h1>
                                     </div>
                                     <div className="flex justify-left">
@@ -219,7 +258,7 @@ const Project_table = () => {
                                           fontSize: "1rem",
                                         }}
                                       >
-                                        Stars :{idea.starred_by.length}
+                                        Stars :{localStorage.getItem("ideastarred_b")}
                                       </h1>
                                     </div>
 
@@ -246,7 +285,7 @@ const Project_table = () => {
                                         <button
                                           className="button-6"
                                           style={{ background: "#222222" }}
-                                          onClick={GoBack}
+                                          onClick={closeModal}
                                         >
                                           Close
                                         </button>
@@ -264,20 +303,6 @@ const Project_table = () => {
                                 </div>
                               </div>
                             </Modal>
-                          </tr>
-                        ))
-                      ) : (
-                        <>
-                          <div
-                            className="spinner-border place-content-center"
-                            role="status"
-                          >
-                            <span class="visually-hidden">Loading...</span>
-                          </div>
-                        </>
-                      )}
-                    </tbody>
-                  </table>
                 </div>
               </div>
             </div>

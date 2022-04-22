@@ -7,23 +7,28 @@ import Modal from "react-modal";
 import "../auth/Login.css";
 import Stones from "../../../assets/svg/stones1.svg";
 import { isMobile } from "react-device-detect";
-//import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import "./tables.css";
 
 const User_table = () => {
   const [user, setUsers] = useState();
-  let [tid, settid] = useState();
-  //const history = useHistory();
+  const history = useHistory();
 
   const GoBack = () => {
-    window.location.reload(false);
+    history.push("/admin/projects");
   };
 
   const [modalIsOpen, setIsOpen] = React.useState(false);
   function openModal(use) {
     setIsOpen(true);
-    tid = settid(use);
-    console.log(tid);
+    // tid = settid(use);
+    // console.log(tid);
+    localStorage.setItem("userpic",use.profile_pic);
+    localStorage.setItem("username",use.name);
+    localStorage.setItem("userjob",use.job);
+    localStorage.setItem("usercontributors",use.ideas_contributed.length);
+    localStorage.setItem("userfollowers",use.followers.length);
+    localStorage.setItem("userfollowing",use.following.length);
 
   }
   function closeModal() {
@@ -123,7 +128,8 @@ const User_table = () => {
                     <tbody>
                       {user ? (
                         user.map((use, index) => (
-                          <tr key={index + 1} onClick={openModal}>
+                          <>
+                          <tr key={index + 1} onClick={() =>openModal(use)}>
                            
                             <td>{index + 1}</td>
                             <td>{use.name}</td>
@@ -137,7 +143,23 @@ const User_table = () => {
                                 : "N.A"}
                               
                             </td>
-                            <Modal
+                            </tr>
+                            
+                          </>
+                        ))
+                      ) : (
+                        <>
+                          <div
+                            className="spinner-border place-content-center"
+                            role="status"
+                          >
+                            <span class="visually-hidden">Loading...</span>
+                          </div>
+                        </>
+                      )}
+                    </tbody>
+                  </table>
+                  <Modal
                                   isOpen={modalIsOpen}
                                   // onAfterOpen={afterOpenModal}
                                   onRequestClose={closeModal}
@@ -157,7 +179,7 @@ const User_table = () => {
                                         <div className="flex justify-center ">
                                           
                                           <img
-                                            src={use.profile_pic}
+                                            src={localStorage.getItem("userjob")}
                                             alt="Profile Pic "
                                           />
                                         </div>
@@ -170,7 +192,7 @@ const User_table = () => {
                                                 fontSize: "2rem",
                                               }}
                                             >
-                                              {use.name}
+                                              {localStorage.getItem("username")}
                                             </h1>
                                           </div>
                                         </div>
@@ -182,7 +204,7 @@ const User_table = () => {
                                               fontSize: "1rem",
                                             }}
                                           >
-                                            {use.job}
+                                            {localStorage.getItem("userjob")}
                                           </h1>
                                         </div>
                                         <div className="flex justify-left">
@@ -193,8 +215,8 @@ const User_table = () => {
                                               fontSize: "1rem",
                                             }}
                                           >
-                                            Ideas Contributed :{" "}
-                                            {use.ideas_contributed.length}
+                                            Ideas Contributed :
+                                            {localStorage.getItem("usercontributors")}
                                           </h1>
                                         </div>
                                         <div className="flex justify-left">
@@ -205,7 +227,7 @@ const User_table = () => {
                                               fontSize: "1rem",
                                             }}
                                           >
-                                            Followers : {use.followers.length}
+                                            Followers : {localStorage.getItem("userfollowers")}
                                           </h1>
                                         </div>
                                         <div className="flex justify-left">
@@ -216,7 +238,7 @@ const User_table = () => {
                                               fontSize: "1rem",
                                             }}
                                           >
-                                            Following :{use.following.length}
+                                            Following :{localStorage.getItem("userfollowing")}
                                           </h1>
                                         </div>
 
@@ -261,21 +283,6 @@ const User_table = () => {
                                     </div>
                                   </div>
                                 </Modal>
-                          </tr>
-                        ))
-                      ) : (
-                        <>
-                          <div
-                            className="spinner-border place-content-center"
-                            role="status"
-                          >
-                            <span class="visually-hidden">Loading...</span>
-                          </div>
-                        </>
-                      )}
-                    </tbody>
-                  </table>
-                  
                 </div>
               </div>
             </div>
