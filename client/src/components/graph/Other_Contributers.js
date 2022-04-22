@@ -123,7 +123,7 @@ const OtherContributers = (props) => {
                       </li>
                     ))
                   ) : (
-                    <>{console.log("hill")}</>
+                    <></>
                   )}
                 </ul>
               </div>

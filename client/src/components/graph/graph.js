@@ -244,6 +244,7 @@ const Graph = (props) => {
   useEffect(async () => {
     const idea = JSON.parse(localStorage.getItem("idea"));
     const id = localStorage.getItem("whose_id");
+    const version = localStorage.getItem("version");
     // also check user_id == whosegraph
     if ((idea ? idea[0]._id : <></>) === idea_id) {
       // check if the idea is of the same person

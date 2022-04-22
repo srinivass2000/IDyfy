@@ -23,30 +23,32 @@ const Graph_body = () => {
   const notify = () => toast.success("You succcessfully Pulled the Idea!");
   const notify1 = () => toast.error("There was an error pulling the Idea!");
   const notify2 = () => toast.success("Versioned succcessfully !");
-  const notify3 = () => toast.error("There was an error while versioning !");
+  const notify3 = (a) =>
+    toast.error("There was an error while versioning !" + a);
   const createVersion = async () => {
     await axios
-      .post(`/api/feature/version-end?idea_id=${idea_id}`, {
+      .get(`/api/feature/version-end?idea_id=${idea_id}`, {
         headers: authHeader(),
       })
       .then(
         (res) => {
-          // console.log(res.data);
+          console.log(res.data);
           if (res.data.success == true) {
             notify2();
           } else {
-            notify3();
+            notify3("");
           }
         },
         (err) => {
-          notify3();
+          // console.log(err.response.data.error);
+          notify3(err.response.data.error);
         }
       );
   };
 
   const pullIdea = async () => {
     await axios
-      .get(`/api/features/pull?idea_id=${idea_id}&from=${Whosegraph}`, {
+      .get(`/api/feature/pull?idea_id=${idea_id}&from=${Whosegraph}`, {
         headers: authHeader(),
       })
       .then(
@@ -75,7 +77,7 @@ const Graph_body = () => {
           SetVersion(res.data.highest_contributor.latest_version);
           SetWhosegraph(res.data.highest_contributor._id);
           SetContributers(res.data.contributor_names);
-          console.log(res.data.contributor_names);
+          // console.log(res.data.contributor_names);
           SetHeighest(res.data.highest_contributor);
         },
         (err) => {
@@ -99,7 +101,7 @@ const Graph_body = () => {
                   )
               )
             ) : (
-              <>{console.log("fs")}</>
+              <></>
             )}
           </div>
           <div class="dropdown mt-2 offset-lg-3 col-sm-4 col-lg-2 col-4 ">
@@ -156,7 +158,7 @@ const Graph_body = () => {
         </div>
       </div>
       <div>
-        <TransformWrapper
+        {/* <TransformWrapper
           defaultScale={1}
           defaultPositionX={200}
           defaultPositionY={100}
@@ -168,16 +170,12 @@ const Graph_body = () => {
                 <button onClick={zoomOut}>-</button>
                 <button onClick={resetTransform}>x</button>
               </div>
-              <TransformComponent>
-                <Graph
-                  canIEdit={canIEdit}
-                  version={Version}
-                  whosegraph={Whosegraph}
-                />
-              </TransformComponent>
+              <TransformComponent> */}
+        <Graph canIEdit={canIEdit} version={Version} whosegraph={Whosegraph} />
+        {/* </TransformComponent>
             </React.Fragment>
-          )}
-        </TransformWrapper>
+          )} 
+        </TransformWrapper>*/}
       </div>
     </>
   );
