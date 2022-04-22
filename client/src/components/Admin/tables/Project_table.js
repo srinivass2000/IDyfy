@@ -7,17 +7,21 @@ import Modal from "react-modal";
 import "../auth/Login.css";
 import Stones from "../../../assets/svg/stones1.svg";
 import { isMobile } from "react-device-detect";
-//import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import "./tables.css";
 
 const Project_table = () => {
   const [ideas, setIdeas] = useState({});
   //const [user, setUsers] = useState();
-  //const history = useHistory();
+  const history = useHistory();
 
+  const Closemodal = () => {
+    history.push("/admin/projects");
+    closeModal();
+  };
 
   const GoBack = () => {
-    window.location.reload(false);
+    history.push("/admin/projects");
   };
 
   const [modalIsOpen, setIsOpen] = React.useState(false);
