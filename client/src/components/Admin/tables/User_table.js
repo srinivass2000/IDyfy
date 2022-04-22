@@ -15,7 +15,7 @@ const User_table = () => {
   const history = useHistory();
 
   const GoBack = () => {
-    history.push("/admin/projects");
+    history.push("/admin/users");
   };
 
   const [modalIsOpen, setIsOpen] = React.useState(false);
