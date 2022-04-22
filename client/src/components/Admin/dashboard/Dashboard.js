@@ -52,9 +52,9 @@ const Dashboard = () => {
         data: [
           [0, 1],
           [1, 2],
-          [2, 4],
+          [2, 3],
           [3, 2],
-          [4, 7],
+          [4, 1],
         ],
       },
     ],
@@ -68,22 +68,9 @@ const Dashboard = () => {
     ],
     []
   );
-  const series = React.useMemo(
-    () => ({
-      type: "bar",
-    }),
-    []
-  );
-  const axes2 = React.useMemo(
-    () => [
-      { primary: true, type: "ordinal", position: "bottom" },
-      { position: "left", type: "linear", stacked: false, show: false },
-    ],
-    []
-  );
 
   return (
-    <div>
+    <div style={{width: "100%"}}>
       <div className=" my-5">
         <div className="my-3">
           <Navbar />
@@ -94,7 +81,7 @@ const Dashboard = () => {
           <div className="col-12">
             <div className="container-fluid ">
               <div className="row mx-5 my-5">
-                <div className="col-4 my-3">
+                <div className="col-md-4 my-3">
                   <div
                     className="px-4 shadow  rounded"
                     style={{ background: "#321FDB", height: "180px" }}
@@ -112,10 +99,7 @@ const Dashboard = () => {
                           >
                             Total Users 
                           </h1>
-                          <h2 className="mt-1" style={{ fontSize: "1.3rem" }}>
-                            {" "}
-                            {count_users}
-                          </h2>
+                          <h2 className="mt-2 ml-4" style={{ color:"white",fontSize: "1.7rem" }}> {count_users}</h2>
                         </div>
                       </div>
                       <div className="col-4">
@@ -135,7 +119,7 @@ const Dashboard = () => {
                     </div>
                   </div>
                 </div>
-                <div className="col-4 my-3">
+                <div className="col-md-4 my-3">
                   <div
                     className="px-4 shadow  rounded"
                     style={{ background: "#F9B115", height: "180px" }}
@@ -153,7 +137,7 @@ const Dashboard = () => {
                           >
                             Total Projects 
                           </h1>
-                          <h2 className="mt-2 ml-4" style={{ color:"white",fontSize: "1.5rem" }}> {count_ideas}</h2>
+                          <h2 className="mt-2 ml-4" style={{ color:"white",fontSize: "1.7rem" }}> {count_ideas}</h2>
                         </div>
                       </div>
                       <div className="col-4">
@@ -173,7 +157,7 @@ const Dashboard = () => {
                     </div>
                   </div>
                 </div>
-                <div className="col-4 my-3">
+                <div className="col-md-4 my-3">
                   <div
                     className="px-4 shadow  rounded"
                     style={{ background: "#E55353", height: "180px" }}
@@ -230,29 +214,12 @@ const Dashboard = () => {
                         Traffic
                       </h1>
                       <center>
-                        <div style={{ width: "94%", height: "23%" }}>
+                        <div style={{ width: "90%", height: "21rem" }}>
                           <Chart data={data} axes={axes} />
                         </div>
                       </center>
                     </div>
                   </div>
-                  {/* <div className="col-md my-3">
-                    <div
-                      className="p-4 shadow bg-white rounded"
-                      style={{ background: "white" }}
-                    >
-                      <center>
-                        <div style={{ width: "19rem", height: "19rem" }}>
-                          <Chart
-                            data={data}
-                            series={series}
-                            axes={axes2}
-                            tooltip
-                          />
-                        </div>
-                      </center>
-                    </div>
-                  </div> */}
                 </div>
                 <div className="row mx-4 my-5">
                   <div className="col-md">

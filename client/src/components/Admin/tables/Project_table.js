@@ -1,26 +1,22 @@
 import React from "react";
 import { useState, useEffect } from "react";
-//import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import Navbar from "../Navbar/Navbar";
 import authHeader from "../auth/auth-header";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import Modal from "react-modal";
 import "../auth/Login.css";
-import Idyfy_logo from "../../../assets/svg/Idyfy_logo.svg";
 import Stones from "../../../assets/svg/stones1.svg";
-import Idyfy_name from "../../../assets/svg/Idyfy_name_Signup.svg";
 import { isMobile } from "react-device-detect";
-import AuthService from "../../../services/authservices";
-import { useHistory } from "react-router-dom";
+//import { useHistory } from "react-router-dom";
 import "./tables.css";
 
 const Project_table = () => {
   const [ideas, setIdeas] = useState();
-  const history = useHistory();
+  //const [user, setUsers] = useState();
+  //const history = useHistory();
 
   const GoBack = () => {
-    history.push("/admin/projects");
+    window.location.reload(false);
   };
 
   const [modalIsOpen, setIsOpen] = React.useState(false);
@@ -34,7 +30,7 @@ const Project_table = () => {
 
   const fetchIdea = async () => {
     //const history = useHistory();
-    console.log("here");
+    //console.log("here");
     await axios
       .get(`/api/admin/get-ideas`, {
         headers: authHeader(),
@@ -42,7 +38,7 @@ const Project_table = () => {
       .then((res) => {
         setIdeas(res.data.final);
 
-        console.log(res.data);
+        //console.log(res.data);
       })
       .catch((err) => console.log(err));
   };
@@ -83,36 +79,6 @@ const Project_table = () => {
 
   // console.log(user);
 
-  const data = {
-    columns: [
-      {
-        label: "Sr. No.",
-        field: "id",
-        sort: "asc",
-      },
-      {
-        label: "Name",
-        field: "heading0",
-        sort: "asc",
-      },
-      {
-        label: "Email",
-        field: "heading1",
-        sort: "asc",
-      },
-      {
-        label: "No. of Ideas",
-        field: "heading2",
-        sort: "asc",
-      },
-      {
-        label: "Engage Score",
-        field: "heading3",
-        sort: "asc",
-      },
-    ],
-  };
-
   return (
     <div>
       <div className="col-12 ">
@@ -148,11 +114,10 @@ const Project_table = () => {
                       <tr>
                         <th>Sr. No.</th>
                         <th>Name</th>
-                        <th>Email</th>
-                        <th>Following</th>
-                        <th>Followers</th>
-                        <th>Ideas Contributed</th>
-                        <th>Engagement Score</th>
+                        <th>Conributors</th>
+                        <th>Likes</th>
+                        <th>Shares</th>
+                        <th>Comments</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -195,17 +160,6 @@ const Project_table = () => {
                                         </h1>
                                       </div>
                                     </div>
-                                    {/* <div className="flex justify-left">
-                                  <h1
-                                    className="my-1 ml-3 text-left"
-                                    style={{
-                                      color: "white",
-                                      fontSize: "1.2rem",
-                                    }}
-                                  >
-                                    Description
-                                  </h1>
-                                </div> */}
                                     <div className="flex justify-center">
                                       <h1
                                         className="my-1 ml-3 text-left"
@@ -286,7 +240,7 @@ const Project_table = () => {
                                         <button
                                           className="button-6"
                                           style={{ background: "#222222" }}
-                                          onClick={closeModal}
+                                          onClick={GoBack}
                                         >
                                           Close
                                         </button>

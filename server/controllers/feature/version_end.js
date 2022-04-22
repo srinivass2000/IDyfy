@@ -33,8 +33,12 @@ exports.version_end = async (req, res, next) => {
       $or: [
         {
           updated_feature: latest_version + 1,
-          deleted_version: latest_version + 1,
+        },
+        {
           version_end: 0,
+        },
+        {
+          deleted_version: latest_version + 1,
         },
       ],
       contributors: { $in: [req.user._id.toString()] },

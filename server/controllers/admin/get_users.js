@@ -17,7 +17,7 @@ exports.get_users = async (req, res, next) => {
           profile_pic:1,
           email:1
         })
-          .sort({ engagement_score:1 });
+          .sort({ engagement_score:-1 });
         //console.log(result);
         res.status(200).json({
           success: true,

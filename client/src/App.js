@@ -14,7 +14,7 @@ const Notification = lazy(() =>
 const Starred_ideas = lazy(() =>
   import("./components/Starred_Ideas/starred_ideas")
 );
-const Admin = lazy(() => import("./components/Admin/admin"));
+const Admin = lazy(() => import("./components/Admin/dashboard/Dashboard"));
 const A_Login = lazy(() => import("./components/Admin/auth/Auth"));
 const User_table = lazy(() => import("./components/Admin/tables/User_table"));
 const Project_table = lazy(() =>

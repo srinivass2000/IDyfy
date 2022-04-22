@@ -1,5 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useHistory } from "react-router-dom";
 
 const API_URL = "/api/admin";
 
@@ -8,6 +9,7 @@ const notify3 = (text) => toast.error(text);
 const notify9 = () => toast.success("Successfully logged out!");
 
 const login = (email, password) => {
+
   return axios
     .post(API_URL + "/admin-login", {
       email,
@@ -33,6 +35,7 @@ const login = (email, password) => {
 
 const logout = () => {
   localStorage.removeItem("AdminToken");
+  //history.push("/admin");
   notify9();
 };
 

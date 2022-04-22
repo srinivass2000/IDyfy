@@ -2,7 +2,17 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../Navbar/Navbar1.css";
 import { useState, useEffect } from "react";
+import AuthService from "../auth/authservices";
+import { useHistory } from "react-router-dom";
+
+
 const Navbar = () => {
+
+  const logout = () => {
+    AuthService.logout();
+    history.push("/admin");
+  };
+  const history = useHistory();
   const [toggleMenu, setToggleMenu] = useState(false);
 
   const toggleNav = () => {
@@ -33,7 +43,11 @@ const Navbar = () => {
             <li className="items mx-9">
               <Link to="/admin/users">Users</Link>
             </li>
+            <div className="items mx-9" onClick={logout}>
+              <button className="button-6" >Log out</button>
+            </div>
           </ul>
+          
         )}
 
         <button onClick={toggleNav} className="btn">
