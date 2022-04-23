@@ -1,13 +1,11 @@
 import React from "react";
-// import Star from "../../assets/icon/star.svg";
-import Share from "../../assets/icon/share.svg";
-// import like from "../../assets/svg/heart-outline.svg";
 import { Link } from "react-router-dom";
 import "../Feed_Tile/feed.css";
 import { useState } from "react";
 import axios from "axios";
 import authHeader from "../../services/auth-header";
 import { toast } from "react-toastify";
+import { RWebShare } from "react-web-share";
 
 const notify1 = () => toast.success("Idea Starred Successfully!!");
 const notify2 = () => toast.success("Idea Unstarred Successfully!");
@@ -17,6 +15,8 @@ const notify3 = (text) => toast.error(text);
 
 const FeedTile = (props) => {
   const url = "/idea/";
+  const description = props.details.description;
+  const title = props.details.title;
   function removeHTML(str) {
     var tmp = document.createElement("DIV");
     tmp.innerHTML = str;
@@ -367,7 +367,24 @@ const FeedTile = (props) => {
         </div>
         <div className="text-start col-lg-1 col-1">{starred_count}</div>
         <div className="offset-lg-3 col-lg-1 offset-3 col-1">
-          <img src={Share} alt="feed icon" className="absolute mt-1" />
+          {/* <img src={Share} alt="feed icon" className="absolute mt-1" />
+           */}
+          <RWebShare
+            data={{
+              text: { description },
+              url: `https://idyfy.tech/idea/${props.details._id.toString()}`,
+              title: { title },
+            }}
+            onClick={() => console.log("shared successfully!")}
+          >
+            {/* <button>Share 🔗</button> */}
+            <img
+              src="https://img.icons8.com/ios-filled/50/FFFFFF/share--v1.png"
+              alt="feed icon"
+              className="absolute mt-1"
+              width="22px"
+            />
+          </RWebShare>
         </div>
       </div>
     </div>
