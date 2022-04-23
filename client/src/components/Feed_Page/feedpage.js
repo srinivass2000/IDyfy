@@ -7,6 +7,7 @@ import authHeader from "../../services/auth-header";
 const FeedPage = () => {
   const [ideas, setIdeas] = useState();
   const [skip, setskip] = useState(0);
+  const [feedlength, setFeedLength] = useState();
   const getideas = async (skip) => {
     try {
       // console.log(skip);
@@ -23,6 +24,7 @@ const FeedPage = () => {
               setIdeas([...ideas, ...res.data.ideas]);
             }
             console.log(res.data.ideas);
+            setFeedLength(res.data.ideas.length);
             // console.log(ideas);
           },
           (err) => {
@@ -41,7 +43,10 @@ const FeedPage = () => {
       e.target.documentElement.scrollHeight
     ) {
       console.log("at the bottom of page");
-      skipinc();
+      console.log(feedlength);
+      if (feedlength !== 0) {
+        skipinc();
+      }
     }
   };
 
@@ -50,7 +55,9 @@ const FeedPage = () => {
   }, [skip]);
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
+    if (feedlength !== 0) {
+      window.addEventListener("scroll", handleScroll);
+    }
   });
 
   const skipinc = () => {

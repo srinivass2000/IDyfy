@@ -15,8 +15,6 @@ const notify3 = (text) => toast.error(text);
 
 const FeedTile = (props) => {
   const url = "/idea/";
-  const description = props.details.description;
-  const title = props.details.title;
   function removeHTML(str) {
     var tmp = document.createElement("DIV");
     tmp.innerHTML = str;
@@ -371,9 +369,9 @@ const FeedTile = (props) => {
            */}
           <RWebShare
             data={{
-              text: { description },
+              text: `${removeHTML(props.details.description)}`,
               url: `https://idyfy.tech/idea/${props.details._id.toString()}`,
-              title: { title },
+              title: `${props.details.title}`,
             }}
             onClick={() => console.log("shared successfully!")}
           >
