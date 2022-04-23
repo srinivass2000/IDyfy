@@ -8,15 +8,24 @@ import "../auth/Login.css";
 import Stones from "../../../assets/svg/stones1.svg";
 import { isMobile } from "react-device-detect";
 import "./tables.css";
+import { toast } from "react-toastify";
 
 const User_table = () => {
   const [user, setUsers] = useState();
   const [currentuser, setUser] = useState();
-
+  const [disabled, setDisable] = useState();
+  const notify1 = () => toast.success("Suspended User Successfully");
+  const notify2 = () => toast.success("User Account Enabled");
+  const notify3 = (text) => toast.error(text);
   const [modalIsOpen, setIsOpen] = React.useState(false);
   function openModal(user) {
     setIsOpen(true);
     setUser(user);
+    if (user.suspended) {
+      setDisable(true);
+    } else {
+      setDisable(false);
+    }
   }
   function closeModal() {
     setIsOpen(false);
@@ -33,7 +42,40 @@ const User_table = () => {
 
         //console.log(res.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        notify3(err.response.data.error);
+      });
+  };
+
+  const toggleSuspend = async () => {
+    setDisable(!disabled);
+    if (disabled === false) {
+      await axios
+        .get(`/api/admin/user-suspend?user_id=${currentuser._id.toString()}`, {
+          headers: authHeader(),
+        })
+        .then((res) => {
+          console.log(res);
+          notify1();
+          //console.log(res.data);
+        })
+        .catch((err) => console.log(err));
+    } else {
+      await axios
+        .get(`/api/admin/user-enable?user_id=${currentuser._id.toString()}`, {
+          headers: authHeader(),
+        })
+        .then((res) => {
+          console.log(res);
+          notify2();
+          //console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+          notify3(err.response.data.error);
+        });
+    }
   };
 
   //   let subtitle;
@@ -226,27 +268,52 @@ const User_table = () => {
                                 >
                                   Followers :{currentuser.followers.length}
                                 </h1>
+                                {/* <h1 className="text-white">
+                                  {disabled === false ? "Yessss" : "Noooo"}
+                                </h1> */}
                               </div>
 
                               <div className="row mx-3 mt-5 flex justify-center">
                                 <div className="col-4   flex justify-center">
-                                  <button
-                                    className="button-6"
-                                    style={{ background: "#FF9900" }}
-                                    onClick={closeModal}
-                                  >
-                                    Warn
-                                  </button>
+                                  {disabled === false ? (
+                                    <button
+                                      className="button-6"
+                                      style={{ background: "#EE0000" }}
+                                      onClick={() => toggleSuspend()}
+                                      disabled={disabled}
+                                    >
+                                      Suspend
+                                    </button>
+                                  ) : (
+                                    <button
+                                      className="button-6"
+                                      // style={{ background: "#EE0000" }}
+                                      disabled={disabled}
+                                      onClick={() => toggleSuspend()}
+                                    >
+                                      Suspend
+                                    </button>
+                                  )}
                                 </div>
                                 <div className="col-4   flex justify-center">
-                                  <button
-                                    className="button-6"
-                                    style={{ background: "#EE0000" }}
-                                    onClick={closeModal}
-                                  >
-                                    Delete
-                                  </button>
+                                  {disabled === true ? (
+                                    <button
+                                      className="button-6 bg-green-600 "
+                                      onClick={() => toggleSuspend()}
+                                    >
+                                      Enable
+                                    </button>
+                                  ) : (
+                                    <button
+                                      className="button-6 btn-disabled"
+                                      disabled={!disabled}
+                                      onClick={() => toggleSuspend()}
+                                    >
+                                      Enable
+                                    </button>
+                                  )}
                                 </div>
+
                                 <div className="col-4  flex justify-center">
                                   <button
                                     className="button-6"

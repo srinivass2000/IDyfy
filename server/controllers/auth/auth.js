@@ -29,7 +29,11 @@ exports.login = async (req, res, next) => {
     if (user.emailVerified === false) {
       emailVerification(user, res, next);
     } else {
-      sendToken(user, 202, res);
+      if (user.suspended === true) {
+        return next(new ErrorResponse("Your Account has been suspended", 403));
+      } else {
+        sendToken(user, 202, res);
+      }
     }
   } catch (err) {
     next(err);

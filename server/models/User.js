@@ -39,6 +39,7 @@ const UserSchema = new mongoose.Schema(
     job: String,
     university: String,
     about: String,
+    suspended: Boolean,
   },
   { timestamps: true }
 );
