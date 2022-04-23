@@ -33,12 +33,30 @@ const FeedPage = () => {
       console.log(e);
     }
   };
+
+  const handleScroll = (e) => {
+    // console.log("reached inside");
+    if (
+      window.innerHeight + e.target.documentElement.scrollTop + 1 >=
+      e.target.documentElement.scrollHeight
+    ) {
+      console.log("at the bottom of page");
+      skipinc();
+    }
+  };
+
   useEffect(() => {
     getideas(skip);
   }, [skip]);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+  });
+
   const skipinc = () => {
-    setskip(skip + 10);
+    setskip(skip + 5);
   };
+
   return (
     <div className="container">
       <div className="row my-3">
@@ -80,11 +98,11 @@ const FeedPage = () => {
           </div>
         </>
       )}
-      <div>
+      {/* <div>
         <button onClick={skipinc} style={{ background: "#fff" }}>
           load more
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };
