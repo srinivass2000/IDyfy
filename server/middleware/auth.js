@@ -30,6 +30,7 @@ exports.protect = async (req, res, next) => {
 
       // console.log(admin);
       req.user = admin;
+      req.user.isAdmin = true;
 
       next();
     } catch (err) {

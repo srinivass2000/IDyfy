@@ -7,29 +7,16 @@ import Modal from "react-modal";
 import "../auth/Login.css";
 import Stones from "../../../assets/svg/stones1.svg";
 import { isMobile } from "react-device-detect";
-import { useHistory } from "react-router-dom";
 import "./tables.css";
 
 const User_table = () => {
   const [user, setUsers] = useState();
-  const history = useHistory();
-
-  const GoBack = () => {
-    history.push("/admin/users");
-  };
+  const [currentuser, setUser] = useState();
 
   const [modalIsOpen, setIsOpen] = React.useState(false);
-  function openModal(use) {
+  function openModal(user) {
     setIsOpen(true);
-    // tid = settid(use);
-    // console.log(tid);
-    localStorage.setItem("userpic",use.profile_pic);
-    localStorage.setItem("username",use.name);
-    localStorage.setItem("userjob",use.job);
-    localStorage.setItem("usercontributors",use.ideas_contributed.length);
-    localStorage.setItem("userfollowers",use.followers.length);
-    localStorage.setItem("userfollowing",use.following.length);
-
+    setUser(user);
   }
   function closeModal() {
     setIsOpen(false);
@@ -119,9 +106,10 @@ const User_table = () => {
                         <th>Sr. No.</th>
                         <th>Name</th>
                         <th>Email</th>
+                        <th>Ideas Contributed</th>
                         <th>Following</th>
                         <th>Followers</th>
-                        <th>Ideas Contributed</th>
+
                         <th>Engagement Score</th>
                       </tr>
                     </thead>
@@ -129,22 +117,19 @@ const User_table = () => {
                       {user ? (
                         user.map((use, index) => (
                           <>
-                          <tr key={index + 1} onClick={() =>openModal(use)}>
-                           
-                            <td>{index + 1}</td>
-                            <td>{use.name}</td>
-                            <td>{use.email}</td>
-                            <td>{use.ideas_contributed.length}</td>
-                            <td>{use.following.length}</td>
-                            <td>{use.followers.length}</td>
-                            <td>
-                              {use.engagement_score
-                                ? use.engagement_score.toFixed(2)
-                                : "N.A"}
-                              
-                            </td>
+                            <tr key={index + 1} onClick={() => openModal(use)}>
+                              <td>{index + 1}</td>
+                              <td>{use.name}</td>
+                              <td>{use.email}</td>
+                              <td>{use.ideas_contributed.length}</td>
+                              <td>{use.following.length}</td>
+                              <td>{use.followers.length}</td>
+                              <td>
+                                {use.engagement_score
+                                  ? use.engagement_score.toFixed(2)
+                                  : "N.A"}
+                              </td>
                             </tr>
-                            
                           </>
                         ))
                       ) : (
@@ -160,129 +145,141 @@ const User_table = () => {
                     </tbody>
                   </table>
                   <Modal
-                                  isOpen={modalIsOpen}
-                                  // onAfterOpen={afterOpenModal}
-                                  onRequestClose={closeModal}
-                                  style={customStyles}
-                                  contentLabel="Example Modal"
-                                  ariaHideApp={false}
-                                >
-                                  <div
-                                    className="relative  rounded"
+                    isOpen={modalIsOpen}
+                    // onAfterOpen={afterOpenModal}
+                    onRequestClose={closeModal}
+                    style={customStyles}
+                    contentLabel="Example Modal"
+                    ariaHideApp={false}
+                  >
+                    <div
+                      className="relative  rounded"
+                      style={{
+                        background:
+                          "linear-gradient(75deg, rgb(4, 4, 4), midnightblue)",
+                      }}
+                    >
+                      {currentuser ? (
+                        <>
+                          <div className="row">
+                            <div className="col-lg-12 col-12 px-4 py-9 container">
+                              <div className="flex justify-center ">
+                                <img
+                                  src={currentuser.profile_pic}
+                                  alt="Profile Pic "
+                                />
+                              </div>
+                              <div className="flex justify-center mt-4">
+                                <div>
+                                  <h1
+                                    className="my-2 mb-3 text-center"
                                     style={{
-                                      background:
-                                        "linear-gradient(75deg, rgb(4, 4, 4), midnightblue)",
+                                      color: "white",
+                                      fontSize: "2rem",
                                     }}
                                   >
-                                    <div className="row">
-                                      <div className="col-lg-12 col-12 px-4 py-9 container">
-                                        <div className="flex justify-center ">
-                                          
-                                          <img
-                                            src={localStorage.getItem("userjob")}
-                                            alt="Profile Pic "
-                                          />
-                                        </div>
-                                        <div className="flex justify-center mt-4">
-                                          <div>
-                                            <h1
-                                              className="my-2 mb-3 text-center"
-                                              style={{
-                                                color: "white",
-                                                fontSize: "2rem",
-                                              }}
-                                            >
-                                              {localStorage.getItem("username")}
-                                            </h1>
-                                          </div>
-                                        </div>
-                                        <div className="flex justify-center">
-                                          <h1
-                                            className="my-1 ml-3 text-left"
-                                            style={{
-                                              color: "white",
-                                              fontSize: "1rem",
-                                            }}
-                                          >
-                                            {localStorage.getItem("userjob")}
-                                          </h1>
-                                        </div>
-                                        <div className="flex justify-left">
-                                          <h1
-                                            className="my-2 ml-3 text-left"
-                                            style={{
-                                              color: "white",
-                                              fontSize: "1rem",
-                                            }}
-                                          >
-                                            Ideas Contributed :
-                                            {localStorage.getItem("usercontributors")}
-                                          </h1>
-                                        </div>
-                                        <div className="flex justify-left">
-                                          <h1
-                                            className="my-2 ml-3 text-left"
-                                            style={{
-                                              color: "white",
-                                              fontSize: "1rem",
-                                            }}
-                                          >
-                                            Followers : {localStorage.getItem("userfollowers")}
-                                          </h1>
-                                        </div>
-                                        <div className="flex justify-left">
-                                          <h1
-                                            className="my-2 ml-3 text-left"
-                                            style={{
-                                              color: "white",
-                                              fontSize: "1rem",
-                                            }}
-                                          >
-                                            Following :{localStorage.getItem("userfollowing")}
-                                          </h1>
-                                        </div>
+                                    {currentuser.name}
+                                  </h1>
+                                </div>
+                              </div>
+                              <div className="flex justify-center">
+                                <h1
+                                  className="my-1 ml-3 text-left"
+                                  style={{
+                                    color: "white",
+                                    fontSize: "1rem",
+                                  }}
+                                >
+                                  {currentuser.job}
+                                </h1>
+                              </div>
+                              <div className="flex justify-left">
+                                <h1
+                                  className="my-2 ml-3 text-left"
+                                  style={{
+                                    color: "white",
+                                    fontSize: "1rem",
+                                  }}
+                                >
+                                  Ideas Contributed :
+                                  {currentuser.ideas_contributed.length}
+                                </h1>
+                              </div>
+                              <div className="flex justify-left">
+                                <h1
+                                  className="my-2 ml-3 text-left"
+                                  style={{
+                                    color: "white",
+                                    fontSize: "1rem",
+                                  }}
+                                >
+                                  Following : {currentuser.following.length}
+                                </h1>
+                              </div>
+                              <div className="flex justify-left">
+                                <h1
+                                  className="my-2 ml-3 text-left"
+                                  style={{
+                                    color: "white",
+                                    fontSize: "1rem",
+                                  }}
+                                >
+                                  Followers :{currentuser.followers.length}
+                                </h1>
+                              </div>
 
-                                        <div className="row mx-3 mt-5 flex justify-center">
-                                          <div className="col-4   flex justify-center">
-                                            <button
-                                              className="button-6"
-                                              style={{ background: "#FF9900" }}
-                                              onClick={GoBack}
-                                            >
-                                              Warn
-                                            </button>
-                                          </div>
-                                          <div className="col-4   flex justify-center">
-                                            <button
-                                              className="button-6"
-                                              style={{ background: "#EE0000" }}
-                                              onClick={GoBack}
-                                            >
-                                              Delete
-                                            </button>
-                                          </div>
-                                          <div className="col-4  flex justify-center">
-                                            <button
-                                              className="button-6"
-                                              style={{ background: "#222222" }}
-                                              onClick={GoBack}
-                                            >
-                                              Close
-                                            </button>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
+                              <div className="row mx-3 mt-5 flex justify-center">
+                                <div className="col-4   flex justify-center">
+                                  <button
+                                    className="button-6"
+                                    style={{ background: "#FF9900" }}
+                                    onClick={closeModal}
+                                  >
+                                    Warn
+                                  </button>
+                                </div>
+                                <div className="col-4   flex justify-center">
+                                  <button
+                                    className="button-6"
+                                    style={{ background: "#EE0000" }}
+                                    onClick={closeModal}
+                                  >
+                                    Delete
+                                  </button>
+                                </div>
+                                <div className="col-4  flex justify-center">
+                                  <button
+                                    className="button-6"
+                                    style={{ background: "#222222" }}
+                                    onClick={closeModal}
+                                  >
+                                    Close
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
 
-                                    <div className="">
-                                      <img
-                                        className="stones"
-                                        src={Stones}
-                                        alt="Stone Art"
-                                      />
-                                    </div>
-                                  </div>
-                                </Modal>
+                          <div className="">
+                            <img
+                              className="stones"
+                              src={Stones}
+                              alt="Stone Art"
+                            />
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div
+                            className="spinner-border place-content-center"
+                            role="status"
+                          >
+                            <span class="visually-hidden">Loading...</span>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  </Modal>
                 </div>
               </div>
             </div>

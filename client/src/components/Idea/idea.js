@@ -41,7 +41,10 @@ const Idea = () => {
         console.log(res.data);
         setLoad(false);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        notify3(err.response.data.error);
+        console.log(err);
+      });
   };
 
   useEffect(() => {
@@ -196,7 +199,7 @@ const Idea = () => {
             className="mt-3 text-start col-md-1 col-1 "
             style={{ color: "white" }}
           >
-            3
+            {likes_count}
           </div>
 
           <div className="ml-6 mt-3  col-md-1 d  col-1 flex justify-end">
