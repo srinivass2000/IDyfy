@@ -10,6 +10,14 @@ exports.pull_idea = async (req, res, next) => {
 
     var idea = await Idea.findById(idea_id);
     if (idea) {
+      if (idea.contributors.includes(req.user._id.toString())) {
+        return next(
+          new ErrorResponse(
+            "You cannot pull this Idea as you are already a contributor! Kindly edit your owm Graph!",
+            403
+          )
+        );
+      }
       var Feature = mongoose.model(`features_${idea_id}`, FeatureSchema);
 
       console.log(Feature);

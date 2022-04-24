@@ -44,7 +44,7 @@ const FeedPage = () => {
     ) {
       console.log("at the bottom of page");
       console.log(feedlength);
-      if (feedlength !== 0) {
+      if (feedlength !== 0 || feedlength !== undefined) {
         skipinc();
       }
     }
@@ -52,11 +52,16 @@ const FeedPage = () => {
 
   useEffect(() => {
     getideas(skip);
+    if (feedlength == 0 || feedlength == undefined) {
+      window.removeEventListener("scroll", handleScroll);
+    }
   }, [skip]);
 
   useEffect(() => {
-    if (feedlength !== 0) {
+    if (feedlength !== 0 || feedlength !== undefined) {
       window.addEventListener("scroll", handleScroll);
+    } else {
+      window.removeEventListener("scroll", handleScroll);
     }
   });
 

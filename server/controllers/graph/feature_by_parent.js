@@ -12,6 +12,7 @@ exports.fetch_features_by_parent = async (req, res, next) => {
     obj4 = { show: "nothing" };
     obj5 = { canEdit: true };
     obj6 = { canEdit: false };
+    obj7 = { canEdit: "cannot pull" };
 
     var user;
     if (whosegraph == "null" || whosegraph == undefined) {
@@ -106,7 +107,11 @@ exports.fetch_features_by_parent = async (req, res, next) => {
           ) {
             idea = { ...idea, ...obj5 };
           } else {
-            idea = { ...idea, ...obj6 };
+            if (idea.contributors.includes(req.user._id.toString())) {
+              idea = { ...idea, ...obj7 };
+            } else {
+              idea = { ...idea, ...obj6 };
+            }
           }
         } else {
           idea = { ...idea._doc, ...obj3 };
@@ -131,7 +136,11 @@ exports.fetch_features_by_parent = async (req, res, next) => {
           )
             idea = { ...idea, ...obj5 };
         } else {
-          idea = { ...idea, ...obj6 };
+          if (idea.contributors.includes(req.user._id.toString())) {
+            idea = { ...idea, ...obj7 };
+          } else {
+            idea = { ...idea, ...obj6 };
+          }
         }
 
         // idea = { ...idea._doc, ...obj2 };
