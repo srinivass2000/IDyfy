@@ -9,8 +9,8 @@ const Graph = (props) => {
   const { idea_id } = useParams();
   const [Edit, SetEdit] = useState(false);
   const [allLinks, SetAllLinks] = useState([]);
-  const [Version, setV] = useState(props.version);
-  const [Whosegraph, setW] = useState(props.whosegraph);
+  let Version = props.version;
+  let Whosegraph = props.whosegraph;
   const [TreeData, SetTreeData] = useState();
   const getChilderen = async (p) => {
     await axios
@@ -242,25 +242,27 @@ const Graph = (props) => {
   }, [TreeData]);
 
   useEffect(async () => {
+    console.log("rerendered");
     const idea = JSON.parse(localStorage.getItem("idea"));
     const id = localStorage.getItem("whose_id");
-    const ver = localStorage.getItem("version");
+    const ver = JSON.parse(localStorage.getItem("version"));
+    console.log(ver, Version);
     // also check user_id == whosegraph
-    if ((idea ? idea[0]._id : <></>) === idea_id) {
-      if (id ? id : <></> == Whosegraph) {
-        if (ver ? ver : <></> == Version) {
-          console.log("asa");
+    if (
+      (idea ? idea[0]._id : <></>) === idea_id &&
+      (id ? id : <></>) == Whosegraph &&
+      (ver ? ver : <></>) == Version
+    ) {
+      console.log("asa");
 
-          SetTreeData(JSON.parse(localStorage.getItem("idea")));
+      SetTreeData(JSON.parse(localStorage.getItem("idea")));
 
-          if (idea[0].canEdit == true) {
-            props.canIEdit(true);
-            SetEdit(true);
-          } else {
-            props.canIEdit(false);
-            SetEdit(false);
-          }
-        }
+      if (idea[0].canEdit == true) {
+        props.canIEdit(true);
+        SetEdit(true);
+      } else {
+        props.canIEdit(false);
+        SetEdit(false);
       }
     } else {
       console.log("na");
@@ -296,7 +298,7 @@ const Graph = (props) => {
         console.log(e);
       }
     }
-  }, []);
+  }, [Version, Whosegraph]);
   return (
     // <div style={{ height: window.innerHeight, width: window.innerWidth }}>
 
