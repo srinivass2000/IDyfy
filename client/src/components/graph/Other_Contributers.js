@@ -43,6 +43,7 @@ const OtherContributers = (props) => {
   }
   //modal end
   const selectWhoseIdea = (id) => {
+    props.SetVersion(0);
     props.SetWhosegraph(id);
     closeModal();
   };

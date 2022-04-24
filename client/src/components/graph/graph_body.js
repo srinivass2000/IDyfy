@@ -87,6 +87,25 @@ const Graph_body = () => {
       );
   }, []);
 
+  // useEffect(async () => {
+  //   await axios
+  //     .get(
+  //       // `/api/feature/idea-version-details?idea_id=${idea_id}&user_id=${Whosegraph}`,
+  //       {
+  //         headers: authHeader(),
+  //       }
+  //     )
+  //     .then(
+  //       (res) => {
+  //         // console.log(res.data);
+  //         // SetMaxVersion(res.data);
+  //       },
+  //       (err) => {
+  //         //
+  //       }
+  //     );
+  // }, [Whosegraph]);
+
   return (
     <>
       <div className="container">
@@ -150,6 +169,7 @@ const Graph_body = () => {
             {/* {console.log(Contributers)} */}
             <OtherContributers
               SetWhosegraph={SetWhosegraph}
+              SetVersion={SetVersion}
               Contributers={Contributers}
               heighest={Heighest}
             />
