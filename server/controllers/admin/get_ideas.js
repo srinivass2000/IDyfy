@@ -19,7 +19,7 @@ exports.get_ideas = async (req, res, next) => {
         Date: -1,
       })
       .limit(20);
-    console.log(result);
+    // console.log(result);
     var final = [];
     for await (var idea of result) {
       //   console.log(idea);

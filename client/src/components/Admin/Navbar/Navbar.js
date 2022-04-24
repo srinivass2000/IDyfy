@@ -5,9 +5,7 @@ import { useState, useEffect } from "react";
 import AuthService from "../auth/authservices";
 import { useHistory } from "react-router-dom";
 
-
 const Navbar = () => {
-
   const logout = () => {
     AuthService.logout();
     history.push("/admin");
@@ -44,10 +42,11 @@ const Navbar = () => {
               <Link to="/admin/users">Users</Link>
             </li>
             <div className="items mx-9" onClick={logout}>
-              <button className="button-6" >Log out</button>
+              <button className="button-6 hover:bg-red-500 hover:text-white">
+                Log out
+              </button>
             </div>
           </ul>
-          
         )}
 
         <button onClick={toggleNav} className="btn">

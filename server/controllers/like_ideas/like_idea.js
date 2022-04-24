@@ -1,7 +1,7 @@
 const Idea = require("../../models/Idea");
 const ErrorResponse = require("../../utils/errorResponse");
 
-exports.star_idea = async (req, res, next) => {
+exports.like_idea = async (req, res, next) => {
   try {
     const { idea_id } = req.query;
     // var idea = await Idea.find({ _id: idea_id });
@@ -13,7 +13,7 @@ exports.star_idea = async (req, res, next) => {
       { _id: idea_id },
       {
         $addToSet: {
-          starred_by: id,
+          liked_users: id,
         },
       }
     );

@@ -9,7 +9,7 @@ exports.get_idea = async (req, res, next) => {
 
     console.log(id);
 
-    const idea = await Idea.findById(id);
+    var idea = await Idea.findById(id);
     //comments
     console.log(idea);
 
@@ -38,6 +38,12 @@ exports.get_idea = async (req, res, next) => {
     console.log(user_id);
 
     var can_edit = idea.contributors.includes(user_id);
+
+    if (idea.liked_users.includes(req.user._id)) {
+      idea = { ...idea._doc, liked: true };
+    } else {
+      idea = { ...idea._doc, liked: false };
+    }
 
     res.status(200).json({
       success: true,

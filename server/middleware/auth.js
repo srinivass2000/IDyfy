@@ -30,6 +30,7 @@ exports.protect = async (req, res, next) => {
 
       // console.log(admin);
       req.user = admin;
+      req.user.isAdmin = true;
 
       next();
     } catch (err) {
@@ -54,6 +55,10 @@ exports.protect = async (req, res, next) => {
 
       if (!user) {
         return next(new ErrorResponse("No user found with this id", 404));
+      }
+
+      if (user.suspended === true) {
+        return next(new ErrorResponse("User Account is Suspended", 403));
       }
 
       // console.log(user)

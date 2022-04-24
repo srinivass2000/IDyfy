@@ -9,12 +9,19 @@ import authHeader from "../../services/auth-header";
 import Footer from "../Footer/footer";
 import { Link } from "react-router-dom";
 import Loader from "../Loader/loader";
+import { toast } from "react-toastify";
 const Idea = () => {
+  const notify5 = () => toast.success("Idea Liked!");
+  const notify6 = () => toast.success("Idea Unliked!");
+  const notify3 = (text) => toast.error(text);
+
   const [load, setLoad] = useState(true);
   const [idea, setIdea] = useState({});
   const [comments, setComment] = useState([]);
   const [contributors, setContributors] = useState([]);
   const [canEdit, setCanEdit] = useState(false);
+  const [isLiked, setActiveliked] = useState();
+  var [likes_count, setLikesCount] = useState();
 
   const { id } = useParams();
   const url = "/ideaEdit/";
@@ -29,10 +36,15 @@ const Idea = () => {
         setComment(res.data.comments);
         setContributors(res.data.contributed_users);
         setCanEdit(res.data.can_edit);
+        setActiveliked(res.data.idea.liked);
+        setLikesCount(res.data.idea.liked_users.length);
         console.log(res.data);
         setLoad(false);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        notify3(err.response.data.error);
+        console.log(err);
+      });
   };
 
   useEffect(() => {
@@ -46,6 +58,53 @@ const Idea = () => {
       </div>
     );
   }
+
+  const toggleLiked = async () => {
+    setActiveliked(!isLiked);
+    if (isLiked === false) {
+      try {
+        // console.log(skip);
+        setLikesCount(++likes_count);
+        await axios
+          .get(`/api/idea/like-idea?idea_id=${idea._id.toString()}`, {
+            headers: authHeader(),
+          })
+          .then(
+            (res) => {
+              console.log(res);
+              notify5();
+            },
+            (err) => {
+              console.log(err);
+              notify3(err.response.data.error);
+            }
+          );
+      } catch (e) {
+        console.log(e);
+      }
+    } else {
+      try {
+        // console.log(skip);
+        setLikesCount(--likes_count);
+        await axios
+          .get(`/api/idea/unlike-idea?idea_id=${idea._id.toString()}`, {
+            headers: authHeader(),
+          })
+          .then(
+            (res) => {
+              console.log(res);
+              notify6();
+            },
+            (err) => {
+              console.log(err);
+              notify3(err.response.data.error);
+            }
+          );
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  };
 
   return (
     <div>
@@ -81,9 +140,12 @@ const Idea = () => {
                 {contributors.map((con, i) => (
                   <li key={i}>
                     {/* when you click on a user route him to his profile page */}
-                    <a className="dropdown-item" href="/">
+                    <Link
+                      to={`/profile?id=${con._id.toString()}`}
+                      className="dropdown-item"
+                    >
                       {con.name}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -112,13 +174,32 @@ const Idea = () => {
             </p>
           </div>
           <div className="mt-3 offset-md-6 offset-7 col-md-1 flex justify-end col-1">
-            <img src={Like} alt="like" className="absolute mt-1 " />
+            {/* <img src={Like} alt="like" className="absolute mt-1 " /> */}
+            {isLiked === false ? (
+              <img
+                src="https://img.icons8.com/ios/50/FFFFFF/hearts--v1.png"
+                // src={Like}
+                alt="feed icon"
+                className="absolute mt-0.3 ml-1"
+                width="26px"
+                onClick={toggleLiked}
+              />
+            ) : (
+              <img
+                src="https://img.icons8.com/fluency-systems-filled/48/FF0000/like.png"
+                // src={Like}
+                alt="feed icon"
+                className="absolute mt-0.3 ml-1"
+                width="26px"
+                onClick={toggleLiked}
+              />
+            )}
           </div>
           <div
             className="mt-3 text-start col-md-1 col-1 "
             style={{ color: "white" }}
           >
-            3
+            {likes_count}
           </div>
 
           <div className="ml-6 mt-3  col-md-1 d  col-1 flex justify-end">

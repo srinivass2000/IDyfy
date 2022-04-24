@@ -1,10 +1,17 @@
 import React from "react";
-import Star from "../../assets/icon/star.svg";
-import Chat from "../../assets/icon/chat.svg";
-import Share from "../../assets/icon/share.svg";
-import Like from "../../assets/icon/heart.svg";
 import { Link } from "react-router-dom";
 import "../Feed_Tile/feed.css";
+import { useState } from "react";
+import axios from "axios";
+import authHeader from "../../services/auth-header";
+import { toast } from "react-toastify";
+import { RWebShare } from "react-web-share";
+
+const notify1 = () => toast.success("Idea Starred Successfully!!");
+const notify2 = () => toast.success("Idea Unstarred Successfully!");
+const notify5 = () => toast.success("Idea Liked!");
+const notify6 = () => toast.success("Idea Unliked!");
+const notify3 = (text) => toast.error(text);
 
 const FeedTile = (props) => {
   const url = "/idea/";
@@ -13,6 +20,115 @@ const FeedTile = (props) => {
     tmp.innerHTML = str;
     return tmp.textContent || tmp.innerText || "";
   }
+
+  const [isActive, setActive] = useState(props.details.starred);
+  var [starred_count, setStarredCount] = useState(
+    props.details.starred_by.length
+  );
+
+  const [isLiked, setActiveliked] = useState(props.details.liked);
+  var [likes_count, setLikesCount] = useState(props.details.liked_users.length);
+
+  const toggleStarred = async () => {
+    setActive(!isActive);
+    if (isActive === false) {
+      try {
+        // console.log(skip);
+        setStarredCount(++starred_count);
+        await axios
+          .get(`/api/idea/star-idea?idea_id=${props.details._id.toString()}`, {
+            headers: authHeader(),
+          })
+          .then(
+            (res) => {
+              console.log(res);
+              notify1();
+            },
+            (err) => {
+              console.log(err);
+              notify3(err.response.data.error);
+            }
+          );
+      } catch (e) {
+        console.log(e);
+      }
+    } else {
+      try {
+        // console.log(skip);
+        setStarredCount(--starred_count);
+        await axios
+          .get(
+            `/api/idea/unstar-idea?idea_id=${props.details._id.toString()}`,
+            {
+              headers: authHeader(),
+            }
+          )
+          .then(
+            (res) => {
+              console.log(res);
+              notify2();
+            },
+            (err) => {
+              console.log(err);
+              notify3(err.response.data.error);
+            }
+          );
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  };
+
+  const toggleLiked = async () => {
+    setActiveliked(!isLiked);
+    if (isLiked === false) {
+      try {
+        // console.log(skip);
+        setLikesCount(++likes_count);
+        await axios
+          .get(`/api/idea/like-idea?idea_id=${props.details._id.toString()}`, {
+            headers: authHeader(),
+          })
+          .then(
+            (res) => {
+              console.log(res);
+              notify5();
+            },
+            (err) => {
+              console.log(err);
+              notify3(err.response.data.error);
+            }
+          );
+      } catch (e) {
+        console.log(e);
+      }
+    } else {
+      try {
+        // console.log(skip);
+        setLikesCount(--likes_count);
+        await axios
+          .get(
+            `/api/idea/unlike-idea?idea_id=${props.details._id.toString()}`,
+            {
+              headers: authHeader(),
+            }
+          )
+          .then(
+            (res) => {
+              console.log(res);
+              notify6();
+            },
+            (err) => {
+              console.log(err);
+              notify3(err.response.data.error);
+            }
+          );
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  };
+
   return (
     <div className="text-white p-4 mb-12 tile">
       <div className="row overflow-x-hidden">
@@ -21,7 +137,6 @@ const FeedTile = (props) => {
             className="flex justify-center fs-1 mb-3"
             style={{ fontFamily: "Pelo" }}
           >
-            {" "}
             {props.details.title}
           </div>
           <div className="flex align-left ">
@@ -195,34 +310,79 @@ const FeedTile = (props) => {
       <hr className="hr mt-1" />
       <div className="row mt-3">
         <div className="col-lg-1  col-1">
-          <img src={Like} alt="feed icon" className="absolute mt-1 " />
+          {isLiked === false ? (
+            <img
+              src="https://img.icons8.com/ios/50/FFFFFF/hearts--v1.png"
+              // src={Like}
+              alt="feed icon"
+              className="absolute mt-0.3 ml-1"
+              width="26px"
+              onClick={toggleLiked}
+            />
+          ) : (
+            <img
+              src="https://img.icons8.com/fluency-systems-filled/48/FF0000/like.png"
+              // src={Like}
+              alt="feed icon"
+              className="absolute mt-0.3 ml-1"
+              width="26px"
+              onClick={toggleLiked}
+            />
+          )}
         </div>
-        <div className="text-start col-lg-1 col-1 ">
-          {props.details.liked_users.length}
-        </div>
+        <div className="text-start col-lg-1 col-1 ">{likes_count}</div>
 
         <div className="offset-lg-1 col-lg-1 d offset-1 col-1">
           <img
-            src={Chat}
+            // src={Chat}
+            src="https://img.icons8.com/material/48/FFFFFF/comments--v1.png"
             alt="feed icon"
             className="absolute mr-4 mt-1"
             width="22px"
           />
         </div>
-        <div className="text-start col-lg-1 col-1 ">3</div>
+        <div className="text-start col-lg-1 col-1 ">
+          {props.details.comment_count}
+        </div>
         <div className="offset-lg-1 col-lg-1 d offset-1 col-1">
-          <img
-            src={Star}
-            alt="feed icon"
-            className="absolute mt-1 "
-            width="30px"
-          />
+          {isActive === false ? (
+            <img
+              src="https://img.icons8.com/ios/50/FFFFFF/star--v1.png"
+              alt="star icon"
+              className="absolute mt-1 "
+              width="22px"
+              onClick={toggleStarred}
+            />
+          ) : (
+            <img
+              src="https://img.icons8.com/ios-filled/50/FFA500/christmas-star.png"
+              alt="star icon"
+              className="absolute mt-1 "
+              width="22px"
+              onClick={toggleStarred}
+            />
+          )}
         </div>
-        <div className="text-start col-lg-1 col-1">
-          {props.details.starred_by.length}
-        </div>
+        <div className="text-start col-lg-1 col-1">{starred_count}</div>
         <div className="offset-lg-3 col-lg-1 offset-3 col-1">
-          <img src={Share} alt="feed icon" className="absolute mt-1" />
+          {/* <img src={Share} alt="feed icon" className="absolute mt-1" />
+           */}
+          <RWebShare
+            data={{
+              text: `${removeHTML(props.details.description)}`,
+              url: `https://idyfy.tech/idea/${props.details._id.toString()}`,
+              title: `${props.details.title}`,
+            }}
+            onClick={() => console.log("shared successfully!")}
+          >
+            {/* <button>Share 🔗</button> */}
+            <img
+              src="https://img.icons8.com/ios-filled/50/FFFFFF/share--v1.png"
+              alt="feed icon"
+              className="absolute mt-1"
+              width="22px"
+            />
+          </RWebShare>
         </div>
       </div>
     </div>

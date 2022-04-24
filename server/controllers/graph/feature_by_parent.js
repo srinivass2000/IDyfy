@@ -228,14 +228,33 @@ exports.fetch_features_by_parent = async (req, res, next) => {
 
       for await (const feature of results) {
         // console.log(feature);
-        var test = await Feature.find(
-          {
-            parent_id: feature._id.toString(),
-          },
-          {
-            _id: 1,
-          }
-        );
+        if (version == "null" || version == undefined || version == 0) {
+          var test = await Feature.find(
+            {
+              parent_id: feature._id.toString(),
+              contributors: { $in: [user.toString()] },
+            },
+            {
+              _id: 1,
+            }
+          );
+        } else {
+          var test = await Feature.find(
+            {
+              parent_id: feature._id.toString(),
+              version_start: {
+                $lte: version,
+              },
+              version_end: {
+                $gte: version,
+              },
+              contributors: { $in: [user.toString()] },
+            },
+            {
+              _id: 1,
+            }
+          );
+        }
 
         if (test.length === 0) {
           result = { ...feature._doc, ...obj4 };

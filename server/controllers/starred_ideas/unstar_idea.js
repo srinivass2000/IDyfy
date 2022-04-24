@@ -3,7 +3,7 @@ const ErrorResponse = require("../../utils/errorResponse");
 
 exports.unstar_idea = async (req, res, next) => {
   try {
-    const { idea_id } = req.body;
+    const { idea_id } = req.query;
     // var idea = await Idea.find({ _id: idea_id });
     // idea.starred_by = idea.starred_by.push(req.user._id);
 

@@ -31,7 +31,7 @@ const Login = () => {
     // console.log(formdata);
   };
   const GoBack = () => {
-    history.push("/feed");
+    history.push("/");
   };
   const handleChange = (e) => {
     setFormData({ ...formdata, [e.target.name]: e.target.value });
@@ -100,7 +100,10 @@ const Login = () => {
             style={{ height: "250px" }}
           />
 
-          <h1 style={{color:"white"}}> Welcome to the Admin Section of IDyfy</h1>
+          <h1 style={{ color: "white" }}>
+            {" "}
+            Welcome to the Admin Section of IDyfy
+          </h1>
           <button
             type="button"
             className="text-white mt-4 bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"

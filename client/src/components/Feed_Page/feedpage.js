@@ -7,6 +7,7 @@ import authHeader from "../../services/auth-header";
 const FeedPage = () => {
   const [ideas, setIdeas] = useState();
   const [skip, setskip] = useState(0);
+  const [feedlength, setFeedLength] = useState();
   const getideas = async (skip) => {
     try {
       // console.log(skip);
@@ -22,7 +23,8 @@ const FeedPage = () => {
             if (skip !== 0) {
               setIdeas([...ideas, ...res.data.ideas]);
             }
-            // console.log(res.data.ideas);
+            console.log(res.data.ideas);
+            setFeedLength(res.data.ideas.length);
             // console.log(ideas);
           },
           (err) => {
@@ -33,12 +35,35 @@ const FeedPage = () => {
       console.log(e);
     }
   };
+
+  const handleScroll = (e) => {
+    // console.log("reached inside");
+    if (
+      window.innerHeight + e.target.documentElement.scrollTop + 1 >=
+      e.target.documentElement.scrollHeight
+    ) {
+      console.log("at the bottom of page");
+      console.log(feedlength);
+      if (feedlength !== 0) {
+        skipinc();
+      }
+    }
+  };
+
   useEffect(() => {
     getideas(skip);
   }, [skip]);
+
+  useEffect(() => {
+    if (feedlength !== 0) {
+      window.addEventListener("scroll", handleScroll);
+    }
+  });
+
   const skipinc = () => {
-    setskip(skip + 10);
+    setskip(skip + 5);
   };
+
   return (
     <div className="container">
       <div className="row my-3">
@@ -80,11 +105,11 @@ const FeedPage = () => {
           </div>
         </>
       )}
-      <div>
+      {/* <div>
         <button onClick={skipinc} style={{ background: "#fff" }}>
           load more
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };
