@@ -9,13 +9,13 @@ const Graph = (props) => {
   const { idea_id } = useParams();
   const [Edit, SetEdit] = useState(false);
   const [allLinks, SetAllLinks] = useState([]);
-  let version = props.version;
-  let whosegraph = props.whosegraph;
+  const [Version, setV] = useState(props.version);
+  const [Whosegraph, setW] = useState(props.whosegraph);
   const [TreeData, SetTreeData] = useState();
   const getChilderen = async (p) => {
     await axios
       .get(
-        `/api/feature/features-by-parent?idea_id=${idea_id}&parent_id=${p}&version=${version}&whosegraph=${whosegraph}`,
+        `/api/feature/features-by-parent?idea_id=${idea_id}&parent_id=${p}&version=${Version}&whosegraph=${Whosegraph}`,
         {
           headers: authHeader(),
         }
@@ -244,21 +244,22 @@ const Graph = (props) => {
   useEffect(async () => {
     const idea = JSON.parse(localStorage.getItem("idea"));
     const id = localStorage.getItem("whose_id");
-    const version = localStorage.getItem("version");
+    const ver = localStorage.getItem("version");
     // also check user_id == whosegraph
     if ((idea ? idea[0]._id : <></>) === idea_id) {
-      // check if the idea is of the same person
-      if (whosegraph == id) {
-        console.log("asa");
+      if (id ? id : <></> == Whosegraph) {
+        if (ver ? ver : <></> == Version) {
+          console.log("asa");
 
-        SetTreeData(JSON.parse(localStorage.getItem("idea")));
+          SetTreeData(JSON.parse(localStorage.getItem("idea")));
 
-        if (idea[0].canEdit == true) {
-          props.canIEdit(true);
-          SetEdit(true);
-        } else {
-          props.canIEdit(false);
-          SetEdit(false);
+          if (idea[0].canEdit == true) {
+            props.canIEdit(true);
+            SetEdit(true);
+          } else {
+            props.canIEdit(false);
+            SetEdit(false);
+          }
         }
       }
     } else {
@@ -267,7 +268,7 @@ const Graph = (props) => {
       try {
         await axios
           .get(
-            `/api/feature/features-by-parent?idea_id=${idea_id}&version=${version}&whosegraph=${whosegraph}`,
+            `/api/feature/features-by-parent?idea_id=${idea_id}&version=${Version}&whosegraph=${Whosegraph}`,
             {
               headers: authHeader(),
             }
@@ -285,6 +286,7 @@ const Graph = (props) => {
               }
               localStorage.setItem("idea", JSON.stringify(res.data.features));
               localStorage.setItem("whose_id", res.data.whose_id);
+              localStorage.setItem("version", res.data.version);
             },
             (err) => {
               console.log(err);

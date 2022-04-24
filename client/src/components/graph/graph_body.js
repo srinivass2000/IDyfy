@@ -8,7 +8,8 @@ import authHeader from "../../services/auth-header";
 import { toast } from "react-toastify";
 
 const Graph_body = () => {
-  const [Version, SetVersion] = useState("null");
+  const [Version, SetVersion] = useState(0);
+  const [MAxVersion, SetMaxVersion] = useState("null");
   const [Whosegraph, SetWhosegraph] = useState("null");
   const [Edit, SetEdit] = useState(false);
   const [Contributers, SetContributers] = useState();
@@ -74,7 +75,7 @@ const Graph_body = () => {
       .then(
         (res) => {
           // console.log(res.data);
-          SetVersion(res.data.highest_contributor.latest_version);
+          SetMaxVersion(res.data.highest_contributor.latest_version);
           SetWhosegraph(res.data.highest_contributor._id);
           SetContributers(res.data.contributor_names);
           // console.log(res.data.contributor_names);
@@ -96,7 +97,8 @@ const Graph_body = () => {
                 (contributor, idx) =>
                   Whosegraph == contributor._id && (
                     <p className="text-white mt-2">
-                      You a viewing {contributor.name}'s idea
+                      You a viewing {contributor.name}'s idea at version{" "}
+                      {Version == 0 ? <>Latest Version</> : Version}
                     </p>
                   )
               )
@@ -115,23 +117,31 @@ const Graph_body = () => {
               Versions
             </button>
             <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              {Version == 0 ? (
+              {MAxVersion == 0 ? (
                 <>
                   <li>
-                    <a class="dropdown-item" href="">
+                    <a class="dropdown-item" onClick={() => SetVersion(0)}>
                       Not yet versioned
                     </a>
                   </li>
                 </>
               ) : (
                 <>
-                  {[...Array(Version)].map((elem, index) => (
+                  {[...Array(MAxVersion)].map((elem, index) => (
                     <li key={index}>
-                      <a class="dropdown-item" href="">
+                      <a
+                        class="dropdown-item"
+                        onClick={() => SetVersion(index + 1)}
+                      >
                         Version {index + 1}
                       </a>
                     </li>
                   ))}
+                  <li>
+                    <a class="dropdown-item" onClick={() => SetVersion(0)}>
+                      Latest Version
+                    </a>
+                  </li>
                 </>
               )}
             </ul>
