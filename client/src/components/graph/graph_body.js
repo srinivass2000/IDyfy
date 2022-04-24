@@ -8,7 +8,8 @@ import authHeader from "../../services/auth-header";
 import { toast } from "react-toastify";
 
 const Graph_body = () => {
-  const [Version, SetVersion] = useState("null");
+  const [Version, SetVersion] = useState(0);
+  const [MAxVersion, SetMaxVersion] = useState("null");
   const [Whosegraph, SetWhosegraph] = useState("null");
   const [Edit, SetEdit] = useState(false);
   const [Contributers, SetContributers] = useState();
@@ -22,11 +23,33 @@ const Graph_body = () => {
 
   const notify = () => toast.success("You succcessfully Pulled the Idea!");
   const notify1 = () => toast.error("There was an error pulling the Idea!");
-  const createVersion = () => {};
+  const notify2 = () => toast.success("Versioned succcessfully !");
+  const notify3 = (a) =>
+    toast.error("There was an error while versioning !" + a);
+  const createVersion = async () => {
+    await axios
+      .get(`/api/feature/version-end?idea_id=${idea_id}`, {
+        headers: authHeader(),
+      })
+      .then(
+        (res) => {
+          console.log(res.data);
+          if (res.data.success == true) {
+            notify2();
+          } else {
+            notify3("");
+          }
+        },
+        (err) => {
+          // console.log(err.response.data.error);
+          notify3(err.response.data.error);
+        }
+      );
+  };
 
   const pullIdea = async () => {
     await axios
-      .get(`/api/features/pull?idea_id=${idea_id}&from=${Whosegraph}`, {
+      .get(`/api/feature/pull?idea_id=${idea_id}&from=${Whosegraph}`, {
         headers: authHeader(),
       })
       .then(
@@ -52,10 +75,10 @@ const Graph_body = () => {
       .then(
         (res) => {
           // console.log(res.data);
-          SetVersion(res.data.highest_contributor.latest_version);
+          SetMaxVersion(res.data.highest_contributor.latest_version);
           SetWhosegraph(res.data.highest_contributor._id);
           SetContributers(res.data.contributor_names);
-          console.log(res.data.contributor_names);
+          // console.log(res.data.contributor_names);
           SetHeighest(res.data.highest_contributor);
         },
         (err) => {
@@ -63,6 +86,25 @@ const Graph_body = () => {
         }
       );
   }, []);
+
+  // useEffect(async () => {
+  //   await axios
+  //     .get(
+  //       // `/api/feature/idea-version-details?idea_id=${idea_id}&user_id=${Whosegraph}`,
+  //       {
+  //         headers: authHeader(),
+  //       }
+  //     )
+  //     .then(
+  //       (res) => {
+  //         // console.log(res.data);
+  //         // SetMaxVersion(res.data);
+  //       },
+  //       (err) => {
+  //         //
+  //       }
+  //     );
+  // }, [Whosegraph]);
 
   return (
     <>
@@ -74,12 +116,13 @@ const Graph_body = () => {
                 (contributor, idx) =>
                   Whosegraph == contributor._id && (
                     <p className="text-white mt-2">
-                      You a viewing {contributor.name}'s idea
+                      You a viewing {contributor.name}'s idea at version{" "}
+                      {Version == 0 ? <>Latest Version</> : Version}
                     </p>
                   )
               )
             ) : (
-              <>{console.log("fs")}</>
+              <></>
             )}
           </div>
           <div class="dropdown mt-2 offset-lg-3 col-sm-4 col-lg-2 col-4 ">
@@ -93,23 +136,31 @@ const Graph_body = () => {
               Versions
             </button>
             <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              {Version == 0 ? (
+              {MAxVersion == 0 ? (
                 <>
                   <li>
-                    <a class="dropdown-item" href="">
+                    <a class="dropdown-item" onClick={() => SetVersion(0)}>
                       Not yet versioned
                     </a>
                   </li>
                 </>
               ) : (
                 <>
-                  {[...Array(Version)].map((elem, index) => (
+                  {[...Array(MAxVersion)].map((elem, index) => (
                     <li key={index}>
-                      <a class="dropdown-item" href="">
+                      <a
+                        class="dropdown-item"
+                        onClick={() => SetVersion(index + 1)}
+                      >
                         Version {index + 1}
                       </a>
                     </li>
                   ))}
+                  <li>
+                    <a class="dropdown-item" onClick={() => SetVersion(0)}>
+                      Latest Version
+                    </a>
+                  </li>
                 </>
               )}
             </ul>
@@ -118,6 +169,7 @@ const Graph_body = () => {
             {/* {console.log(Contributers)} */}
             <OtherContributers
               SetWhosegraph={SetWhosegraph}
+              SetVersion={SetVersion}
               Contributers={Contributers}
               heighest={Heighest}
             />
@@ -136,7 +188,7 @@ const Graph_body = () => {
         </div>
       </div>
       <div>
-        <TransformWrapper
+        {/* <TransformWrapper
           defaultScale={1}
           defaultPositionX={200}
           defaultPositionY={100}
@@ -148,16 +200,12 @@ const Graph_body = () => {
                 <button onClick={zoomOut}>-</button>
                 <button onClick={resetTransform}>x</button>
               </div>
-              <TransformComponent>
-                <Graph
-                  canIEdit={canIEdit}
-                  version={Version}
-                  whosegraph={Whosegraph}
-                />
-              </TransformComponent>
+              <TransformComponent> */}
+        <Graph canIEdit={canIEdit} version={Version} whosegraph={Whosegraph} />
+        {/* </TransformComponent>
             </React.Fragment>
-          )}
-        </TransformWrapper>
+          )} 
+        </TransformWrapper>*/}
       </div>
     </>
   );

@@ -153,6 +153,7 @@ exports.fetch_features_by_parent = async (req, res, next) => {
           success: true,
           features: [idea],
           whose_id: user.toString(),
+          version: version,
         });
       }
     }

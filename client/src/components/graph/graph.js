@@ -9,13 +9,13 @@ const Graph = (props) => {
   const { idea_id } = useParams();
   const [Edit, SetEdit] = useState(false);
   const [allLinks, SetAllLinks] = useState([]);
-  let version = props.version;
-  let whosegraph = props.whosegraph;
+  let Version = props.version;
+  let Whosegraph = props.whosegraph;
   const [TreeData, SetTreeData] = useState();
   const getChilderen = async (p) => {
     await axios
       .get(
-        `/api/feature/features-by-parent?idea_id=${idea_id}&parent_id=${p}&version=${version}&whosegraph=${whosegraph}`,
+        `/api/feature/features-by-parent?idea_id=${idea_id}&parent_id=${p}&version=${Version}&whosegraph=${Whosegraph}`,
         {
           headers: authHeader(),
         }
@@ -242,9 +242,17 @@ const Graph = (props) => {
   }, [TreeData]);
 
   useEffect(async () => {
+    console.log("rerendered");
     const idea = JSON.parse(localStorage.getItem("idea"));
-    if ((idea ? idea[0]._id : <></>) === idea_id) {
-      // check if the idea is of the same person
+    const id = localStorage.getItem("whose_id");
+    const ver = JSON.parse(localStorage.getItem("version"));
+    console.log(ver, Version);
+    // also check user_id == whosegraph
+    if (
+      (idea ? idea[0]._id : <></>) === idea_id &&
+      (id ? id : <></>) == Whosegraph &&
+      (ver ? ver : <></>) == Version
+    ) {
       console.log("asa");
 
       SetTreeData(JSON.parse(localStorage.getItem("idea")));
@@ -262,7 +270,7 @@ const Graph = (props) => {
       try {
         await axios
           .get(
-            `/api/feature/features-by-parent?idea_id=${idea_id}&version=${version}&whosegraph=${whosegraph}`,
+            `/api/feature/features-by-parent?idea_id=${idea_id}&version=${Version}&whosegraph=${Whosegraph}`,
             {
               headers: authHeader(),
             }
@@ -279,6 +287,8 @@ const Graph = (props) => {
                 SetEdit(false);
               }
               localStorage.setItem("idea", JSON.stringify(res.data.features));
+              localStorage.setItem("whose_id", res.data.whose_id);
+              localStorage.setItem("version", res.data.version);
             },
             (err) => {
               console.log(err);
@@ -288,7 +298,7 @@ const Graph = (props) => {
         console.log(e);
       }
     }
-  }, []);
+  }, [Version, Whosegraph]);
   return (
     // <div style={{ height: window.innerHeight, width: window.innerWidth }}>
 
