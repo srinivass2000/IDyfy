@@ -117,7 +117,7 @@ const Graph_body = () => {
                   Whosegraph == contributor._id && (
                     <p className="text-white mt-2">
                       You a viewing {contributor.name}'s idea at version{" "}
-                      {Version == 0 ? <>Latest Version</> : Version}
+                      {Version == 0 ? <>Latest Workspace</> : Version}
                     </p>
                   )
               )
@@ -158,7 +158,7 @@ const Graph_body = () => {
                   ))}
                   <li>
                     <a class="dropdown-item" onClick={() => SetVersion(0)}>
-                      Latest Version
+                      Latest Workspace
                     </a>
                   </li>
                 </>
