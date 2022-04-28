@@ -87,24 +87,23 @@ const Graph_body = () => {
       );
   }, []);
 
-  // useEffect(async () => {
-  //   await axios
-  //     .get(
-  //       // `/api/feature/idea-version-details?idea_id=${idea_id}&user_id=${Whosegraph}`,
-  //       {
-  //         headers: authHeader(),
-  //       }
-  //     )
-  //     .then(
-  //       (res) => {
-  //         // console.log(res.data);
-  //         // SetMaxVersion(res.data);
-  //       },
-  //       (err) => {
-  //         //
-  //       }
-  //     );
-  // }, [Whosegraph]);
+  useEffect(async () => {
+    await axios
+      .get(
+        `/api/feature/get-latest-version?idea_id=${idea_id}&user_id=${Whosegraph}`,
+        {
+          headers: authHeader(),
+        }
+      )
+      .then(
+        (res) => {
+          SetMaxVersion(res.data.latest_version);
+        },
+        (err) => {
+          //
+        }
+      );
+  }, [Whosegraph]);
 
   return (
     <>
