@@ -22,6 +22,12 @@ const Profile = () => {
   // const { id } = useParams();
   const url = "/profileEdit";
 
+  function removeHTML(str) {
+    var tmp = document.createElement("DIV");
+    tmp.innerHTML = str;
+    return tmp.textContent || tmp.innerText || "";
+  }
+
   useEffect(() => {
     fetchProfile();
   }, []);
@@ -179,10 +185,10 @@ const Profile = () => {
                   ))}
                 <p className="text-left p-1">{idea.title}</p>
                 <p className="text-left p-1">
-                  {idea.description.length > 50 &&
-                    idea.description.substring(50, 0) + " . . ."}
-                  {idea.description.length <= 50 &&
-                    idea.description.substring(50, 0)}
+                  {removeHTML(idea.description).length > 50 &&
+                    removeHTML(idea.description).substring(50, 0) + " . . ."}
+                  {removeHTML(idea.description).length <= 50 &&
+                    removeHTML(idea.description).substring(50, 0)}
                 </p>
               </div>
             ))}

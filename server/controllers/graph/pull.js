@@ -37,7 +37,7 @@ exports.pull_idea = async (req, res, next) => {
       });
 
       await User.findByIdAndUpdate(req.user._id, {
-        $push: { ideas_contributed: idea._id.toString() },
+        $addToSet: { ideas_contributed: idea._id.toString() },
       });
 
       await User.findByIdAndUpdate(from.toString(), {
@@ -59,7 +59,7 @@ exports.pull_idea = async (req, res, next) => {
           contributors: { $in: [from.toString()] },
         },
         {
-          $push: { contributors: [req.user._id.toString()] },
+          $addToSet: { contributors: req.user._id.toString() },
           // contributors: { $push: req.user._id.toString() },
         }
       );

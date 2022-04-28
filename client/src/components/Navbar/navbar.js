@@ -21,7 +21,7 @@ import Login from "../Auth/Login";
 
 const Navbar = () => {
   const url = "/search/";
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState();
   const [searchdata, setSearchdata] = useState({ search: "" });
   const location = useLocation();
   const history = useHistory();
@@ -38,15 +38,18 @@ const Navbar = () => {
         headers: authHeader(),
       })
       .then((res) => {
-        setUser(AuthService.getUser);
+        // setUser(AuthService.getUser);
+        setUser(res.data.user);
       })
       .catch((err) => {
         if (err.response.status === 401) {
           localStorage.removeItem("UserToken");
-          setUser("");
+          // setUser("");
         }
       });
   }, [location]);
+
+  // user ? console.log(user) : console.log("nothing");
   return (
     <div>
       <ToastContainer theme="dark" />
@@ -150,13 +153,14 @@ const Navbar = () => {
                 </Link>
               </form>
               {/* small screen */}
+
               <Link
                 to="/profile"
                 className="mt-2 d-flex justify-center d-lg-none"
               >
                 <img
-                  className="ml-3 mt-1 icon dropdown-toggle"
-                  src={profile}
+                  className="ml-3 mt-1 icon dropdown-toggle profile"
+                  src={user.profile_pic}
                   alt="My Profile"
                 />
               </Link>
@@ -170,8 +174,8 @@ const Navbar = () => {
                   aria-expanded="false"
                 >
                   <img
-                    className="ml-3 mt-1 icon dropdown-toggle"
-                    src={profile}
+                    className="ml-3 mt-1 icon dropdown-toggle profile"
+                    src={user.profile_pic}
                     alt="My Profile"
                   />
                 </p>
@@ -194,9 +198,10 @@ const Navbar = () => {
                   </li>
                   <li className="flex justify-center p-1">
                     <button
+                      className="focus:outline-none text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-8 py-2.5 mb-2 dark:focus:ring-red-900"
                       onClick={logout}
-                      className="flex justify-center text-white"
-                      style={{ backgroundColor: "red" }}
+                      // className="flex justify-center text-white"
+                      // style={{ backgroundColor: "red" }}
                     >
                       logout
                     </button>
