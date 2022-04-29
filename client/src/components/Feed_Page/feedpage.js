@@ -6,10 +6,12 @@ import Loader from "../Loader/loader";
 import authHeader from "../../services/auth-header";
 const FeedPage = () => {
   const [ideas, setIdeas] = useState();
+  const [load, setLoad] = useState(false);
   const [skip, setskip] = useState(0);
   const [feedlength, setFeedLength] = useState();
   const getideas = async (skip) => {
     try {
+      setLoad(true);
       // console.log(skip);
       await axios
         .get("/api/idea/get-ideas/" + skip, {
@@ -25,9 +27,11 @@ const FeedPage = () => {
             }
             console.log(res.data.ideas);
             setFeedLength(res.data.ideas.length);
+            setLoad(false);
             // console.log(ideas);
           },
           (err) => {
+            setLoad(false);
             console.log(err);
           }
         );
@@ -99,7 +103,7 @@ const FeedPage = () => {
         ideas.map((idea, index) => (
           <div key={index} className="row ">
             <div className="offset-md-1 col-md-10 offset-lg-3 col-lg-6 col-12 text-white">
-              <FeedTile details={idea} />
+              <FeedTile details={idea} className="animate-pulse" />
             </div>
           </div>
         ))
@@ -109,6 +113,14 @@ const FeedPage = () => {
             <Loader />
           </div>
         </>
+      )}
+
+      {load === true ? (
+        <div class="spinner-border text-light" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      ) : (
+        ""
       )}
       {/* <div>
         <button onClick={skipinc} style={{ background: "#fff" }}>
