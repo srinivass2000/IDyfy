@@ -125,7 +125,7 @@ const Graph = (props) => {
     let svg = document.getElementById("tree__svg-container__svg");
     // console.log(TreeData);
     generatepath();
-    // console.log(allLinks);
+    console.log(allLinks);
     svg.innerHTML = "";
     for (let i = 0; allLinks.length > i; i++) {
       path();
@@ -212,29 +212,32 @@ const Graph = (props) => {
   }
 
   function connectElements(svg, path, startElem, endElem) {
-    let svgContainer = document.getElementById("tree__svg-container");
+    if (startElem == null || endElem == null) {
+    } else {
+      let svgContainer = document.getElementById("tree__svg-container");
 
-    // if first element is lower than the second, swap!
-    if (startElem.offsetTop > endElem.offsetTop) {
-      let temp = startElem;
-      startElem = endElem;
-      endElem = temp;
+      // if first element is lower than the second, swap!
+      if (startElem.offsetTop > endElem.offsetTop) {
+        let temp = startElem;
+        startElem = endElem;
+        endElem = temp;
+      }
+
+      // get (top, left) corner coordinates of the svg container
+      let svgTop = svgContainer.offsetTop;
+      let svgLeft = svgContainer.offsetLeft;
+
+      // calculate path's start (x,y)  coords
+      // we want the x coordinate to visually result in the element's mid point
+      let startX = startElem.offsetLeft + 0.5 * startElem.offsetWidth - svgLeft; // x = left offset + 0.5*width - svg's left offset
+      let startY = startElem.offsetTop + startElem.offsetHeight - svgTop; // y = top offset + height - svg's top offset
+
+      // calculate path's end (x,y) coords
+      let endX = endElem.offsetLeft + 0.5 * endElem.offsetWidth - svgLeft;
+      let endY = endElem.offsetTop - svgTop;
+      // call function for drawing the path
+      drawPath(svg, path, startX, startY, endX, endY);
     }
-
-    // get (top, left) corner coordinates of the svg container
-    let svgTop = svgContainer.offsetTop;
-    let svgLeft = svgContainer.offsetLeft;
-
-    // calculate path's start (x,y)  coords
-    // we want the x coordinate to visually result in the element's mid point
-    let startX = startElem.offsetLeft + 0.5 * startElem.offsetWidth - svgLeft; // x = left offset + 0.5*width - svg's left offset
-    let startY = startElem.offsetTop + startElem.offsetHeight - svgTop; // y = top offset + height - svg's top offset
-
-    // calculate path's end (x,y) coords
-    let endX = endElem.offsetLeft + 0.5 * endElem.offsetWidth - svgLeft;
-    let endY = endElem.offsetTop - svgTop;
-    // call function for drawing the path
-    drawPath(svg, path, startX, startY, endX, endY);
   }
 
   useEffect(() => {

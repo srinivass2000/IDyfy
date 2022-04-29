@@ -4,7 +4,7 @@ const User = require("../../models/User");
 
 // Login user
 exports.login = async (req, res, next) => {
-  const { email, password } = req.body;
+  var { email, password } = req.body;
 
   // Check if email and password is provided
   if (!email || !password) {
@@ -13,6 +13,7 @@ exports.login = async (req, res, next) => {
 
   try {
     // Check that user exists by email
+    email = email.toLowerCase();
     const user = await User.findOne({ email }).select("+password");
 
     if (!user) {
@@ -42,7 +43,8 @@ exports.login = async (req, res, next) => {
 
 // Register user
 exports.register = async (req, res, next) => {
-  const { name, email, password } = req.body;
+  var { name, email, password } = req.body;
+  email = email.toLowerCase();
   let user = await User.findOne({ email });
 
   if (!user) {

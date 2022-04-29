@@ -11,3 +11,8 @@
 .hoveritem:hover {
   background-color: #b287ff;
 }
+
+.profile {
+  /* filter: drop-shadow(15px 1px 4px #00255c); */
+  border-radius: 50%;
+}

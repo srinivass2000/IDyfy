@@ -87,24 +87,23 @@ const Graph_body = () => {
       );
   }, []);
 
-  // useEffect(async () => {
-  //   await axios
-  //     .get(
-  //       // `/api/feature/idea-version-details?idea_id=${idea_id}&user_id=${Whosegraph}`,
-  //       {
-  //         headers: authHeader(),
-  //       }
-  //     )
-  //     .then(
-  //       (res) => {
-  //         // console.log(res.data);
-  //         // SetMaxVersion(res.data);
-  //       },
-  //       (err) => {
-  //         //
-  //       }
-  //     );
-  // }, [Whosegraph]);
+  useEffect(async () => {
+    await axios
+      .get(
+        `/api/feature/get-latest-version?idea_id=${idea_id}&user_id=${Whosegraph}`,
+        {
+          headers: authHeader(),
+        }
+      )
+      .then(
+        (res) => {
+          SetMaxVersion(res.data.latest_version);
+        },
+        (err) => {
+          //
+        }
+      );
+  }, [Whosegraph]);
 
   return (
     <>
@@ -117,7 +116,7 @@ const Graph_body = () => {
                   Whosegraph == contributor._id && (
                     <p className="text-white mt-2">
                       You a viewing {contributor.name}'s idea at version{" "}
-                      {Version == 0 ? <>Latest Version</> : Version}
+                      {Version == 0 ? <>Latest Workspace</> : Version}
                     </p>
                   )
               )
@@ -158,7 +157,7 @@ const Graph_body = () => {
                   ))}
                   <li>
                     <a class="dropdown-item" onClick={() => SetVersion(0)}>
-                      Latest Version
+                      Latest Workspace
                     </a>
                   </li>
                 </>
