@@ -23,6 +23,7 @@ const IdeaSchema = new mongoose.Schema(
     links: Array,
     documents: Array,
     user_scores: Object,
+    temporaries: Object,
   },
   { timestamps: true }
 );

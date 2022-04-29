@@ -14,11 +14,10 @@ exports.get_ideas = async (req, res, next) => {
         description: 1,
         starred_by: 1,
       }
-    )
-      .sort({
-        Date: -1,
-      })
-      .limit(20);
+    ).sort({
+      Date: -1,
+    });
+    // .limit(20);
     // console.log(result);
     var final = [];
     for await (var idea of result) {
