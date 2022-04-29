@@ -162,6 +162,8 @@ const Navbar = () => {
                   className="ml-3 mt-1 icon dropdown-toggle profile"
                   src={user.profile_pic}
                   alt="My Profile"
+                  height="64px"
+                  width="64px"
                 />
               </Link>
               {/* large */}
@@ -177,6 +179,8 @@ const Navbar = () => {
                     className="ml-3 mt-1 icon dropdown-toggle profile"
                     src={user.profile_pic}
                     alt="My Profile"
+                    height="64px"
+                    width="64px"
                   />
                 </p>
 
