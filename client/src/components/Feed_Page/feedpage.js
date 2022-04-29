@@ -43,34 +43,44 @@ const FeedPage = () => {
   const handleScroll = (e) => {
     // console.log("reached inside");
     if (
-      window.innerHeight + e.target.documentElement.scrollTop + 1 >=
-      e.target.documentElement.scrollHeight
-    ) {
-      console.log("at the bottom of page");
-      console.log(feedlength);
-      if (feedlength !== 0 || feedlength !== undefined) {
-        skipinc();
-      }
-    }
+      !(
+        window.innerHeight + e.target.documentElement.scrollTop + 1 >=
+        e.target.documentElement.scrollHeight
+      )
+    )
+      return;
+    setLoad(true);
+    // {
+    //   console.log("at the bottom of page");
+    //   console.log(feedlength);
+    //   if (feedlength !== 0 || feedlength !== undefined) {
+    //     skipinc();
+    //   }
+    // }
   };
 
   useEffect(() => {
-    getideas(skip);
-    if (feedlength == 0 || feedlength == undefined) {
-      window.removeEventListener("scroll", handleScroll);
+    if (!load) {
+      return;
     }
+    if (feedlength > 0) {
+      skipinc();
+    }
+  }, [load]);
+
+  useEffect(() => {
+    getideas(skip);
   }, [skip]);
 
   useEffect(() => {
-    if (feedlength !== 0 || feedlength !== undefined) {
-      window.addEventListener("scroll", handleScroll);
-    } else {
-      window.removeEventListener("scroll", handleScroll);
-    }
-  });
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-  const skipinc = () => {
-    setskip(skip + 5);
+  const skipinc = async () => {
+    await setskip(skip + 5);
   };
 
   return (
@@ -115,7 +125,7 @@ const FeedPage = () => {
         </>
       )}
 
-      {load === true ? (
+      {load === true && feedlength != 0 ? (
         <div class="spinner-border text-light" role="status">
           <span class="sr-only">Loading...</span>
         </div>
