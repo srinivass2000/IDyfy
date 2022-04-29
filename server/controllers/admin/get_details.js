@@ -44,6 +44,14 @@ exports.get_details = async (req, res, next) => {
       })
       .limit(10);
 
+    var igraph = await Idea.find({},{
+      date:1,
+    });
+
+    // for await (var i of igraph){
+    //   console.log(i.getFullYear())
+    // }
+
     res.status(200).json({
       success: true,
       count_ideas,
@@ -51,6 +59,7 @@ exports.get_details = async (req, res, next) => {
       count_comments,
       active_ideas,
       active_users,
+      iggraph,
     });
   } catch (err) {
     console.log(err);

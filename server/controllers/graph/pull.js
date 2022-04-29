@@ -64,6 +64,16 @@ exports.pull_idea = async (req, res, next) => {
         }
       );
 
+      var user = await User.findByIdAndUpdate(req.user._id,{
+        $push:  {
+          events: {
+            type: "idea pulled",
+            detail: idea,
+            time: new Date()
+          }
+        }
+      });
+
       res.status(200).json({
         success: true,
         idea,

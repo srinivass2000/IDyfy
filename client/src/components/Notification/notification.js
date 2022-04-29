@@ -1,10 +1,64 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import error_logo from "../../assets/svg/error.svg";
 import attention_logo from "../../assets/svg/Attention.svg";
 import success_logo from "../../assets/svg/Success.svg";
 import info_logo from "../../assets/svg/Information.svg";
-
+import axios from "axios";
+import authHeader from "../../services/auth-header";
 const Notification = () => {
+  const [ideas, setIdeas] = useState();
+  const [events, setEvents] = useState();
+  const [users_liked, setUsers_liked] = useState();
+
+  const getideas = async () => {
+    try {
+      // console.log(skip);
+      await axios
+        .get("/api/idea/get-notification", {
+          headers: authHeader(),
+        })
+        .then(
+          (res) => {
+            setIdeas(res.data.ideas);
+            setUsers_liked(res.data.liked_users);
+            setEvents(res.data.events[0].events);
+            console.log(res.data.events[0].events);
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const icons = {
+    "idea created": success_logo,
+    "idea updated": success_logo,
+    "feature created": success_logo,
+    "feature updated": success_logo,
+    "feature deleted": error_logo,
+    "idea pulled": info_logo,
+    "user updated": info_logo,
+  };
+
+  const title = {
+    "idea created": "You created idea : ",
+    "idea updated": "You updated idea : ",
+    "feature created": "You created feature : ",
+    "feature updated": "You updated feature : ",
+    "feature deleted": "You deleted feature : ",
+    "idea pulled": "You pulled idea : ",
+    "user updated": "You updated profile",
+  };
+ 
+  useEffect(() => {
+    getideas();
+//    getstarredideas();
+    //updateideas();
+  }, []);
+
   return (
     <div className="container">
       <div className="row my-3">
@@ -30,116 +84,60 @@ const Notification = () => {
         </div>
       </div>
       <div className="row">
-        <h1 style={{color:"white"}}>No Notifications Available Right Now :)</h1>
         <div className="container  my-4">
-          <div className="row my-5">
-            <div className="col col-6">
-              
-              <div className="row">
-              <div className="col col-3"></div>
-              <div className="col col-8">
-                <div className="px-4" style={{background:"#D6BEFF"}}>
-                  <div className="row">
-                    <div className="my-2 text-left col-10">
-                      <h1 style={{ "fontSize":"1.2rem" ,fontWeight:"bolder"}}>Deleted</h1>
-                      <p>lorem...</p>
-                      <div className="mt-4"><button className="btn btn-sm" style={{border:"1px solid black"}}>Close</button></div>
-                    </div>
-                    <div className="col-2">
-                      <img src= {error_logo} className="float-left" alt="error" style={{ height: "100px"}}/>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col col-1"></div>
-              </div>
-
-            </div>
-            <div className="col col-6">
-              
-              <div className="row">
-              <div className="col col-1"></div>
-              <div className="col col-8">
-                <div className="px-4" style={{background:"#D6BEFF"}}>
-                  <div className="row">
-                    <div className="my-2 text-left col-10">
-                      <h1 style={{ "fontSize":"1.2rem" ,fontWeight:"bolder"}}>Feature Added</h1>
-                      <p>lorem...</p>
-                      <div className="mt-4"><button className="btn btn-sm" style={{border:"1px solid black"}}>Close</button></div>
-                    </div>
-                    <div className="col-2">
-                      <img src= {attention_logo} className="float-left" alt="error" style={{ height: "100px" }}/>
+          {events ? (
+            events.map((event, index) => (
+              <div className="row my-5">
+                <div className="col col-2"></div>
+                <div className="col col-8">
+                  <div className="px-4" style={{ background: "#D6BEFF" }}>
+                    <div className="row">
+                      <div className="my-2 text-left col-10">
+                        <h1
+                          style={{ fontSize: "1.2rem", fontWeight: "bolder" }}
+                        >
+                          {title[event.type]} {(event.detail.title)}
+                        </h1>
+                        {/* <p>lorem...</p> */}
+                        <div className="mt-4">
+                          <button
+                            className="btn btn-sm"
+                            style={{ border: "1px solid black" }}
+                          >
+                            Close
+                          </button>
+                        </div>
+                      </div>
+                      <div className="col-2 mt-4">
+                        <img
+                          src={icons[event.type]}
+                          className="float-left"
+                          alt="error"
+                          style={{ height: "90px" }}
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
+                <div className="col col-2"></div>
               </div>
-              <div className="col col-3"></div>
-              {/* <div className="col col-2"></div> */}
+            ))
+          ) : (
+            <>
+              <div
+                className="spinner-border place-content-center"
+                role="status"
+              >
+                <span class="visually-hidden">
+                  <h1 style={{ color: "white" }}>
+                    No Notifications Available Right Now :)
+                  </h1>
+                </span>
               </div>
-
-            </div>
-          </div>
-
-          <div className="row my-5">
-            <div className="col col-6">
-              
-              <div className="row">
-              <div className="col col-3"></div>
-              <div className="col col-8">
-                <div className="px-4" style={{background:"#D6BEFF"}}>
-                  <div className="row">
-                    <div className="my-2 text-left col-10">
-                      <h1 style={{ "fontSize":"1.2rem" ,fontWeight:"bolder"}}>Idea Pulled</h1>
-                      <p>lorem...</p>
-                      <div className="mt-4"><button className="btn btn-sm" style={{border:"1px solid black"}}>Close</button></div>
-                    </div>
-                    <div className="col-2">
-                      <img src= {success_logo} className="float-left" alt="error" style={{ height: "100px" }}/>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col col-1"></div>
-              </div>
-
-            </div>
-            <div className="col col-6">
-              
-              <div className="row">
-              <div className="col col-1"></div>
-              <div className="col col-8">
-                <div className="px-4" style={{background:"#D6BEFF"}}>
-                  <div className="row">
-                    <div className="my-2 text-left col-10">
-                      <h1 style={{ "fontSize":"1.2rem" ,fontWeight:"bolder"}}>Idea Created</h1>
-                      <p>lorem...</p>
-                      <div className="mt-4"><button className="btn btn-sm" style={{border:"1px solid black"}}>Close</button></div>
-                    </div>
-                    <div className="col-2">
-                      <img src= {info_logo} className="float-left" alt="error" style={{ "height": "100px" }}/>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col col-3"></div>
-              {/* <div className="col col-2"></div> */}
-              </div>
-            </div>
-          </div>
-          {/* <div className="row mx-2">
-            <div className="col col-4">
-              <div className="mx-5" style={{background:"#D6BEFF"}}>
-              
-                  <center><img src= {info_logo} alt="error" style={{"height":"130px","padding-top":"2.6rem"}} /></center>
-                
-                <div>
-                    <h1 style={{"fontWeight":"bolder","fontSize":"1.2rem"}}>lorem</h1>
-                  <p className="my-3">Line 1942:15:  The href attribute is required for an anchor to be keyboard accessible. Provide a valid, </p>                      <hr style={{"color":"white",height:"10px"}}/> 
-                  <button className="btn my-2" style={{"background":"#840FCC","color":"white","width":"80%"}}>Open</button>                                  </div>
-                </div>
-              </div>  
-            </div> */}
-          </div>
+            </>
+          )}
+          
+        </div>
       </div>
     </div>
   );

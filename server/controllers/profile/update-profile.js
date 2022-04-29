@@ -43,6 +43,16 @@ exports.update_profile = async (req, res, next) => {
       });
     }
 
+    var user = await User.findByIdAndUpdate(req.user._id,{
+      $push:  {
+        events: {
+          type: "user updated",
+          detail: user,
+          time: new Date()
+        }
+      }
+    });
+
     res.status(200).json({
       success: true,
       user,

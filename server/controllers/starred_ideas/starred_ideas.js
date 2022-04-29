@@ -4,7 +4,7 @@ const Comment = require("../../models/Comment");
 
 exports.get_starred_ideas = async (req, res, next) => {
   try {
-    console.log(req.user._id);
+    //console.log(req.user._id);
     var id = req.user._id;
     id = id.toString();
     const result = await Idea.find(
@@ -25,7 +25,7 @@ exports.get_starred_ideas = async (req, res, next) => {
 
     var final = [];
     for await (var idea of result) {
-      console.log(idea);
+      //console.log(idea);
       var comment_count = await Comment.find({
         idea_id: idea._id.toString(),
         feature_id: null,

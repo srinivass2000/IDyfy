@@ -84,6 +84,16 @@ exports.update_idea = async (req, res, next) => {
         engagement_score,
       });
 
+      var user = await User.findByIdAndUpdate(req.user._id,{
+        $push:  {
+          events: {
+            type: "idea updated",
+            detail: idea,
+            time: new Date()
+          }
+        }
+      });
+
       res.status(200).json({
         success: true,
         idea,

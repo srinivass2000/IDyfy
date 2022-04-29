@@ -62,6 +62,16 @@ exports.delete_feature = async (req, res, next) => {
         user_scores,
       });
 
+      var user = await User.findByIdAndUpdate(req.user._id,{
+        $push:  {
+          events: {
+            type: "feature deleted",
+            detail: deleted_feature,
+            time: new Date()
+          }
+        }
+      });
+
       res.status(200).json({
         success: true,
         deleted_feature: deleted_feature,
