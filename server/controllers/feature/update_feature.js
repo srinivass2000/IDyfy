@@ -141,6 +141,16 @@ exports.update_feature = async (req, res, next) => {
         user_scores,
       });
 
+      var user = await User.findByIdAndUpdate(req.user._id,{
+        $push:  {
+          events: {
+            type: "feature updated",
+            detail: response,
+            time: new Date()
+          }
+        }
+      });
+
       res.status(200).json({
         success: true,
         new_feature: response,

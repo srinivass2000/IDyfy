@@ -3,6 +3,7 @@ const User = require("../../models/User");
 const ErrorResponse = require("../../utils/errorResponse");
 const { FeatureSchema } = require("../../models/Feature");
 const mongoose = require("mongoose");
+const { events } = require("../../models/Idea");
 
 // function createModelForName(name) {
 //     console.log(name);
@@ -42,6 +43,7 @@ exports.create_idea = async (req, res, next) => {
     ideas_contributed = req.user.ideas_contributed;
     idea_id = idea._id.toString();
     ideas_contributed.push(idea_id);
+    
 
     if (req.user.engagement_score == null) {
       var engagement_score = 1;
@@ -52,6 +54,16 @@ exports.create_idea = async (req, res, next) => {
     var user = await User.findByIdAndUpdate(a, {
       ideas_contributed,
       engagement_score,
+    });
+
+    var user = await User.findByIdAndUpdate(a,{
+      $push:  {
+        events: {
+          type: "idea created",
+          detail: idea,
+          time: new Date()
+        }
+      }
     });
 
     // var table_name = createModelForName(`features_${idea._id}`);

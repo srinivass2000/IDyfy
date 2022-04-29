@@ -17,6 +17,7 @@ exports.get_idea = async (req, res, next) => {
       return next(new ErrorResponse("Idea not found", 404));
     }
 
+
     //give names for contributors
 
     var contributed_users = await User.find(

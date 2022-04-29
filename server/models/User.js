@@ -40,6 +40,7 @@ const UserSchema = new mongoose.Schema(
     university: String,
     about: String,
     suspended: Boolean,
+    events: Array,
   },
   { timestamps: true }
 );

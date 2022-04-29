@@ -45,6 +45,16 @@ exports.create_feature = async (req, res, next) => {
       user_scores,
     });
 
+    var user = await User.findByIdAndUpdate(req.user._id,{
+      $push:  {
+        events: {
+          type: "feature created",
+          detail: feature,
+          time: new Date()
+        }
+      }
+    });
+
     res.status(200).json({
       success: true,
       feature,
