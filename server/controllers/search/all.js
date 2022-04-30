@@ -6,6 +6,7 @@ const ErrorResponse = require("../../utils/errorResponse");
 exports.search_all = async (req, res, next) => {
   try {
     var query = req.query.query;
+    console.log(query);
     if (query) {
       var search_by_title = await Idea.find({
         $text: { $search: `${query}` },

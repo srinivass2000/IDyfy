@@ -7,7 +7,6 @@ import list from "../../assets/icon/list.png";
 import my_idea from "../../assets/icons/my_idea.svg";
 import starred from "../../assets/icons/starred.svg";
 import notifications from "../../assets/icons/notifications.svg";
-import profile from "../../assets/images/dummy_profile.png";
 import "../Navbar/navbar.css";
 import { Link, useLocation } from "react-router-dom";
 import AuthService from "../../services/authservices";

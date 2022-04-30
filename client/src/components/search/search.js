@@ -13,22 +13,22 @@ const Search = () => {
   const [resultName, setResultName] = useState();
   const [showvalue, setShowValue] = useState(1);
 
-  const [skip, setskip] = useState(3);
-  const [skip1, setskip1] = useState(3);
-  const [skip2, setskip2] = useState(3);
+  // const [skip, setskip] = useState(3);
+  // const [skip1, setskip1] = useState(3);
+  // const [skip2, setskip2] = useState(3);
 
   const getsearch = async () => {
     try {
       // console.log(skip);
       await axios
-        .get("/api/search/all/" + key, {
+        .get(`/api/search/all?query=${key}`, {
           headers: authHeader(),
         })
         .then(
           (res) => {
-            setResultTag();
-            setResultName();
-            setResultPeople();
+            setResultTag(res.data.search_by_tags);
+            setResultName(res.data.search_by_title);
+            setResultPeople(res.data.search_user);
             console.log(res);
           },
           (err) => {
@@ -44,16 +44,16 @@ const Search = () => {
       // console.log(skip);
       await axios
         .get(
-          "/api/search/people/" + key,
+          `/api/search/people?query=${key}`,
           {
             headers: authHeader(),
-          },
-          { skip: skip }
+          }
+          // { skip: skip }
         )
         .then(
           (res) => {
             setResultPeople();
-            setskip(skip + 5);
+            // setskip(skip + 5);
             console.log(res);
           },
           (err) => {
@@ -69,16 +69,16 @@ const Search = () => {
       // console.log(skip);
       await axios
         .get(
-          "/api/search/tags/" + key,
+          `/api/search/tags?query=${key}`,
           {
             headers: authHeader(),
-          },
-          { skip: skip1 }
+          }
+          // { skip: skip1 }
         )
         .then(
           (res) => {
             setResultTag();
-            setskip1(skip1 + 5);
+            // setskip1(skip1 + 5);
             console.log(res);
           },
           (err) => {
@@ -97,13 +97,13 @@ const Search = () => {
           "/api/search/title/" + key,
           {
             headers: authHeader(),
-          },
-          { skip: skip2 }
+          }
+          // { skip: skip2 }
         )
         .then(
           (res) => {
             setResultName();
-            setskip2(skip2 + 5);
+            // setskip2(skip2 + 5);
             console.log(res);
           },
           (err) => {
@@ -198,8 +198,22 @@ const Search = () => {
             >
               IDEA TITLE
             </span>
+            {console.log("Here")}
+            {resultName ? (
+              resultName.map((idea, index) => (
+                <div key={index} className="row ">
+                  <FeedTile details={idea} className="animate-pulse" />
+                </div>
+              ))
+            ) : (
+              <div>
+                <div class="spinner-border text-light" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </div>
+            )}
             {/* <FeedTile /> */}
-            <button onClick={getideas}>load more</button>
+            {/* <button onClick={getideas}>load more</button> */}
           </div>
         )}
         {showvalue === 2 && (
@@ -212,8 +226,22 @@ const Search = () => {
             >
               IDEA TAG
             </span>
+            {console.log("Here")}
+            {resultTag ? (
+              resultTag.map((idea, index) => (
+                <div key={index} className="row ">
+                  <FeedTile details={idea} className="animate-pulse" />
+                </div>
+              ))
+            ) : (
+              <div>
+                <div class="spinner-border text-light" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </div>
+            )}
             {/* <FeedTile /> */}
-            <button onClick={gettags}>load more</button>
+            {/* <button onClick={gettags}>load more</button> */}
           </div>
         )}
         {showvalue === 3 && (
@@ -226,21 +254,27 @@ const Search = () => {
             >
               PEOPLE
             </span>
-            {/*  */}
-            <div className="row ">
-              <div className="idea col-lg-3 col-md-4 col-5 mr-1 ml-1 text-white ">
-                <img
-                  className="ml-3 mt-1 icon "
-                  src={profile}
-                  alt="My Profile"
-                />
-                <p className="text-left p-1">Name</p>
-                <p className="text-left p-1">
-                  Bio : Some thing is better than nothing
-                </p>
+            {resultPeople ? (
+              resultPeople.map((user, index) => (
+                <div className="row ">
+                  <div className="idea col-lg-3 col-md-4 col-5 mr-1 ml-1 text-white ">
+                    <img
+                      className="ml-3 mt-1 icon profile"
+                      src={user.profile_pic}
+                      alt="My Profile"
+                    />
+                    <p className="text-left p-1">{user.name}</p>
+                    <p className="text-left p-1">{user.about}</p>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div>
+                <div class="spinner-border text-light" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
               </div>
-            </div>
-            {/*  */}
+            )}
             <button onClick={getsearch}>load more</button>
           </div>
         )}
