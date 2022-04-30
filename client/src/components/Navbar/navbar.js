@@ -31,6 +31,9 @@ const Navbar = () => {
   const handleChange = (e) => {
     setSearchdata({ ...searchdata, [e.target.name]: e.target.value });
   };
+  const onSubmit = () => {
+    history.push(`/search?search=${searchdata.search}`);
+  };
   useEffect(() => {
     axios
       .get("/api/profile", {
@@ -139,7 +142,7 @@ const Navbar = () => {
                   </Link>
                 </li>
               </ul>
-              <form className="d-flex justify-center">
+              <form className="d-flex justify-center" onSubmit={onSubmit}>
                 <input
                   type="search"
                   className="h-10 mr-2 p-1 rounded-xl z-0 focus:shadow focus:outline-none border"
@@ -147,7 +150,10 @@ const Navbar = () => {
                   name="search"
                   onChange={handleChange}
                 />
-                <Link to={url + searchdata.search} className="pt-2">
+                <Link
+                  to={`/search?search=${searchdata.search}`}
+                  className="pt-2"
+                >
                   <img src={search} alt="Search" style={{ height: "20px" }} />
                 </Link>
               </form>
@@ -222,7 +228,7 @@ const Navbar = () => {
                 className="collapse navbar-collapse items-center"
                 id="navbarSupportedContent"
               >
-                <form className="items-center">
+                {/* <form className="items-center">
                   <input
                     type="search"
                     className="h-10 mr-2 p-1 rounded-xl z-0 focus:shadow focus:outline-none border"
@@ -236,7 +242,7 @@ const Navbar = () => {
                   >
                     <img src={search} alt="Search" style={{ height: "20px" }} />
                   </Link>
-                </form>
+                </form> */}
                 <div className="md:flex pl-8">
                   <button className="text-white mr-4">
                     <Login />

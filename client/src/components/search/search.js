@@ -1,13 +1,16 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useState } from "react";
-import profile from "../../assets/images/dummy_profile.png";
+// import profile from "../../assets/images/dummy_profile.png";
 import axios from "axios";
 import authHeader from "../../services/auth-header";
 import { useEffect } from "react";
 import FeedTile from "../Feed_Tile/feed";
 const Search = () => {
-  const { key } = useParams();
+  // const { key } = useParams();
+  const search = useLocation().search;
+  const key = new URLSearchParams(search).get("search");
   const [resultTag, setResultTag] = useState();
   const [resultPeople, setResultPeople] = useState();
   const [resultName, setResultName] = useState();
@@ -275,7 +278,7 @@ const Search = () => {
                 </div>
               </div>
             )}
-            <button onClick={getsearch}>load more</button>
+            {/* <button onClick={getsearch}>load more</button> */}
           </div>
         )}
       </div>
