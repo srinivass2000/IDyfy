@@ -124,14 +124,15 @@ const Search = () => {
   }, []);
 
   const active = {
-    backgroundColor: "red",
-    border: "1px solid #840FCC",
+    backgroundColor: "#B287FF",
+
+    fontSize: "1.3rem",
     width: "100%",
   };
   const notActive = {
-    backgroundColor: "#0a0135",
-    border: "1px solid #840FCC",
-    width: "80%",
+    backgroundColor: "#0A0135",
+    fontSize: "1.3rem",
+    width: "100%",
   };
   const handleChange = (event) => {
     if (event.target.value === "1") {
@@ -149,6 +150,50 @@ const Search = () => {
   };
   return (
     <div className="container">
+      <div>
+        <div className="bg-white" style={{ height: "20px" }}></div>
+      </div>
+
+      <div className="mx-5 offset-lg-2 text-white d-none d-lg-block">
+        <ul className="nav nav-pills nav-fill">
+          <li className="nav-item">
+            <button
+              className="nav-link text-white"
+              onClick={() => setShowValue(1)}
+              style={showvalue === 1 ? active : notActive}
+            >
+              TITLE
+            </button>
+          </li>
+          <li className="nav-item">
+            <button
+              className="nav-link text-white"
+              onClick={() => setShowValue(2)}
+              style={showvalue === 2 ? active : notActive}
+            >
+              TAGS
+            </button>
+          </li>
+          <li className="nav-item">
+            <button
+              className="nav-link text-white"
+              onClick={() => setShowValue(3)}
+              style={showvalue === 3 ? active : notActive}
+            >
+              PEOPLE
+            </button>
+          </li>
+          <li className="nav-item">
+            <button
+              className="nav-link text-white"
+              onClick={() => setShowValue(4)}
+              style={showvalue === 4 ? active : notActive}
+            >
+              SIMILAR IDEAS
+            </button>
+          </li>
+        </ul>
+      </div>
       <div className="row mt-10">
         <div className="col-12 flex justify-center d-lg-none mb-10">
           <select
@@ -163,165 +208,126 @@ const Search = () => {
             <option value="4"> Similar Ideas</option>
           </select>
         </div>
-        <div
-          className="offset-lg-2 col-lg-2 text-white d-none d-lg-block "
-          style={{
-            border: "5px solid #840FCC",
-            borderRadius: "15px",
-            width: "200px",
-            height: "143px",
-          }}
-        >
-          <center>
-            <button
-              className="row mt-2 text-white"
-              onClick={() => setShowValue(1)}
-              style={showvalue === 1 ? active : notActive}
-            >
-              Idea Title
-            </button>
-            <button
-              className="row mt-1 text-white"
-              onClick={() => setShowValue(2)}
-              style={showvalue === 2 ? active : notActive}
-            >
-              Idea Tag
-            </button>
-            <button
-              className="row mt-1 text-white"
-              onClick={() => setShowValue(3)}
-              style={showvalue === 3 ? active : notActive}
-            >
-              People
-            </button>
-            <button
-              className="row mt-1 mb-2 text-white"
-              onClick={() => setShowValue(4)}
-              style={showvalue === 4 ? active : notActive}
-            >
-              Similar Ideas
-            </button>
-          </center>
-        </div>
-
-        {showvalue === 1 && (
-          <div className="offset-lg-1 col-lg-6">
-            <span
-              className="p-2 text-white d-lg-none"
-              style={{
-                backgroundColor: "red",
-              }}
-            >
-              IDEA TITLE
-            </span>
-            {console.log("Here")}
-            {resultName ? (
-              resultName.map((idea, index) => (
-                <div key={index} className="row ">
-                  <FeedTile details={idea} className="animate-pulse" />
-                </div>
-              ))
-            ) : (
-              <div>
-                <div class="spinner-border text-light" role="status">
-                  <span class="sr-only">Loading...</span>
-                </div>
-              </div>
-            )}
-            {/* <FeedTile /> */}
-            {/* <button onClick={getideas}>load more</button> */}
-          </div>
-        )}
-        {showvalue === 2 && (
-          <div className="offset-lg-1 col-lg-6">
-            <span
-              className="p-2 text-white d-lg-none"
-              style={{
-                backgroundColor: "red",
-              }}
-            >
-              IDEA TAG
-            </span>
-            {console.log("Here")}
-            {resultTag ? (
-              resultTag.map((idea, index) => (
-                <div key={index} className="row ">
-                  <FeedTile details={idea} className="animate-pulse" />
-                </div>
-              ))
-            ) : (
-              <div>
-                <div class="spinner-border text-light" role="status">
-                  <span class="sr-only">Loading...</span>
-                </div>
-              </div>
-            )}
-            {/* <FeedTile /> */}
-            {/* <button onClick={gettags}>load more</button> */}
-          </div>
-        )}
-        {showvalue === 3 && (
-          <div className="offset-lg-1 col-lg-6">
-            <span
-              className="p-2 text-white d-lg-none"
-              style={{
-                backgroundColor: "red",
-              }}
-            >
-              PEOPLE
-            </span>
-            {resultPeople ? (
-              resultPeople.map((user, index) => (
-                <div className="row ">
-                  <div className="idea col-lg-3 col-md-4 col-5 mr-1 ml-1 text-white ">
-                    <img
-                      className="ml-3 mt-1 icon profile"
-                      src={user.profile_pic}
-                      alt="My Profile"
-                    />
-                    <p className="text-left p-1">{user.name}</p>
-                    <p className="text-left p-1">{user.about}</p>
+        <center>
+          {showvalue === 1 && (
+            <div className="offset-lg-1 col-lg-8">
+              <span
+                className="p-2 text-white d-lg-none"
+                style={{
+                  backgroundColor: "red",
+                }}
+              >
+                IDEA TITLE
+              </span>
+              {console.log("Here")}
+              {resultName ? (
+                resultName.map((idea, index) => (
+                  <div key={index} className="row ">
+                    <FeedTile details={idea} className="animate-pulse" />
+                  </div>
+                ))
+              ) : (
+                <div>
+                  <div class="text-light" role="status">
+                    <span class="sr-only">Loading...</span>
                   </div>
                 </div>
-              ))
-            ) : (
-              <div>
-                <div class="spinner-border text-light" role="status">
-                  <span class="sr-only">Loading...</span>
+              )}
+              {/* <FeedTile /> */}
+              {/* <button onClick={getideas}>load more</button> */}
+            </div>
+          )}
+          {showvalue === 2 && (
+            <div className="offset-lg-1 col-lg-12">
+              <span
+                className="p-2 text-white d-lg-none"
+                style={{
+                  backgroundColor: "red",
+                }}
+              >
+                IDEA TAG
+              </span>
+              {console.log("Here")}
+              {resultTag ? (
+                resultTag.map((idea, index) => (
+                  <div key={index} className="row ">
+                    <FeedTile details={idea} className="animate-pulse" />
+                  </div>
+                ))
+              ) : (
+                <div>
+                  <div class=" text-light" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
                 </div>
-              </div>
-            )}
-            {/* <button onClick={getsearch}>load more</button> */}
-          </div>
-        )}
-        {showvalue === 4 && (
-          <div className="offset-lg-1 col-lg-6">
-            <span
-              className="p-2 text-white d-lg-none"
-              style={{
-                backgroundColor: "red",
-              }}
-            >
-              SIMILAR IDEAS
-            </span>
-            {console.log("Here")}
-            {similarIdeas ? (
-              similarIdeas.map((idea, index) => (
-                <div key={index} className="row ">
-                  <FeedTile details={idea} className="animate-pulse" />
+              )}
+              {/* <FeedTile /> */}
+              {/* <button onClick={gettags}>load more</button> */}
+            </div>
+          )}
+          {showvalue === 3 && (
+            <div className="offset-lg-1 col-lg-6">
+              <span
+                className="p-2 text-white d-lg-none"
+                style={{
+                  backgroundColor: "red",
+                }}
+              >
+                PEOPLE
+              </span>
+              {resultPeople ? (
+                resultPeople.map((user, index) => (
+                  <div className="row ">
+                    <div className="idea col-lg-3 col-md-4 col-5 mr-1 ml-1 text-white ">
+                      <img
+                        className="ml-3 mt-1 icon profile"
+                        src={user.profile_pic}
+                        alt="My Profile"
+                      />
+                      <p className="text-left p-1">{user.name}</p>
+                      <p className="text-left p-1">{user.about}</p>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div>
+                  <div class="text-light" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
                 </div>
-              ))
-            ) : (
-              <div>
-                <div class="spinner-border text-light" role="status">
-                  <span class="sr-only">Loading...</span>
+              )}
+              {/* <button onClick={getsearch}>load more</button> */}
+            </div>
+          )}
+          {showvalue === 4 && (
+            <div className="offset-lg-1 col-lg-6">
+              <span
+                className="p-2 text-white d-lg-none"
+                style={{
+                  backgroundColor: "red",
+                }}
+              >
+                SIMILAR IDEAS
+              </span>
+              {console.log("Here")}
+              {similarIdeas ? (
+                similarIdeas.map((idea, index) => (
+                  <div key={index} className="row ">
+                    <FeedTile details={idea} className="animate-pulse" />
+                  </div>
+                ))
+              ) : (
+                <div>
+                  <div class="spinner-border text-light" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
                 </div>
-              </div>
-            )}
-            {/* <FeedTile /> */}
-            {/* <button onClick={gettags}>load more</button> */}
-          </div>
-        )}
+              )}
+              {/* <FeedTile /> */}
+              {/* <button onClick={gettags}>load more</button> */}
+            </div>
+          )}
+        </center>
       </div>
     </div>
   );
