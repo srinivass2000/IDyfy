@@ -18,6 +18,7 @@ const Search = () => {
   const [resultTag, setResultTag] = useState();
   const [resultPeople, setResultPeople] = useState();
   const [resultName, setResultName] = useState();
+  const [similarIdeas, setResultSimilarIdeas] = useState();
   const [showvalue, setShowValue] = useState(1);
 
   // const [skip, setskip] = useState(3);
@@ -36,6 +37,7 @@ const Search = () => {
             setResultTag(res.data.search_by_tags);
             setResultName(res.data.search_by_title);
             setResultPeople(res.data.search_user);
+            setResultSimilarIdeas(res.data.similar_ideas);
             console.log(res);
           },
           (err) => {
@@ -146,6 +148,9 @@ const Search = () => {
     if (event.target.value === "3") {
       setShowValue(3);
     }
+    if (event.target.value === "4") {
+      setShowValue(4);
+    }
   };
   return (
     <div className="">
@@ -192,6 +197,7 @@ const Search = () => {
             <option value="1"> Idea Title</option>
             <option value="2">Idea Tag</option>
             <option value="3"> People</option>
+            <option value="4"> Similar Ideas</option>
           </select>
         </div>
 

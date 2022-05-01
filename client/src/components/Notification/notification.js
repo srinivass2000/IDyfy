@@ -52,10 +52,10 @@ const Notification = () => {
     "idea pulled": "You pulled idea : ",
     "user updated": "You updated profile",
   };
- 
+
   useEffect(() => {
     getideas();
-//    getstarredideas();
+    //    getstarredideas();
     //updateideas();
   }, []);
 
@@ -87,7 +87,6 @@ const Notification = () => {
         <div className="container  my-4">
           {events ? (
             events.map((event, index) => (
-              
               <div className="row my-5">
                 <div className="col col-2"></div>
                 <div className="col col-8">
@@ -98,7 +97,7 @@ const Notification = () => {
                           style={{ fontSize: "1.2rem", fontWeight: "bolder" }}
                         >
                           {/* {console.log(event)} */}
-                          {title[event.type]} {(event.detail.title)}
+                          {title[event.type]} {event.detail.title}
                         </h1>
                         {/* <p>lorem...</p> */}
                         <div className="mt-4">
@@ -127,7 +126,7 @@ const Notification = () => {
           ) : (
             <>
               <div
-                className="spinner-border place-content-center"
+                className="spinner-border text-white place-content-center"
                 role="status"
               >
                 <span class="visually-hidden">
@@ -138,7 +137,6 @@ const Notification = () => {
               </div>
             </>
           )}
-          
         </div>
       </div>
     </div>
