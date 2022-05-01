@@ -6,9 +6,9 @@ import info_logo from "../../assets/svg/Information.svg";
 import axios from "axios";
 import authHeader from "../../services/auth-header";
 const Notification = () => {
-  const [ideas, setIdeas] = useState();
+  //const [ideas, setIdeas] = useState();
   const [events, setEvents] = useState();
-  const [users_liked, setUsers_liked] = useState();
+  //const [users_liked, setUsers_liked] = useState();
 
   const getideas = async () => {
     try {
@@ -19,8 +19,8 @@ const Notification = () => {
         })
         .then(
           (res) => {
-            setIdeas(res.data.ideas);
-            setUsers_liked(res.data.liked_users);
+            //setIdeas(res.data.ideas);
+            //setUsers_liked(res.data.liked_users);
             setEvents(res.data.events[0].events);
             console.log(res.data.events[0].events);
           },
@@ -87,6 +87,7 @@ const Notification = () => {
         <div className="container  my-4">
           {events ? (
             events.map((event, index) => (
+              
               <div className="row my-5">
                 <div className="col col-2"></div>
                 <div className="col col-8">
@@ -96,6 +97,7 @@ const Notification = () => {
                         <h1
                           style={{ fontSize: "1.2rem", fontWeight: "bolder" }}
                         >
+                          {/* {console.log(event)} */}
                           {title[event.type]} {(event.detail.title)}
                         </h1>
                         {/* <p>lorem...</p> */}

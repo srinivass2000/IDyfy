@@ -122,14 +122,15 @@ const Search = () => {
   }, []);
 
   const active = {
-    backgroundColor: "red",
-    border: "1px solid #840FCC",
+    backgroundColor: "#B287FF",
+    
+    fontSize: "1.3rem",
     width: "100%",
   };
   const notActive = {
-    backgroundColor: "#0a0135",
-    border: "1px solid #840FCC",
-    width: "80%",
+    backgroundColor: "#0A0135",
+    fontSize: "1.3rem",
+    width: "100%",
   };
   const handleChange = (event) => {
     if (event.target.value === "1") {
@@ -144,8 +145,36 @@ const Search = () => {
   };
   return (
     <div className="container">
+      
+      <div>
+        <div className="bg-white" style={{height:"20px"}}>
+          
+        </div>
+      </div>
+      
+      <div className="mx-5 offset-lg-2 text-white d-none d-lg-block">
+        <ul className="nav nav-pills nav-fill">
+          <li className="nav-item" >
+            <button className="nav-link text-white" 
+              onClick={() => setShowValue(1)}
+              style={showvalue === 1 ? active : notActive} >TITLE</button>
+          </li>
+          <li className="nav-item">
+            <button className="nav-link text-white" 
+              onClick={() => setShowValue(2)}
+              style={showvalue === 2 ? active : notActive}>TAGS</button>
+          </li>
+          <li className="nav-item">
+            <button className="nav-link text-white" 
+              onClick={() => setShowValue(3)}
+              style={showvalue === 3 ? active : notActive}>PEOPLE</button>
+          </li>
+        </ul>
+      </div>
       <div className="row mt-10">
+        
         <div className="col-12 flex justify-center d-lg-none mb-10">
+          
           <select
             class="form-select form-select-sm mx-2 "
             aria-label=".form-select-sm example"
@@ -157,42 +186,9 @@ const Search = () => {
             <option value="3"> People</option>
           </select>
         </div>
-        <div
-          className="offset-lg-2 col-lg-2 text-white d-none d-lg-block "
-          style={{
-            border: "5px solid #840FCC",
-            borderRadius: "15px",
-            width: "200px",
-            height: "125px",
-          }}
-        >
-          <center>
-            <button
-              className="row mt-2 text-white"
-              onClick={() => setShowValue(1)}
-              style={showvalue === 1 ? active : notActive}
-            >
-              Idea Title
-            </button>
-            <button
-              className="row mt-1 text-white"
-              onClick={() => setShowValue(2)}
-              style={showvalue === 2 ? active : notActive}
-            >
-              Idea Tag
-            </button>
-            <button
-              className="row mt-1 mb-2 text-white"
-              onClick={() => setShowValue(3)}
-              style={showvalue === 3 ? active : notActive}
-            >
-              People
-            </button>
-          </center>
-        </div>
-
+        <center>
         {showvalue === 1 && (
-          <div className="offset-lg-1 col-lg-6">
+          <div className="offset-lg-1 col-lg-8">
             <span
               className="p-2 text-white d-lg-none"
               style={{
@@ -210,7 +206,7 @@ const Search = () => {
               ))
             ) : (
               <div>
-                <div class="spinner-border text-light" role="status">
+                <div class="text-light" role="status">
                   <span class="sr-only">Loading...</span>
                 </div>
               </div>
@@ -220,7 +216,7 @@ const Search = () => {
           </div>
         )}
         {showvalue === 2 && (
-          <div className="offset-lg-1 col-lg-6">
+          <div className="offset-lg-1 col-lg-12">
             <span
               className="p-2 text-white d-lg-none"
               style={{
@@ -238,7 +234,7 @@ const Search = () => {
               ))
             ) : (
               <div>
-                <div class="spinner-border text-light" role="status">
+                <div class=" text-light" role="status">
                   <span class="sr-only">Loading...</span>
                 </div>
               </div>
@@ -273,7 +269,7 @@ const Search = () => {
               ))
             ) : (
               <div>
-                <div class="spinner-border text-light" role="status">
+                <div class="text-light" role="status">
                   <span class="sr-only">Loading...</span>
                 </div>
               </div>
@@ -281,6 +277,7 @@ const Search = () => {
             {/* <button onClick={getsearch}>load more</button> */}
           </div>
         )}
+        </center>
       </div>
     </div>
   );
