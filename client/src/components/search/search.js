@@ -14,6 +14,7 @@ const Search = () => {
   const [resultTag, setResultTag] = useState();
   const [resultPeople, setResultPeople] = useState();
   const [resultName, setResultName] = useState();
+  const [similarIdeas, setResultSimilarIdeas] = useState();
   const [showvalue, setShowValue] = useState(1);
 
   // const [skip, setskip] = useState(3);
@@ -32,6 +33,7 @@ const Search = () => {
             setResultTag(res.data.search_by_tags);
             setResultName(res.data.search_by_title);
             setResultPeople(res.data.search_user);
+            setResultSimilarIdeas(res.data.similar_ideas);
             console.log(res);
           },
           (err) => {
@@ -141,6 +143,9 @@ const Search = () => {
     if (event.target.value === "3") {
       setShowValue(3);
     }
+    if (event.target.value === "4") {
+      setShowValue(4);
+    }
   };
   return (
     <div className="container">
@@ -155,6 +160,7 @@ const Search = () => {
             <option value="1"> Idea Title</option>
             <option value="2">Idea Tag</option>
             <option value="3"> People</option>
+            <option value="4"> Similar Ideas</option>
           </select>
         </div>
         <div
@@ -163,7 +169,7 @@ const Search = () => {
             border: "5px solid #840FCC",
             borderRadius: "15px",
             width: "200px",
-            height: "125px",
+            height: "143px",
           }}
         >
           <center>
@@ -182,11 +188,18 @@ const Search = () => {
               Idea Tag
             </button>
             <button
-              className="row mt-1 mb-2 text-white"
+              className="row mt-1 text-white"
               onClick={() => setShowValue(3)}
               style={showvalue === 3 ? active : notActive}
             >
               People
+            </button>
+            <button
+              className="row mt-1 mb-2 text-white"
+              onClick={() => setShowValue(4)}
+              style={showvalue === 4 ? active : notActive}
+            >
+              Similar Ideas
             </button>
           </center>
         </div>
@@ -279,6 +292,34 @@ const Search = () => {
               </div>
             )}
             {/* <button onClick={getsearch}>load more</button> */}
+          </div>
+        )}
+        {showvalue === 4 && (
+          <div className="offset-lg-1 col-lg-6">
+            <span
+              className="p-2 text-white d-lg-none"
+              style={{
+                backgroundColor: "red",
+              }}
+            >
+              SIMILAR IDEAS
+            </span>
+            {console.log("Here")}
+            {similarIdeas ? (
+              similarIdeas.map((idea, index) => (
+                <div key={index} className="row ">
+                  <FeedTile details={idea} className="animate-pulse" />
+                </div>
+              ))
+            ) : (
+              <div>
+                <div class="spinner-border text-light" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </div>
+            )}
+            {/* <FeedTile /> */}
+            {/* <button onClick={gettags}>load more</button> */}
           </div>
         )}
       </div>
