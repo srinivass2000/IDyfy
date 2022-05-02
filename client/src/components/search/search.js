@@ -183,6 +183,15 @@ const Search = () => {
               PEOPLE
             </button>
           </li>
+          <li className="nav-item">
+            <button
+              className="nav-link text-white"
+              onClick={() => setShowValue(4)}
+              style={showvalue === 4 ? active : notActive}
+            >
+              SIMILAR IDEAS
+            </button>
+          </li>
         </ul>
       </div>
 
@@ -201,9 +210,8 @@ const Search = () => {
           </select>
         </div>
 
-          {showvalue === 1 && (
-            <>
-            
+        {showvalue === 1 && (
+          <>
             <div className="offset-lg-1 col-lg-10">
               <span
                 className="p-2 text-white d-lg-none"
@@ -217,82 +225,81 @@ const Search = () => {
               {resultName ? (
                 resultName.map((idea, index) => (
                   <div key={index} className="row ">
-                    <Link to = {urlidea + idea._id}>  
-                    <div className="mx-10 " style={{ marginTop: "15px" }}>
-                      <div
-                        className="relative rounded"
-                        style={{
-                          borderTop: "2px solid #B287FF",
-                          borderBottom: "2px solid #B287FF",
-                          margin: "18px",
-                          height: "12rem",
-                        }}
-                      >
-                        <hr />
-                        <h1
-                          className="d-flex align-items-start mt-3 mb-1 mx-5"
+                    <Link to={urlidea + idea._id}>
+                      <div className="mx-10 " style={{ marginTop: "15px" }}>
+                        <div
+                          className="relative rounded"
                           style={{
-                            color: "white",
-                            fontWeight: "bold",
-                            fontSize: "1.4rem",
+                            borderTop: "2px solid #B287FF",
+                            borderBottom: "2px solid #B287FF",
+                            margin: "18px",
+                            height: "12rem",
                           }}
                         >
-                          {idea.title}
-                        </h1>
-                        {/* <hr className="ml-9" style={{background:"white"}}/> */}
-                        <h3
-                          className="d-flex align-items-start my-3 mx-5"
-                          style={{
-                            color: "white",
-                            fontSize: "1rem",
-                          }}
-                        >
-                          {idea.contributors.length +
-                            " users are contributing to this idea"}
-                        </h3>
-                        <div className=" row absolute bottom-0 left-0">
-                          <hr
-                            className="mx-10"
-                            style={{ background: "#B287FF" }}
-                          />
-                          <div className="col d-flex align-items-start">
-                            <span
-                              className="my-3 mx-5"
-                              style={{
-                                color: "white",
-                                fontSize: "1rem",
-                              }}
-                            >
-                              {idea.liked_users.length + " "} Likes
-                            </span>
-                            <span
-                              className="my-3 mx-5"
-                              style={{
-                                color: "white",
-                                fontSize: "1rem",
-                              }}
-                            >
-                              {idea.liked_users.length + " "} Comments
-                            </span>
-                          </div>
-                          <div className="col d-flex justify-content-end">
-                            <span
-                              className="my-3 mx-5"
-                              style={{
-                                color: "white",
-                                fontSize: "1rem",
-                              }}
-                            >
-                              {"Created at : " + idea.date}
-                            </span>
+                          <hr />
+                          <h1
+                            className="d-flex align-items-start mt-3 mb-1 mx-5"
+                            style={{
+                              color: "white",
+                              fontWeight: "bold",
+                              fontSize: "1.4rem",
+                            }}
+                          >
+                            {idea.title}
+                          </h1>
+                          {/* <hr className="ml-9" style={{background:"white"}}/> */}
+                          <h3
+                            className="d-flex align-items-start my-3 mx-5"
+                            style={{
+                              color: "white",
+                              fontSize: "1rem",
+                            }}
+                          >
+                            {idea.contributors.length +
+                              " users are contributing to this idea"}
+                          </h3>
+                          <div className=" row absolute bottom-0 left-0">
+                            <hr
+                              className="mx-10"
+                              style={{ background: "#B287FF" }}
+                            />
+                            <div className="col d-flex align-items-start">
+                              <span
+                                className="my-3 mx-5"
+                                style={{
+                                  color: "white",
+                                  fontSize: "1rem",
+                                }}
+                              >
+                                {idea.liked_users.length + " "} Likes
+                              </span>
+                              <span
+                                className="my-3 mx-5"
+                                style={{
+                                  color: "white",
+                                  fontSize: "1rem",
+                                }}
+                              >
+                                {idea.liked_users.length + " "} Comments
+                              </span>
+                            </div>
+                            <div className="col d-flex justify-content-end">
+                              <span
+                                className="my-3 mx-5"
+                                style={{
+                                  color: "white",
+                                  fontSize: "1rem",
+                                }}
+                              >
+                                {"Created at : " + idea.date}
+                              </span>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    {/* <FeedTile details={idea} className="" /> */}
+                      {/* <FeedTile details={idea} className="" /> */}
                     </Link>
                   </div>
-                  
                 ))
               ) : (
                 <div>
@@ -304,23 +311,23 @@ const Search = () => {
               {/* <FeedTile /> */}
               {/* <button onClick={getideas}>load more</button> */}
             </div>
-            </>
-          )}
-          {showvalue === 2 && (
-            <div className="offset-lg-1 col-lg-12">
-              <span
-                className="p-2 text-white d-lg-none"
-                style={{
-                  backgroundColor: "red",
-                }}
-              >
-                IDEA TAG
-              </span>
-              {console.log("Here")}
-              {resultTag ? (
-                resultTag.map((idea, index) => (
-                  <div key={index} className="row ">
-                    <Link to = {urlidea + idea._id}>  
+          </>
+        )}
+        {showvalue === 2 && (
+          <div className="offset-lg-1 col-lg-12">
+            <span
+              className="p-2 text-white d-lg-none"
+              style={{
+                backgroundColor: "red",
+              }}
+            >
+              IDEA TAG
+            </span>
+            {console.log("Here")}
+            {resultTag ? (
+              resultTag.map((idea, index) => (
+                <div key={index} className="row ">
+                  <Link to={urlidea + idea._id}>
                     <div className="mx-10 col-9" style={{ marginTop: "15px" }}>
                       <div
                         className="relative rounded"
@@ -393,34 +400,34 @@ const Search = () => {
                       </div>
                     </div>
                     {/* <FeedTile details={idea} className="" /> */}
-                    </Link>
-                  </div>
-                ))
-              ) : (
-                <div>
-                  <div class=" text-light" role="status">
-                    <span class="sr-only">Loading...</span>
-                  </div>
+                  </Link>
                 </div>
-              )}
-              {/* <FeedTile /> */}
-              {/* <button onClick={gettags}>load more</button> */}
-            </div>
-          )}
-          {showvalue === 3 && (
-            <div className="offset-lg-1 col-lg">
-              <span
-                className="p-2 text-white d-lg-none"
-                style={{
-                  backgroundColor: "red",
-                }}
-              >
-                PEOPLE
-              </span>
-              {resultPeople ? (
-                resultPeople.map((user, index) => (
-                  <div className="row ">
-                    <Link to= {urluser + user._id}>
+              ))
+            ) : (
+              <div>
+                <div class=" text-light" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </div>
+            )}
+            {/* <FeedTile /> */}
+            {/* <button onClick={gettags}>load more</button> */}
+          </div>
+        )}
+        {showvalue === 3 && (
+          <div className="offset-lg-1 col-lg">
+            <span
+              className="p-2 text-white d-lg-none"
+              style={{
+                backgroundColor: "red",
+              }}
+            >
+              PEOPLE
+            </span>
+            {resultPeople ? (
+              resultPeople.map((user, index) => (
+                <div className="row ">
+                  <Link to={urluser + user._id}>
                     <div className="col-11 " style={{ marginTop: "15px" }}>
                       <div
                         className="relative rounded "
@@ -434,14 +441,14 @@ const Search = () => {
                         <div className="row">
                           <div className="col-3">
                             <div className="rounded-circle ">
-                            <center>
-                              <img
-                                className="icon profile my-2 ml-9"
-                                src={user.profile_pic}
-                                alt="Profile Pic"
-                                style={{ height: "160px",width:"160px" }}
-                              />{" "}
-                            </center>
+                              <center>
+                                <img
+                                  className="icon profile my-2 ml-9"
+                                  src={user.profile_pic}
+                                  alt="Profile Pic"
+                                  style={{ height: "160px", width: "160px" }}
+                                />{" "}
+                              </center>
                             </div>
                           </div>
                           <div className="col-9">
@@ -502,7 +509,8 @@ const Search = () => {
                                       fontSize: "1rem",
                                     }}
                                   >
-                                    Score {Math.round(user.engagement_score)}
+                                    Engagement Score :{" "}
+                                    {Math.round(user.engagement_score)}
                                   </span>
                                 </div>
                               </div>
@@ -521,19 +529,120 @@ const Search = () => {
                       <p className="text-left p-1">{user.name}</p>
                       <p className="text-left p-1">{user.about}</p>
                     </div> */}
-                    </Link>
-                  </div>
-                ))
-              ) : (
-                <div>
-                  <div class="text-light" role="status">
-                    <span class="sr-only">Loading...</span>
-                  </div>
+                  </Link>
                 </div>
-              )}
-              {/* <button onClick={getsearch}>load more</button> */}
-            </div>
-          )}
+              ))
+            ) : (
+              <div>
+                <div class="text-light" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </div>
+            )}
+            {/* <button onClick={getsearch}>load more</button> */}
+          </div>
+        )}
+        {showvalue === 4 && (
+          <div className="offset-lg-1 col-lg-12">
+            <span
+              className="p-2 text-white d-lg-none"
+              style={{
+                backgroundColor: "red",
+              }}
+            >
+              SIMILAR IDEAS
+            </span>
+            {console.log("Here")}
+            {similarIdeas ? (
+              similarIdeas.map((idea, index) => (
+                <div key={index} className="row ">
+                  <Link to={urlidea + idea._id}>
+                    <div className="mx-10 col-9" style={{ marginTop: "15px" }}>
+                      <div
+                        className="relative rounded"
+                        style={{
+                          borderTop: "2px solid #B287FF",
+                          borderBottom: "2px solid #B287FF",
+                          margin: "18px",
+                          height: "12rem",
+                        }}
+                      >
+                        <hr />
+                        <h1
+                          className="d-flex align-items-start mt-3 mb-1 mx-5"
+                          style={{
+                            color: "white",
+                            fontWeight: "bold",
+                            fontSize: "1.4rem",
+                          }}
+                        >
+                          {idea.title}
+                        </h1>
+                        {/* <hr className="ml-9" style={{background:"white"}}/> */}
+                        <h3
+                          className="d-flex align-items-start my-3 mx-5"
+                          style={{
+                            color: "white",
+                            fontSize: "1rem",
+                          }}
+                        >
+                          {idea.contributors.length +
+                            " users are contributing to this idea"}
+                        </h3>
+                        <div className=" row absolute bottom-0 left-0">
+                          <hr
+                            className="mx-10"
+                            style={{ background: "#B287FF" }}
+                          />
+                          <div className="col d-flex align-items-start">
+                            <span
+                              className="my-3 mx-5"
+                              style={{
+                                color: "white",
+                                fontSize: "1rem",
+                              }}
+                            >
+                              {idea.liked_users.length + " "} Likes
+                            </span>
+                            <span
+                              className="my-3 mx-5"
+                              style={{
+                                color: "white",
+                                fontSize: "1rem",
+                              }}
+                            >
+                              {idea.liked_users.length + " "} Comments
+                            </span>
+                          </div>
+                          <div className="col d-flex justify-content-end">
+                            <span
+                              className="my-3 mx-5"
+                              style={{
+                                color: "white",
+                                fontSize: "1rem",
+                              }}
+                            >
+                              {"Created at : " + idea.date}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {/* <FeedTile details={idea} className="" /> */}
+                  </Link>
+                </div>
+              ))
+            ) : (
+              <div>
+                <div class=" text-light" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </div>
+            )}
+            {/* <FeedTile /> */}
+            {/* <button onClick={gettags}>load more</button> */}
+          </div>
+        )}
       </div>
     </div>
   );
