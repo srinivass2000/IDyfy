@@ -33,7 +33,6 @@ const Search = () => {
   // const [skip1, setskip1] = useState(3);
   // const [skip2, setskip2] = useState(3);
 
-  
   const getsearch = async () => {
     try {
       // console.log(skip);
@@ -136,12 +135,9 @@ const Search = () => {
         // console.log(skip);
         setStarredCount(--starred_count);
         await axios
-          .get(
-            `/api/idea/unstar-idea?idea_id=${resultName._id.toString()}`,
-            {
-              headers: authHeader(),
-            }
-          )
+          .get(`/api/idea/unstar-idea?idea_id=${resultName._id.toString()}`, {
+            headers: authHeader(),
+          })
           .then(
             (res) => {
               console.log(res);
@@ -215,9 +211,9 @@ const Search = () => {
 
   return (
     <div>
-      <div className="">
-        <center className="mt-3">
-          <div className="col-4 text-white d-none d-lg-block">
+      <div className="mt-3">
+        <center>
+          <div className="col-6 text-white d-none d-lg-block ">
             <ul className="nav nav-pills nav-fill">
               <li className="nav-item">
                 <button
@@ -246,82 +242,86 @@ const Search = () => {
                   PEOPLE
                 </button>
               </li>
+              <li className="nav-item">
+                <button
+                  className="nav-link text-white"
+                  onClick={() => setShowValue(4)}
+                  style={showvalue === 4 ? active : notActive}
+                >
+                  SIMILAR IDEAS
+                </button>
+              </li>
             </ul>
           </div>
         </center>
-        <div>
-          <div className="col-12 flex justify-center d-lg-none mb-10">
-            <select
-              class="form-select form-select-sm mx-2 "
-              aria-label=".form-select-sm example"
-              style={{ width: "150px", backgroundColor: "#B287FF" }}
-              onChange={handleChange}
-            >
-              <option value="1"> Idea Title</option>
-              <option value="2">Idea Tag</option>
-              <option value="3"> People</option>
-              <option value="4"> Similar Ideas</option>
-            </select>
-          </div>
-          {showvalue === 1 && (
-            <>
-              <div className="offset-lg-1 col-lg-10">
-                <span
-                  className="p-2 text-white d-lg-none"
-                  style={{
-                    backgroundColor: "red",
-                  }}
-                >
-                  IDEA TITLE
-                </span>
-                {console.log("Here")}
-                {resultName ? (
-                  resultName.map((idea, index) => (
-                    <div key={index} className="relative my-4 ">
-                      <Link to={urlidea + idea._id}>
-                        <div
-                          className="mx-10 idea "
-                          style={{ marginTop: "15px" }}
-                        >
-                          <div
-                            className=" "
-                            style={{
-                              marginLeft: "13px",
-                              height: "10rem",
-                              borderBottom: "2px solid white",
-                            }}
-                          >
-                            <hr />
-                            <div>
+      </div>
+
+      <div className=" mt-10">
+        <div className=" flex justify-center d-lg-none mb-10">
+          <select
+            class="form-select form-select-sm mx-2 "
+            aria-label=".form-select-sm example"
+            style={{ width: "150px", backgroundColor: "#B287FF" }}
+            onChange={handleChange}
+          >
+            <option value="1"> Idea Title</option>
+            <option value="2">Idea Tag</option>
+            <option value="3"> People</option>
+            <option value="4"> Similar Ideas</option>
+          </select>
+        </div>
+
+        {showvalue === 1 && (
+          <>
+            <div className="offset-lg-1 col-lg-10">
+              <span
+                className="p-2 text-white d-lg-none"
+                style={{
+                  backgroundColor: "red",
+                }}
+              >
+                IDEA TITLE
+              </span>
+              {console.log("Here")}
+              {resultName ? (
+                resultName.map((idea, index) => (
+                  <div key={index} className="row">
+                    <Link to={urlidea + idea._id}>
+                      <div className="col idea my-3">
+                        <div className="relative">
+                          <div className="row" style={{ height: "10rem" }}>
+                            <div className="col-11">
+                              <hr />
                               <h1
                                 className="d-flex align-items-start mt-3 mb-1 mx-5"
                                 style={{
                                   color: "white",
                                   fontWeight: "bold",
-                                  fontSize: "1.4rem",
+                                  fontSize: "1.9rem",
                                 }}
                               >
                                 {idea.title}
                               </h1>
+                              {/* <hr className="ml-9" style={{background:"white"}}/> */}
                               <h3
-                                className="d-flex align-items-start my-3 mx-5"
+                                className="d-flex align-items-start my-4 mx-5"
                                 style={{
                                   color: "white",
-                                  fontSize: "1rem",
+                                  fontSize: "1.7rem",
                                 }}
                               >
                                 {idea.contributors.length +
                                   " users are contributing to this idea"}
                               </h3>
                             </div>
-                            <div className="d-flex flex-row-reverse">
-                              <div className="offset-lg-1 col-lg-1 d offset-1 col-1">
+                            <div className="col-1">
+                              <div className="mt-7">
                                 {isActive === false ? (
                                   <img
                                     src="https://img.icons8.com/ios/50/FFFFFF/star--v1.png"
                                     alt="star icon"
                                     className="absolute mt-1 "
-                                    width="22px"
+                                    width="32px"
                                     onClick={toggleStarred}
                                   />
                                 ) : (
@@ -329,7 +329,7 @@ const Search = () => {
                                     src="https://img.icons8.com/ios-filled/50/FFA500/christmas-star.png"
                                     alt="star icon"
                                     className="absolute mt-1 "
-                                    width="22px"
+                                    width="32px"
                                     onClick={toggleStarred}
                                   />
                                 )}
@@ -337,256 +337,42 @@ const Search = () => {
                             </div>
                           </div>
                           <div
-                            className=" row"
                             style={{
-                              marginLeft: "13px",
-                              height: "3rem",
+                              marginLeft: "12px",
+                              borderTop: "2px solid white",
                             }}
                           >
-                            <div className="col d-flex align-items-start">
-                              <span
-                                className="my-2 mx-5 "
-                                style={{
-                                  color: "white",
-                                  fontSize: "1rem",
-                                }}
-                              >
-                                {idea.liked_users.length + " "} Likes
-                              </span>
-                              <span
-                                className="my-2 mx-5"
-                                style={{
-                                  color: "white",
-                                  fontSize: "1rem",
-                                }}
-                              >
-                                {idea.liked_users.length + " "} Comments
-                              </span>
-                            </div>
-                            <div className="col d-flex flex-row-reverse">
-                              <span
-                                className="my-2 mx-5"
-                                style={{
-                                  color: "white",
-                                  fontSize: "1rem",
-                                }}
-                              >
-                                {"Created at : " + idea.date}
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </Link>
-                    </div>
-                  ))
-                ) : (
-                  <div>
-                    <div class="text-light" role="status">
-                      <span class="sr-only">Loading...</span>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </>
-          )}
-          {showvalue === 2 && (
-            <div className="offset-lg-1 col-lg-12">
-              <span
-                className="p-2 text-white d-lg-none"
-                style={{
-                  backgroundColor: "red",
-                }}
-              >
-                IDEA TAG
-              </span>
-              {console.log("Here")}
-              {resultTag ? (
-                resultTag.map((idea, index) => (
-                  <div key={index} className="row ">
-                    <Link to={urlidea + idea._id}>
-                      <div
-                        className="mx-10 col-9"
-                        style={{ marginTop: "15px" }}
-                      >
-                        <div
-                          className="relative rounded idea"
-                          style={{
-                            margin: "18px",
-                            height: "12rem",
-                          }}
-                        >
-                          <hr />
-                          <div>
-                            <h1
-                              className="d-flex align-items-start mt-3 mb-1 mx-5"
-                              style={{
-                                color: "white",
-                                fontWeight: "bold",
-                                fontSize: "1.4rem",
-                              }}
-                            >
-                              {idea.title}
-                            </h1>
-                            {/* <hr className="ml-9" style={{background:"white"}}/> */}
-                            <h3
-                              className="d-flex align-items-start my-3 mx-5"
-                              style={{
-                                color: "white",
-                                fontSize: "1rem",
-                              }}
-                            >
-                              {idea.contributors.length +
-                                " users are contributing to this idea"}
-                            </h3>
-                          </div>
-                          <div className=" row absolute bottom-0 left-0">
-                            <div className="col d-flex align-items-start">
-                              <span
-                                className="my-3 mx-5"
-                                style={{
-                                  borderTop: "2px solid white",
-                                  color: "white",
-                                  fontSize: "1rem",
-                                }}
-                              >
-                                {idea.liked_users.length + " "} Likes
-                              </span>
-                              <span
-                                className="my-3 mx-5"
-                                style={{
-                                  borderTop: "2px solid white",
-                                  color: "white",
-                                  fontSize: "1rem",
-                                }}
-                              >
-                                {idea.liked_users.length + " "} Comments
-                              </span>
-                            </div>
-                            <div className="col d-flex justify-content-end">
-                              <span
-                                className="my-3 mx-5"
-                                style={{
-                                  borderTop: "2px solid white",
-                                  color: "white",
-                                  fontSize: "1rem",
-                                }}
-                              >
-                                {"Created at : " + idea.date}
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </Link>
-                  </div>
-                ))
-              ) : (
-                <div>
-                  <div class=" text-light" role="status">
-                    <span class="sr-only">Loading...</span>
-                  </div>
-                </div>
-              )}
-            </div>
-          )}
-          {showvalue === 3 && (
-            <div className="offset-lg-1 col-lg">
-              <span
-                className="p-2 text-white d-lg-none"
-                style={{
-                  backgroundColor: "red",
-                }}
-              >
-                PEOPLE
-              </span>
-              {resultPeople ? (
-                resultPeople.map((user, index) => (
-                  <div className="row ">
-                    <Link to={urluser + user._id}>
-                      <div className="col-11 " style={{ marginTop: "15px" }}>
-                        <div
-                          className="relative rounded "
-                          style={{
-                            borderTop: "2px solid #B287FF",
-                            borderBottom: "2px solid #B287FF",
-                            margin: "18px",
-                            // height: "12rem",
-                          }}
-                        >
-                          <div className="row">
-                            <div className="col-3">
-                              <div className="rounded-circle ">
-                                <center>
-                                  <img
-                                    className="icon profile my-2 ml-9"
-                                    src={user.profile_pic}
-                                    alt="Profile Pic"
-                                    style={{ height: "160px", width: "160px" }}
-                                  />{" "}
-                                </center>
+                            <div className="row">
+                              <div className="col d-flex align-items-start">
+                                <span
+                                  className="my-3 mx-5"
+                                  style={{
+                                    color: "white",
+                                    fontSize: "1.3rem",
+                                  }}
+                                >
+                                  {idea.liked_users.length + " "} Likes
+                                </span>
+                                <span
+                                  className="my-3 mx-5"
+                                  style={{
+                                    color: "white",
+                                    fontSize: "1.3rem",
+                                  }}
+                                >
+                                  {idea.liked_users.length + " "} Comments
+                                </span>
                               </div>
-                            </div>
-                            <div className="col-9">
-                              <hr />
-                              <h1
-                                className="d-flex align-items-start mt-3 mb-1 mx-5"
-                                style={{
-                                  color: "white",
-                                  fontWeight: "bold",
-                                  fontSize: "1.4rem",
-                                }}
-                              >
-                                {user.name}
-                              </h1>
-                              <h3
-                                className="d-flex align-items-start my-3 mx-5"
-                                style={{
-                                  color: "white",
-                                  fontSize: "1rem",
-                                }}
-                              >
-                                {user.job}
-                              </h3>
-                              <h3
-                                className="d-flex align-items-start my-3 mx-5"
-                                style={{
-                                  color: "white",
-                                  fontSize: "1rem",
-                                }}
-                              >
-                                {"Contributed to " +
-                                  user.ideas_contributed.length}
-                              </h3>
-                            </div>
-                            <div className=" absolute bottom-0 left-0">
-                              <div className="row">
-                                <div className="col-3"></div>
-                                <div className="col-9">
-                                  <hr
-                                    className="mx-10 mt-2"
-                                    style={{ background: "#B287FF" }}
-                                  />
-                                  <div className=" d-flex align-items-start">
-                                    <span
-                                      className="my-3 mx-5"
-                                      style={{
-                                        color: "white",
-                                        fontSize: "1rem",
-                                      }}
-                                    >
-                                      Followers : {user.followers.length}
-                                    </span>
-                                    <span
-                                      className="my-3 mx-5"
-                                      style={{
-                                        color: "white",
-                                        fontSize: "1rem",
-                                      }}
-                                    >
-                                      Score {Math.round(user.engagement_score)}
-                                    </span>
-                                  </div>
-                                </div>
+                              <div className="col d-flex justify-content-end">
+                                <span
+                                  className="my-3 mx-5"
+                                  style={{
+                                    color: "white",
+                                    fontSize: "1rem",
+                                  }}
+                                >
+                                  {idea.date.slice(0, 10)}
+                                </span>
                               </div>
                             </div>
                           </div>
@@ -603,8 +389,388 @@ const Search = () => {
                 </div>
               )}
             </div>
-          )}
-        </div>
+          </>
+        )}
+        {showvalue === 2 && (
+          <div className="offset-lg-1 col-lg-12">
+            <span
+              className="p-2 text-white d-lg-none"
+              style={{
+                backgroundColor: "red",
+              }}
+            >
+              IDEA TAG
+            </span>
+            {console.log("Here")}
+            {resultTag ? (
+              resultTag.map((idea, index) => (
+                <div key={index} className="row ">
+                  <Link to={urlidea + idea._id}>
+                  <div className="mx-10 idea col-9" style={{ marginTop: "15px" }}>
+                      <div
+                        className="relative rounded"
+                        style={{
+                          margin: "18px",
+                          height: "15rem",
+                        }}
+                      >
+                        <div className="row" style={{ height: "10rem" }}>
+                            <div className="col-11">
+                              <hr />
+                              <h1
+                                className="d-flex align-items-start mt-3 mb-1 mx-5"
+                                style={{
+                                  color: "white",
+                                  fontWeight: "bold",
+                                  fontSize: "1.9rem",
+                                }}
+                              >
+                                {idea.title}
+                              </h1>
+                              {/* <hr className="ml-9" style={{background:"white"}}/> */}
+                              <h3
+                                className="d-flex align-items-start my-4 mx-5"
+                                style={{
+                                  color: "white",
+                                  fontSize: "1.7rem",
+                                }}
+                              >
+                                {idea.contributors.length +
+                                  " users are contributing to this idea"}
+                              </h3>
+                            </div>
+                            <div className="col-1">
+                              <div className="mt-7">
+                                {isActive === false ? (
+                                  <img
+                                    src="https://img.icons8.com/ios/50/FFFFFF/star--v1.png"
+                                    alt="star icon"
+                                    className="absolute mt-1 "
+                                    width="32px"
+                                    onClick={toggleStarred}
+                                  />
+                                ) : (
+                                  <img
+                                    src="https://img.icons8.com/ios-filled/50/FFA500/christmas-star.png"
+                                    alt="star icon"
+                                    className="absolute mt-1 "
+                                    width="32px"
+                                    onClick={toggleStarred}
+                                  />
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            style={{
+                              marginLeft: "12px",
+                              borderTop: "2px solid white",
+                            }}
+                          >
+                            <div className="row">
+                              <div className="col d-flex align-items-start">
+                                <span
+                                  className="my-3 mx-5"
+                                  style={{
+                                    color: "white",
+                                    fontSize: "1.3rem",
+                                  }}
+                                >
+                                  {idea.liked_users.length + " "} Likes
+                                </span>
+                                <span
+                                  className="my-3 mx-5"
+                                  style={{
+                                    color: "white",
+                                    fontSize: "1.3rem",
+                                  }}
+                                >
+                                  {idea.liked_users.length + " "} Comments
+                                </span>
+                              </div>
+                              <div className="col d-flex justify-content-end">
+                                <span
+                                  className="my-3 mx-5"
+                                  style={{
+                                    color: "white",
+                                    fontSize: "1rem",
+                                  }}
+                                >
+                                  {idea.date.slice(0, 10)}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                  </Link>
+                </div>
+              ))
+            ) : (
+              <div>
+                <div class=" text-light" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </div>
+            )}
+            {/* <FeedTile /> */}
+            {/* <button onClick={gettags}>load more</button> */}
+          </div>
+        )}
+        {showvalue === 3 && (
+          <div className="offset-lg-1 col-lg">
+            <span
+              className="p-2 text-white d-lg-none"
+              style={{
+                backgroundColor: "red",
+              }}
+            >
+              PEOPLE
+            </span>
+            {resultPeople ? (
+              resultPeople.map((user, index) => (
+                <div className="row ">
+                  <Link to={urluser + user._id}>
+                    <div className="col-11 " style={{ marginTop: "15px" }}>
+                      <div
+                        className="relative rounded "
+                        style={{
+                          // borderTop: "2px solid #B287FF",
+                          // borderBottom: "2px solid #B287FF",
+                          margin: "18px",
+                          // height: "12rem",
+                        }}
+                      >
+                        <div className="row idea">
+                          <div className="col-3">
+                            <div className="rounded-circle ">
+                              <center>
+                                <img
+                                  className="icon profile my-4 ml-9"
+                                  src={user.profile_pic}
+                                  alt="Profile Pic"
+                                  style={{ height: "160px", width: "160px" }}
+                                />{" "}
+                              </center>
+                            </div>
+                          </div>
+                          <div className="col-9">
+                            <hr />
+                            <h1
+                              className="d-flex align-items-start mt-3 mb-1 mx-5"
+                              style={{
+                                color: "white",
+                                fontWeight: "bold",
+                                fontSize: "1.4rem",
+                              }}
+                            >
+                              {user.name}
+                            </h1>
+                            {/* <hr className="ml-9" style={{background:"white"}}/> */}
+                            <h3
+                              className="d-flex align-items-start my-3 mx-5"
+                              style={{
+                                color: "white",
+                                fontSize: "1rem",
+                              }}
+                            >
+                              {user.job}
+                            </h3>
+                            <h3
+                              className="d-flex align-items-start my-3 mx-5"
+                              style={{
+                                color: "white",
+                                fontSize: "1rem",
+                              }}
+                            >
+                              {"Contributed to " +
+                                user.ideas_contributed.length}
+                            </h3>
+                          </div>
+                          <div className=" absolute bottom-0 left-0">
+                            <div className="row">
+                              <div className="col-3"></div>
+                              <div className="col-9">
+                                <hr
+                                  className="mx-10"
+                                  style={{ background: "#B287FF" }}
+                                />
+                                <div className=" d-flex align-items-start">
+                                  <span
+                                    className="my-3 mx-5"
+                                    style={{
+                                      color: "white",
+                                      fontSize: "1rem",
+                                    }}
+                                  >
+                                    Followers : {user.followers.length}
+                                  </span>
+                                  <span
+                                    className="my-3 mx-5"
+                                    style={{
+                                      color: "white",
+                                      fontSize: "1rem",
+                                    }}
+                                  >
+                                    Engagement Score :{" "}
+                                    {Math.round(user.engagement_score)}
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* <div className="idea col-lg-3 col-md-4 col-5 mr-1 ml-1 text-white ">
+                      <img
+                        className="ml-3 mt-1 icon profile"
+                        src={user.profile_pic}
+                        alt="My Profile"
+                      />
+                      <p className="text-left p-1">{user.name}</p>
+                      <p className="text-left p-1">{user.about}</p>
+                    </div> */}
+                  </Link>
+                </div>
+              ))
+            ) : (
+              <div>
+                <div class="text-light" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </div>
+            )}
+            {/* <button onClick={getsearch}>load more</button> */}
+          </div>
+        )}
+        {showvalue === 4 && (
+          <div className="offset-lg-1 col-lg-12">
+            <span
+              className="p-2 text-white d-lg-none"
+              style={{
+                backgroundColor: "red",
+              }}
+            >
+              SIMILAR IDEAS
+            </span>
+            {console.log("Here")}
+            {similarIdeas ? (
+              similarIdeas.map((idea, index) => (
+                <div key={index} className="row ">
+                  <Link to={urlidea + idea._id}>
+                  <div className="mx-10 idea col-9" style={{ marginTop: "15px" }}>
+                      <div
+                        className="relative rounded"
+                        style={{
+                          margin: "18px",
+                          height: "15rem",
+                        }}
+                      >
+                        <div className="row" style={{ height: "10rem" }}>
+                            <div className="col-11">
+                              <hr />
+                              <h1
+                                className="d-flex align-items-start mt-3 mb-1 mx-5"
+                                style={{
+                                  color: "white",
+                                  fontWeight: "bold",
+                                  fontSize: "1.9rem",
+                                }}
+                              >
+                                {idea.title}
+                              </h1>
+                              {/* <hr className="ml-9" style={{background:"white"}}/> */}
+                              <h3
+                                className="d-flex align-items-start my-4 mx-5"
+                                style={{
+                                  color: "white",
+                                  fontSize: "1.7rem",
+                                }}
+                              >
+                                {idea.contributors.length +
+                                  " users are contributing to this idea"}
+                              </h3>
+                            </div>
+                            <div className="col-1">
+                              <div className="mt-7">
+                                {isActive === false ? (
+                                  <img
+                                    src="https://img.icons8.com/ios/50/FFFFFF/star--v1.png"
+                                    alt="star icon"
+                                    className="absolute mt-1 "
+                                    width="32px"
+                                    onClick={toggleStarred}
+                                  />
+                                ) : (
+                                  <img
+                                    src="https://img.icons8.com/ios-filled/50/FFA500/christmas-star.png"
+                                    alt="star icon"
+                                    className="absolute mt-1 "
+                                    width="32px"
+                                    onClick={toggleStarred}
+                                  />
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            style={{
+                              marginLeft: "12px",
+                              borderTop: "2px solid white",
+                            }}
+                          >
+                            <div className="row">
+                              <div className="col d-flex align-items-start">
+                                <span
+                                  className="my-3 mx-5"
+                                  style={{
+                                    color: "white",
+                                    fontSize: "1.3rem",
+                                  }}
+                                >
+                                  {idea.liked_users.length + " "} Likes
+                                </span>
+                                <span
+                                  className="my-3 mx-5"
+                                  style={{
+                                    color: "white",
+                                    fontSize: "1.3rem",
+                                  }}
+                                >
+                                  {idea.liked_users.length + " "} Comments
+                                </span>
+                              </div>
+                              <div className="col d-flex justify-content-end">
+                                <span
+                                  className="my-3 mx-5"
+                                  style={{
+                                    color: "white",
+                                    fontSize: "1rem",
+                                  }}
+                                >
+                                  {idea.date.slice(0, 10)}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                  </Link>
+                </div>
+              ))
+            ) : (
+              <div>
+                <div class=" text-light" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </div>
+            )}
+            {/* <FeedTile /> */}
+            {/* <button onClick={gettags}>load more</button> */}
+          </div>
+        )}
       </div>
     </div>
   );
