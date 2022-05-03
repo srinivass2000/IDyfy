@@ -59,7 +59,6 @@ exports.get_details = async (req, res, next) => {
       count_comments,
       active_ideas,
       active_users,
-      iggraph,
     });
   } catch (err) {
     console.log(err);
