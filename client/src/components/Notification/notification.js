@@ -84,10 +84,10 @@ const Notification = () => {
         </div>
       </div>
       <div className="row">
-        <div className="container  my-4">
           {events ? (
             events.map((event, index) => (
-              <div className="row my-5">
+              <div className="col-6">
+              <div className="row my-3">
                 <div className="col col-2"></div>
                 <div className="col col-8">
                   <div className="px-4" style={{ background: "#D6BEFF" }}>
@@ -120,7 +120,8 @@ const Notification = () => {
                     </div>
                   </div>
                 </div>
-                <div className="col col-2"></div>
+                {/* <div className="col col-2"></div> */}
+              </div>
               </div>
             ))
           ) : (
@@ -138,7 +139,6 @@ const Notification = () => {
             </>
           )}
         </div>
-      </div>
     </div>
   );
 };
