@@ -41,10 +41,18 @@ exports.get_feature = async (req, res, next) => {
       }
     }
 
-    const comments = await Comment.find({
-      idea_id: idea_id,
-      feature_id: feature_id,
-    });
+    const comments = await Comment.find(
+      {
+        idea_id: idea_id,
+        feature_id: feature_id,
+      },
+      {
+        createdAt: 1,
+        user_id: 1,
+        username: 1,
+        content: 1,
+      }
+    );
 
     var user_id = req.user._id.toString();
 

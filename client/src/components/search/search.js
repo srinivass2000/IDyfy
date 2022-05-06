@@ -6,7 +6,7 @@ import { useState } from "react";
 import axios from "axios";
 import authHeader from "../../services/auth-header";
 import { useEffect } from "react";
-import FeedTile from "../Feed_Tile/feed";
+// import FeedTile from "../Feed_Tile/feed";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import "./search.css";
@@ -406,7 +406,10 @@ const Search = () => {
               resultTag.map((idea, index) => (
                 <div key={index} className="row ">
                   <Link to={urlidea + idea._id}>
-                  <div className="mx-10 idea col-9" style={{ marginTop: "15px" }}>
+                    <div
+                      className="mx-10 idea col-9"
+                      style={{ marginTop: "15px" }}
+                    >
                       <div
                         className="relative rounded"
                         style={{
@@ -415,92 +418,92 @@ const Search = () => {
                         }}
                       >
                         <div className="row" style={{ height: "10rem" }}>
-                            <div className="col-11">
-                              <hr />
-                              <h1
-                                className="d-flex align-items-start mt-3 mb-1 mx-5"
-                                style={{
-                                  color: "white",
-                                  fontWeight: "bold",
-                                  fontSize: "1.9rem",
-                                }}
-                              >
-                                {idea.title}
-                              </h1>
-                              {/* <hr className="ml-9" style={{background:"white"}}/> */}
-                              <h3
-                                className="d-flex align-items-start my-4 mx-5"
-                                style={{
-                                  color: "white",
-                                  fontSize: "1.7rem",
-                                }}
-                              >
-                                {idea.contributors.length +
-                                  " users are contributing to this idea"}
-                              </h3>
-                            </div>
-                            <div className="col-1">
-                              <div className="mt-7">
-                                {isActive === false ? (
-                                  <img
-                                    src="https://img.icons8.com/ios/50/FFFFFF/star--v1.png"
-                                    alt="star icon"
-                                    className="absolute mt-1 "
-                                    width="32px"
-                                    onClick={toggleStarred}
-                                  />
-                                ) : (
-                                  <img
-                                    src="https://img.icons8.com/ios-filled/50/FFA500/christmas-star.png"
-                                    alt="star icon"
-                                    className="absolute mt-1 "
-                                    width="32px"
-                                    onClick={toggleStarred}
-                                  />
-                                )}
-                              </div>
+                          <div className="col-11">
+                            <hr />
+                            <h1
+                              className="d-flex align-items-start mt-3 mb-1 mx-5"
+                              style={{
+                                color: "white",
+                                fontWeight: "bold",
+                                fontSize: "1.9rem",
+                              }}
+                            >
+                              {idea.title}
+                            </h1>
+                            {/* <hr className="ml-9" style={{background:"white"}}/> */}
+                            <h3
+                              className="d-flex align-items-start my-4 mx-5"
+                              style={{
+                                color: "white",
+                                fontSize: "1.7rem",
+                              }}
+                            >
+                              {idea.contributors.length +
+                                " users are contributing to this idea"}
+                            </h3>
+                          </div>
+                          <div className="col-1">
+                            <div className="mt-7">
+                              {isActive === false ? (
+                                <img
+                                  src="https://img.icons8.com/ios/50/FFFFFF/star--v1.png"
+                                  alt="star icon"
+                                  className="absolute mt-1 "
+                                  width="32px"
+                                  onClick={toggleStarred}
+                                />
+                              ) : (
+                                <img
+                                  src="https://img.icons8.com/ios-filled/50/FFA500/christmas-star.png"
+                                  alt="star icon"
+                                  className="absolute mt-1 "
+                                  width="32px"
+                                  onClick={toggleStarred}
+                                />
+                              )}
                             </div>
                           </div>
-                          <div
-                            style={{
-                              marginLeft: "12px",
-                              borderTop: "2px solid white",
-                            }}
-                          >
-                            <div className="row">
-                              <div className="col d-flex align-items-start">
-                                <span
-                                  className="my-3 mx-5"
-                                  style={{
-                                    color: "white",
-                                    fontSize: "1.3rem",
-                                  }}
-                                >
-                                  {idea.liked_users.length + " "} Likes
-                                </span>
-                                <span
-                                  className="my-3 mx-5"
-                                  style={{
-                                    color: "white",
-                                    fontSize: "1.3rem",
-                                  }}
-                                >
-                                  {idea.liked_users.length + " "} Comments
-                                </span>
-                              </div>
-                              <div className="col d-flex justify-content-end">
-                                <span
-                                  className="my-3 mx-5"
-                                  style={{
-                                    color: "white",
-                                    fontSize: "1rem",
-                                  }}
-                                >
-                                  {idea.date.slice(0, 10)}
-                                </span>
-                              </div>
+                        </div>
+                        <div
+                          style={{
+                            marginLeft: "12px",
+                            borderTop: "2px solid white",
+                          }}
+                        >
+                          <div className="row">
+                            <div className="col d-flex align-items-start">
+                              <span
+                                className="my-3 mx-5"
+                                style={{
+                                  color: "white",
+                                  fontSize: "1.3rem",
+                                }}
+                              >
+                                {idea.liked_users.length + " "} Likes
+                              </span>
+                              <span
+                                className="my-3 mx-5"
+                                style={{
+                                  color: "white",
+                                  fontSize: "1.3rem",
+                                }}
+                              >
+                                {idea.liked_users.length + " "} Comments
+                              </span>
+                            </div>
+                            <div className="col d-flex justify-content-end">
+                              <span
+                                className="my-3 mx-5"
+                                style={{
+                                  color: "white",
+                                  fontSize: "1rem",
+                                }}
+                              >
+                                {idea.date.slice(0, 10)}
+                              </span>
                             </div>
                           </div>
+                        </div>
                       </div>
                     </div>
                   </Link>
@@ -660,7 +663,10 @@ const Search = () => {
               similarIdeas.map((idea, index) => (
                 <div key={index} className="row ">
                   <Link to={urlidea + idea._id}>
-                  <div className="mx-10 idea col-9" style={{ marginTop: "15px" }}>
+                    <div
+                      className="mx-10 idea col-9"
+                      style={{ marginTop: "15px" }}
+                    >
                       <div
                         className="relative rounded"
                         style={{
@@ -669,92 +675,92 @@ const Search = () => {
                         }}
                       >
                         <div className="row" style={{ height: "10rem" }}>
-                            <div className="col-11">
-                              <hr />
-                              <h1
-                                className="d-flex align-items-start mt-3 mb-1 mx-5"
-                                style={{
-                                  color: "white",
-                                  fontWeight: "bold",
-                                  fontSize: "1.9rem",
-                                }}
-                              >
-                                {idea.title}
-                              </h1>
-                              {/* <hr className="ml-9" style={{background:"white"}}/> */}
-                              <h3
-                                className="d-flex align-items-start my-4 mx-5"
-                                style={{
-                                  color: "white",
-                                  fontSize: "1.7rem",
-                                }}
-                              >
-                                {idea.contributors.length +
-                                  " users are contributing to this idea"}
-                              </h3>
-                            </div>
-                            <div className="col-1">
-                              <div className="mt-7">
-                                {isActive === false ? (
-                                  <img
-                                    src="https://img.icons8.com/ios/50/FFFFFF/star--v1.png"
-                                    alt="star icon"
-                                    className="absolute mt-1 "
-                                    width="32px"
-                                    onClick={toggleStarred}
-                                  />
-                                ) : (
-                                  <img
-                                    src="https://img.icons8.com/ios-filled/50/FFA500/christmas-star.png"
-                                    alt="star icon"
-                                    className="absolute mt-1 "
-                                    width="32px"
-                                    onClick={toggleStarred}
-                                  />
-                                )}
-                              </div>
+                          <div className="col-11">
+                            <hr />
+                            <h1
+                              className="d-flex align-items-start mt-3 mb-1 mx-5"
+                              style={{
+                                color: "white",
+                                fontWeight: "bold",
+                                fontSize: "1.9rem",
+                              }}
+                            >
+                              {idea.title}
+                            </h1>
+                            {/* <hr className="ml-9" style={{background:"white"}}/> */}
+                            <h3
+                              className="d-flex align-items-start my-4 mx-5"
+                              style={{
+                                color: "white",
+                                fontSize: "1.7rem",
+                              }}
+                            >
+                              {idea.contributors.length +
+                                " users are contributing to this idea"}
+                            </h3>
+                          </div>
+                          <div className="col-1">
+                            <div className="mt-7">
+                              {isActive === false ? (
+                                <img
+                                  src="https://img.icons8.com/ios/50/FFFFFF/star--v1.png"
+                                  alt="star icon"
+                                  className="absolute mt-1 "
+                                  width="32px"
+                                  onClick={toggleStarred}
+                                />
+                              ) : (
+                                <img
+                                  src="https://img.icons8.com/ios-filled/50/FFA500/christmas-star.png"
+                                  alt="star icon"
+                                  className="absolute mt-1 "
+                                  width="32px"
+                                  onClick={toggleStarred}
+                                />
+                              )}
                             </div>
                           </div>
-                          <div
-                            style={{
-                              marginLeft: "12px",
-                              borderTop: "2px solid white",
-                            }}
-                          >
-                            <div className="row">
-                              <div className="col d-flex align-items-start">
-                                <span
-                                  className="my-3 mx-5"
-                                  style={{
-                                    color: "white",
-                                    fontSize: "1.3rem",
-                                  }}
-                                >
-                                  {idea.liked_users.length + " "} Likes
-                                </span>
-                                <span
-                                  className="my-3 mx-5"
-                                  style={{
-                                    color: "white",
-                                    fontSize: "1.3rem",
-                                  }}
-                                >
-                                  {idea.liked_users.length + " "} Comments
-                                </span>
-                              </div>
-                              <div className="col d-flex justify-content-end">
-                                <span
-                                  className="my-3 mx-5"
-                                  style={{
-                                    color: "white",
-                                    fontSize: "1rem",
-                                  }}
-                                >
-                                  {idea.date.slice(0, 10)}
-                                </span>
-                              </div>
+                        </div>
+                        <div
+                          style={{
+                            marginLeft: "12px",
+                            borderTop: "2px solid white",
+                          }}
+                        >
+                          <div className="row">
+                            <div className="col d-flex align-items-start">
+                              <span
+                                className="my-3 mx-5"
+                                style={{
+                                  color: "white",
+                                  fontSize: "1.3rem",
+                                }}
+                              >
+                                {idea.liked_users.length + " "} Likes
+                              </span>
+                              <span
+                                className="my-3 mx-5"
+                                style={{
+                                  color: "white",
+                                  fontSize: "1.3rem",
+                                }}
+                              >
+                                {idea.liked_users.length + " "} Comments
+                              </span>
+                            </div>
+                            <div className="col d-flex justify-content-end">
+                              <span
+                                className="my-3 mx-5"
+                                style={{
+                                  color: "white",
+                                  fontSize: "1rem",
+                                }}
+                              >
+                                {idea.date.slice(0, 10)}
+                              </span>
                             </div>
                           </div>
+                        </div>
                       </div>
                     </div>
                   </Link>
