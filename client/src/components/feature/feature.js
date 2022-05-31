@@ -129,6 +129,7 @@ const Feature = () => {
           >
             3
           </div>
+
           {canEdit ? (
             <div className="row justify-content-center">
               <div className="col-md-4">
@@ -157,11 +158,7 @@ const Feature = () => {
             <div></div>
           )}
         </div>
-        <div className="row">
-          <div className="mt-3 col-md-6">
-            <Comment />
-          </div>
-        </div>
+        <Comment comments={comments} />
       </div>
       <Footer />
     </div>

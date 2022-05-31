@@ -31,7 +31,8 @@ const Navbar = () => {
   const handleChange = (e) => {
     setSearchdata({ ...searchdata, [e.target.name]: e.target.value });
   };
-  const onSubmit = () => {
+  const onSubmit = (e) => {
+    e.preventDefault();
     history.push(`/search?search=${searchdata.search}`);
   };
   useEffect(() => {
@@ -150,12 +151,12 @@ const Navbar = () => {
                   name="search"
                   onChange={handleChange}
                 />
-                <Link
+                {/* <Link
                   to={`/search?search=${searchdata.search}`}
                   className="pt-2"
-                >
-                  <img src={search} alt="Search" style={{ height: "20px" }} />
-                </Link>
+                > */}
+                  <img src={search} alt="Search" className="mt-2" style={{ height: "20px" }} onClick={onSubmit} />
+                {/* </Link> */}
               </form>
               {/* small screen */}
 

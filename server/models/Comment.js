@@ -18,6 +18,9 @@ const CommentSchema = new mongoose.Schema(
       type: String,
       default: null,
     },
+    username: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

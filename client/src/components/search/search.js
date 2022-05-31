@@ -6,7 +6,7 @@ import { useState } from "react";
 import axios from "axios";
 import authHeader from "../../services/auth-header";
 import { useEffect } from "react";
-import FeedTile from "../Feed_Tile/feed";
+// import FeedTile from "../Feed_Tile/feed";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import "./search.css";
