@@ -27,6 +27,15 @@ exports.delete_idea = async (req, res, next) => {
               $inc: { engagement_score: -50 },
             }
           );
+          var usr = await User.findByIdAndUpdate(user,{
+            $push:  {
+              events: {
+                type: "idea deleted",
+                detail: idea,
+                time: new Date()
+              }
+            }
+          });
           console.log(response);
         }
         await Idea.findOneAndDelete({ _id: idea._id.toString() });
@@ -34,6 +43,7 @@ exports.delete_idea = async (req, res, next) => {
           success: true,
           data: "Idea & its features Deleted Successfully!",
         });
+        
       } else return next(new ErrorResponse("You are Not an Admin!", 403));
     } else return next(new ErrorResponse("Idea not found", 404));
   } catch (err) {

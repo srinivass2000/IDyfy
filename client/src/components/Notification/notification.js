@@ -41,6 +41,8 @@ const Notification = () => {
     "feature deleted": error_logo,
     "idea pulled": info_logo,
     "user updated": info_logo,
+    "idea deleted": error_logo,
+    "user suspended": error_logo,
   };
 
   const title = {
@@ -51,6 +53,8 @@ const Notification = () => {
     "feature deleted": "You deleted feature : ",
     "idea pulled": "You pulled idea : ",
     "user updated": "You updated profile",
+    "idea deleted": "Admin deleted your idea ",
+    "user suspended": "You are suspended",
   };
 
   useEffect(() => {
