@@ -56,6 +56,12 @@ exports.idea_details = async (req, res, next) => {
         idea.ideas_details[highest_contributor._id.toString()];
     }
 
+    var your_latest_version;
+
+    if (idea.contributors.includes(req.user.id.toString())) {
+      your_latest_version = idea.ideas_details[req.user.id.toString()];
+    }
+
     console.log(latest_version);
 
     var temp = { user_score: sortable[0][1], latest_version: latest_version };
@@ -67,6 +73,7 @@ exports.idea_details = async (req, res, next) => {
       id,
       contributor_names,
       highest_contributor,
+      your_latest_version,
     });
   } catch (err) {
     console.log(err);
