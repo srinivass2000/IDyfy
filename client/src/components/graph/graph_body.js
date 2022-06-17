@@ -79,6 +79,11 @@ const Graph_body = () => {
           SetWhosegraph(res.data.highest_contributor._id);
           SetContributers(res.data.contributor_names);
           // console.log(res.data.contributor_names);
+          res.data.contributor_names.map((contri, idx) => {
+            if (contri._id == res.data.id) {
+              Whosegraph = res.data.id;
+            }
+          });
           SetHeighest(res.data.highest_contributor);
         },
         (err) => {
