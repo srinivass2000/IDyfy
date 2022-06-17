@@ -2,7 +2,6 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./profile.css";
-// import profile from "../../assets/svg/Dummy_Profile2.svg";
 import authHeader from "../../services/auth-header";
 import Footer from "../Footer/footer";
 import { useLocation } from "react-router-dom";
@@ -21,6 +20,12 @@ const Profile = () => {
 
   // const { id } = useParams();
   const url = "/profileEdit";
+
+  function removeHTML(str) {
+    var tmp = document.createElement("DIV");
+    tmp.innerHTML = str;
+    return tmp.textContent || tmp.innerText || "";
+  }
 
   useEffect(() => {
     fetchProfile();
@@ -179,10 +184,10 @@ const Profile = () => {
                   ))}
                 <p className="text-left p-1">{idea.title}</p>
                 <p className="text-left p-1">
-                  {idea.description.length > 50 &&
-                    idea.description.substring(50, 0) + " . . ."}
-                  {idea.description.length <= 50 &&
-                    idea.description.substring(50, 0)}
+                  {removeHTML(idea.description).length > 50 &&
+                    removeHTML(idea.description).substring(50, 0) + " . . ."}
+                  {removeHTML(idea.description).length <= 50 &&
+                    removeHTML(idea.description).substring(50, 0)}
                 </p>
               </div>
             ))}

@@ -77,6 +77,7 @@ app.get("/file/:filename", async (req, res) => {
 const env = process.env.ENVIRONMENT ? process.env.ENVIRONMENT : "production";
 
 if (env === "production") {
+  console.log = () => {};
   dir = "../client/build";
   if (fs.existsSync(dir)) {
     console.log("Directory exists!");

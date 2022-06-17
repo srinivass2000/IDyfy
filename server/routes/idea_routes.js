@@ -22,6 +22,8 @@ const { like_idea } = require("../controllers/like_ideas/like_idea");
 
 const { unlike_idea } = require("../controllers/like_ideas/unlike_idea");
 
+const { get_notification } = require("../controllers/notification/get_notification");
+
 const {
   get_starred_ideas,
 } = require("../controllers/starred_ideas/starred_ideas");
@@ -36,5 +38,6 @@ router.route("/unstar-idea").get(protect, unstar_idea);
 router.route("/starred-ideas").get(protect, get_starred_ideas);
 router.route("/unlike-idea").get(protect, unlike_idea);
 router.route("/like-idea").get(protect, like_idea);
+router.route("/get-notification").get(protect, get_notification);
 
 module.exports = router;

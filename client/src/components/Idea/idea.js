@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import back from "../../assets/svg/backidea.svg";
+import back from "../../assets/images/backidea.png";
 import contri from "../../assets/svg/contributor_icon.svg";
-import Like from "../../assets/icon/heart.svg";
 import Chat from "../../assets/icon/chat.svg";
 import { useParams } from "react-router-dom";
 import axios from "axios";

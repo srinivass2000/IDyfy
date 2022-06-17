@@ -7,7 +7,6 @@ import list from "../../assets/icon/list.png";
 import my_idea from "../../assets/icons/my_idea.svg";
 import starred from "../../assets/icons/starred.svg";
 import notifications from "../../assets/icons/notifications.svg";
-import profile from "../../assets/images/dummy_profile.png";
 import "../Navbar/navbar.css";
 import { Link, useLocation } from "react-router-dom";
 import AuthService from "../../services/authservices";
@@ -21,7 +20,7 @@ import Login from "../Auth/Login";
 
 const Navbar = () => {
   const url = "/search/";
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState();
   const [searchdata, setSearchdata] = useState({ search: "" });
   const location = useLocation();
   const history = useHistory();
@@ -32,21 +31,28 @@ const Navbar = () => {
   const handleChange = (e) => {
     setSearchdata({ ...searchdata, [e.target.name]: e.target.value });
   };
+  const onSubmit = (e) => {
+    e.preventDefault();
+    history.push(`/search?search=${searchdata.search}`);
+  };
   useEffect(() => {
     axios
       .get("/api/profile", {
         headers: authHeader(),
       })
       .then((res) => {
-        setUser(AuthService.getUser);
+        // setUser(AuthService.getUser);
+        setUser(res.data.user);
       })
       .catch((err) => {
         if (err.response.status === 401) {
           localStorage.removeItem("UserToken");
-          setUser("");
+          // setUser("");
         }
       });
   }, [location]);
+
+  // user ? console.log(user) : console.log("nothing");
   return (
     <div>
       <ToastContainer theme="dark" />
@@ -137,7 +143,7 @@ const Navbar = () => {
                   </Link>
                 </li>
               </ul>
-              <form className="d-flex justify-center">
+              <form className="d-flex justify-center" onSubmit={onSubmit}>
                 <input
                   type="search"
                   className="h-10 mr-2 p-1 rounded-xl z-0 focus:shadow focus:outline-none border"
@@ -145,19 +151,25 @@ const Navbar = () => {
                   name="search"
                   onChange={handleChange}
                 />
-                <Link to={url + searchdata.search} className="pt-2">
-                  <img src={search} alt="Search" style={{ height: "20px" }} />
-                </Link>
+                {/* <Link
+                  to={`/search?search=${searchdata.search}`}
+                  className="pt-2"
+                > */}
+                  <img src={search} alt="Search" className="mt-2" style={{ height: "20px" }} onClick={onSubmit} />
+                {/* </Link> */}
               </form>
               {/* small screen */}
+
               <Link
                 to="/profile"
                 className="mt-2 d-flex justify-center d-lg-none"
               >
                 <img
-                  className="ml-3 mt-1 icon dropdown-toggle"
-                  src={profile}
+                  className="ml-3 mt-1 icon dropdown-toggle profile"
+                  src={user.profile_pic}
                   alt="My Profile"
+                  height="64px"
+                  width="64px"
                 />
               </Link>
               {/* large */}
@@ -170,9 +182,11 @@ const Navbar = () => {
                   aria-expanded="false"
                 >
                   <img
-                    className="ml-3 mt-1 icon dropdown-toggle"
-                    src={profile}
+                    className="ml-3 mt-1 icon dropdown-toggle profile"
+                    src={user.profile_pic}
                     alt="My Profile"
+                    height="64px"
+                    width="64px"
                   />
                 </p>
 
@@ -194,9 +208,10 @@ const Navbar = () => {
                   </li>
                   <li className="flex justify-center p-1">
                     <button
+                      className="focus:outline-none text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-8 py-2.5 mb-2 dark:focus:ring-red-900"
                       onClick={logout}
-                      className="flex justify-center text-white"
-                      style={{ backgroundColor: "red" }}
+                      // className="flex justify-center text-white"
+                      // style={{ backgroundColor: "red" }}
                     >
                       logout
                     </button>
@@ -214,7 +229,7 @@ const Navbar = () => {
                 className="collapse navbar-collapse items-center"
                 id="navbarSupportedContent"
               >
-                <form className="items-center">
+                {/* <form className="items-center">
                   <input
                     type="search"
                     className="h-10 mr-2 p-1 rounded-xl z-0 focus:shadow focus:outline-none border"
@@ -228,7 +243,7 @@ const Navbar = () => {
                   >
                     <img src={search} alt="Search" style={{ height: "20px" }} />
                   </Link>
-                </form>
+                </form> */}
                 <div className="md:flex pl-8">
                   <button className="text-white mr-4">
                     <Login />

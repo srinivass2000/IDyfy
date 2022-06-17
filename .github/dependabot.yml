@@ -11,6 +11,7 @@ updates:
       interval: "daily"
     ignore:
       - dependency-name: "react-router-dom"
+      - dependency-name: "axios"
      
   - package-ecosystem: "npm" # See documentation for possible values
     directory: "/server/" # Location of package manifests

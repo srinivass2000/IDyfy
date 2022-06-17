@@ -48,15 +48,17 @@ const Dashboard = () => {
   const data = React.useMemo(
     () => [
       {
-        label: "Series 1",
-        data: [
-          [0, 1],
-          [1, 2],
-          [2, 3],
-          [3, 2],
-          [4, 1],
-        ],
+        label: 'Series 1',
+        data: [{ x: 1, y: 10 }, { x: 2, y: 10 }, { x: 3, y: 10 }]
       },
+      {
+        label: 'Series 2',
+        data: [{ x: 1, y: 10 }, { x: 2, y: 10 }, { x: 3, y: 10 }]
+      },
+      {
+        label: 'Series 3',
+        data: [{ x: 1, y: 10 }, { x: 2, y: 10 }, { x: 3, y: 10 }]
+      }
     ],
     []
   );
@@ -68,6 +70,8 @@ const Dashboard = () => {
     ],
     []
   );
+
+  
 
   return (
     <div style={{width: "100%"}}>

@@ -46,6 +46,7 @@ const TermsAndConditions = lazy(() =>
 );
 
 const Graph_body = lazy(() => import("./components/graph/graph_body"));
+const Infinite = lazy(() => import("./components/graph/infinite"));
 
 const home = ({ match }) => {
   return (
@@ -83,10 +84,11 @@ const home = ({ match }) => {
               exact
               component={Graph_body}
             />
+            <Protectedroute path="/infinite" exact component={Infinite} />
             <Protectedroute path="/ideaEdit/:id" exact component={IdeaEdit} />
             <Protectedroute path="/feaEdit" exact component={FeatureEdit} />
             <Protectedroute path="/profileEdit" exact component={ProfileEdit} />
-            <Protectedroute path="/search/:key" exact component={Search} />
+            <Protectedroute path="/search" exact component={Search} />
             <Route path="/email/verify/:id" exact component={VerifyEmail} />
             <Route path="/passwordreset/:id" exact component={ResetPassword} />
             <Route path="/privacy-policy" component={PrivacyPolicy} />
