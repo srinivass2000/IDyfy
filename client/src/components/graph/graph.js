@@ -257,7 +257,6 @@ const Graph = (props) => {
       (ver ? ver : <></>) == Version
     ) {
       console.log("asa");
-
       SetTreeData(JSON.parse(localStorage.getItem("idea")));
 
       if (idea[0].canEdit == true) {
