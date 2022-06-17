@@ -14,7 +14,7 @@ const Graph_body = () => {
   const [Edit, SetEdit] = useState(false);
   const [Contributers, SetContributers] = useState();
   const [Heighest, SetHeighest] = useState();
-
+  const [canPull, SetcanPull] = useState(true);
   const { idea_id } = useParams();
   const canIEdit = (a) => {
     SetEdit(a);
@@ -85,7 +85,8 @@ const Graph_body = () => {
               // Whosegraph = res.data.id;
               SetMaxVersion(res.data.your_latest_version);
               SetWhosegraph(res.data.id);
-              console.log("hello");
+              // console.log("hello");
+              SetcanPull(false);
             }
           });
         },
@@ -186,10 +187,12 @@ const Graph_body = () => {
               <button className="btn btn-secondary" onClick={createVersion}>
                 Create Version
               </button>
-            ) : (
+            ) : canPull ? (
               <button className="btn btn-secondary" onClick={pullIdea}>
                 Pull Idea
               </button>
+            ) : (
+              <></>
             )}
           </div>
         </div>
