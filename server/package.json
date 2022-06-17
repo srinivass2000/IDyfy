@@ -20,6 +20,6 @@
     "multer-gridfs-storage": "5.0.2",
     "nodemailer": "^6.7.5",
     "sib-api-v3-sdk": "^8.2.1",
-    "yarn": "^1.22.17"
+    "yarn": "^1.22.19"
   }
 }
