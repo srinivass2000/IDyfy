@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, version } from "react";
 import Graph from "./graph";
 import { useParams } from "react-router-dom";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
@@ -184,9 +184,13 @@ const Graph_body = () => {
           </div>
           <div className="col-sm-4 col-lg-2 col-4 mt-2">
             {Edit ? (
-              <button className="btn btn-secondary" onClick={createVersion}>
-                Create Version
-              </button>
+              Version == 0 ? (
+                <button className="btn btn-secondary" onClick={createVersion}>
+                  Create Version
+                </button>
+              ) : (
+                console.log(2)
+              )
             ) : canPull ? (
               <button className="btn btn-secondary" onClick={pullIdea}>
                 Pull Idea

@@ -8,7 +8,7 @@ const Graph_iterate_children = (props) => {
     //   strokeWidth = "5px",
     //   strokeColor = "#000000",
     _id = props._id;
-
+  let Version = props.version;
   const handleClick = (item) => {
     console.log(item);
     if (item.show == "nothing") {
@@ -43,36 +43,43 @@ const Graph_iterate_children = (props) => {
                       className="dropdown-item"
                       to={"../feature/" + TreeData[0]._id + "/" + item._id}
                     >
-                      {Edit ? <>Edit</> : <>View</>}
+                      {Edit ? Version == 0 ? <>Edit</> : <>View</> : <>View</>}
                     </Link>
                   </li>
                   {Edit ? (
-                    <>
-                      <li>
-                        <Link
-                          className="dropdown-item"
-                          to={
-                            "/createFeature/" + TreeData[0]._id + "/" + item._id
-                          }
-                          onClick={() => handleClick(item)}
-                        >
-                          Add Child
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          className="dropdown-item"
-                          to={
-                            "/createFeature/" +
-                            TreeData[0]._id +
-                            "/" +
-                            item.parent_id
-                          }
-                        >
-                          Add Sibling
-                        </Link>
-                      </li>
-                    </>
+                    Version == 0 ? (
+                      <>
+                        <li>
+                          <Link
+                            className="dropdown-item"
+                            to={
+                              "/createFeature/" +
+                              TreeData[0]._id +
+                              "/" +
+                              item._id
+                            }
+                            onClick={() => handleClick(item)}
+                          >
+                            Add Child
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            className="dropdown-item"
+                            to={
+                              "/createFeature/" +
+                              TreeData[0]._id +
+                              "/" +
+                              item.parent_id
+                            }
+                          >
+                            Add Sibling
+                          </Link>
+                        </li>
+                      </>
+                    ) : (
+                      <></>
+                    )
                   ) : (
                     <></>
                   )}
