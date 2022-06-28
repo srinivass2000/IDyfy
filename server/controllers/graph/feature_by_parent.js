@@ -269,10 +269,10 @@ exports.fetch_features_by_parent = async (req, res, next) => {
 
         if (test.length === 0) {
           result = { ...feature._doc, ...obj4 };
-          result = { ...feature._doc, ...obj8 };
+          result = { ...result, ...obj8 };
         } else {
           result = { ...feature._doc, ...obj3 };
-          result = { ...feature._doc, ...obj9 };
+          result = { ...result, ...obj9 };
         }
 
         // console.log(result);
