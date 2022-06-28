@@ -13,6 +13,8 @@ exports.fetch_features_by_parent = async (req, res, next) => {
     obj5 = { canEdit: true };
     obj6 = { canEdit: false };
     obj7 = { canEdit: "cannot pull" };
+    obj8 = { leaf: true };
+    obj9 = { leaf: false };
 
     var user;
     if (whosegraph == "null" || whosegraph == undefined) {
@@ -182,7 +184,7 @@ exports.fetch_features_by_parent = async (req, res, next) => {
       console.log("-------------------------------------");
 
       if (version == "null" || version == undefined || version == 0) {
-        console.log("Inside version");
+        // console.log("Inside version");
         var results = await Feature.find(
           {
             parent_id,
@@ -199,7 +201,7 @@ exports.fetch_features_by_parent = async (req, res, next) => {
           }
         );
       } else {
-        console.log("Inside version else");
+        // console.log("Inside version else");
         var results = await Feature.find(
           {
             parent_id,
@@ -267,8 +269,10 @@ exports.fetch_features_by_parent = async (req, res, next) => {
 
         if (test.length === 0) {
           result = { ...feature._doc, ...obj4 };
+          result = { ...result, ...obj8 };
         } else {
           result = { ...feature._doc, ...obj3 };
+          result = { ...result, ...obj9 };
         }
 
         // console.log(result);
