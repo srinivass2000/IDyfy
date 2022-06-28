@@ -14,6 +14,15 @@ exports.user_enable = async (req, res, next) => {
     await User.findByIdAndUpdate(user_id.toString(), {
       suspended: undefined,
     });
+    var user = await User.findByIdAndUpdate(user_id,{
+      $push:  {
+        events: {
+          type: "user_enabled",
+          detail: user,
+          time: new Date()
+        }
+      }
+    });
     console.log("User Enabled");
     res.status(200).json({
       success: true,

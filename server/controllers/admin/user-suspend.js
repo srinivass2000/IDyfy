@@ -15,6 +15,15 @@ exports.user_suspend = async (req, res, next) => {
     await User.findByIdAndUpdate(user_id.toString(), {
       suspended: true,
     });
+    var user = await User.findByIdAndUpdate(user_id,{
+      $push:  {
+        events: {
+          type: "user suspended",
+          detail: user,
+          time: new Date()
+        }
+      }
+    });
     console.log("User Suspended");
     res.status(200).json({
       success: true,

@@ -17,7 +17,6 @@ exports.get_idea = async (req, res, next) => {
       return next(new ErrorResponse("Idea not found", 404));
     }
 
-
     //give names for contributors
 
     var contributed_users = await User.find(
@@ -29,10 +28,18 @@ exports.get_idea = async (req, res, next) => {
       { name: 1 }
     );
 
-    const comments = await Comment.find({
-      idea_id: id,
-      feature_id: null,
-    });
+    const comments = await Comment.find(
+      {
+        idea_id: id,
+        feature_id: null,
+      },
+      {
+        createdAt: 1,
+        user_id: 1,
+        username: 1,
+        content: 1,
+      }
+    );
 
     var user_id = req.user._id.toString();
 

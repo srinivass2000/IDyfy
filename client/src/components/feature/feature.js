@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 
 const Feature = () => {
   const [load, setLoad] = useState(true);
+  const [load2, setLoad2] = useState(false);
   const [feature, setFeature] = useState({});
   const [canEdit, setCanEdit] = useState(false);
   const [comments, setComment] = useState([]);
@@ -18,6 +19,37 @@ const Feature = () => {
   // const idea_id = "61eee0198824f70eb12c7107";
   // const feature_id = "61eeed4daf56b67335d393ab";
   const url = "/feaEdit";
+
+  const [content, setContent] = useState("");
+
+  const handleComment = async (e) => {
+    e.preventDefault();
+    try {
+      let res = await axios({
+        method: "POST",
+        url: "/api/comment/post-comment",
+        headers: authHeader(),
+        data: {
+          idea_id: idea_id,
+          feature_id: feature_id,
+          content: content,
+        },
+      });
+
+      if (res.status === 200) {
+        console.log("comment sucessfully");
+        reloadpage();
+      } else {
+        console.log("some error occured");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const reloadpage = () => {
+    setLoad2(!load2);
+  };
 
   const fetchFeature = () => {
     axios
@@ -39,7 +71,8 @@ const Feature = () => {
 
   useEffect(() => {
     fetchFeature();
-  }, []);
+    console.log("cholna");
+  }, [load2]);
 
   if (load) {
     return (
@@ -129,6 +162,7 @@ const Feature = () => {
           >
             3
           </div>
+
           {canEdit ? (
             <div className="row justify-content-center">
               <div className="col-md-4">
@@ -158,8 +192,33 @@ const Feature = () => {
           )}
         </div>
         <div className="row">
-          <div className="mt-3 col-md-6">
-            <Comment />
+          <div className="col-6">
+            <Comment comments={comments} />
+          </div>
+
+          <div className="col-6">
+            <div className="row">
+              <div className="flex justify-center mt-3 mx-3">
+                <input
+                  type="text"
+                  value={content}
+                  onChange={(e) => setContent(e.target.value)}
+                  className="form-control form_box"
+                  placeholder="Enter Comment"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="flex justify-center">
+                <button
+                  type="submit"
+                  onClick={handleComment}
+                  className="mr-2 h-10 mb-10 btn button"
+                >
+                  Add Comment
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
