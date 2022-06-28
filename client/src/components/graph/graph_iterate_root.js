@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, version } from "react";
 import "./lib/treestyle.css";
 import { Link } from "react-router-dom";
 import Graph_iterate_children from "./graph_iterate_children";
@@ -9,6 +9,7 @@ const Graph_Iterate_root = (props) => {
     //   strokeWidth = "5px",
     //   strokeColor = "red",
     _id = props._id;
+
   const handleClick = (item) => {
     console.log(item);
     if (item.show == "nothing") {
@@ -17,6 +18,8 @@ const Graph_Iterate_root = (props) => {
       localStorage.setItem("idea", JSON.stringify(TreeData));
     }
   };
+
+  const DeleteFeature = () => {};
   return (
     // <div className="tree__container__step">
     <>
@@ -70,6 +73,7 @@ const Graph_Iterate_root = (props) => {
                         Add Sibling
                       </Link>
                     </li>
+                    <li className="dropdown-item">Delete feature</li>
                   </>
                 ) : (
                   <></>

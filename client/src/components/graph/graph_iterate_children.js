@@ -72,6 +72,7 @@ const Graph_iterate_children = (props) => {
                           Add Sibling
                         </Link>
                       </li>
+                      <li className="dropdown-item">Delete feature</li>
                     </>
                   ) : (
                     <></>

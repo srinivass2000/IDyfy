@@ -327,20 +327,24 @@ const Graph = (props) => {
                 >
                   <li>
                     <Link className="dropdown-item" to={"../idea/" + idea_id}>
-                      {Edit ? <>Edit</> : <>View</>}
+                      {Edit ? Version == 0 ? <>Edit</> : <>View</> : <>View</>}
                     </Link>
                   </li>
 
                   {Edit ? (
-                    <li>
-                      <Link
-                        className="dropdown-item"
-                        to={"/createFeature/" + idea_id + "/" + idea_id}
-                        onClick={handleClick}
-                      >
-                        Add Child
-                      </Link>
-                    </li>
+                    Version == 0 ? (
+                      <li>
+                        <Link
+                          className="dropdown-item"
+                          to={"/createFeature/" + idea_id + "/" + idea_id}
+                          onClick={handleClick}
+                        >
+                          Add Child
+                        </Link>
+                      </li>
+                    ) : (
+                      <></>
+                    )
                   ) : (
                     <></>
                   )}
