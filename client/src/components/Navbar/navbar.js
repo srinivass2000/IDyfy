@@ -33,7 +33,7 @@ const Navbar = () => {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    history.push(`/search?search=${searchdata.search}`);
+    history.push(`/search/${searchdata.search}`);
   };
   useEffect(() => {
     axios
@@ -155,7 +155,13 @@ const Navbar = () => {
                   to={`/search?search=${searchdata.search}`}
                   className="pt-2"
                 > */}
-                  <img src={search} alt="Search" className="mt-2" style={{ height: "20px" }} onClick={onSubmit} />
+                <img
+                  src={search}
+                  alt="Search"
+                  className="mt-2"
+                  style={{ height: "20px" }}
+                  onClick={onSubmit}
+                />
                 {/* </Link> */}
               </form>
               {/* small screen */}

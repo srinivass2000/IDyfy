@@ -88,7 +88,7 @@ const home = ({ match }) => {
             <Protectedroute path="/ideaEdit/:id" exact component={IdeaEdit} />
             <Protectedroute path="/feaEdit" exact component={FeatureEdit} />
             <Protectedroute path="/profileEdit" exact component={ProfileEdit} />
-            <Protectedroute path="/search" exact component={Search} />
+            <Protectedroute path="/search/:search" exact component={Search} />
             <Route path="/email/verify/:id" exact component={VerifyEmail} />
             <Route path="/passwordreset/:id" exact component={ResetPassword} />
             <Route path="/privacy-policy" component={PrivacyPolicy} />
