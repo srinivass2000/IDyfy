@@ -82,7 +82,11 @@ const Graph_Iterate_root = (props) => {
                           Add Sibling
                         </Link>
                       </li>
-                      <li className="dropdown-item">Delete feature</li>
+                      {item.leaf ? (
+                        <li className="dropdown-item">Delete feature</li>
+                      ) : (
+                        <></>
+                      )}
                     </>
                   ) : (
                     <></>

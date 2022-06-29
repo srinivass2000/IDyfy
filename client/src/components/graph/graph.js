@@ -27,7 +27,7 @@ const Graph = (props) => {
             "idea",
             JSON.stringify([...TreeData, ...res.data.features])
           );
-          // console.log([...TreeData, ...res.data.features]);
+          console.log([...TreeData, ...res.data.features]);
         },
         (err) => {
           console.log(err);
