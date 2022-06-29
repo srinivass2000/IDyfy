@@ -88,9 +88,9 @@ const Notification = () => {
         </div>
       </div>
       <div className="row">
-          {events ? (
-            events.map((event, index) => (
-              <div className="col-6">
+        {events ? (
+          events.map((event, index) => (
+            <div className="col-6">
               <div className="row my-3">
                 <div className="col col-2"></div>
                 <div className="col col-8">
@@ -104,14 +104,14 @@ const Notification = () => {
                           {title[event.type]} {event.detail.title}
                         </h1>
                         {/* <p>lorem...</p> */}
-                        <div className="mt-4">
-                          <button
-                            className="btn btn-sm"
-                            style={{ border: "1px solid black" }}
-                          >
-                            Close
-                          </button>
-                        </div>
+                        {/* <div className="mt-4">
+                            <button
+                              className="btn btn-sm"
+                              style={{ border: "1px solid black" }}
+                            >
+                              Close
+                            </button>
+                          </div> */}
                       </div>
                       <div className="col-2 mt-4">
                         <img
@@ -126,23 +126,23 @@ const Notification = () => {
                 </div>
                 {/* <div className="col col-2"></div> */}
               </div>
-              </div>
-            ))
-          ) : (
-            <>
-              <div
-                className="spinner-border text-white place-content-center"
-                role="status"
-              >
-                <span class="visually-hidden">
-                  <h1 style={{ color: "white" }}>
-                    No Notifications Available Right Now :)
-                  </h1>
-                </span>
-              </div>
-            </>
-          )}
-        </div>
+            </div>
+          ))
+        ) : (
+          <>
+            <div
+              className="spinner-border text-white place-content-center"
+              role="status"
+            >
+              <span class="visually-hidden">
+                <h1 style={{ color: "white" }}>
+                  No Notifications Available Right Now :)
+                </h1>
+              </span>
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 };

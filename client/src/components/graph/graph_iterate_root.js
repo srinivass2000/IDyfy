@@ -7,6 +7,7 @@ import authHeader from "../../services/auth-header";
 import { Link } from "react-router-dom";
 import Graph_iterate_children from "./graph_iterate_children";
 const Graph_Iterate_root = (props) => {
+  let Version = props.version;
   let TreeData = props.tree,
     // cardkey = "",
     Edit = props.Edit,
@@ -139,6 +140,7 @@ const Graph_Iterate_root = (props) => {
               _id={item._id}
               Clicked={props.Clicked}
               Edit={Edit}
+              version={Version}
             />
           </div>
         ) : (

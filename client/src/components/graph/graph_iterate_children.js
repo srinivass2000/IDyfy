@@ -12,7 +12,7 @@ const Graph_iterate_children = (props) => {
     //   strokeWidth = "5px",
     //   strokeColor = "#000000",
     _id = props._id;
-
+  let Version = props.version;
   const handleClick = (item) => {
     console.log(item);
     if (item.show == "nothing") {
