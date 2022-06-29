@@ -1,5 +1,9 @@
 import React, { useEffect, useState, version } from "react";
+import { useReducer } from "react";
+import { toast } from "react-toastify";
 import "./lib/treestyle.css";
+import axios from "axios";
+import authHeader from "../../services/auth-header";
 import { Link } from "react-router-dom";
 import Graph_iterate_children from "./graph_iterate_children";
 const Graph_Iterate_root = (props) => {
@@ -9,7 +13,6 @@ const Graph_Iterate_root = (props) => {
     //   strokeWidth = "5px",
     //   strokeColor = "red",
     _id = props._id;
-
   const handleClick = (item) => {
     console.log(item);
     if (item.show == "nothing") {
@@ -18,8 +21,18 @@ const Graph_Iterate_root = (props) => {
       localStorage.setItem("idea", JSON.stringify(TreeData));
     }
   };
-
-  const DeleteFeature = () => {};
+  const DeleteFeature = async (id, pid) => {
+    await axios
+      .get(`/api/feature/delete-feature?idea_id=${TreeData[0]._id}&id=${id}`, {
+        headers: authHeader(),
+      })
+      .then((res) => {
+        if (res.data.success == true) {
+          toast.success("Deleted " + res.data.deleted_feature.title);
+          props.Clicked(pid);
+        }
+      });
+  };
   return (
     // <div className="tree__container__step">
     <>
@@ -83,7 +96,14 @@ const Graph_Iterate_root = (props) => {
                         </Link>
                       </li>
                       {item.leaf ? (
-                        <li className="dropdown-item">Delete feature</li>
+                        <li
+                          className="dropdown-item"
+                          onClick={() =>
+                            DeleteFeature(item._id, item.parent_id)
+                          }
+                        >
+                          Delete feature
+                        </li>
                       ) : (
                         <></>
                       )}

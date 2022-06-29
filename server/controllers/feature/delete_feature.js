@@ -7,7 +7,7 @@ const User = require("../../models/User");
 
 exports.delete_feature = async (req, res, next) => {
   try {
-    const { id, idea_id } = req.body;
+    const { id, idea_id } = req.query;
 
     var Feature = mongoose.model(`features_${idea_id}`, FeatureSchema);
 
@@ -62,14 +62,14 @@ exports.delete_feature = async (req, res, next) => {
         user_scores,
       });
 
-      var user = await User.findByIdAndUpdate(req.user._id,{
-        $push:  {
+      var user = await User.findByIdAndUpdate(req.user._id, {
+        $push: {
           events: {
             type: "feature deleted",
             detail: deleted_feature,
-            time: new Date()
-          }
-        }
+            time: new Date(),
+          },
+        },
       });
 
       res.status(200).json({

@@ -11,7 +11,7 @@ const Graph_body = () => {
   const [Version, SetVersion] = useState(0);
   const [MAxVersion, SetMaxVersion] = useState("null");
   const [Whosegraph, SetWhosegraph] = useState("null");
-  const [Edit, SetEdit] = useState(false);
+  const [Edit, SetEdit] = useState(true);
   const [Contributers, SetContributers] = useState();
   const [Heighest, SetHeighest] = useState();
   const [canPull, SetcanPull] = useState(false);
