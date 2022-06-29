@@ -14,7 +14,7 @@ const Graph_body = () => {
   const [Edit, SetEdit] = useState(false);
   const [Contributers, SetContributers] = useState();
   const [Heighest, SetHeighest] = useState();
-  const [canPull, SetcanPull] = useState(true);
+  const [canPull, SetcanPull] = useState(false);
   const { idea_id } = useParams();
   const canIEdit = (a) => {
     SetEdit(a);
@@ -184,9 +184,13 @@ const Graph_body = () => {
           </div>
           <div className="col-sm-4 col-lg-2 col-4 mt-2">
             {Edit ? (
-              <button className="btn btn-secondary" onClick={createVersion}>
-                Create Version
-              </button>
+              Version == 0 ? (
+                <button className="btn btn-secondary" onClick={createVersion}>
+                  Create Version
+                </button>
+              ) : (
+                <></>
+              )
             ) : canPull ? (
               <button className="btn btn-secondary" onClick={pullIdea}>
                 Pull Idea
