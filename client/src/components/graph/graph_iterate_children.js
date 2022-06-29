@@ -9,8 +9,8 @@ const Graph_iterate_children = (props) => {
   let TreeData = props.tree,
     cardkey = "",
     Edit = props.Edit,
-    //   strokeWidth = "5px",
-    //   strokeColor = "#000000",
+    // strokeWidth = "",
+    strokeColor = "",
     _id = props._id;
   let Version = props.version;
   const handleClick = (item) => {
@@ -45,10 +45,17 @@ const Graph_iterate_children = (props) => {
                 className="tree__container__step__card dropdown"
                 id={item._id}
               >
-                {/* {(cardkey = "card_" + item.id)} */}
+                {/* no change */}
+                {item.updated == 0 && (strokeColor = "")}
+                {/* updated feature */}
+                {item.updated == 1 &&
+                  (strokeColor = "border border-5 border-warning")}
+                {/* new feature */}
+                {item.updated == 2 &&
+                  (strokeColor = "border border-5 border-success")}
+
                 <p
-                  // id={cardkey}
-                  className="tree__container__step__card__p"
+                  className={`tree__container__step__card__p +${strokeColor}`}
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >

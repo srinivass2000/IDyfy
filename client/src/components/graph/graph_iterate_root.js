@@ -12,7 +12,7 @@ const Graph_Iterate_root = (props) => {
     // cardkey = "",
     Edit = props.Edit,
     //   strokeWidth = "5px",
-    //   strokeColor = "red",
+    strokeColor = "",
     _id = props._id;
   const handleClick = (item) => {
     console.log(item);
@@ -42,10 +42,16 @@ const Graph_Iterate_root = (props) => {
         item.parent_id == _id ? (
           <div className="tree__container__step" key={"div" + key}>
             <div className="tree__container__step__card dropdown" id={item._id}>
-              {/* {(cardkey = "card_" + item.id)} */}
+              {/* no change */}
+              {item.updated == 0 && (strokeColor = "")}
+              {/* updated feature */}
+              {item.updated == 1 &&
+                (strokeColor = "border border-5 border-warning")}
+              {/* new feature */}
+              {item.updated == 2 &&
+                (strokeColor = "border border-5 border-success")}
               <p
-                // id={cardkey}
-                className="tree__container__step__card__p"
+                className={`tree__container__step__card__p +${strokeColor}`}
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
